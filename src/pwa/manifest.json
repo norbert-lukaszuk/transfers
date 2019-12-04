@@ -1,12 +1,12 @@
 {
-  "name": "WTF: PWA",
-  "short_name": "WTF: PWA",
+  "name": "toDo",
+  "short_name": "toDo",
   "theme_color": "#000000",
   "background_color": "#000000",
   "display": "standalone",
   "orientation": "portrait",
-  "scope": "/wtf-gulp-starter/",
-  "start_url": "/wtf-gulp-starter/",
+  "scope": "/toDoList/",
+  "start_url": "/toDoList/",
   "icons": [
     {
       "src": "assets/pwa/icons/icon-72x72.png",
