@@ -14,3 +14,76 @@ body {
   color: $yellow;
   background: $violet;
 }
+
+.button{
+  align-self: center;
+  border-radius: 10px;
+  min-width: 43px;
+  max-height: 33 px;
+  margin-left: 10px;
+  border-style: none;
+  background-color: lime;
+  font-size: 25px;
+  font-weight: 0;
+  align-items: center;
+  padding: 6px;
+  border-width: 0;
+
+}
+.form{
+  min-width: 270px;
+  align-self: center;
+  align-content: center;
+  border-radius: 10px;
+  min-height: 33px;
+  text-indent: 10px;
+  border-style: none;
+  background-color: lightskyblue;
+  color:black;
+  font-size: large;
+  
+}
+.input{
+  display: flex;
+  align-self: center;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 25px;
+ 
+  
+}
+li{
+  border-radius: 10px;
+  background-color: lightsteelblue;
+  color: black;
+  padding: 15px;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 25px;
+  font-weight: 800;
+  margin-bottom: 10px;
+  min-width: 300px;
+  }
+.lineTrough{
+  text-decoration: line-through;
+  background-color: rgba(180, 179, 179, 0.644);
+  color: rgba(0, 0, 0, 0.596);
+}
+
+.list{
+  display: flex;
+  flex-direction: column;
+  
+}
+.notDone{
+  text-decoration: none;
+}
+#toList{
+  font-size: 25px;
+}
+ul{
+  list-style-type: none;
+  text-decoration: none;
+  align-self: center;
+  padding: 0;
+}
