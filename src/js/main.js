@@ -18,23 +18,23 @@ const ul = document.querySelector('ul');
 
 const addButon = document.querySelector('.button');
 
-for(let i=0; i<localStorage.length;i++){
-  const li = document.createElement('li');
+for(let i=0; i<localStorage.length;i++){  
+  const div = document.createElement('div');
   const local = localStorage.getItem(localStorage.key(i));
   // console.log(local);  
   const object = JSON.parse(local);
   
   let task = object.task;
-  li.textContent = task;
-  li.setAttribute('class',object.class);
+  div.textContent = task;
+  div.setAttribute('class',object.class);
   // if(localStorage.key(i)!=='super'){
-  //   li.setAttribute('class','lineTrough')
+  //   div.setAttribute('class','lineTrough')
   // }
-  ul.prepend(li);
+  ul.prepend(div);
 }
 
 addButon.addEventListener('click',(e)=>{
-  const li = document.createElement('li');
+  const div = document.createElement('div');
   
   const form = document.getElementById('toList');
   const key = form.value;
@@ -50,9 +50,9 @@ addButon.addEventListener('click',(e)=>{
   const parse = JSON.parse(stringify);
   console.log(`Parse -> ${parse.task}`);
   console.log(typeof(parse));
-  li.textContent=form.value;
-  li.setAttribute('class', object.class);
-  ul.prepend(li);
+  div.textContent=form.value;
+  div.setAttribute('class', object.class);
+  ul.prepend(div);
   // localStorage.setItem(key,form.value);
   // localStorage.setItem(key,array);
   form.value = '';
@@ -60,19 +60,18 @@ addButon.addEventListener('click',(e)=>{
 
 
 ul.addEventListener('click', e=>{
-if(e.target.tagName === 'LI'){
+if(e.target.tagName === 'DIV'){
   const attr = e.target.getAttribute('class'); 
   const name = e.target.innerText;
   const clas = localStorage.getItem(name);
-  // console.log(name);
   let object = JSON.parse(clas);
   
   
   
-  // let objectClass = object.class;
   if(attr === 'notDone'){
   e.target.setAttribute('class','lineTrough');
-   object.class = 'lineTrough';
+  object.class = 'lineTrough';
+  // e.target.setAttribute('style','width: 200px;');
   // localStorage.setItem(name,JSON.stringify(object));
   console.log(object.class);
 
