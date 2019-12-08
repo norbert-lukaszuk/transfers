@@ -35,7 +35,8 @@ for(let i=0; i<localStorage.length;i++){
 
 addButon.addEventListener('click',(e)=>{
   const div = document.createElement('div');
-  
+  const del = document.createElement('span');
+  const item = document.createElement('span');
   const form = document.getElementById('toList');
   const key = form.value;
   let object={
@@ -50,9 +51,13 @@ addButon.addEventListener('click',(e)=>{
   const parse = JSON.parse(stringify);
   console.log(`Parse -> ${parse.task}`);
   console.log(typeof(parse));
-  div.textContent=form.value;
+  item.textContent=form.value;
   div.setAttribute('class', object.class);
   ul.prepend(div);
+  div.appendChild(item);
+  div.appendChild(del);
+  del.classList.add('delete');
+  del.textContent = 'X';
   // localStorage.setItem(key,form.value);
   // localStorage.setItem(key,array);
   form.value = '';
@@ -91,3 +96,12 @@ localStorage.setItem(name,JSON.stringify(object));
 }
 })
 
+ul.addEventListener('dblclick',(e)=>{
+  if(e.target.tagName === 'DIV'){
+    e.target.remove();
+    
+  }
+  const name = e.target.innerText;
+    console.log(name);
+    localStorage.removeItem(name);
+})

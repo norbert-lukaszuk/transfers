@@ -53,6 +53,10 @@ body {
  
   
 }
+.delete{
+  background-color: chocolate;
+  color: red;
+}
 div{
   border-radius: 10px;
   background-color: lightsteelblue;
@@ -92,6 +96,9 @@ li{
 }
 .notDone{
   text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
 }
 #toList{
   font-size: 25px;
