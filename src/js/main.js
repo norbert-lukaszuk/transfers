@@ -21,22 +21,19 @@ const addButon = document.querySelector('.button');
 for(let i=0; i<localStorage.length;i++){  
   const div = document.createElement('div');
   const local = localStorage.getItem(localStorage.key(i));
-  // console.log(local);  
   const object = JSON.parse(local);
   
   let task = object.task;
   div.textContent = task;
   div.setAttribute('class',object.class);
-  // if(localStorage.key(i)!=='super'){
-  //   div.setAttribute('class','lineTrough')
-  // }
   ul.prepend(div);
 }
 
 addButon.addEventListener('click',(e)=>{
-  const div = document.createElement('div');
+  const li = document.createElement('li');
+  const container = documnet.createElement('div');
   const del = document.createElement('span');
-  const item = document.createElement('span');
+  const item = document.createElement('div');
   const form = document.getElementById('toList');
   const key = form.value;
   let object={
@@ -52,19 +49,25 @@ addButon.addEventListener('click',(e)=>{
   console.log(`Parse -> ${parse.task}`);
   console.log(typeof(parse));
   item.textContent=form.value;
-  div.setAttribute('class', object.class);
-  ul.prepend(div);
-  div.appendChild(item);
-  div.appendChild(del);
-  del.classList.add('delete');
-  del.textContent = 'X';
-  // localStorage.setItem(key,form.value);
-  // localStorage.setItem(key,array);
+  // container.setAttribute('class', object.class);
+  ul.prepend(li);
+  //  li.appendChild(container);
+  // container.appendChild(item);
+  // container.appendChild(del);
+  // del.classList.add('delete');
+  // li.classList.add('notDone');
+  del.textContent = 'x';
   form.value = '';
 })
 
 
 ul.addEventListener('click', e=>{
+if(e.target.tagName === 'SPAN'){
+  e.target.parentElement.removeAttribute('class');
+  const spanAtr = e.target.removeAttribute('class');
+  e.target.parentElement.remove();
+  
+}
 if(e.target.tagName === 'DIV'){
   const attr = e.target.getAttribute('class'); 
   const name = e.target.innerText;

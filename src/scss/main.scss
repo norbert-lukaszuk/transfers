@@ -43,19 +43,12 @@ body {
   font-size: large;
   
 }
-.input{
-  display: flex;
-  align-self: center;
-  align-items: center;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 25px;
-  background-color: black;
- 
-  
-}
+
 .delete{
-  background-color: chocolate;
-  color: red;
+  background-color: rgb(230, 70, 83);
+  color: white;
+  padding: 5px;
+  border-radius: 30%;
 }
 div{
   border-radius: 10px;
@@ -69,7 +62,22 @@ div{
   margin-bottom: 10px;
   min-width: 300px;
 }
+
+.input{
+  display: flex;
+  align-self: center;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 25px;
+  background-color: black;
+}
+
+.item{
+  text-decoration: line-through;
+}
 li{
+  display: flex;
+  justify-content: space-between;
   border-radius: 10px;
   background-color: lightsteelblue;
   color: black;
@@ -82,7 +90,7 @@ li{
   min-width: 300px;
   }
 .lineTrough{
-  min-width: 200px; 
+  min-width: 300px; 
   text-decoration: line-through;
   background-color: rgba(180, 179, 179, 0.644);
   color: rgba(0, 0, 0, 0.596);
@@ -97,8 +105,8 @@ li{
 .notDone{
   text-decoration: none;
   display: flex;
-  flex-direction: column;
-  align-content: space-between;
+  flex-direction: row;
+  justify-content: space-between;
 }
 #toList{
   font-size: 25px;
@@ -106,6 +114,8 @@ li{
   padding: 10px;
 }
 ul{
+  display: flex;
+  flex-direction: column;
   list-style-type: none;
   text-decoration: none;
   align-self: center;
