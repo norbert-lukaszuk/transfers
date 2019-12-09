@@ -33,7 +33,7 @@ addButon.addEventListener('click',(e)=>{
   const li = document.createElement('li');
   const container = document.createElement('div');
   const del = document.createElement('span');
-  const item = document.createElement('div');
+  const item = document.createElement('span');
   const form = document.getElementById('toList');
   const key = form.value;
   let object={
@@ -52,19 +52,27 @@ addButon.addEventListener('click',(e)=>{
   // li.appendChild(container);
   container.appendChild(item);
   container.appendChild(del);
-  // del.classList.add('delete');
+  container.classList.add('container');
+  del.classList.add('delete');
+  item.classList.add('item');
+
   // li.classList.add('notDone');
   del.textContent = 'x';
   form.value = '';
 })
 
-
 ul.addEventListener('click', e=>{
-if(e.target.tagName === 'SPAN'){
+if(e.target.tagName === 'SPAN' && e.target.classList.contains('delete')){
   // e.target.parentElement.removeAttribute('class');
   // const spanAtr = e.target.removeAttribute('class');
   e.target.parentElement.remove();
-  
+}
+
+if(e.target.tagName === 'SPAN' && e.target.classList.contains('item')){
+  e.target.classList.toggle('lineTrough');
+  e.target.parentElement.classList.toggle('done');
+  // const spanAtr = e.target.removeAttribute('class');
+ 
 }
 if(e.target.tagName === 'DIV'){
   const attr = e.target.getAttribute('class'); 

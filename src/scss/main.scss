@@ -30,6 +30,10 @@ body {
   border-width: 0;
 
 }
+.container{
+  display: flex;
+  justify-content: space-between;
+}
 .form{
   min-width: 270px;
   align-self: center;
@@ -47,7 +51,7 @@ body {
 .delete{
   background-color: rgb(230, 70, 83);
   color: white;
-  padding: 5px;
+  padding: 5px 8px;
   border-radius: 30%;
 }
 div{
@@ -62,7 +66,9 @@ div{
   margin-bottom: 10px;
   min-width: 300px;
 }
-
+.done{
+  background-color: rgba(180, 179, 179, 0.644);
+}
 .input{
   display: flex;
   align-self: center;
@@ -73,7 +79,7 @@ div{
 }
 
 .item{
-  text-decoration: line-through;
+  text-decoration: none;
 }
 li{
   display: flex;
@@ -90,9 +96,8 @@ li{
   min-width: 300px;
   }
 .lineTrough{
-  min-width: 300px; 
   text-decoration: line-through;
-  background-color: rgba(180, 179, 179, 0.644);
+  // background-color: rgba(180, 179, 179, 0.644);
   color: rgba(0, 0, 0, 0.596);
 }
 
