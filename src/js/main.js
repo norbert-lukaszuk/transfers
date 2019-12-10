@@ -30,7 +30,6 @@ const addButon = document.querySelector('.button');
 } */
 
 addButon.addEventListener('click',(e)=>{
-  const li = document.createElement('li');
   const container = document.createElement('div');
   const del = document.createElement('span');
   const item = document.createElement('span');
@@ -38,15 +37,16 @@ addButon.addEventListener('click',(e)=>{
   const key = form.value;
   let object={
     class: '',
-    task: '',
+    item: '',
+    status: 'notDone',
   }
-  object.task = form.value;
-  object.class = 'notDone';
+  object.item = form.value;
+  object.class = 'item';
   const stringify = JSON.stringify(object);
-  console.log(`Stringify -> ${stringify}`);
   localStorage.setItem(key,stringify);
-  const parse = JSON.parse(stringify);
-  item.textContent=form.value;
+  // const parse = JSON.parse(stringify);
+  item.textContent = object.item;
+  // item.textContent=form.value;
   // container.setAttribute('class', object.class);
   ul.prepend(container);
   // li.appendChild(container);
@@ -55,39 +55,40 @@ addButon.addEventListener('click',(e)=>{
   container.classList.add('container');
   del.classList.add('delete');
   item.classList.add('item');
-
+  item.classList.add(object.class);
   // li.classList.add('notDone');
   del.textContent = 'X';
   form.value = '';
 })
 
 ul.addEventListener('click', e=>{
+  const key = e.target.textContent;
+  const local = localStorage.getItem(key);
+  let object = JSON.parse(local);
+
 if(e.target.tagName === 'SPAN' && e.target.classList.contains('delete')){
-  // e.target.parentElement.removeAttribute('class');
-  // const spanAtr = e.target.removeAttribute('class');
+  let key = e.target.previousElementSibling.textContent;//element obok, przed tym
+  localStorage.removeItem(key);
   e.target.parentElement.remove();
 }
 
 if(e.target.tagName === 'SPAN' && e.target.classList.contains('item')){
   e.target.classList.toggle('lineTrough');
   e.target.parentElement.classList.toggle('done');
+  
   // const spanAtr = e.target.removeAttribute('class');
  
 }
 if(e.target.tagName === 'DIV' && e.target.classList.contains('container')){
-  /* if(e.target.childElement.classList.contains('item')){
-    
-  } */
+  
   e.target.classList.toggle('done');
   e.target.firstChild.classList.toggle('lineTrough');
-  const attr = e.target.getAttribute('class'); 
-  const name = e.target.innerText;
-  const clas = localStorage.getItem(name);
-  let object = JSON.parse(clas);
+  const attr = e.target.getAttribute('class');
+   
   
   
   
-  if(attr === 'notDone'){
+ /*  if(attr === 'notDone'){
   e.target.setAttribute('class','lineTrough');
   object.class = 'lineTrough';
   // e.target.setAttribute('style','width: 200px;');
@@ -101,9 +102,9 @@ if(e.target.tagName === 'DIV' && e.target.classList.contains('container')){
   object.class = 'notDone';
   console.log(object.class);
 
-} 
+}  */
 
-localStorage.setItem(name,JSON.stringify(object));
+// localStorage.setItem(name,JSON.stringify(object));
   // localStorage.setItem('atr',attr);
   // console.log(attr);
   // alert(attr);
