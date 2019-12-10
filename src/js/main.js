@@ -18,16 +18,25 @@ const ul = document.querySelector('ul');
 
 const addButon = document.querySelector('.button');
 
-/* for(let i=0; i<localStorage.length;i++){  
-  const div = document.createElement('div');
+ for(let i=0; i<localStorage.length;i++){  
   const local = localStorage.getItem(localStorage.key(i));
   const object = JSON.parse(local);
-  
-  let task = object.task;
-  div.textContent = task;
-  div.setAttribute('class',object.class);
-  ul.prepend(div);
-} */
+  const container = document.createElement('div');
+  const del = document.createElement('span');
+  const item = document.createElement('span');
+  ul.prepend(container);
+  container.appendChild(item);
+  container.appendChild(del);
+  item.textContent = object.item;
+  container.classList.add('container');
+  del.classList.add('delete');
+  del.textContent = 'X';
+
+  // if(object.status === 'done'){
+  //   container.classList.add('done');
+  //   item.classList.add('lineTrough');
+  // }
+}
 
 addButon.addEventListener('click',(e)=>{
   const container = document.createElement('div');
@@ -39,6 +48,9 @@ addButon.addEventListener('click',(e)=>{
     class: '',
     item: '',
     status: 'notDone',
+    containerClass:'',
+    itemClass: '',
+
   }
   object.item = form.value;
   object.class = 'item';
@@ -83,8 +95,9 @@ if(e.target.tagName === 'DIV' && e.target.classList.contains('container')){
   
   e.target.classList.toggle('done');
   e.target.firstChild.classList.toggle('lineTrough');
-  const attr = e.target.getAttribute('class');
-   
+  if(e.target.classList.contains('done')){
+    object.containerClass = 'done';
+  }
   
   
   
