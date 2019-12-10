@@ -57,7 +57,7 @@ addButon.addEventListener('click',(e)=>{
   item.classList.add('item');
 
   // li.classList.add('notDone');
-  del.textContent = 'x';
+  del.textContent = 'X';
   form.value = '';
 })
 
@@ -74,7 +74,12 @@ if(e.target.tagName === 'SPAN' && e.target.classList.contains('item')){
   // const spanAtr = e.target.removeAttribute('class');
  
 }
-if(e.target.tagName === 'DIV'){
+if(e.target.tagName === 'DIV' && e.target.classList.contains('container')){
+  /* if(e.target.childElement.classList.contains('item')){
+    
+  } */
+  e.target.classList.toggle('done');
+  e.target.firstChild.classList.toggle('lineTrough');
   const attr = e.target.getAttribute('class'); 
   const name = e.target.innerText;
   const clas = localStorage.getItem(name);
