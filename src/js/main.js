@@ -28,7 +28,8 @@ const addButon = document.querySelector('.button');
   container.appendChild(item);
   container.appendChild(del);
   item.textContent = object.item;
-  container.classList = JSON.parse(object.itemClass);
+  item.classList.add(...object.itemClass);
+  container.classList.add(...object.containerClass);
   // container.classList.add('container');
   del.classList.add('delete');
   del.textContent = 'X';
@@ -54,14 +55,11 @@ addButon.addEventListener('click',(e)=>{
 
   }
   object.item = form.value;
-  // object.class = 'item';
   object.itemClass[0] = 'item';
-  
-  
+  object.containerClass[0] = 'container';
   item.textContent = object.item;
   
   ul.prepend(container);
-  // li.appendChild(container);
   container.appendChild(item);
   container.appendChild(del);
   container.classList.add('container');
@@ -89,8 +87,9 @@ if(e.target.tagName === 'SPAN' && e.target.classList.contains('delete')){
 
 if(e.target.tagName === 'SPAN' && e.target.classList.contains('item')){
   e.target.classList.toggle('lineTrough');
+  object.itemClass[1] = e.target.classList[1];
   e.target.parentElement.classList.toggle('done');
-  object.itemClass = JSON.stringify(e.target.classList);
+  object.containerClass[1] = e.target.parentElement.classList[1];
   localStorage.setItem(key,JSON.stringify(object));
   // const spanAtr = e.target.removeAttribute('class');
  
@@ -98,10 +97,13 @@ if(e.target.tagName === 'SPAN' && e.target.classList.contains('item')){
 if(e.target.tagName === 'DIV' && e.target.classList.contains('container')){
   
   e.target.classList.toggle('done');
+  object.containerClass[1] = e.target.classList[1];
   e.target.firstChild.classList.toggle('lineTrough');
-  if(e.target.classList.contains('done')){
-    object.containerClass = 'done';
-  }
+  object.itemClass[1] = e.target.firstChild.classList[1];
+  localStorage.setItem(key,JSON.stringify(object));
+  // if(e.target.classList.contains('done')){
+  //   object.containerClass = 'done';
+  // }
   
   
   
@@ -128,12 +130,12 @@ if(e.target.tagName === 'DIV' && e.target.classList.contains('container')){
 }
 })
 
-ul.addEventListener('dblclick',(e)=>{
-  if(e.target.tagName === 'DIV'){
-    e.target.remove();
+// ul.addEventListener('dblclick',(e)=>{
+//   if(e.target.tagName === 'DIV'){
+//     e.target.remove();
     
-  }
-  const name = e.target.innerText;
-    console.log(name);
-    localStorage.removeItem(name);
-})
+//   }
+//   const name = e.target.innerText;
+//     console.log(name);
+//     localStorage.removeItem(name);
+// })
