@@ -18,9 +18,9 @@ const ul = document.querySelector('ul');
 
 const addButon = document.querySelector('.button');
 
- for(let i=0; i<localStorage.length;i++){  
-  const local = localStorage.getItem(localStorage.key(i));
-  const object = JSON.parse(local);
+ for(let i=0; i<localStorage.length;i++){  //pętla iterujące przez localStorage
+  const local = localStorage.getItem(localStorage.key(i));//pobranie z localStorage elementu o danym w pętli kluczu
+  const object = JSON.parse(local);//parsowanie do obiektu
   const container = document.createElement('div');
   const del = document.createElement('span');
   const item = document.createElement('span');
@@ -28,7 +28,8 @@ const addButon = document.querySelector('.button');
   container.appendChild(item);
   container.appendChild(del);
   item.textContent = object.item;
-  container.classList.add('container');
+  container.classList = JSON.parse(object.itemClass);
+  // container.classList.add('container');
   del.classList.add('delete');
   del.textContent = 'X';
 
@@ -87,7 +88,8 @@ if(e.target.tagName === 'SPAN' && e.target.classList.contains('delete')){
 if(e.target.tagName === 'SPAN' && e.target.classList.contains('item')){
   e.target.classList.toggle('lineTrough');
   e.target.parentElement.classList.toggle('done');
-  
+  object.itemClass = JSON.stringify(e.target.classList);
+  localStorage.setItem(key,JSON.stringify(object));
   // const spanAtr = e.target.removeAttribute('class');
  
 }
