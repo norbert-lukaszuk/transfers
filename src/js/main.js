@@ -49,29 +49,31 @@ addButon.addEventListener('click',(e)=>{
     class: '',
     item: '',
     status: 'notDone',
-    containerClass:'',
-    itemClass: '',
+    containerClass: [],
+    itemClass: [],
 
   }
   object.item = form.value;
-  object.class = 'item';
-  const stringify = JSON.stringify(object);
-  localStorage.setItem(key,stringify);
-  // const parse = JSON.parse(stringify);
+  // object.class = 'item';
+  object.itemClass[0] = 'item';
+  
+  
   item.textContent = object.item;
-  // item.textContent=form.value;
-  // container.setAttribute('class', object.class);
+  
   ul.prepend(container);
   // li.appendChild(container);
   container.appendChild(item);
   container.appendChild(del);
   container.classList.add('container');
   del.classList.add('delete');
-  item.classList.add('item');
-  item.classList.add(object.class);
-  // li.classList.add('notDone');
+  item.classList.add(...object.itemClass);
+  // item.classList.add(object.class);
+  const stringify = JSON.stringify(object);
+  localStorage.setItem(key,stringify);
   del.textContent = 'X';
+  
   form.value = '';
+  
 })
 
 ul.addEventListener('click', e=>{
