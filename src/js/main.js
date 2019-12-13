@@ -43,24 +43,27 @@ input.addEventListener('submit', e =>{
     container.appendChild(delButton);
     delButton.classList.add('delete');
     delButton.innerText = 'X';
+    const stringify = JSON.stringify(taskObject);
+    localStorage.setItem(taskObject.key, stringify);
 })
 // const addButon = document.querySelector('.button');
 
  for(let i=0; i<localStorage.length;i++){  //pętla iterujące przez localStorage
   const local = localStorage.getItem(localStorage.key(i));//pobranie z localStorage elementu o danym w pętli kluczu
-  const object = JSON.parse(local);//parsowanie do obiektu
+  const taskObject = JSON.parse(local);//parsowanie do obiektu
   const container = document.createElement('div');
-  const del = document.createElement('span');
-  const item = document.createElement('span');
   ul.prepend(container);
-  container.appendChild(item);
-  container.appendChild(del);
-  item.textContent = object.item;
-  item.classList.add(...object.itemClass);
-  container.classList.add(...object.containerClass);
-  // container.classList.add('container');
-  del.classList.add('delete');
-  del.textContent = 'X';
+  container.classList.add(taskObject.containerClass);
+  const taskName = document.createElement('span');
+  container.appendChild(taskName);
+  taskName.innerText = taskObject.taskName;
+  taskName.classList.add(taskObject.taskClass);
+  const delButton = document.createElement('span');
+  container.appendChild(delButton);
+  delButton.classList.add('delete');
+  delButton.innerText = 'X';
+
+  
 
   // if(object.status === 'done'){
   //   container.classList.add('done');
@@ -105,7 +108,7 @@ input.addEventListener('submit', e =>{
 ul.addEventListener('click', e=>{
   const key = e.target.textContent;
   const local = localStorage.getItem(key);
-  let object = JSON.parse(local);
+  let taskObject = JSON.parse(local);
 
 if(e.target.tagName === 'SPAN' && e.target.classList.contains('delete')){
   let key = e.target.previousElementSibling.textContent;//element obok, przed tym
@@ -114,18 +117,32 @@ if(e.target.tagName === 'SPAN' && e.target.classList.contains('delete')){
 }
 
 if(e.target.tagName === 'SPAN' && e.target.classList.contains('item')){
-  e.target.classList.toggle('lineTrough');
-  object.itemClass[1] = e.target.classList[1];
-  e.target.parentElement.classList.toggle('done');
-  object.containerClass[1] = e.target.parentElement.classList[1];
-  localStorage.setItem(key,JSON.stringify(object));
-  // const spanAtr = e.target.removeAttribute('class');
+  
+  // e.target.classList.toggle('itemDone');
+  let classes = e.target.classList;
+   classes.toggle('itemDone');
+  // console.log(typeof classes, classes);
+  // console.log(classes.value);
+  // let stringify = JSON.stringify(classes);
+  // console.log(stringify);
+  taskObject.itemClass = classes;
+  const testDiv = document.createElement('div');
+  ul.prepend(testDiv);
+  testDiv.classList = classes;
+  
+  console.log(taskObject);
+  // object.itemClass[1] = e.target.classList[1];
+  // e.target.parentElement.classList.toggle('done');
+  // object.containerClass[1] = e.target.parentElement.classList[1];
+  // localStorage.setItem(key,JSON.stringify(object));
+  // // const spanAtr = e.target.removeAttribute('class');
  
 }
 if(e.target.tagName === 'DIV' && e.target.classList.contains('container')){
   
-  e.target.classList.toggle('done');
-  object.containerClass[1] = e.target.classList[1];
+  
+  console.log(e.target.classList[0]);
+  // taskObject.containerClass = e.target.classList[0];
   e.target.firstChild.classList.toggle('lineTrough');
   object.itemClass[1] = e.target.firstChild.classList[1];
   localStorage.setItem(key,JSON.stringify(object));

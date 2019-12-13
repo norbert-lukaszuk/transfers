@@ -94,6 +94,10 @@ div{
 .item{
   text-decoration: none;
 }
+.itemDone{
+  text-decoration: none;
+  color: gray;
+}
 li{
   display: flex;
   justify-content: space-between;
