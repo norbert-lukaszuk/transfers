@@ -15,8 +15,36 @@ if ('serviceWorker' in navigator) {
 }
 
 const ul = document.querySelector('ul');
+let input = document.querySelector('.input')
+let taskObject={
+  taskName: '',
+  key: '',
+  taskClass: '',
+  containerClass: '',
+}
+console.log(taskObject);
 
-const addButon = document.querySelector('.button');
+input.addEventListener('submit', e =>{
+    e.preventDefault();
+    taskObject.taskName = input.form.value;
+    taskObject.key = taskObject.taskName;
+    input.reset();
+    taskObject.containerClass = 'container';
+    taskObject.taskClass = '';
+    const container = document.createElement('div');
+    ul.prepend(container);
+    container.classList.add(taskObject.containerClass);
+    const taskName = document.createElement('span');
+    container.appendChild(taskName);
+    taskName.classList.add('item');
+    taskName.innerText = taskObject.taskName;
+    taskObject.taskClass = 'item';
+    const delButton = document.createElement('span');
+    container.appendChild(delButton);
+    delButton.classList.add('delete');
+    delButton.innerText = 'X';
+})
+// const addButon = document.querySelector('.button');
 
  for(let i=0; i<localStorage.length;i++){  //pętla iterujące przez localStorage
   const local = localStorage.getItem(localStorage.key(i));//pobranie z localStorage elementu o danym w pętli kluczu
@@ -40,7 +68,7 @@ const addButon = document.querySelector('.button');
   // }
 }
 
-addButon.addEventListener('click',(e)=>{
+/* addButon.addEventListener('click',(e)=>{
   const container = document.createElement('div');
   const del = document.createElement('span');
   const item = document.createElement('span');
@@ -72,7 +100,7 @@ addButon.addEventListener('click',(e)=>{
   
   form.value = '';
   
-})
+}) */
 
 ul.addEventListener('click', e=>{
   const key = e.target.textContent;
