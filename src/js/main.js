@@ -21,7 +21,7 @@ let input = document.querySelector('.input')
 let taskObject={
   taskName: '',
   key: '',
-  taskClass: [],
+  taskClass:  [],
   containerClass: '',
 }
 
@@ -40,7 +40,7 @@ input.addEventListener('submit', e =>{
     container.appendChild(taskName);
     taskName.classList.add('item');
     taskName.innerText = taskObject.taskName;
-    taskObject.taskClass = 'item';
+    taskObject.taskClass = ['item'];
     const delButton = document.createElement('span');
     container.appendChild(delButton);
     delButton.classList.add('delete');
@@ -62,7 +62,7 @@ input.addEventListener('submit', e =>{
   taskName.innerText = taskObject.taskName;
   const taskClass = taskObject.taskClass;
 
-  // taskName.classList.value = taskClass;
+  taskName.classList.add(...taskClass);
   console.log(`container classList ${container.classList}`)
   console.log(`let taskClass ${typeof taskClass}`);
   const delButton = document.createElement('span');
@@ -127,8 +127,8 @@ if(e.target.tagName === 'SPAN' && e.target.classList.contains('item')){
   
   e.target.classList.toggle('itemDone');
   let taskClass = e.target.classList.value;
-  let slice=JSON.stringify(taskClass);
-  console.log(typeof slice, slice);
+  taskObject.taskClass = taskClass.split(' ');
+  
   // taskObject.taskClass = taskClass.slice(" ");
   
   // console.log(typeof classes, classes);
