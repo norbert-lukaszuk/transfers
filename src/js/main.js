@@ -1,5 +1,7 @@
 "use strict";
 
+import { type } from "os";
+
 // service worker registration - remove if you're not going to use it
 
 if ('serviceWorker' in navigator) {
@@ -19,10 +21,10 @@ let input = document.querySelector('.input')
 let taskObject={
   taskName: '',
   key: '',
-  taskClass: '',
+  taskClass: [],
   containerClass: '',
 }
-console.log(taskObject);
+
 
 input.addEventListener('submit', e =>{
     e.preventDefault();
@@ -51,13 +53,18 @@ input.addEventListener('submit', e =>{
  for(let i=0; i<localStorage.length;i++){  //pętla iterujące przez localStorage
   const local = localStorage.getItem(localStorage.key(i));//pobranie z localStorage elementu o danym w pętli kluczu
   const taskObject = JSON.parse(local);//parsowanie do obiektu
+  console.log(taskObject);
   const container = document.createElement('div');
   ul.prepend(container);
   container.classList.add(taskObject.containerClass);
   const taskName = document.createElement('span');
   container.appendChild(taskName);
   taskName.innerText = taskObject.taskName;
-  taskName.classList.add(taskObject.taskClass);
+  const taskClass = taskObject.taskClass;
+
+  // taskName.classList.value = taskClass;
+  console.log(`container classList ${container.classList}`)
+  console.log(`let taskClass ${typeof taskClass}`);
   const delButton = document.createElement('span');
   container.appendChild(delButton);
   delButton.classList.add('delete');
@@ -118,19 +125,20 @@ if(e.target.tagName === 'SPAN' && e.target.classList.contains('delete')){
 
 if(e.target.tagName === 'SPAN' && e.target.classList.contains('item')){
   
-  // e.target.classList.toggle('itemDone');
-  let classes = e.target.classList;
-   classes.toggle('itemDone');
+  e.target.classList.toggle('itemDone');
+  let taskClass = e.target.classList.value;
+  let slice=JSON.stringify(taskClass);
+  console.log(typeof slice, slice);
+  // taskObject.taskClass = taskClass.slice(" ");
+  
   // console.log(typeof classes, classes);
   // console.log(classes.value);
-  // let stringify = JSON.stringify(classes);
+  let stringify = JSON.stringify(taskObject);
+  localStorage.setItem(key, stringify);
   // console.log(stringify);
-  taskObject.itemClass = classes;
-  const testDiv = document.createElement('div');
-  ul.prepend(testDiv);
-  testDiv.classList = classes;
   
-  console.log(taskObject);
+  
+  // console.log(taskObject);
   // object.itemClass[1] = e.target.classList[1];
   // e.target.parentElement.classList.toggle('done');
   // object.containerClass[1] = e.target.parentElement.classList[1];
