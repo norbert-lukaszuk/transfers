@@ -30,20 +30,30 @@ body {
   border-width: 0;
 
 }
+.clock{
+
+  align-self: flex-start;
+  font-size: 15px;
+}
 .container{
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   background-color: lightsteelblue;
   color: black;
-  padding: 15px;
+  padding: 5px 15px;
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 25px;
   font-weight: 800;
   margin-bottom: 10px;
   min-width: 300px;
+  min-height: 90px;
   border-radius: 10px;
   
+}
+.containerDone{
+  background-color: rgba(128, 128, 128, 0.69);
 }
 .form{
   min-width: 270px;
@@ -60,6 +70,7 @@ body {
 }
 
 .delete{
+  align-self: flex-end;
   width: 38px;
   height: 38px;
   background-color: rgb(230, 70, 83);
@@ -92,11 +103,12 @@ div{
 }
 
 .item{
+  align-self: center;
   text-decoration: none;
 }
 .itemDone{
   text-decoration: line-through;
-  color: gray;
+  color: rgba(158, 154, 154, 0.795);
 }
 li{
   display: flex;

@@ -22,7 +22,8 @@ let taskObject={
   taskName: '',
   key: '',
   taskClass:  [],
-  containerClass: '',
+  containerClass: [],
+  timeStamp: null,
 }
 
 
@@ -31,7 +32,7 @@ input.addEventListener('submit', e =>{
     taskObject.taskName = input.form.value;
     taskObject.key = taskObject.taskName;
     input.reset();
-    taskObject.containerClass = 'container';
+    taskObject.containerClass = ['container'];
     taskObject.taskClass = '';
     const container = document.createElement('div');
     ul.prepend(container);
@@ -45,6 +46,8 @@ input.addEventListener('submit', e =>{
     container.appendChild(delButton);
     delButton.classList.add('delete');
     delButton.innerText = 'X';
+    const timeStamp = new Date();
+    taskObject.timeStamp = timeStamp.getTime();
     const stringify = JSON.stringify(taskObject);
     localStorage.setItem(taskObject.key, stringify);
 })
@@ -56,19 +59,30 @@ input.addEventListener('submit', e =>{
   console.log(taskObject);
   const container = document.createElement('div');
   ul.prepend(container);
-  container.classList.add(taskObject.containerClass);
+  const containerClass = taskObject.containerClass;
+  container.classList.add(...containerClass);
+  let now = new Date();
+  console.log(typeof now);
+  let timeStamp = taskObject.timeStamp;
+  console.log(typeof timeStamp);
+  let timeDiff = now.getTime() - timeStamp;
+  console.log(Math.round( timeDiff/1000/60));
+  const timeCount = document.createElement('span');
+  container.appendChild(timeCount);
+  timeCount.classList.add('clock');
+  timeCount.innerText = `${Math.round(timeDiff/1000/60)} min. ago`;
   const taskName = document.createElement('span');
   container.appendChild(taskName);
   taskName.innerText = taskObject.taskName;
   const taskClass = taskObject.taskClass;
 
   taskName.classList.add(...taskClass);
-  console.log(`container classList ${container.classList}`)
-  console.log(`let taskClass ${typeof taskClass}`);
+  
   const delButton = document.createElement('span');
   container.appendChild(delButton);
   delButton.classList.add('delete');
   delButton.innerText = 'X';
+  
 
   
 
@@ -128,9 +142,9 @@ if(e.target.tagName === 'SPAN' && e.target.classList.contains('item')){
   e.target.classList.toggle('itemDone');
   let taskClass = e.target.classList.value;
   taskObject.taskClass = taskClass.split(' ');
-  
-  // taskObject.taskClass = taskClass.slice(" ");
-  
+  e.target.parentElement.classList.toggle('containerDone');
+  let containerClass = e.target.parentElement.classList.value;
+  taskObject.containerClass = containerClass.split(' ');
   // console.log(typeof classes, classes);
   // console.log(classes.value);
   let stringify = JSON.stringify(taskObject);
@@ -140,26 +154,24 @@ if(e.target.tagName === 'SPAN' && e.target.classList.contains('item')){
   
   // console.log(taskObject);
   // object.itemClass[1] = e.target.classList[1];
-  // e.target.parentElement.classList.toggle('done');
+  
   // object.containerClass[1] = e.target.parentElement.classList[1];
   // localStorage.setItem(key,JSON.stringify(object));
   // // const spanAtr = e.target.removeAttribute('class');
  
 }
-if(e.target.tagName === 'DIV' && e.target.classList.contains('container')){
+if(e.target.tagName === 'DIV' && e.target.classList.contains('container') || e.target.classList.contains('containerDone') ){
+  e.target.classList.toggle('containerDone');
+  let containerClass = e.target.classList.value;
+  e.target.firstChild.classList.toggle('itemDone');
+  let taskClass = e.target.firstChild.classList.value;
+  // console.log(e.target.firstChild.classList.value);
+  taskObject.taskClass = taskClass.split(' ');
+  console.log(taskClass);
+  let stringify = JSON.stringify(taskObject);
+  localStorage.setItem(key, stringify);
   
-  
-  console.log(e.target.classList[0]);
-  // taskObject.containerClass = e.target.classList[0];
-  e.target.firstChild.classList.toggle('lineTrough');
-  object.itemClass[1] = e.target.firstChild.classList[1];
-  localStorage.setItem(key,JSON.stringify(object));
-  // if(e.target.classList.contains('done')){
-  //   object.containerClass = 'done';
-  // }
-  
-  
-  
+
  /*  if(attr === 'notDone'){
   e.target.setAttribute('class','lineTrough');
   object.class = 'lineTrough';
