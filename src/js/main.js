@@ -37,6 +37,14 @@ input.addEventListener('submit', e =>{
     const container = document.createElement('div');
     ul.prepend(container);
     container.classList.add(taskObject.containerClass);
+    const timeStamp = new Date();
+    taskObject.timeStamp = timeStamp.getTime();
+    const now = new Date();
+    const timeDiff = now - timeStamp;
+    const timeCount = document.createElement('span');
+    container.appendChild(timeCount);
+    timeCount.classList.add('clock');
+    timeCount.innerText = `${Math.round(timeDiff/1000/60)} m. ago`;
     const taskName = document.createElement('span');
     container.appendChild(taskName);
     taskName.classList.add('item');
@@ -46,85 +54,43 @@ input.addEventListener('submit', e =>{
     container.appendChild(delButton);
     delButton.classList.add('delete');
     delButton.innerText = 'X';
-    const timeStamp = new Date();
-    taskObject.timeStamp = timeStamp.getTime();
+    
     const stringify = JSON.stringify(taskObject);
     localStorage.setItem(taskObject.key, stringify);
 })
-// const addButon = document.querySelector('.button');
+
 
  for(let i=0; i<localStorage.length;i++){  //pętla iterujące przez localStorage
+  // get data from localStorage
   const local = localStorage.getItem(localStorage.key(i));//pobranie z localStorage elementu o danym w pętli kluczu
   const taskObject = JSON.parse(local);//parsowanie do obiektu
-  console.log(taskObject);
+  // container create
   const container = document.createElement('div');
   ul.prepend(container);
   const containerClass = taskObject.containerClass;
   container.classList.add(...containerClass);
+  // time stamp
   let now = new Date();
-  console.log(typeof now);
   let timeStamp = taskObject.timeStamp;
-  console.log(typeof timeStamp);
   let timeDiff = now.getTime() - timeStamp;
-  console.log(Math.round( timeDiff/1000/60));
   const timeCount = document.createElement('span');
   container.appendChild(timeCount);
   timeCount.classList.add('clock');
-  timeCount.innerText = `${Math.round(timeDiff/1000/60)} min. ago`;
+  timeCount.innerText = `${Math.round(timeDiff/1000/60)} m. ago`;
+  // task create
   const taskName = document.createElement('span');
   container.appendChild(taskName);
   taskName.innerText = taskObject.taskName;
   const taskClass = taskObject.taskClass;
-
   taskName.classList.add(...taskClass);
-  
+  // del button create
   const delButton = document.createElement('span');
   container.appendChild(delButton);
   delButton.classList.add('delete');
   delButton.innerText = 'X';
   
-
-  
-
-  // if(object.status === 'done'){
-  //   container.classList.add('done');
-  //   item.classList.add('lineTrough');
-  // }
 }
 
-/* addButon.addEventListener('click',(e)=>{
-  const container = document.createElement('div');
-  const del = document.createElement('span');
-  const item = document.createElement('span');
-  const form = document.getElementById('toList');
-  const key = form.value;
-  let object={
-    class: '',
-    item: '',
-    status: 'notDone',
-    containerClass: [],
-    itemClass: [],
-
-  }
-  object.item = form.value;
-  object.itemClass[0] = 'item';
-  object.containerClass[0] = 'container';
-  item.textContent = object.item;
-  
-  ul.prepend(container);
-  container.appendChild(item);
-  container.appendChild(del);
-  container.classList.add('container');
-  del.classList.add('delete');
-  item.classList.add(...object.itemClass);
-  // item.classList.add(object.class);
-  const stringify = JSON.stringify(object);
-  localStorage.setItem(key,stringify);
-  del.textContent = 'X';
-  
-  form.value = '';
-  
-}) */
 
 ul.addEventListener('click', e=>{
   const key = e.target.textContent;
@@ -143,10 +109,9 @@ if(e.target.tagName === 'SPAN' && e.target.classList.contains('item')){
   let taskClass = e.target.classList.value;
   taskObject.taskClass = taskClass.split(' ');
   e.target.parentElement.classList.toggle('containerDone');
+  e.target.previousSibling.classList.toggle('clockHide');
   let containerClass = e.target.parentElement.classList.value;
   taskObject.containerClass = containerClass.split(' ');
-  // console.log(typeof classes, classes);
-  // console.log(classes.value);
   let stringify = JSON.stringify(taskObject);
   localStorage.setItem(key, stringify);
   // console.log(stringify);

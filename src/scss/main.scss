@@ -36,13 +36,17 @@ body {
   font-size: 10px;
   font-weight: 300;
 }
+.clockHide{
+  display: none;
+  
+}
 .container{
   display: flex;
-  flex-direction: column;
+  // flex-direction: column;
   justify-content: space-between;
   background-color: lightsteelblue;
   color: black;
-  padding: 5px 15px;
+  padding: 5px 15px 5px 5px;
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 25px;
@@ -55,6 +59,7 @@ body {
 }
 .containerDone{
   background-color: rgba(128, 128, 128, 0.69);
+  justify-content: space-evenly;
 }
 .form{
   min-width: 270px;
@@ -71,7 +76,7 @@ body {
 }
 
 .delete{
-  align-self: flex-end;
+  align-self: center;
   width: 38px;
   height: 38px;
   background-color: rgb(230, 70, 83);
