@@ -114,16 +114,7 @@ if(e.target.tagName === 'SPAN' && e.target.classList.contains('item')){
   taskObject.containerClass = containerClass.split(' ');
   let stringify = JSON.stringify(taskObject);
   localStorage.setItem(key, stringify);
-  // console.log(stringify);
   
-  
-  // console.log(taskObject);
-  // object.itemClass[1] = e.target.classList[1];
-  
-  // object.containerClass[1] = e.target.parentElement.classList[1];
-  // localStorage.setItem(key,JSON.stringify(object));
-  // // const spanAtr = e.target.removeAttribute('class');
- 
 }
 if(e.target.tagName === 'DIV' && e.target.classList.contains('container') || e.target.classList.contains('containerDone') ){
   e.target.classList.toggle('containerDone');
@@ -135,37 +126,8 @@ if(e.target.tagName === 'DIV' && e.target.classList.contains('container') || e.t
   console.log(taskClass);
   let stringify = JSON.stringify(taskObject);
   localStorage.setItem(key, stringify);
-  
 
- /*  if(attr === 'notDone'){
-  e.target.setAttribute('class','lineTrough');
-  object.class = 'lineTrough';
-  // e.target.setAttribute('style','width: 200px;');
-  // localStorage.setItem(name,JSON.stringify(object));
-  console.log(object.class);
-
-}
- if(attr === 'lineTrough'){
-  // e.target.removeAttribute('class');
-  e.target.setAttribute('class','notDone');
-  object.class = 'notDone';
-  console.log(object.class);
-
-}  */
-
-// localStorage.setItem(name,JSON.stringify(object));
-  // localStorage.setItem('atr',attr);
-  // console.log(attr);
-  // alert(attr);
+ 
 }
 })
 
-// ul.addEventListener('dblclick',(e)=>{
-//   if(e.target.tagName === 'DIV'){
-//     e.target.remove();
-    
-//   }
-//   const name = e.target.innerText;
-//     console.log(name);
-//     localStorage.removeItem(name);
-// })
