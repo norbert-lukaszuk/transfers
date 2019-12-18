@@ -76,7 +76,15 @@ input.addEventListener('submit', e =>{
   const timeCount = document.createElement('span');
   container.appendChild(timeCount);
   timeCount.classList.add('clock');
-  timeCount.innerText = `${Math.round(timeDiff/1000/60)} m. ago`;
+  if((timeDiff/1000/60)>59 && (timeDiff/1000/60/60/24) < 1 ){
+    console.log(Math.round(timeDiff/1000/60/60), 'hours');
+    timeCount.innerText = `${Math.round(timeDiff/1000/60/60)} h. ago`;
+  }
+  if((timeDiff/1000/60/60/24)>0){
+    console.log(Math.round(timeDiff/1000/60/60/24), 'days');
+    timeCount.innerText = `${Math.round(timeDiff/1000/60/60/24)} days. ago`;
+  }
+  // timeCount.innerText = `${Math.round(timeDiff/1000/60)} m. ago`;
   // task create
   const taskName = document.createElement('span');
   container.appendChild(taskName);
