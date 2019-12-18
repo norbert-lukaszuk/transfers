@@ -61,37 +61,42 @@ input.addEventListener('submit', e =>{
 
 
  for(let i=0; i<localStorage.length;i++){  //pętla iterujące przez localStorage
-  // get data from localStorage
+  /* get data from localStorage */
   const local = localStorage.getItem(localStorage.key(i));//pobranie z localStorage elementu o danym w pętli kluczu
   const taskObject = JSON.parse(local);//parsowanie do obiektu
-  // container create
+  /* container create */
   const container = document.createElement('div');
   ul.prepend(container);
   const containerClass = taskObject.containerClass;
   container.classList.add(...containerClass);
-  // time stamp
+  /* time stamp */
   let now = new Date();
   let timeStamp = taskObject.timeStamp;
   let timeDiff = now.getTime() - timeStamp;
   const timeCount = document.createElement('span');
   container.appendChild(timeCount);
   timeCount.classList.add('clock');
-  if((timeDiff/1000/60)>59 && (timeDiff/1000/60/60/24) < 1 ){
+  // condition statments to cunt hours & days
+  if((timeDiff/1000/60)<59 /* && (timeDiff/1000/60/60/24) < 1  */){
+    timeCount.innerText = `${Math.round(timeDiff/1000/60)} m. ago`;
+    console.log(Math.round(timeDiff/1000/60), 'minuts');
+  }
+  else if((timeDiff/1000/60)>59 && (timeDiff/1000/60/60/24) < 1 ){
     console.log(Math.round(timeDiff/1000/60/60), 'hours');
     timeCount.innerText = `${Math.round(timeDiff/1000/60/60)} h. ago`;
   }
-  if((timeDiff/1000/60/60/24)>0){
+  else if((timeDiff/1000/60/60/24)>0){
     console.log(Math.round(timeDiff/1000/60/60/24), 'days');
-    timeCount.innerText = `${Math.round(timeDiff/1000/60/60/24)} days. ago`;
+    timeCount.innerText = `${Math.round(timeDiff/1000/60/60/24)} d. ago`;
   }
-  // timeCount.innerText = `${Math.round(timeDiff/1000/60)} m. ago`;
-  // task create
+  
+  /*  task create */
   const taskName = document.createElement('span');
   container.appendChild(taskName);
   taskName.innerText = taskObject.taskName;
   const taskClass = taskObject.taskClass;
   taskName.classList.add(...taskClass);
-  // del button create
+  /* del button create */
   const delButton = document.createElement('span');
   container.appendChild(delButton);
   delButton.classList.add('delete');
