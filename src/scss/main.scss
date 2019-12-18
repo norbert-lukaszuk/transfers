@@ -32,8 +32,8 @@ body {
 }
 .clock{
 
-  align-self: flex-start;
-  font-size: 10px;
+  align-self: center;
+  font-size: 14px;
   font-weight: 300;
 }
 .clockHide{
@@ -42,7 +42,7 @@ body {
 }
 .container{
   display: flex;
-  // flex-direction: column;
+  flex-direction: column;
   justify-content: space-between;
   background-color: lightsteelblue;
   color: black;
@@ -54,6 +54,7 @@ body {
   margin-bottom: 10px;
   min-width: 300px;
   min-height: 90px;
+  max-height: 100px;
   border-radius: 10px;
   
 }
@@ -147,6 +148,11 @@ li{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+.taskWraper{
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px;
 }
 #toList{
   font-size: 25px;

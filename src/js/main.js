@@ -90,15 +90,19 @@ input.addEventListener('submit', e =>{
     timeCount.innerText = `${Math.round(timeDiff/1000/60/60/24)} d. ago`;
   }
   
+  /*  task & delete wraper create **/
+  const taskWraper = document.createElement('div');
+  container.appendChild(taskWraper);
+  taskWraper.setAttribute('class','taskWraper');
   /*  task create */
   const taskName = document.createElement('span');
-  container.appendChild(taskName);
+  taskWraper.appendChild(taskName);
   taskName.innerText = taskObject.taskName;
   const taskClass = taskObject.taskClass;
   taskName.classList.add(...taskClass);
   /* del button create */
   const delButton = document.createElement('span');
-  container.appendChild(delButton);
+  taskWraper.appendChild(delButton);
   delButton.classList.add('delete');
   delButton.innerText = 'X';
   
@@ -109,7 +113,7 @@ ul.addEventListener('click', e=>{
   const key = e.target.textContent;
   const local = localStorage.getItem(key);
   let taskObject = JSON.parse(local);
-
+ 
 if(e.target.tagName === 'SPAN' && e.target.classList.contains('delete')){
   let key = e.target.previousElementSibling.textContent;//element obok, przed tym
   localStorage.removeItem(key);
@@ -117,12 +121,11 @@ if(e.target.tagName === 'SPAN' && e.target.classList.contains('delete')){
 }
 
 if(e.target.tagName === 'SPAN' && e.target.classList.contains('item')){
-  
   e.target.classList.toggle('itemDone');
   let taskClass = e.target.classList.value;
   taskObject.taskClass = taskClass.split(' ');
   e.target.parentElement.classList.toggle('containerDone');
-  e.target.previousSibling.classList.toggle('clockHide');
+  
   let containerClass = e.target.parentElement.classList.value;
   taskObject.containerClass = containerClass.split(' ');
   let stringify = JSON.stringify(taskObject);
