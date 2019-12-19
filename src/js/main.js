@@ -122,13 +122,15 @@ if(e.target.tagName === 'SPAN' && e.target.classList.contains('delete')){
 }
 
 if(e.target.tagName === 'SPAN' && e.target.classList.contains('item')){
+  e.target.parentNode.parentNode.classList.toggle('containerDone');
+  // console.log(nodeName);
   e.target.classList.toggle('itemDone');
   let taskClass = e.target.classList.value;
   taskObject.taskClass = taskClass.split(' ');
-  e.target.parentElement.classList.toggle('containerDone');
-  const clock = document.getElementById(taskObject.timeStamp);
+  // e.target.parentElement.classList.toggle('containerDone');
+  const clock = document.getElementById(taskObject.timeStamp); //finding task clock by id 
   clock.classList.toggle('clockHide');
-  let containerClass = e.target.parentElement.classList.value;
+  let containerClass = e.target.parentNode.parentNode.classList.value;
   taskObject.containerClass = containerClass.split(' ');
   let stringify = JSON.stringify(taskObject);
   localStorage.setItem(key, stringify);
