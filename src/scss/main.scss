@@ -85,21 +85,21 @@ body {
   padding-top: 4px;
   border-radius: 50%;
 }
-div{
-  border-radius: 10px;
-  background-color: lightsteelblue;
-  color: black;
-  padding: 15px;
-  text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 25px;
-  font-weight: 800;
-  margin-bottom: 10px;
-  min-width: 300px;
-}
-.done{
-  background-color: rgba(180, 179, 179, 0.644);
-}
+// div{
+//   border-radius: 10px;
+//   background-color: lightsteelblue;
+//   color: black;
+//   padding: 15px;
+//   text-align: center;
+//   font-family: Arial, Helvetica, sans-serif;
+//   font-size: 25px;
+//   font-weight: 800;
+//   margin-bottom: 10px;
+//   min-width: 300px;
+// }
+// .done{
+//   background-color: rgba(128, 128, 128, 0.69);
+// }
 .input{
   display: flex;
   align-self: center;
@@ -115,7 +115,7 @@ div{
 }
 .itemDone{
   text-decoration: line-through;
-  color: rgba(158, 154, 154, 0.795);
+  color: rgba(128, 128, 128, 0.69);
 }
 li{
   display: flex;
@@ -152,7 +152,10 @@ li{
 .taskWraper{
   display: flex;
   justify-content: space-between;
-  padding: 10px 15px;
+  padding: 5px 15px 25px 15px;
+}
+.taskWraperDone{
+  padding-top: 15px;
 }
 #toList{
   font-size: 25px;

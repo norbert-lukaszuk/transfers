@@ -23,6 +23,7 @@ let taskObject={
   key: '',
   taskClass:  [],
   containerClass: [],
+  taskWraperClass: [],
   timeStamp: null,
 }
 
@@ -118,7 +119,7 @@ ul.addEventListener('click', e=>{
 if(e.target.tagName === 'SPAN' && e.target.classList.contains('delete')){
   let key = e.target.previousElementSibling.textContent;//element obok, przed tym
   localStorage.removeItem(key);
-  e.target.parentElement.remove();
+  e.target.parentNode.parentElement.remove();
 }
 
 if(e.target.tagName === 'SPAN' && e.target.classList.contains('item')){
@@ -136,18 +137,32 @@ if(e.target.tagName === 'SPAN' && e.target.classList.contains('item')){
   localStorage.setItem(key, stringify);
   
 }
-if(e.target.tagName === 'DIV' && e.target.classList.contains('container') || e.target.classList.contains('containerDone') ){
+/* if(e.target.tagName === 'DIV' && e.target.classList.contains('container') || e.target.classList.contains('containerDone') ){
   e.target.classList.toggle('containerDone');
   let containerClass = e.target.classList.value;
   e.target.firstChild.classList.toggle('itemDone');
   let taskClass = e.target.firstChild.classList.value;
   // console.log(e.target.firstChild.classList.value);
+  e.target.firstChild.classList.toggle('taskWraperDone')
   taskObject.taskClass = taskClass.split(' ');
   console.log(taskClass);
   let stringify = JSON.stringify(taskObject);
   localStorage.setItem(key, stringify);
-
+} */
+if(e.target.tagName === 'DIV' && e.target.classList.contains('taskWraper') || e.target.classList.contains('taskWraperDone')){
+  e.target.classList.toggle('taskWraperDone');
+  
+  const taskWraperClass = e.target.classList.value;
  
+  let array = taskWraperClass.split(' ');
+  console.log(typeof array,array);
+  taskObject.taskWraperClass = taskWraperClass.split(' ');//not working !!!
+ 
+  e.target.parentElement.classList.toggle('containerDone');
+  e.target.firstChild.classList.toggle('itemDone');
+  e.target.parentNode.firstChild.classList.toggle('clockHide');
+  let stringify = JSON.stringify(taskObject);
+  localStorage.setItem(key, stringify);
 }
 })
 
