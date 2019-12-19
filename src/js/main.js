@@ -76,6 +76,7 @@ input.addEventListener('submit', e =>{
   const timeCount = document.createElement('span');
   container.appendChild(timeCount);
   timeCount.classList.add('clock');
+  timeCount.setAttribute('id',timeStamp);
   // condition statments to cunt hours & days
   if((timeDiff/1000/60)<59 /* && (timeDiff/1000/60/60/24) < 1  */){
     timeCount.innerText = `${Math.round(timeDiff/1000/60)} m. ago`;
@@ -125,7 +126,8 @@ if(e.target.tagName === 'SPAN' && e.target.classList.contains('item')){
   let taskClass = e.target.classList.value;
   taskObject.taskClass = taskClass.split(' ');
   e.target.parentElement.classList.toggle('containerDone');
-  
+  const clock = document.getElementById(taskObject.timeStamp);
+  clock.classList.toggle('clockHide');
   let containerClass = e.target.parentElement.classList.value;
   taskObject.containerClass = containerClass.split(' ');
   let stringify = JSON.stringify(taskObject);
