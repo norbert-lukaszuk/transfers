@@ -45,14 +45,20 @@ input.addEventListener('submit', e =>{
     const timeCount = document.createElement('span');
     container.appendChild(timeCount);
     timeCount.classList.add('clock');
-    timeCount.innerText = `${Math.round(timeDiff/1000/60)} m. ago`;
+    let clockClass = timeCount.classList.value.split(' ');
+    taskObject.clockClass = clockClass;
+  
+    timeCount.innerText = `${Math.round(timeDiff/1000)+1} s.ago`;
+    const taskWraper = document.createElement('div');
+    container.appendChild(taskWraper);
+    taskWraper.classList.add('taskWraper');
     const taskName = document.createElement('span');
-    container.appendChild(taskName);
+    taskWraper.appendChild(taskName);
     taskName.classList.add('item');
     taskName.innerText = taskObject.taskName;
     taskObject.taskClass = ['item'];
     const delButton = document.createElement('span');
-    container.appendChild(delButton);
+    taskWraper.appendChild(delButton);
     delButton.classList.add('delete');
     delButton.innerText = 'X';
     
@@ -76,13 +82,17 @@ input.addEventListener('submit', e =>{
   let timeDiff = now.getTime() - timeStamp;
   const timeCount = document.createElement('span');
   container.appendChild(timeCount);
-  
-  timeCount.classList.add(...taskObject.clockClass);//tu skończyłem dodawanie klas zegara z taskObject
-  timeCount.classList.add('clock');
-  timeCount.setAttribute('id',timeStamp);
+  timeCount.classList.add(...taskObject.clockClass);
+  // const clockClass = taskObject.clockClass;
+  // timeCount.classList.add(...clockClass);//tu skończyłem dodawanie klas zegara z taskObject
+  // timeCount.classList.add('clock');
+  // timeCount.setAttribute('id',timeStamp);
   // condition statments to cunt hours & days
-  if((timeDiff/1000/60)<59 /* && (timeDiff/1000/60/60/24) < 1  */){
-    timeCount.innerText = `${Math.round(timeDiff/1000/60)} m. ago`;
+  if((timeDiff/1000)<60){
+    timeCount.innerText = `${Math.round(timeDiff/1000)} s.ago`
+  }
+  else if((timeDiff/1000/60)<59 /* && (timeDiff/1000/60/60/24) < 1  */){
+    timeCount.innerText = `${Math.round(timeDiff/1000/60)} m.ago`;
     console.log(Math.round(timeDiff/1000/60), 'minuts');
   }
   else if((timeDiff/1000/60)>59 && (timeDiff/1000/60/60/24) < 1 ){
@@ -131,10 +141,10 @@ if(e.target.tagName === 'SPAN' && e.target.classList.contains('item')){
   let taskClass = e.target.classList.value;
   taskObject.taskClass = taskClass.split(' ');
   // e.target.parentElement.classList.toggle('containerDone');
-  const clock = document.getElementById(taskObject.timeStamp); //finding task clock by id 
-  clock.classList.toggle('clockHide');
+  e.target.parentNode.parentNode.firstChild.classList.toggle('clockHide');
   let containerClass = e.target.parentNode.parentNode.classList.value;
   taskObject.containerClass = containerClass.split(' ');
+  e.target.parentNode.classList.add('taskWraperDone');
   let stringify = JSON.stringify(taskObject);
   localStorage.setItem(key, stringify);
   
