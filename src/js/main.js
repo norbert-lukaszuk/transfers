@@ -76,6 +76,8 @@ input.addEventListener('submit', e =>{
   let timeDiff = now.getTime() - timeStamp;
   const timeCount = document.createElement('span');
   container.appendChild(timeCount);
+  
+  timeCount.classList.add(...taskObject.clockClass);//tu skończyłem dodawanie klas zegara z taskObject
   timeCount.classList.add('clock');
   timeCount.setAttribute('id',timeStamp);
   // condition statments to cunt hours & days
@@ -124,7 +126,7 @@ if(e.target.tagName === 'SPAN' && e.target.classList.contains('delete')){
 
 if(e.target.tagName === 'SPAN' && e.target.classList.contains('item')){
   e.target.parentNode.parentNode.classList.toggle('containerDone');
-  // console.log(nodeName);
+  console.log(taskObject);
   e.target.classList.toggle('itemDone');
   let taskClass = e.target.classList.value;
   taskObject.taskClass = taskClass.split(' ');
@@ -137,6 +139,23 @@ if(e.target.tagName === 'SPAN' && e.target.classList.contains('item')){
   localStorage.setItem(key, stringify);
   
 }
+
+if(e.target.tagName === 'DIV' && e.target.classList.contains('taskWraper') || e.target.classList.contains('taskWraperDone')){
+  const key = e.target.firstChild.textContent;
+  const local = localStorage.getItem(key);
+  taskObject = JSON.parse(local);
+  e.target.classList.toggle('taskWraperDone');
+  taskObject.taskWraperClass = e.target.classList.value.split(' ');
+  e.target.parentElement.classList.toggle('containerDone');
+  taskObject.containerClass = e.target.parentElement.classList.value.split(' ');
+  e.target.firstChild.classList.toggle('itemDone');
+  taskObject.taskClass = e.target.firstChild.classList.value.split(' ');
+  e.target.parentNode.firstChild.classList.toggle('clockHide');
+  taskObject.clockClass = e.target.parentNode.firstChild.classList.value.split(' ');
+  let stringify = JSON.stringify(taskObject);
+  localStorage.setItem(key, stringify);
+}
+
 /* if(e.target.tagName === 'DIV' && e.target.classList.contains('container') || e.target.classList.contains('containerDone') ){
   e.target.classList.toggle('containerDone');
   let containerClass = e.target.classList.value;
@@ -149,20 +168,5 @@ if(e.target.tagName === 'SPAN' && e.target.classList.contains('item')){
   let stringify = JSON.stringify(taskObject);
   localStorage.setItem(key, stringify);
 } */
-if(e.target.tagName === 'DIV' && e.target.classList.contains('taskWraper') || e.target.classList.contains('taskWraperDone')){
-  e.target.classList.toggle('taskWraperDone');
-  
-  const taskWraperClass = e.target.classList.value;
- 
-  let array = taskWraperClass.split(' ');
-  console.log(typeof array,array);
-  taskObject.taskWraperClass = taskWraperClass.split(' ');//not working !!!
- 
-  e.target.parentElement.classList.toggle('containerDone');
-  e.target.firstChild.classList.toggle('itemDone');
-  e.target.parentNode.firstChild.classList.toggle('clockHide');
-  let stringify = JSON.stringify(taskObject);
-  localStorage.setItem(key, stringify);
-}
 })
 
