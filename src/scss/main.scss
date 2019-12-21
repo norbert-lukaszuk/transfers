@@ -36,6 +36,7 @@ body {
   font-family: 'Lucida Console';
   font-size: 14px;
   font-weight: 300;
+  cursor: pointer;
 }
 .clockHide{
   display: none;
@@ -84,6 +85,7 @@ body {
   color: white;
   padding-top: 4px;
   border-radius: 50%;
+  cursor: pointer;
 }
 
 .input{
@@ -105,6 +107,7 @@ body {
   color: rgba(26, 102, 26, 0.95);
   font-size: 25px;
   font-weight: 500;
+  cursor: pointer;
 }
 .itemDone{
   text-decoration: line-through;
@@ -142,10 +145,21 @@ li{
   flex-direction: row;
   justify-content: space-between;
 }
+.popup{
+
+  background-color: coral;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: block;
+}
 .taskWraper{
   display: flex;
   justify-content: space-between;
   padding: 5px 15px 25px 15px;
+  cursor: pointer;
 }
 .taskWraperDone{
   padding-top: 20px;
