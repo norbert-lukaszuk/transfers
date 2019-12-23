@@ -26,17 +26,22 @@
     <link rel="stylesheet" href="css/main.css" />
   </head>
   <body>
-    <div class="popup">  
+    <button class="button"> + </button>
+   <div class="popup">
+     <label class="calendarLabel" for="calendar">Enter the date</label>
+     <input class="calendar" type="date" name="date" id="calendar">
+     <button class="button" id="cancel">cancel</button>
+   </div>
     <div class="list">
         <ul>
         </ul>
         <form class="input">
       <input class="form" type="text" name="form" id="toList" placeholder=" add task">
       <input class="button" type="submit" value="+">
-      <!-- <button class="button"> + </button> -->
+      
   </form>  
     </div>
-  </div> 
+  
   
     <script src="js/main.js"></script>
   </body>

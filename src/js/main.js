@@ -15,7 +15,13 @@ if ('serviceWorker' in navigator) {
     });
   });
 }
-
+const addButon = document.querySelector('button.button');
+const popup = document.querySelector('.popup');
+const cancel = document.getElementById('cancel');
+const date = document.getElementById('calendar');
+console.log(date.innerText);
+console.log(cancel);
+console.log(addButon);
 const ul = document.querySelector('ul');
 let input = document.querySelector('.input')
 let taskObject={
@@ -27,7 +33,12 @@ let taskObject={
   timeStamp: null,
 }
 
-
+addButon.addEventListener('click', e =>{
+  popup.style.display = 'block';
+})
+cancel.addEventListener('click', e =>{
+  popup.style.display = 'none';
+})
 input.addEventListener('submit', e =>{
     e.preventDefault();
     taskObject.taskName = input.form.value;

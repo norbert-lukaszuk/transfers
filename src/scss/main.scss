@@ -30,6 +30,19 @@ body {
   border-width: 0;
 
 }
+.calendar{
+  display: block;
+  margin: 20px auto;
+}
+.calendarLabel{
+  display: block;
+  margin: 10px auto;
+  color: black;
+}
+#cancel{
+  display: block;
+  margin: 10px auto;
+}
 .clock{
 
   align-self: center;
@@ -89,7 +102,8 @@ body {
 }
 
 .input{
-  position: fixed;
+  // position: fixed;
+  // top: 0;
   display: flex;
   align-self: center;
   align-items: center;
@@ -153,7 +167,7 @@ li{
   position: fixed;
   top: 0;
   left: 0;
-  display: block;
+  display: none;
 }
 .taskWraper{
   display: flex;
@@ -177,4 +191,5 @@ ul{
   align-self: center;
   padding: 0;
   margin-top: 76px;
+  margin-bottom: 30px;
 }
