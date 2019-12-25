@@ -30,18 +30,33 @@ body {
   border-width: 0;
 
 }
+#buttonPopup{
+  margin-top: 20px;
+}
+.buttonsWraper{
+  display: flex;
+  justify-content: center;
+}
 .calendar{
+  font-family: 'Lucida Console';
   display: block;
+  background-color: transparent;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 10px 5px;
   margin: 20px auto;
 }
 .calendarLabel{
+  font-family: 'Lucida Console';
+  text-align: center;
   display: block;
   margin: 10px auto;
   color: black;
 }
 #cancel{
   display: block;
-  margin: 10px auto;
+  background-color: rgba(220, 20, 60, 0.377);
+  // margin: 10px auto;
 }
 .clock{
 
@@ -102,8 +117,8 @@ body {
 }
 
 .input{
-  // position: fixed;
-  // top: 0;
+  position: fixed;
+  top: 0;
   display: flex;
   align-self: center;
   align-items: center;
@@ -159,6 +174,9 @@ li{
   flex-direction: row;
   justify-content: space-between;
 }
+#ok{
+  background-color: rgba(0, 255, 0, 0.349);
+}
 .popup{
 
   background-color: coral;
@@ -190,6 +208,6 @@ ul{
   text-decoration: none;
   align-self: center;
   padding: 0;
-  margin-top: 76px;
+  margin-top: 26px;
   margin-bottom: 30px;
 }

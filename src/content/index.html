@@ -26,11 +26,15 @@
     <link rel="stylesheet" href="css/main.css" />
   </head>
   <body>
-    <button class="button"> + </button>
+    <button class="button" id="buttonPopup"> $ </button>
    <div class="popup">
+     <input type="text" class="form" placeholder="enter the task">
      <label class="calendarLabel" for="calendar">Enter the date</label>
-     <input class="calendar" type="date" name="date" id="calendar">
-     <button class="button" id="cancel">cancel</button>
+     <input class="calendar" type="date" name="date" id="calendar" value="2019-12-22">
+     <div class="buttonsWraper">
+     <input type="submit" class="button button__submit" id="ok" value="OK">
+     <button class="button button__cancel" id="cancel">Cancel</button>
+    </div>
    </div>
     <div class="list">
         <ul>

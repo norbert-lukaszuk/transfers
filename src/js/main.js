@@ -19,7 +19,9 @@ const addButon = document.querySelector('button.button');
 const popup = document.querySelector('.popup');
 const cancel = document.getElementById('cancel');
 const date = document.getElementById('calendar');
-console.log(date.innerText);
+const newDate = new Date(date.valueAsNumber);
+console.log(date.valueAsNumber, typeof date);
+console.log(newDate.getTime(), typeof newDate);
 console.log(cancel);
 console.log(addButon);
 const ul = document.querySelector('ul');
@@ -35,9 +37,11 @@ let taskObject={
 
 addButon.addEventListener('click', e =>{
   popup.style.display = 'block';
+  input.style.display = 'none';
 })
 cancel.addEventListener('click', e =>{
   popup.style.display = 'none';
+  input.style.display = 'block';
 })
 input.addEventListener('submit', e =>{
     e.preventDefault();
