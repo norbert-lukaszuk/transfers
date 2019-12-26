@@ -28,11 +28,20 @@
   <body>
     <button class="button" id="buttonPopup"> $ </button>
    <div class="popup">
-     <input type="text" class="form" placeholder="enter the task">
+     
+     <form class="transfer"> <!-- form żeby resetować pola formularza ale nie działą-->
+     <label for="bank" class="calendarLabel">Select the bank</label>
+     <select class="calendar" name="bank" id="bank">
+       <option value="mBank">nBank</option>
+       <option value="PKO">PKO</option>
+     </select>
      <label class="calendarLabel" for="calendar">Enter the date</label>
-     <input class="calendar" type="date" name="date" id="calendar" value="2019-12-22">
+     <input class="calendar" type="date" name="date" id="calendar">
+     <label for="title" class="calendarLabel">Enter the tile</label>
+     <input type="text" class="calendar" id="title">
+    </form>
      <div class="buttonsWraper">
-     <input type="submit" class="button button__submit" id="ok" value="OK">
+     <button class="button button__submit" id="ok">OK</button>
      <button class="button button__cancel" id="cancel">Cancel</button>
     </div>
    </div>

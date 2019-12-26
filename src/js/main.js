@@ -19,11 +19,16 @@ const addButon = document.querySelector('button.button');
 const popup = document.querySelector('.popup');
 const cancel = document.getElementById('cancel');
 const date = document.getElementById('calendar');
+const bank = document.getElementById('bank');
+const title = document.getElementById('title');
+const okButton = document.getElementById('ok');
 const newDate = new Date(date.valueAsNumber);
+const transfer = document.querySelector('.transfer');
 console.log(date.valueAsNumber, typeof date);
 console.log(newDate.getTime(), typeof newDate);
 console.log(cancel);
-console.log(addButon);
+console.log(title);
+console.log(JSON.stringify(bank.value), typeof bank);
 const ul = document.querySelector('ul');
 let input = document.querySelector('.input')
 let taskObject={
@@ -42,6 +47,16 @@ addButon.addEventListener('click', e =>{
 cancel.addEventListener('click', e =>{
   popup.style.display = 'none';
   input.style.display = 'block';
+})
+okButton.addEventListener('click', e =>{
+  let bankObject ={};
+  bankObject.bank = bank.value;
+  bankObject.date = date.value;
+  bankObject.title = title.value;
+  bankObject.key = `${bankObject.title} ${bankObject.bank}`;
+  localStorage.setItem(bankObject.key,JSON.stringify(bankObject));
+  transfer.reset();
+  console.log(bankObject);
 })
 input.addEventListener('submit', e =>{
     e.preventDefault();
