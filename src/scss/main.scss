@@ -30,18 +30,29 @@ body {
   border-width: 0;
 
 }
+#buttonDone{
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: lime solid 2px;
+  background-color: transparent;
+  color: lime;
+  padding: 1px 6px 1px 5px;
+}
 #buttonPopup{
   margin-top: 20px;
 }
 .buttonsWraper{
   display: flex;
   justify-content: center;
+  margin-bottom: 20px;
 }
 .calendar{
   font-family: 'Lucida Console';
   display: block;
   background-color: transparent;
-  border: 2px solid black;
+  border: 2px solid lime;
+  color: lime;
   border-radius: 10px;
   padding: 10px 5px;
   margin: 20px auto;
@@ -51,7 +62,7 @@ body {
   text-align: center;
   display: block;
   margin: 10px auto;
-  color: black;
+  color: lime;
 }
 #cancel{
   display: block;
@@ -179,7 +190,7 @@ li{
 }
 .popup{
 
-  background-color: coral;
+  background-color: black;
   width: 100%;
   height: 100%;
   position: fixed;
@@ -200,6 +211,17 @@ li{
   font-size: 25px;
   max-width: 250px;
   padding: 10px;
+}
+.transferItem{
+  border: solid lime 2px;
+  border-radius: 10px;
+  color: lime;
+  font-family: 'Lucida Console';
+  // height: 60px;
+  padding: 12px;
+  text-align: center;
+  width: 250px;
+  margin: 0 auto;
 }
 ul{
   display: flex;
