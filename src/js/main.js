@@ -56,22 +56,20 @@ okButton.addEventListener('click', e =>{
   bankObject.key = `${bankObject.title} ${bankObject.bank}`;
   localStorage.setItem(bankObject.key,JSON.stringify(bankObject));
   transfer.reset();// reset() resetuje tylko form
-  console.log(bankObject);
-  const buttonWraper = document.querySelector('.buttonsWraper');
-  const button__done = document.createElement('button');
-  button__done.innerText = 'X';
-  const element = document.createElement('div');
-  popup.append(element);
-  element.setAttribute('class','transferItem');
-  element.innerHTML = `${bankObject.bank} Title: ${bankObject.title} Date: ${bankObject.date} `;
-  element.appendChild(button__done);
-  button__done.setAttribute('id','buttonDone')
+  const container = document.createElement('div');
+  ul.prepend(container);
+  container.classList.add('container');
+  const dateSpan = document.createElement('span');
+  container.prepend(date);
+  dateSpan.innerText = bankObject.date.valueAsDate;
+  popup.style.display = 'none';
+  
 })
-const button__done = document.getElementById('buttonDone');
+/* const button__done = document.getElementById('buttonDone');
 console.log(button__done);
 button__done.addEventListener('click', e=>{
   e.target.parentElement.remove();
-})
+}) */
 input.addEventListener('submit', e =>{
     e.preventDefault();
     taskObject.taskName = input.form.value;
