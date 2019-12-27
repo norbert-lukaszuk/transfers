@@ -11,8 +11,8 @@ html {
 }
 
 body {
-  color: $yellow;
-  background: black;
+  color: black;
+  background: rgb(226, 223, 223);
 }
 
 .button{
@@ -69,12 +69,23 @@ body {
   background-color: rgba(220, 20, 60, 0.377);
   // margin: 10px auto;
 }
+.category{
+  font-size: 20px;
+  font-weight: 500;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: black;
+}
 .clock{
 
   align-self: center;
   font-family: 'Lucida Console';
   font-size: 14px;
   font-weight: 300;
+  background-color: red;
+  max-width: inherit;
+  height: 15px;
+  border-top-right-radius: inherit;
+  border-top-left-radius: inherit;
   cursor: pointer;
 }
 .clockHide{
@@ -84,10 +95,10 @@ body {
 .container{
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  background-color: rgba(176, 196, 222, 0.286);
-  padding: 5px 15px 5px 5px;
-  text-align: center;
+  // justify-content: space-between;
+  background-color: white;
+  padding: 0;
+  // text-align: center;
   margin-bottom: 10px;
   min-width: 300px;
   min-height: 90px;
@@ -176,8 +187,15 @@ li{
 .list{
   display: flex;
   flex-direction: column;
-  background-color: black;
+  // background-color: black;
   
+}
+.logoWraper{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+  margin-top: 5px;
 }
 .notDone{
   text-decoration: none;
@@ -198,6 +216,20 @@ li{
   left: 0;
   display: none;
 }
+.statusCircle{
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: green;
+}
+.strip{
+  background-color: red;
+  max-width: inherit;
+  height: 15px;
+  border-top-right-radius: inherit;
+  border-top-left-radius: inherit;
+  cursor: pointer;
+}
 .taskWraper{
   display: flex;
   justify-content: space-between;
@@ -206,6 +238,12 @@ li{
 }
 .taskWraperDone{
   padding-top: 20px;
+}
+.timeLeft{
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  align-self: flex-end;
+  padding-right: 5px;
+  font-size: 14px;
 }
 #toList{
   font-size: 25px;
