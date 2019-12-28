@@ -72,7 +72,26 @@ button__done.addEventListener('click', e=>{
 }) */
 input.addEventListener('submit', e =>{
     e.preventDefault();
-    taskObject.taskName = input.form.value;
+    const container = `<div class="container">
+    <div class="strip__pko"></div>
+    <div class="logoWraper">
+      <img src="../assets/img/pkobp 467x485.jpg">
+      <div class="category"></div>
+      <div class="statusCircle"></div>
+    </div>
+    <div class="timeLeft"></div>  
+    <p class="title"></p>          
+</div`;
+  ul.insertAdjacentHTML('afterbegin',container);
+  const strip = document.querySelector('div.strip__pko');
+  console.log(strip);
+  strip.innerHTML = '31.12.2019';
+  const category = document.querySelector('.category');
+  category.innerHTML = 'Prąd';
+  
+
+    
+    /* taskObject.taskName = input.form.value;
     taskObject.key = taskObject.taskName;
     input.reset();
     taskObject.containerClass = ['container'];
@@ -105,7 +124,7 @@ input.addEventListener('submit', e =>{
     delButton.innerText = 'X';
     
     const stringify = JSON.stringify(taskObject);
-    localStorage.setItem(taskObject.key, stringify);
+    localStorage.setItem(taskObject.key, stringify); */
 })
 
 

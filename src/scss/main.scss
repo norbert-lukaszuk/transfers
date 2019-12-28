@@ -13,6 +13,7 @@ html {
 body {
   color: black;
   background: rgb(226, 223, 223);
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .button{
@@ -92,16 +93,20 @@ body {
   display: none;
   
 }
+.close{
+  width: inherit;
+  height: 100px;
+  background-color: rgba(128, 128, 128, 0.534);
+}
 .container{
   display: flex;
   flex-direction: column;
-  // justify-content: space-between;
   background-color: white;
+  // background-color: rgb(177, 176, 176);
   padding: 0;
-  // text-align: center;
   margin-bottom: 10px;
   min-width: 300px;
-  min-height: 90px;
+  min-height: 100px;
   max-height: 100px;
   border-radius: 10px;
   
@@ -222,12 +227,28 @@ li{
   border-radius: 50%;
   background-color: green;
 }
-.strip{
-  background-color: red;
+.strip__pko{
+  background-color: blue;
   max-width: inherit;
-  height: 15px;
+  height: 18px;
   border-top-right-radius: inherit;
   border-top-left-radius: inherit;
+  color: white;
+  font-size: 11px;
+  text-align: center;
+  padding: 4px 0;
+  cursor: pointer;
+}
+.strip__mbank{
+  background-color: red;
+  max-width: inherit;
+  height: 18px;
+  border-top-right-radius: inherit;
+  border-top-left-radius: inherit;
+  color: white;
+  font-size: 11px;
+  text-align: center;
+  padding: 4px 0;
   cursor: pointer;
 }
 .taskWraper{
@@ -242,8 +263,12 @@ li{
 .timeLeft{
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   align-self: flex-end;
-  padding-right: 5px;
+  padding-right: 7px;
   font-size: 14px;
+}
+.title{
+  text-align: center;
+  margin: 0;
 }
 #toList{
   font-size: 25px;
