@@ -59,7 +59,8 @@ okButton.addEventListener('click', e =>{
       <div class="statusCircle"></div>
     </div>
     <div class="timeLeft"></div>  
-    <p class="title"></p>          
+    <p class="title"></p>
+    <div class="close"></div>          
   </div`;
   ul.insertAdjacentHTML('afterbegin',container);
   const image = document.querySelector('.image');
@@ -68,9 +69,81 @@ okButton.addEventListener('click', e =>{
   const dateOutput = document.querySelector('.strip');
   const titleOutput = document.querySelector('.title');
   const daysLeft = document.querySelector('.timeLeft');
+  const statusCircle = document.querySelector('.statusCircle');
   const today = new Date();
   const trasferDay = new Date(bankObject.date);
   const timeLeft = Math.ceil( (trasferDay-today)/1000/60/60/24);
+  if(timeLeft===1){
+    statusCircle.style.backgroundColor = 'crimson';
+  }
+  else if(timeLeft < 3){
+    statusCircle.style.backgroundColor = 'orange';
+  }
+  console.log(timeLeft);
+  console.log(category);
+  if(bankObject.bank === 'mBank'){
+    dateOutput.innerText = bankObject.date;
+    strip.setAttribute('class', 'strip__mbank');
+    image.setAttribute('src','/assets/img/mbank 30x30.jpg');
+    categoryOutput.innerText = bankObject.category;
+    titleOutput.innerText = bankObject.title;
+    daysLeft.innerText = `${timeLeft} d.`;
+    
+    
+    
+  }
+  else if(bankObject.bank === 'PKO'){
+    dateOutput.innerText = bankObject.date;
+    strip.setAttribute('class', 'strip__pko');
+    image.setAttribute('src','/assets/img/pkobp 467x485.jpg');
+    categoryOutput.innerText = bankObject.category;
+    titleOutput.innerText = bankObject.title;
+    daysLeft.innerText = `${timeLeft} d.`;
+  }
+
+  /* const container = document.createElement('div');
+  ul.prepend(container);
+  container.classList.add('container');
+  const dateSpan = document.createElement('span');
+  container.prepend(date);
+  dateSpan.innerText = bankObject.date.valueAsDate; */
+  popup.style.display = 'none';
+  
+})
+for(let i=0; i<localStorage.length;i++){  //pętla iterujące przez localStorage
+  //   /* get data from localStorage */
+    const local = localStorage.getItem(localStorage.key(i));//pobranie z localStorage elementu o danym w pętli kluczu
+    const bankObject = JSON.parse(local);//parsowanie do obiektu
+    const container = `<div class="container">
+    <div class="strip"></div>
+    <div class="logoWraper">
+      <img class="image" src="">
+      <div class="category"></div>
+      <div class="statusCircle"></div>
+    </div>
+    <div class="timeLeft"></div>  
+    <p class="title"></p>
+    <div class="close">
+        <button class ="buttonDone">Done</button>
+    </div>          
+  </div`;
+  ul.insertAdjacentHTML('afterbegin',container);
+  const image = document.querySelector('.image');
+  const strip = document.querySelector('.strip');
+  const categoryOutput = document.querySelector('.category');
+  const dateOutput = document.querySelector('.strip');
+  const titleOutput = document.querySelector('.title');
+  const daysLeft = document.querySelector('.timeLeft');
+  const statusCircle = document.querySelector('.statusCircle');
+  const today = new Date();
+  const trasferDay = new Date(bankObject.date);
+  const timeLeft = Math.ceil( (trasferDay-today)/1000/60/60/24);
+  if(timeLeft===1){
+    statusCircle.style.backgroundColor = 'crimson';
+  }
+  else if(timeLeft < 3){
+    statusCircle.style.backgroundColor = 'orange';
+  }
   console.log(timeLeft);
   console.log(category);
   if(bankObject.bank === 'mBank'){
@@ -87,17 +160,26 @@ okButton.addEventListener('click', e =>{
     strip.setAttribute('class', 'strip__pko');
     image.setAttribute('src','/assets/img/pkobp 467x485.jpg');
     categoryOutput.innerText = bankObject.category;
+    titleOutput.innerText = bankObject.title;
+    daysLeft.innerText = `${timeLeft} d.`;
   }
-
-  /* const container = document.createElement('div');
-  ul.prepend(container);
-  container.classList.add('container');
-  const dateSpan = document.createElement('span');
-  container.prepend(date);
-  dateSpan.innerText = bankObject.date.valueAsDate; */
-  popup.style.display = 'none';
-  
+}
+ul.addEventListener('click', e =>{
+  if(e.target.tagName === 'DIV' /* && e.target.classList.contains('container') */){
+    console.log(e.target.children);
+    e.target.children.item(4).style.display = 'flex';//pozwala dostać się do konkretnego dziecka
+  }
+  if(e.target.tagName ==='BUTTON'){
+    console.log(e.target.parentNode.parentElement.children.item(0));
+    e.target.parentNode.parentElement.children.item(0).style.backgroundColor = 'transparent';
+    e.target.parentNode.parentElement.style.backgroundColor = 'gray';
+    e.target.parentElement.style.display = 'none';
+  }
 })
+// const buttonDone = document.querySelector('.buttonDone');
+  // console.log(buttonDone);
+  // buttonDone.parentElement.style.backgroundColor = 'gray';
+
 // /* const button__done = document.getElementById('buttonDone');
 // console.log(button__done);
 // button__done.addEventListener('click', e=>{
