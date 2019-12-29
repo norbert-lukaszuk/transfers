@@ -60,7 +60,9 @@ okButton.addEventListener('click', e =>{
     </div>
     <div class="timeLeft"></div>  
     <p class="title"></p>
-    <div class="close"></div>          
+    <div class="close">
+    <button class ="buttonDone">Done</button>
+    </div>          
   </div`;
   ul.insertAdjacentHTML('afterbegin',container);
   const image = document.querySelector('.image');
@@ -124,6 +126,7 @@ for(let i=0; i<localStorage.length;i++){  //pętla iterujące przez localStorage
     <div class="timeLeft"></div>  
     <p class="title"></p>
     <div class="close">
+        <button class="buttonClose">Cancel</button>
         <button class ="buttonDone">Done</button>
     </div>          
   </div`;
@@ -169,10 +172,13 @@ ul.addEventListener('click', e =>{
     console.log(e.target.children);
     e.target.children.item(4).style.display = 'flex';//pozwala dostać się do konkretnego dziecka
   }
-  if(e.target.tagName ==='BUTTON'){
+  if(e.target.tagName ==='BUTTON' && e.target.classList.contains('buttonDone')){
     console.log(e.target.parentNode.parentElement.children.item(0));
     e.target.parentNode.parentElement.children.item(0).style.backgroundColor = 'transparent';
     e.target.parentNode.parentElement.style.backgroundColor = 'gray';
+    e.target.parentElement.style.display = 'none';
+  }
+  if(e.target.classList.contains('buttonClose')){
     e.target.parentElement.style.display = 'none';
   }
 })

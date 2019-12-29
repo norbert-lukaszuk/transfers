@@ -31,6 +31,15 @@ body {
   border-width: 0;
 
 }
+.buttonClose{
+  background-color: rgb(87, 87, 87);
+  border-style: none;
+  border-radius: 10px;
+  height: 40px;
+  font-size: 20px;
+  font-weight: 700;
+  margin-right: 8px;
+}
 .buttonDone{
   background-color: crimson;
   border-style: none;
@@ -38,6 +47,7 @@ body {
   height: 40px;
   font-size: 20px;
   font-weight: 700;
+  margin-left: 8px;
 }
 #buttonDone{
   width: 24px;
@@ -108,7 +118,7 @@ body {
 }
 .close{
   // display: flex;
-  flex-direction: column;
+  // flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 300px;
