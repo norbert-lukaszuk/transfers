@@ -1,84 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Transfers</title>
-    <meta name="toDo" content="my to do list" />
 
-    
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Transfers</title>
+  <meta name="toDo" content="my to do list" />
 
-    <link rel="manifest" href="manifest.json" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <link
-      rel="apple-touch-icon"
-      sizes="192x192"
-      href="assets/pwa/icons/icon-192x192.png"
-    />
 
-    <link
-      rel="icon"
-      type="image/png"
-      href="assets/pwa/icons/icon-192x192.png"
-    />
 
-    <link rel="stylesheet" href="css/main.css" />
-  </head>
-  <body>
-    <button class="button" id="buttonPopup"> $ </button>
-   <div class="popup">
-     
-     <form class="transfer"> <!-- form żeby resetować pola formularza ale nie działą-->
-     <label for="bank" class="calendarLabel">Select the bank</label>
-     <select class="calendar" name="bank" id="bank">
-       <option value="mBank">nBank</option>
-       <option value="PKO">PKO</option>
-     </select>
-     <label class="calendarLabel" for="calendar">Enter the date</label>
-     <input class="calendar" type="date" name="date" id="calendar">
-     <label for="title" class="calendarLabel">Enter the tile</label>
-     <input type="text" class="calendar" id="title">
+  <link rel="manifest" href="manifest.json" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <link rel="apple-touch-icon" sizes="192x192" href="assets/pwa/icons/icon-192x192.png" />
+
+  <link rel="icon" type="image/png" href="assets/pwa/icons/icon-192x192.png" />
+
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+
+<body>
+  <button class="button" id="buttonPopup"> $ </button>
+  <div class="popup">
+
+    <form class="transfer">
+      <!-- form żeby resetować pola formularza ale nie działą-->
+      <label for="bank" class="calendarLabel">Select the bank</label>
+      <select class="calendar" name="bank" id="bank">
+        <option value="mBank">nBank</option>
+        <option value="PKO">PKO</option>
+      </select>
+      <label class="calendarLabel" for="calendar">Enter the date</label>
+      <input class="calendar" type="date" name="date" id="calendar">
+      <label for="title" class="calendarLabel">Enter the category</label>
+      <input type="text" class="calendar" id="category">
+      <label for="title" class="calendarLabel">Enter the tile</label>
+      <input type="text" class="calendar" id="title">
+      
     </form>
-     <div class="buttonsWraper">
-     <button class="button button__submit" id="ok">OK</button>
-     <button class="button button__cancel" id="cancel">Cancel</button>
+    <div class="buttonsWraper">
+      <button class="button button__submit" id="ok">OK</button>
+      <button class="button button__cancel" id="cancel">Cancel</button>
     </div>
-   </div>
-    <div class="list">
-        <ul>
-            <div class="container">
-                <div class="strip__mbank">28.12.2019</div>
-                <div class="logoWraper">
-                  <img src="/assets/img/mbank 30x30.jpg">
-                  <div class="category">Czynsz</div>
-                  <div class="statusCircle"></div>
-                </div>
-                <div class="timeLeft">2 d.</div>  
-                <p class="title">Faktura 1234/12/2019</p>          
-            </div>
-            <div class="close"></div>
-            <div class="container">
-              
-              <div class="strip__pko">28.12.2019</div>
-              <div class="logoWraper">
-                <img src="../assets/img/pkobp 467x485.jpg">
-                <div class="category">Czynsz</div>
-                <div class="statusCircle"></div>
-              </div>
-              <div class="timeLeft">2 d.</div>  
-              <p class="title">Faktura 1234/12/2019</p> 
-                     
-          </div>
-        </ul>
-        <form class="input">
+  </div>
+  <div class="list">
+    <ul>
+      <div class="container">
+        <div class="strip__mbank">28.12.2019</div>
+        <div class="logoWraper">
+          <img src="/assets/img/mbank 30x30.jpg">
+          <div class="category">Czynsz</div>
+          <div class="statusCircle"></div>
+        </div>
+        <div class="timeLeft">2 d.</div>
+        <p class="title">Faktura 1234/12/2019</p>
+      </div>
+      
+      <div class="container">
+          
+        <div class="strip__pko">28.12.2019</div>
+        <div class="logoWraper">
+          <img src="../assets/img/pkobp 467x485.jpg">
+          <div class="category">Czynsz</div>
+          <div class="statusCircle"></div>
+        </div>
+        <div class="timeLeft">2 d.</div>
+        <p class="title">Faktura 1234/12/2019</p>
+        <div class="close"></div>
+      </div>
+      
+    </ul>
+    <form class="input">
       <!-- <input class="form" type="text" name="form" id="toList" placeholder=" add task"> -->
       <input class="button" type="submit" value="+">
-      
-  </form>  
-    </div>
-  
-  
-    <script src="js/main.js"></script>
-  </body>
+
+    </form>
+  </div>
+
+
+  <script src="js/main.js"></script>
+</body>
+
 </html>
