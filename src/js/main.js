@@ -152,7 +152,7 @@ for(let i=0; i<localStorage.length;i++){  //pętla iterujące przez localStorage
   if(bankObject.bank === 'mBank'){
     dateOutput.innerText = bankObject.date;
     strip.setAttribute('class', 'strip__mbank');
-    image.setAttribute('src','/assets/img/mbank 30x30.jpg');
+    image.setAttribute('src','/assets/img/mbank 30x30.png');
     categoryOutput.innerText = bankObject.category;
     titleOutput.innerText = bankObject.title;
     daysLeft.innerText = `${timeLeft} d.`;
@@ -161,22 +161,24 @@ for(let i=0; i<localStorage.length;i++){  //pętla iterujące przez localStorage
   else if(bankObject.bank === 'PKO'){
     dateOutput.innerText = bankObject.date;
     strip.setAttribute('class', 'strip__pko');
-    image.setAttribute('src','/assets/img/pkobp 467x485.jpg');
+    image.setAttribute('src','/assets/img/pkobp 467x485.png');
     categoryOutput.innerText = bankObject.category;
     titleOutput.innerText = bankObject.title;
     daysLeft.innerText = `${timeLeft} d.`;
   }
 }
 ul.addEventListener('click', e =>{
+  
   if(e.target.tagName === 'DIV' /* && e.target.classList.contains('container') */){
     console.log(e.target.children);
     e.target.children.item(4).style.display = 'flex';//pozwala dostać się do konkretnego dziecka
   }
   if(e.target.tagName ==='BUTTON' && e.target.classList.contains('buttonDone')){
-    console.log(e.target.parentNode.parentElement.children.item(0));
-    e.target.parentNode.parentElement.children.item(0).style.backgroundColor = 'transparent';
-    e.target.parentNode.parentElement.style.backgroundColor = 'gray';
-    e.target.parentElement.style.display = 'none';
+    e.target.style.display = 'none';
+    e.target.parentElement.children.item(0).style.display = 'none';
+    e.target.parentNode.parentNode.children.item(2).style.color = 'transparent';
+    e.target.parentNode.parentNode.children.item(1).lastElementChild.style.backgroundColor = 'transparent';
+    
   }
   if(e.target.classList.contains('buttonClose')){
     e.target.parentElement.style.display = 'none';
