@@ -25,11 +25,7 @@ const title = document.getElementById('title');
 const okButton = document.getElementById('ok');
 const newDate = new Date(date);
 const transfer = document.querySelector('.transfer');
-console.log(date.value);
-console.log(date.valueAsNumber, typeof date);
-console.log(newDate.getTime(), typeof newDate);
-console.log(cancel);
-console.log(title);
+
 console.log(JSON.stringify(bank.value), typeof bank);
 const ul = document.querySelector('ul');
 let input = document.querySelector('.input')
