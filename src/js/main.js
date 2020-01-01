@@ -75,7 +75,7 @@ okButton.addEventListener('click', e =>{
   const today = new Date();
   const trasferDay = new Date(bankObject.date);
   const timeLeft = Math.ceil( (trasferDay-today)/1000/60/60/24);
-  if(timeLeft===1){
+  if(timeLeft<=1){
     statusCircle.style.backgroundColor = 'crimson';
   }
   else if(timeLeft < 3){
@@ -141,7 +141,7 @@ for(let i=0; i<localStorage.length;i++){  //pętla iterujące przez localStorage
   const today = new Date();
   const trasferDay = new Date(bankObject.date);
   const timeLeft = Math.ceil( (trasferDay-today)/1000/60/60/24);
-  if(timeLeft===1){
+  if(timeLeft<=1){
     statusCircle.style.backgroundColor = 'crimson';
   }
   else if(timeLeft < 3){
@@ -155,7 +155,15 @@ for(let i=0; i<localStorage.length;i++){  //pętla iterujące przez localStorage
     image.setAttribute('src','/assets/img/mbank 30x30.png');
     categoryOutput.innerText = bankObject.category;
     titleOutput.innerText = bankObject.title;
-    daysLeft.innerText = `${timeLeft} d.`;
+    if(timeLeft>0){
+      daysLeft.innerText = `${timeLeft} d.`;
+    }
+    else if(timeLeft===0){
+      daysLeft.innerText = 'today'
+    }
+    else if(timeLeft<0){
+      daysLeft.innerText = `passed`
+    }
 
   }
   else if(bankObject.bank === 'PKO'){
