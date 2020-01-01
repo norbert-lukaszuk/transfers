@@ -82,7 +82,7 @@ okButton.addEventListener('click', e =>{
   if(bankObject.bank === 'mBank'){
     dateOutput.innerText = bankObject.date;
     strip.setAttribute('class', 'strip__mbank');
-    image.setAttribute('src','/assets/img/mbank 30x30.png');
+    image.setAttribute('src','assets/img/mbank 30x30.png');
     categoryOutput.innerText = bankObject.category;
     titleOutput.innerText = bankObject.title;
     daysLeft.innerText = `${timeLeft} d.`;
@@ -93,7 +93,7 @@ okButton.addEventListener('click', e =>{
   else if(bankObject.bank === 'PKO'){
     dateOutput.innerText = bankObject.date;
     strip.setAttribute('class', 'strip__pko');
-    image.setAttribute('src','/assets/img/pkobp 467x485.png');
+    image.setAttribute('src','assets/img/pkobp 467x485.png');
     categoryOutput.innerText = bankObject.category;
     titleOutput.innerText = bankObject.title;
     daysLeft.innerText = `${timeLeft} d.`;
@@ -148,7 +148,7 @@ for(let i=0; i<localStorage.length;i++){  //pętla iterujące przez localStorage
   if(bankObject.bank === 'mBank'){
     dateOutput.innerText = bankObject.date;
     strip.setAttribute('class', 'strip__mbank');
-    image.setAttribute('src','/assets/img/mbank 30x30.png');
+    image.setAttribute('src','assets/img/mbank 30x30.png');
     categoryOutput.innerText = bankObject.category;
     titleOutput.innerText = bankObject.title;
     if(timeLeft>0){
@@ -165,7 +165,7 @@ for(let i=0; i<localStorage.length;i++){  //pętla iterujące przez localStorage
   else if(bankObject.bank === 'PKO'){
     dateOutput.innerText = bankObject.date;
     strip.setAttribute('class', 'strip__pko');
-    image.setAttribute('src','/assets/img/pkobp 467x485.png');
+    image.setAttribute('src','assets/img/pkobp 467x485.png');
     categoryOutput.innerText = bankObject.category;
     titleOutput.innerText = bankObject.title;
     daysLeft.innerText = `${timeLeft} d.`;
@@ -205,7 +205,7 @@ ul.addEventListener('click', e =>{
 //     const container = `<div class="container">
 //     <div class="strip__pko"></div>
 //     <div class="logoWraper">
-//       <img src="../assets/img/pkobp 467x485.jpg">
+//       <img src="..assets/img/pkobp 467x485.jpg">
 //       <div class="category"></div>
 //       <div class="statusCircle"></div>
 //     </div>
