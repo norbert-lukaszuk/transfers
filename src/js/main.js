@@ -25,11 +25,14 @@ const title = document.getElementById('title');
 const okButton = document.getElementById('ok');
 const newDate = new Date(date);
 const transfer = document.querySelector('.transfer');
-
-console.log(JSON.stringify(bank.value), typeof bank);
 const ul = document.querySelector('ul');
 let input = document.querySelector('.input')
 
+let keys = localStorage.getItem('keys');
+if(keys===null){
+  keys =[];
+  localStorage.setItem('keys',JSON.stringify(keys));
+}
 addButon.addEventListener('click', e =>{
   popup.style.display = 'block';
   input.style.display = 'none';
@@ -40,11 +43,18 @@ cancel.addEventListener('click', e =>{
 })
 okButton.addEventListener('click', e =>{
   let bankObject ={};
+  let bankArray = [];
   bankObject.bank = bank.value;
   bankObject.category = category.value;
   bankObject.date = date.value;
   bankObject.title = title.value;
-  bankObject.key = `${bankObject.title} ${bankObject.bank}`;
+  bankObject.key = new Date(bankObject.date).getTime();//tworzy klucz na podstwie 
+  bankArray.push(bankObject);
+  const local = localStorage.getItem('keys')
+  let keys = JSON.parse(local);
+  keys.push(new Date(bankObject.date).getTime());
+  localStorage.setItem('bankArray', JSON.stringify(bankArray));
+  localStorage.setItem('keys',JSON.stringify(keys));
   localStorage.setItem(bankObject.key,JSON.stringify(bankObject));
   transfer.reset();// reset() resetuje tylko form
   const container = `<div class="container">
@@ -57,6 +67,7 @@ okButton.addEventListener('click', e =>{
     <div class="timeLeft"></div>  
     <p class="title"></p>
     <div class="close">
+    <button class="buttonClose">Cancel</button>
     <button class ="buttonDone">Done</button>
     </div>          
   </div`;
@@ -99,18 +110,18 @@ okButton.addEventListener('click', e =>{
     daysLeft.innerText = `${timeLeft} d.`;
   }
 
-  /* const container = document.createElement('div');
-  ul.prepend(container);
-  container.classList.add('container');
-  const dateSpan = document.createElement('span');
-  container.prepend(date);
-  dateSpan.innerText = bankObject.date.valueAsDate; */
   popup.style.display = 'none';
   
 })
-for(let i=0; i<localStorage.length;i++){  //pętla iterujące przez localStorage
+/* TU SKOŃCZYŁEM  */
+const keysArray = JSON.parse(localStorage.getItem('bankArray'));//pobieranie array z kluczami 
+keysArray.sort((a,b)=> b.key - a.key);//sortuje od największej do najmniejszej   
+// keysArray.reverse();//odwraca na od najmniejszej do największej 
+
+for(let i=0; i<keysArray.length;i++){  //pętla iterujące przez localStorage
   //   /* get data from localStorage */
-    const local = localStorage.getItem(localStorage.key(i));//pobranie z localStorage elementu o danym w pętli kluczu
+    
+    const local = localStorage.getItem(keysArray[i]);//pobranie z localStorage elementu o danym w pętli kluczu
     const bankObject = JSON.parse(local);//parsowanie do obiektu
     const container = `<div class="container">
     <div class="strip"></div>
@@ -143,8 +154,7 @@ for(let i=0; i<localStorage.length;i++){  //pętla iterujące przez localStorage
   else if(timeLeft < 3){
     statusCircle.style.backgroundColor = 'orange';
   }
-  console.log(timeLeft);
-  console.log(category);
+  
   if(bankObject.bank === 'mBank'){
     dateOutput.innerText = bankObject.date;
     strip.setAttribute('class', 'strip__mbank');
