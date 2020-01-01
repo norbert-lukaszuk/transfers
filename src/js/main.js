@@ -86,7 +86,7 @@ okButton.addEventListener('click', e =>{
   if(bankObject.bank === 'mBank'){
     dateOutput.innerText = bankObject.date;
     strip.setAttribute('class', 'strip__mbank');
-    image.setAttribute('src','/assets/img/mbank 30x30.jpg');
+    image.setAttribute('src','/assets/img/mbank 30x30.png');
     categoryOutput.innerText = bankObject.category;
     titleOutput.innerText = bankObject.title;
     daysLeft.innerText = `${timeLeft} d.`;
@@ -97,7 +97,7 @@ okButton.addEventListener('click', e =>{
   else if(bankObject.bank === 'PKO'){
     dateOutput.innerText = bankObject.date;
     strip.setAttribute('class', 'strip__pko');
-    image.setAttribute('src','/assets/img/pkobp 467x485.jpg');
+    image.setAttribute('src','/assets/img/pkobp 467x485.png');
     categoryOutput.innerText = bankObject.category;
     titleOutput.innerText = bankObject.title;
     daysLeft.innerText = `${timeLeft} d.`;
@@ -170,10 +170,13 @@ for(let i=0; i<localStorage.length;i++){  //pętla iterujące przez localStorage
 ul.addEventListener('click', e =>{
   
   if(e.target.tagName === 'DIV' /* && e.target.classList.contains('container') */){
-    console.log(e.target.children);
+    console.log(e.target.children.item(4));
     e.target.children.item(4).style.display = 'flex';//pozwala dostać się do konkretnego dziecka
   }
   if(e.target.tagName ==='BUTTON' && e.target.classList.contains('buttonDone')){
+    console.log(e.target.parentNode.parentNode);
+    e.target.parentNode.parentNode.style.backgroundColor = 'rgba(128, 128, 128, 0.39)';
+    e.target.parentElement.style.display = 'none';
     e.target.style.display = 'none';
     e.target.parentElement.children.item(0).style.display = 'none';
     e.target.parentNode.parentNode.children.item(2).style.color = 'transparent';
