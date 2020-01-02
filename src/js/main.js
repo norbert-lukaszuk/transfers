@@ -57,7 +57,7 @@ okButton.addEventListener('click', e =>{
   const local = localStorage.getItem('keys')
   let keys = JSON.parse(local);
   // keys.push(new Date(bankObject.date).getTime());
-  localStorage.setItem('bankArray', JSON.stringify(bankArray));
+  
   // localStorage.setItem('keys',JSON.stringify(keys));
   // localStorage.setItem(bankObject.key,JSON.stringify(bankObject));
   transfer.reset();// reset() resetuje tylko form
@@ -76,6 +76,7 @@ okButton.addEventListener('click', e =>{
     </div>          
   </div`;
   ul.insertAdjacentHTML('afterbegin',container);
+  const containerId = document.querySelector('.container');
   const image = document.querySelector('.image');
   const strip = document.querySelector('.strip');
   const categoryOutput = document.querySelector('.category');
@@ -86,6 +87,11 @@ okButton.addEventListener('click', e =>{
   const today = new Date();
   const trasferDay = new Date(bankObject.date);
   const timeLeft = Math.ceil( (trasferDay-today)/1000/60/60/24);
+  containerId.setAttribute('id',today.getTime());
+  bankObject.id = containerId.getAttribute('id');
+  /* Tu skończyłem dodawanie id dla container i zapisanie go w bankObject */
+  /* trzeba ogarnąć array.find() */
+  localStorage.setItem('bankArray', JSON.stringify(bankArray));
   if(timeLeft<=1){
     statusCircle.style.backgroundColor = 'crimson';
   }
@@ -117,7 +123,7 @@ okButton.addEventListener('click', e =>{
   popup.style.display = 'none';
   
 })
-/* TU SKOŃCZYŁEM  */
+
 const keysArray = JSON.parse(localStorage.getItem('bankArray'));//pobieranie array z kluczami 
 keysArray.sort((a,b)=> b.key - a.key);//sortuje od największej do najmniejszej   
 // keysArray.reverse();//odwraca na od najmniejszej do największej 
@@ -194,8 +200,11 @@ ul.addEventListener('click', e =>{
     e.target.children.item(4).style.display = 'flex';//pozwala dostać się do konkretnego dziecka
   }
   if(e.target.tagName ==='BUTTON' && e.target.classList.contains('buttonDone')){
-    console.log(e.target.parentNode.parentNode);
-    e.target.parentNode.parentNode.style.backgroundColor = 'rgba(128, 128, 128, 0.39)';
+    console.log(e.target.parentNode.parentNode.classList);
+    console.log(e.target.parentNode.parentNode.getAttribute('id'));
+    let classList = localStorage.getItem('containerClass').split(' ');
+    e.target.parentNode.parentNode.classList.add(...classList);
+    localStorage.setItem('containerClass',e.target.parentNode.parentNode.classList.value);
     e.target.parentElement.style.display = 'none';
     e.target.style.display = 'none';
     e.target.parentElement.children.item(0).style.display = 'none';
