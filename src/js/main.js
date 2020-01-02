@@ -43,7 +43,11 @@ cancel.addEventListener('click', e =>{
 })
 okButton.addEventListener('click', e =>{
   let bankObject ={};
-  let bankArray = [];
+  let bankArray = JSON.parse(localStorage.getItem('bankArray'));
+  if(bankArray===null){
+    bankArray = [];
+  }
+  console.log(bankArray.value);
   bankObject.bank = bank.value;
   bankObject.category = category.value;
   bankObject.date = date.value;
@@ -52,10 +56,10 @@ okButton.addEventListener('click', e =>{
   bankArray.push(bankObject);
   const local = localStorage.getItem('keys')
   let keys = JSON.parse(local);
-  keys.push(new Date(bankObject.date).getTime());
+  // keys.push(new Date(bankObject.date).getTime());
   localStorage.setItem('bankArray', JSON.stringify(bankArray));
-  localStorage.setItem('keys',JSON.stringify(keys));
-  localStorage.setItem(bankObject.key,JSON.stringify(bankObject));
+  // localStorage.setItem('keys',JSON.stringify(keys));
+  // localStorage.setItem(bankObject.key,JSON.stringify(bankObject));
   transfer.reset();// reset() resetuje tylko form
   const container = `<div class="container">
     <div class="strip"></div>
@@ -146,7 +150,8 @@ for(let i=0; i<keysArray.length;i++){  //pętla iterujące przez localStorage
   const daysLeft = document.querySelector('.timeLeft');
   const statusCircle = document.querySelector('.statusCircle');
   const today = new Date();
-  const trasferDay = new Date(bankObject.date);
+  console.log(keysArray[i]);
+  const trasferDay = new Date(keysArray[i].date);
   const timeLeft = Math.ceil( (trasferDay-today)/1000/60/60/24);
   if(timeLeft<=1){
     statusCircle.style.backgroundColor = 'crimson';
@@ -155,12 +160,13 @@ for(let i=0; i<keysArray.length;i++){  //pętla iterujące przez localStorage
     statusCircle.style.backgroundColor = 'orange';
   }
   
-  if(bankObject.bank === 'mBank'){
-    dateOutput.innerText = bankObject.date;
+  if(keysArray[i].bank === 'mBank'){
+
+    dateOutput.innerText = keysArray[i].date;
     strip.setAttribute('class', 'strip__mbank');
     image.setAttribute('src','assets/img/mbank 30x30.png');
-    categoryOutput.innerText = bankObject.category;
-    titleOutput.innerText = bankObject.title;
+    categoryOutput.innerText = keysArray[i].category;
+    titleOutput.innerText = keysArray[i].title;
     if(timeLeft>0){
       daysLeft.innerText = `${timeLeft} d.`;
     }
@@ -172,12 +178,12 @@ for(let i=0; i<keysArray.length;i++){  //pętla iterujące przez localStorage
     }
 
   }
-  else if(bankObject.bank === 'PKO'){
-    dateOutput.innerText = bankObject.date;
+  else if(keysArray[i].bank === 'PKO'){
+    dateOutput.innerText = keysArray[i].date;
     strip.setAttribute('class', 'strip__pko');
     image.setAttribute('src','assets/img/pkobp 467x485.png');
-    categoryOutput.innerText = bankObject.category;
-    titleOutput.innerText = bankObject.title;
+    categoryOutput.innerText = keysArray[i].category;
+    titleOutput.innerText = keysArray[i].title;
     daysLeft.innerText = `${timeLeft} d.`;
   }
 }
