@@ -53,7 +53,7 @@ okButton.addEventListener('click', e =>{
   bankObject.date = date.value;
   bankObject.title = title.value;
   bankObject.key = new Date(bankObject.date).getTime();//tworzy klucz na podstwie 
-  bankArray.push(bankObject);
+  
   const local = localStorage.getItem('keys')
   let keys = JSON.parse(local);
   // keys.push(new Date(bankObject.date).getTime());
@@ -91,6 +91,8 @@ okButton.addEventListener('click', e =>{
   bankObject.id = containerId.getAttribute('id');
   /* Tu skończyłem dodawanie id dla container i zapisanie go w bankObject */
   /* trzeba ogarnąć array.find() */
+  bankObject.containerClass = containerId.classList.value;
+  bankArray.push(bankObject);
   localStorage.setItem('bankArray', JSON.stringify(bankArray));
   if(timeLeft<=1){
     statusCircle.style.backgroundColor = 'crimson';
@@ -148,6 +150,7 @@ for(let i=0; i<keysArray.length;i++){  //pętla iterujące przez localStorage
     </div>          
   </div`;
   ul.insertAdjacentHTML('afterbegin',container);
+  const containerId = document.querySelector('.container');
   const image = document.querySelector('.image');
   const strip = document.querySelector('.strip');
   const categoryOutput = document.querySelector('.category');
@@ -159,6 +162,9 @@ for(let i=0; i<keysArray.length;i++){  //pętla iterujące przez localStorage
   console.log(keysArray[i]);
   const trasferDay = new Date(keysArray[i].date);
   const timeLeft = Math.ceil( (trasferDay-today)/1000/60/60/24);
+  containerId.setAttribute('id', keysArray[i].id);
+  const containerClass = keysArray[i].containerClass.split(' ');
+  containerId.classList.add(...containerClass);
   if(timeLeft<=1){
     statusCircle.style.backgroundColor = 'crimson';
   }
@@ -200,11 +206,27 @@ ul.addEventListener('click', e =>{
     e.target.children.item(4).style.display = 'flex';//pozwala dostać się do konkretnego dziecka
   }
   if(e.target.tagName ==='BUTTON' && e.target.classList.contains('buttonDone')){
+    let bankArray = JSON.parse(localStorage.getItem('bankArray'));
+    e.target.parentNode.parentNode.classList.add('containerDone');
     console.log(e.target.parentNode.parentNode.classList);
     console.log(e.target.parentNode.parentNode.getAttribute('id'));
-    let classList = localStorage.getItem('containerClass').split(' ');
-    e.target.parentNode.parentNode.classList.add(...classList);
-    localStorage.setItem('containerClass',e.target.parentNode.parentNode.classList.value);
+    const containerId = e.target.parentNode.parentNode.getAttribute('id');
+    console.log(containerId);
+    for(let i=0; i<bankArray.length; i++){
+      const objectValues = Object.values(bankArray[i]);
+      console.log(objectValues, typeof objectValues);
+      const includes = objectValues.includes(containerId);
+      if(includes===true){
+        bankArray[i].containerClass = e.target.parentNode.parentNode.classList.value;
+        console.log(bankArray[i].containerClass);
+        const local = JSON.stringify(bankArray);
+        localStorage.setItem('bankArray',local);
+      }
+      
+    }
+    // let classList = localStorage.getItem('containerClass').split(' ');
+    
+    // localStorage.setItem('containerClass',e.target.parentNode.parentNode.classList.value);
     e.target.parentElement.style.display = 'none';
     e.target.style.display = 'none';
     e.target.parentElement.children.item(0).style.display = 'none';
@@ -215,4 +237,4 @@ ul.addEventListener('click', e =>{
   if(e.target.classList.contains('buttonClose')){
     e.target.parentElement.style.display = 'none';
   }
-})
+  })
