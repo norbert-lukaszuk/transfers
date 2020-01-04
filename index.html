@@ -26,17 +26,27 @@
     <form class="transfer">
       <!-- form żeby resetować pola formularza ale nie działą-->
       <label for="bank" class="calendarLabel">Select the bank</label>
-      <select class="calendar" name="bank" id="bank">
-        <option value="mBank">nBank</option>
+      <div class="bankSelectWraper">
+        <img id="mbankIcon" src="assets/img/mbank 30x30.png" alt="mbank logo">
+        <img id="pkoIcon" src="assets/img/pkobp 467x485.png" alt="pko logo">
+      </div>
+      <!-- <select class="calendar" name="bank" id="bank">
+        <option value="mBank">mBank</option>
         <option value="PKO">PKO</option>
-      </select>
+      </select> -->
       <label class="calendarLabel" for="calendar">Enter the date</label>
       <input class="calendar" type="date" name="date" id="calendar">
       <label for="title" class="calendarLabel">Enter the category</label>
-      <input type="text" class="calendar" id="category">
+      <select class="calendar" name="bank" id="category">
+        <option value="Select category">Select category</option>
+        <option value="Kredyt">Kredyt</option>
+        <option value="Rachunki">Rachunki</option>
+        <option value="Internet">Internet</option>
+      </select>
       <label for="title" class="calendarLabel">Enter the tile</label>
-      <input type="text" class="calendar" id="title">
-      
+      <input type="text" class="calendar title" id="title" placeholder="Title">
+      <label for="title" class="calendarLabel">Enter amount</label>
+      <input type="text" class="calendar" id="amount" placeholder="PLN">
     </form>
     <div class="buttonsWraper">
       <button class="button button__submit" id="ok">OK</button>
@@ -45,10 +55,10 @@
   </div>
   <div class="list">
     <ul>
-      <div class="container">
+     <!--  <div class="container">
         <div class="strip__mbank">28.12.2019</div>
         <div class="logoWraper">
-          <img src="/assets/img/mbank 30x30.jpg">
+          <img src="assets/img/mbank 30x30.jpg">
           <div class="category">Czynsz</div>
           <div class="statusCircle"></div>
         </div>
@@ -60,14 +70,14 @@
           
         <div class="strip__pko">28.12.2019</div>
         <div class="logoWraper">
-          <img src="../assets/img/pkobp 467x485.jpg">
+          <img src="assets/img/pkobp 467x485.jpg">
           <div class="category">Czynsz</div>
           <div class="statusCircle"></div>
         </div>
         <div class="timeLeft">2 d.</div>
         <p class="title">Faktura 1234/12/2019</p>
         <div class="close"></div>
-      </div>
+      </div> -->
       
     </ul>
     <form class="input">

@@ -315,6 +315,20 @@ html {
   -webkit-box-sizing: inherit;
           box-sizing: inherit; }
 
+#amount {
+  text-align: center; }
+
+.bankSelectWraper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+
+.bankClicked {
+  border: solid green 3px; }
+
 body {
   color: black;
   background: #e2dfdf;
@@ -384,15 +398,15 @@ body {
   border-style: ridge;
   border-radius: 10px;
   border-bottom: 3px solid black;
-  padding: 10px 5px;
-  margin: 20px auto;
+  padding: 5px 5px;
+  margin: 8px auto;
   background-color: inherit; }
 
 .calendarLabel {
   font-family: 'Lucida Console';
   text-align: center;
   display: block;
-  margin: 10px auto; }
+  margin: 5px auto; }
 
 #cancel {
   display: block;
@@ -453,10 +467,7 @@ body {
   border-radius: 10px; }
 
 .containerDone {
-  background-color: rgba(128, 128, 128, 0.69);
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly; }
+  background-color: rgba(128, 128, 128, 0.39); }
 
 .form {
   min-width: 250px;
@@ -566,6 +577,9 @@ li {
   padding: 0 15px;
   margin-top: 5px; }
 
+#mbankIcon {
+  margin-right: 10px; }
+
 .notDone {
   text-decoration: none;
   display: -webkit-box;
@@ -582,10 +596,13 @@ li {
 #ok {
   background-color: rgba(0, 255, 0, 0.349); }
 
+#pkoIcon {
+  margin-left: 10px; }
+
 .popup {
   background-color: inherit;
   width: 100%;
-  height: 100%;
+  height: 1000px;
   position: fixed;
   top: 0;
   left: 0;
@@ -596,6 +613,9 @@ li {
   height: 15px;
   border-radius: 50%;
   background-color: green; }
+
+.statusCircleDone {
+  background-color: transparent; }
 
 .strip__pko {
   background-color: blue;
@@ -641,9 +661,11 @@ li {
   padding-right: 7px;
   font-size: 14px; }
 
+.timeLeftDone {
+  color: transparent; }
+
 .title {
-  text-align: center;
-  margin: 0; }
+  text-align: center; }
 
 #toList {
   font-size: 25px;
