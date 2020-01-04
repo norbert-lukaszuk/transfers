@@ -27,12 +27,15 @@ const newDate = new Date(date);
 const transfer = document.querySelector('.transfer');
 const ul = document.querySelector('ul');
 let input = document.querySelector('.input')
+const bankSelectWraper = document.querySelector('.bankSelectWraper');
+const mbankIcon = document.getElementById('mbankIcon');
+bankSelectWraper.addEventListener('click', e =>{
+  if(e.target.tagName === 'IMG'){
+    e.target.classList.toggle('bankClicked');
+    console.log(e.target.nextSibling);
+  }
+})
 
-let keys = localStorage.getItem('keys');
-if(keys===null){
-  keys =[];
-  localStorage.setItem('keys',JSON.stringify(keys));
-}
 addButon.addEventListener('click', e =>{
   popup.style.display = 'block';
   input.style.display = 'none';

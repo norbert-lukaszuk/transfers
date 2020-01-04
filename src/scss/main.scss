@@ -9,7 +9,14 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
+.bankSelectWraper{
+  display: flex;
+  justify-content: center;
 
+}
+.bankClicked{
+  border: solid green 3px;
+}
 body {
   color: black;
   background: rgb(226, 223, 223);
@@ -236,6 +243,7 @@ li{
   padding: 0 15px;
   margin-top: 5px;
 }
+
 .notDone{
   text-decoration: none;
   display: flex;
