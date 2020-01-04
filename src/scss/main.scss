@@ -9,6 +9,9 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
+#amount{
+  text-align: center;
+}
 .bankSelectWraper{
   display: flex;
   justify-content: center;
@@ -243,7 +246,9 @@ li{
   padding: 0 15px;
   margin-top: 5px;
 }
-
+#mbankIcon{
+  margin-right: 10px;
+}
 .notDone{
   text-decoration: none;
   display: flex;
@@ -252,6 +257,9 @@ li{
 }
 #ok{
   background-color: rgba(0, 255, 0, 0.349);
+}
+#pkoIcon{
+  margin-left: 10px;
 }
 .popup{
 
@@ -316,7 +324,7 @@ li{
 }
 .title{
   text-align: center;
-  margin: 0;
+  
 }
 #toList{
   font-size: 25px;
