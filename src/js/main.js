@@ -19,7 +19,8 @@ const addButon = document.querySelector('button.button');
 const popup = document.querySelector('.popup');
 const cancel = document.getElementById('cancel');
 const date = document.getElementById('calendar');
-const bank = document.getElementById('bank');
+let bank = null;
+// const bank = document.getElementById('bank');
 const category = document.getElementById('category');
 const title = document.getElementById('title');
 const okButton = document.getElementById('ok');
@@ -29,10 +30,17 @@ const ul = document.querySelector('ul');
 let input = document.querySelector('.input')
 const bankSelectWraper = document.querySelector('.bankSelectWraper');
 const mbankIcon = document.getElementById('mbankIcon');
+const pkoIcon = document.getElementById('pkoIcon');
 bankSelectWraper.addEventListener('click', e =>{
-  if(e.target.tagName === 'IMG'){
+  if(e.target.tagName === 'IMG' && e.target.id === 'mbankIcon'){
     e.target.classList.toggle('bankClicked');
-    console.log(e.target.nextSibling);
+    pkoIcon.classList.remove('bankClicked');
+    bank = 'mBank';
+  }
+  else if(e.target.tagName === 'IMG' && e.target.id === 'pkoIcon'){
+    e.target.classList.toggle('bankClicked');
+    mbankIcon.classList.remove('bankClicked');
+    bank = 'PKO';
   }
 })
 
@@ -51,7 +59,8 @@ okButton.addEventListener('click', e =>{
     bankArray = [];
   }
   console.log(bankArray.value);
-  bankObject.bank = bank.value;
+  // bankObject.bank = bank.value;
+  bankObject.bank = bank;
   bankObject.category = category.value;
   bankObject.date = date.value;
   bankObject.title = title.value;
