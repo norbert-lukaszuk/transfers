@@ -92,6 +92,8 @@ okButton.addEventListener('click', e =>{
   /* Tu skończyłem dodawanie id dla container i zapisanie go w bankObject */
   /* trzeba ogarnąć array.find() */
   bankObject.containerClass = containerId.classList.value;
+  bankObject.statusCircleClass = statusCircle.classList.value;
+  bankObject.timeLeftClass = daysLeft.classList.value;
   bankArray.push(bankObject);
   localStorage.setItem('bankArray', JSON.stringify(bankArray));
   if(timeLeft<=1){
@@ -127,7 +129,8 @@ okButton.addEventListener('click', e =>{
 })
 
 const keysArray = JSON.parse(localStorage.getItem('bankArray'));//pobieranie array z kluczami 
-keysArray.sort((a,b)=> b.key - a.key);//sortuje od największej do najmniejszej   
+if(keysArray != null){keysArray.sort((a,b)=> b.key - a.key);/* sortuje od największej do najmniejszej */
+ 
 // keysArray.reverse();//odwraca na od najmniejszej do największej 
 
 for(let i=0; i<keysArray.length;i++){  //pętla iterujące przez localStorage
@@ -165,6 +168,10 @@ for(let i=0; i<keysArray.length;i++){  //pętla iterujące przez localStorage
   containerId.setAttribute('id', keysArray[i].id);
   const containerClass = keysArray[i].containerClass.split(' ');
   containerId.classList.add(...containerClass);
+  const statusCircleClass = keysArray[i].statusCircleClass.split(' ');
+  statusCircle.classList.add(...statusCircleClass);
+  const timeLeftClass = keysArray[i].timeLeftClass.split(' ');
+  daysLeft.classList.add(...timeLeftClass);
   if(timeLeft<=1){
     statusCircle.style.backgroundColor = 'crimson';
   }
@@ -198,6 +205,7 @@ for(let i=0; i<keysArray.length;i++){  //pętla iterujące przez localStorage
     titleOutput.innerText = keysArray[i].title;
     daysLeft.innerText = `${timeLeft} d.`;
   }
+  }
 }
 ul.addEventListener('click', e =>{
   
@@ -208,16 +216,25 @@ ul.addEventListener('click', e =>{
   if(e.target.tagName ==='BUTTON' && e.target.classList.contains('buttonDone')){
     let bankArray = JSON.parse(localStorage.getItem('bankArray'));
     e.target.parentNode.parentNode.classList.add('containerDone');
-    console.log(e.target.parentNode.parentNode.classList);
+    console.log(e.target.parentElement.style);
     console.log(e.target.parentNode.parentNode.getAttribute('id'));
     const containerId = e.target.parentNode.parentNode.getAttribute('id');
     console.log(containerId);
+    
+    e.target.parentElement.style.display = 'none';//close div 
+    e.target.style.display = 'none';//done button
+    e.target.parentElement.children.item(0).style.display = 'none';//cancel button
+      e.target.parentNode.parentNode.children.item(2).classList.add('timeLeftDone');//time left div
+      e.target.parentNode.parentNode.children.item(1).lastElementChild.classList.add('statusCircleDone');//status circle
     for(let i=0; i<bankArray.length; i++){
       const objectValues = Object.values(bankArray[i]);
       console.log(objectValues, typeof objectValues);
       const includes = objectValues.includes(containerId);
+      
       if(includes===true){
         bankArray[i].containerClass = e.target.parentNode.parentNode.classList.value;
+        bankArray[i].timeLeftClass = e.target.parentNode.parentNode.children.item(2).classList.value;
+        bankArray[i].statusCircleClass = e.target.parentNode.parentNode.children.item(1).lastElementChild.classList.value;
         console.log(bankArray[i].containerClass);
         const local = JSON.stringify(bankArray);
         localStorage.setItem('bankArray',local);
@@ -227,11 +244,7 @@ ul.addEventListener('click', e =>{
     // let classList = localStorage.getItem('containerClass').split(' ');
     
     // localStorage.setItem('containerClass',e.target.parentNode.parentNode.classList.value);
-    e.target.parentElement.style.display = 'none';
-    e.target.style.display = 'none';
-    e.target.parentElement.children.item(0).style.display = 'none';
-    e.target.parentNode.parentNode.children.item(2).style.color = 'transparent';
-    e.target.parentNode.parentNode.children.item(1).lastElementChild.style.backgroundColor = 'transparent';
+    
     
   }
   if(e.target.classList.contains('buttonClose')){

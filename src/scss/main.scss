@@ -261,6 +261,9 @@ li{
   border-radius: 50%;
   background-color: green;
 }
+.statusCircleDone{
+  background-color: transparent;
+}
 .strip__pko{
   background-color: blue;
   max-width: inherit;
@@ -299,6 +302,9 @@ li{
   align-self: flex-end;
   padding-right: 7px;
   font-size: 14px;
+}
+.timeLeftDone{
+  color: transparent;
 }
 .title{
   text-align: center;
