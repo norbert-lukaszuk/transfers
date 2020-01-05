@@ -221,23 +221,30 @@ for(let i=0; i<keysArray.length;i++){  //pętla iterujące przez localStorage
 }
 ul.addEventListener('click', e =>{
   
-  if(e.target.tagName === 'DIV' /* && e.target.classList.contains('container') */){
-    console.log(e.target.children.item(4));
-    e.target.children.item(4).style.display = 'flex';//pozwala dostać się do konkretnego dziecka
+  if(e.target.tagName === 'DIV' && e.target.classList.contains('close')){
+    console.log(e.target.parentNode.children.item(1).lastElementChild.classList);
+    e.target.children.item(0).style.display = 'block';
+    e.target.children.item(1).style.display = 'block';
+    // e.target.children.item(4).style.display = 'flex';//pozwala dostać się do konkretnego dziecka
   }
   if(e.target.tagName ==='BUTTON' && e.target.classList.contains('buttonDone')){
     let bankArray = JSON.parse(localStorage.getItem('bankArray'));
     e.target.parentNode.parentNode.classList.add('containerDone');
-    console.log(e.target.parentElement.style);
+    console.log(e.target.parentNode);
     console.log(e.target.parentNode.parentNode.getAttribute('id'));
     const containerId = e.target.parentNode.parentNode.getAttribute('id');
     console.log(containerId);
     
-    e.target.parentElement.style.display = 'none';//close div 
-    e.target.style.display = 'none';//done button
-    e.target.parentElement.children.item(0).style.display = 'none';//cancel button
+    // e.target.parentElement.style.display = 'none';//close div 
+    
+    // e.target.style.display = 'none';//done button
+    // e.target.parentElement.children.item(0).remove();//cancel button
+    // e.target.parentElement.children.item(0).style.display = 'none';//cancel button
+   
       e.target.parentNode.parentNode.children.item(2).classList.add('timeLeftDone');//time left div
+      console.log(e.target.parentNode.parentNode);
       e.target.parentNode.parentNode.children.item(1).lastElementChild.classList.add('statusCircleDone');//status circle
+     
     for(let i=0; i<bankArray.length; i++){
       const objectValues = Object.values(bankArray[i]);
       console.log(objectValues, typeof objectValues);
@@ -257,7 +264,7 @@ ul.addEventListener('click', e =>{
     
     // localStorage.setItem('containerClass',e.target.parentNode.parentNode.classList.value);
     
-    
+    e.target.parentNode.remove();
   }
   if(e.target.classList.contains('buttonClose')){
     e.target.parentElement.style.display = 'none';
