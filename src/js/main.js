@@ -64,8 +64,8 @@ okButton.addEventListener('click', e =>{
   bankObject.category = category.value;
   bankObject.date = date.value;
   bankObject.title = title.value;
-  bankObject.key = new Date(bankObject.date).getTime();//tworzy klucz na podstwie 
-  
+  // bankObject.key = new Date(bankObject.date).getTime();//tworzy klucz na podstwie 
+  bankObject.status = '';
   const local = localStorage.getItem('keys')
   let keys = JSON.parse(local);
   // keys.push(new Date(bankObject.date).getTime());
@@ -140,15 +140,16 @@ okButton.addEventListener('click', e =>{
   
 })
 
-const keysArray = JSON.parse(localStorage.getItem('bankArray'));//pobieranie array z kluczami 
-if(keysArray != null){keysArray.sort((a,b)=> b.key - a.key);/* sortuje od największej do najmniejszej */
+const bankArray = JSON.parse(localStorage.getItem('bankArray'));//pobieranie array z kluczami 
+if(bankArray != null){bankArray.sort((a,b)=> b.key - a.key);/* sortuje od największej do najmniejszej */
  
-// keysArray.reverse();//odwraca na od najmniejszej do największej 
+// bankArray.reverse();//odwraca na od najmniejszej do największej 
 
-for(let i=0; i<keysArray.length;i++){  //pętla iterujące przez localStorage
+/******* REFRESSH ***********/
+for(let i=0; i<bankArray.length;i++){  //pętla iterujące przez localStorage
   //   /* get data from localStorage */
     
-    const local = localStorage.getItem(keysArray[i]);//pobranie z localStorage elementu o danym w pętli kluczu
+    const local = localStorage.getItem(bankArray[i]);//pobranie z localStorage elementu o danym w pętli kluczu
     const bankObject = JSON.parse(local);//parsowanie do obiektu
     const container = `<div class="container">
     <div class="strip"></div>
@@ -165,6 +166,7 @@ for(let i=0; i<keysArray.length;i++){  //pętla iterujące przez localStorage
     </div>          
   </div`;
   ul.insertAdjacentHTML('afterbegin',container);
+  const close = document.querySelector('.close');
   const containerId = document.querySelector('.container');
   const image = document.querySelector('.image');
   const strip = document.querySelector('.strip');
@@ -174,16 +176,18 @@ for(let i=0; i<keysArray.length;i++){  //pętla iterujące przez localStorage
   const daysLeft = document.querySelector('.timeLeft');
   const statusCircle = document.querySelector('.statusCircle');
   const today = new Date();
-  console.log(keysArray[i]);
-  const trasferDay = new Date(keysArray[i].date);
+  const trasferDay = new Date(bankArray[i].date);
   const timeLeft = Math.ceil( (trasferDay-today)/1000/60/60/24);
-  containerId.setAttribute('id', keysArray[i].id);
-  const containerClass = keysArray[i].containerClass.split(' ');
+  containerId.setAttribute('id', bankArray[i].id);
+  const containerClass = bankArray[i].containerClass.split(' ');
   containerId.classList.add(...containerClass);
-  const statusCircleClass = keysArray[i].statusCircleClass.split(' ');
+  const statusCircleClass = bankArray[i].statusCircleClass.split(' ');
   statusCircle.classList.add(...statusCircleClass);
-  const timeLeftClass = keysArray[i].timeLeftClass.split(' ');
+  const timeLeftClass = bankArray[i].timeLeftClass.split(' ');
   daysLeft.classList.add(...timeLeftClass);
+  if(bankArray[i].status === 'done'){
+      close.remove();
+  }
   if(timeLeft<=1){
     statusCircle.style.backgroundColor = 'crimson';
   }
@@ -191,13 +195,13 @@ for(let i=0; i<keysArray.length;i++){  //pętla iterujące przez localStorage
     statusCircle.style.backgroundColor = 'orange';
   }
   
-  if(keysArray[i].bank === 'mBank'){
+  if(bankArray[i].bank === 'mBank'){
 
-    dateOutput.innerText = keysArray[i].date;
+    dateOutput.innerText = bankArray[i].date;
     strip.setAttribute('class', 'strip__mbank');
     image.setAttribute('src','assets/img/mbank 30x30.png');
-    categoryOutput.innerText = keysArray[i].category;
-    titleOutput.innerText = keysArray[i].title;
+    categoryOutput.innerText = bankArray[i].category;
+    titleOutput.innerText = bankArray[i].title;
     if(timeLeft>0){
       daysLeft.innerText = `${timeLeft} d.`;
     }
@@ -209,12 +213,12 @@ for(let i=0; i<keysArray.length;i++){  //pętla iterujące przez localStorage
     }
 
   }
-  else if(keysArray[i].bank === 'PKO'){
-    dateOutput.innerText = keysArray[i].date;
+  else if(bankArray[i].bank === 'PKO'){
+    dateOutput.innerText = bankArray[i].date;
     strip.setAttribute('class', 'strip__pko');
     image.setAttribute('src','assets/img/pkobp 467x485.png');
-    categoryOutput.innerText = keysArray[i].category;
-    titleOutput.innerText = keysArray[i].title;
+    categoryOutput.innerText = bankArray[i].category;
+    titleOutput.innerText = bankArray[i].title;
     daysLeft.innerText = `${timeLeft} d.`;
   }
   }
@@ -242,7 +246,6 @@ ul.addEventListener('click', e =>{
     // e.target.parentElement.children.item(0).style.display = 'none';//cancel button
    
       e.target.parentNode.parentNode.children.item(2).classList.add('timeLeftDone');//time left div
-      console.log(e.target.parentNode.parentNode);
       e.target.parentNode.parentNode.children.item(1).lastElementChild.classList.add('statusCircleDone');//status circle
      
     for(let i=0; i<bankArray.length; i++){
@@ -254,6 +257,7 @@ ul.addEventListener('click', e =>{
         bankArray[i].containerClass = e.target.parentNode.parentNode.classList.value;
         bankArray[i].timeLeftClass = e.target.parentNode.parentNode.children.item(2).classList.value;
         bankArray[i].statusCircleClass = e.target.parentNode.parentNode.children.item(1).lastElementChild.classList.value;
+        bankArray[i].status = 'done';
         console.log(bankArray[i].containerClass);
         const local = JSON.stringify(bankArray);
         localStorage.setItem('bankArray',local);
