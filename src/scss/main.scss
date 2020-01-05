@@ -12,6 +12,11 @@ html {
 #amount{
   text-align: center;
 }
+.amount{
+  font-size: 16;
+  font-weight: bold;
+  text-align: center;
+}
 .bankSelectWraper{
   display: flex;
   justify-content: center;
@@ -152,7 +157,7 @@ body {
   margin-bottom: 10px;
   min-width: 300px;
   min-height: 100px;
-  max-height: 100px;
+  // max-height: 100px;
   border-radius: 10px;
   
   
@@ -326,7 +331,7 @@ li{
 }
 .title{
   text-align: center;
-  margin: 0;
+  margin: 10px 0;
   
 }
 #toList{

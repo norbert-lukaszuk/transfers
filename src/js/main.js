@@ -20,9 +20,9 @@ const popup = document.querySelector('.popup');
 const cancel = document.getElementById('cancel');
 const date = document.getElementById('calendar');
 let bank = null;
-// const bank = document.getElementById('bank');
 const category = document.getElementById('category');
 const title = document.getElementById('title');
+const amount = document.getElementById('amount');
 const okButton = document.getElementById('ok');
 const newDate = new Date(date);
 const transfer = document.querySelector('.transfer');
@@ -64,6 +64,7 @@ okButton.addEventListener('click', e =>{
   bankObject.category = category.value;
   bankObject.date = date.value;
   bankObject.title = title.value;
+  bankObject.amount = amount.value;
   // bankObject.key = new Date(bankObject.date).getTime();//tworzy klucz na podstwie 
   bankObject.status = '';
   const local = localStorage.getItem('keys')
@@ -80,7 +81,8 @@ okButton.addEventListener('click', e =>{
       <div class="category"></div>
       <div class="statusCircle"></div>
     </div>
-    <div class="timeLeft"></div>  
+    <div class="timeLeft"></div> 
+    <div class="amount"></div> 
     <p class="title"></p>
     <div class="close">
     <button class="buttonClose">Cancel</button>
@@ -95,6 +97,7 @@ okButton.addEventListener('click', e =>{
   const dateOutput = document.querySelector('.strip');
   const titleOutput = document.querySelector('.title');
   const daysLeft = document.querySelector('.timeLeft');
+  const amountOutput = document.querySelector('.amount');
   const statusCircle = document.querySelector('.statusCircle');
   const today = new Date();
   const trasferDay = new Date(bankObject.date);
@@ -123,6 +126,7 @@ okButton.addEventListener('click', e =>{
     categoryOutput.innerText = bankObject.category;
     titleOutput.innerText = bankObject.title;
     daysLeft.innerText = `${timeLeft} d.`;
+    amountOutput.innerText = `${bankObject.amount} zł`;
     
     
     
@@ -134,6 +138,7 @@ okButton.addEventListener('click', e =>{
     categoryOutput.innerText = bankObject.category;
     titleOutput.innerText = bankObject.title;
     daysLeft.innerText = `${timeLeft} d.`;
+    amountOutput.innerText = `${bankObject.amount} zł`;
   }
 
   popup.style.display = 'none';
@@ -158,7 +163,8 @@ for(let i=0; i<bankArray.length;i++){  //pętla iterujące przez localStorage
       <div class="category"></div>
       <div class="statusCircle"></div>
     </div>
-    <div class="timeLeft"></div>  
+    <div class="timeLeft"></div> 
+    <div class="amount"></div> 
     <p class="title"></p>
     <div class="close">
         <button class="buttonClose">Cancel</button>
