@@ -318,6 +318,11 @@ html {
 #amount {
   text-align: center; }
 
+.amount {
+  font-size: 16;
+  font-weight: bold;
+  text-align: center; }
+
 .bankSelectWraper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -353,6 +358,7 @@ body {
   border-width: 0; }
 
 .buttonClose {
+  display: none;
   background-color: #575757;
   border-style: none;
   border-radius: 10px;
@@ -362,6 +368,7 @@ body {
   margin-right: 8px; }
 
 .buttonDone {
+  display: none;
   background-color: crimson;
   border-style: none;
   border-radius: 10px;
@@ -436,6 +443,9 @@ body {
   display: none; }
 
 .close {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -448,7 +458,7 @@ body {
   margin-bottom: 10px;
   border-radius: 10px;
   position: absolute;
-  display: none; }
+  background: transparent; }
 
 .container {
   display: -webkit-box;
@@ -463,7 +473,6 @@ body {
   margin-bottom: 10px;
   min-width: 300px;
   min-height: 100px;
-  max-height: 100px;
   border-radius: 10px; }
 
 .containerDone {
@@ -563,6 +572,9 @@ li {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column; }
+
+.listHide {
+  display: none; }
 
 .logoWraper {
   display: -webkit-box;
@@ -665,7 +677,8 @@ li {
   color: transparent; }
 
 .title {
-  text-align: center; }
+  text-align: center;
+  margin: 10px 0 5px 0; }
 
 #toList {
   font-size: 25px;
