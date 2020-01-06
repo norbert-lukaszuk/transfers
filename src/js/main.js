@@ -265,9 +265,9 @@ for(let i=0; i<bankArray.length;i++){  //pętla iterujące przez localStorage
 ul.addEventListener('click', e =>{
   
   if(e.target.tagName === 'DIV' && e.target.classList.contains('close')){
-    console.log(e.target.parentNode.children.item(1).lastElementChild.classList);
-    e.target.children.item(0).style.display = 'block';
-    e.target.children.item(1).style.display = 'block';
+    console.log(e.target.children.item(1));
+    e.target.children.item(0).classList.add('buttonClose--show');
+    e.target.children.item(1).classList.add('buttonDone--show');
     // e.target.children.item(4).style.display = 'flex';//pozwala dostać się do konkretnego dziecka
   }
   if(e.target.tagName ==='BUTTON' && e.target.classList.contains('buttonDone')){
@@ -310,7 +310,8 @@ ul.addEventListener('click', e =>{
     e.target.parentNode.remove();
   }
   if(e.target.classList.contains('buttonClose')){//tu trzeba poprawić !!
-    e.target.parentElement.style.display = 'none';
+    e.target.classList.remove('buttonClose--show');
+    e.target.parentElement.children.item(1).classList.remove('buttonDone--show');
     console.log(e.target.parentElement);
   }
   })
