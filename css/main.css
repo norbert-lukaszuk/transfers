@@ -366,6 +366,8 @@ body {
   font-size: 20px;
   font-weight: 700;
   margin-right: 8px; }
+  .buttonClose--show {
+    display: block; }
 
 .buttonDone {
   display: none;
@@ -376,6 +378,8 @@ body {
   font-size: 20px;
   font-weight: 700;
   margin-left: 8px; }
+  .buttonDone--show {
+    display: block; }
 
 #buttonDone {
   width: 24px;
