@@ -31,6 +31,7 @@ let input = document.querySelector('.input')
 const bankSelectWraper = document.querySelector('.bankSelectWraper');
 const mbankIcon = document.getElementById('mbankIcon');
 const pkoIcon = document.getElementById('pkoIcon');
+const list = document.querySelector('.list');
 bankSelectWraper.addEventListener('click', e =>{
   if(e.target.tagName === 'IMG' && e.target.id === 'mbankIcon'){
     e.target.classList.toggle('bankClicked');
@@ -46,12 +47,15 @@ bankSelectWraper.addEventListener('click', e =>{
 
 addButon.addEventListener('click', e =>{
   popup.style.display = 'block';
-  input.style.display = 'none';
+  list.classList.add('listHide');
+  console.log(list);
 })
 cancel.addEventListener('click', e =>{
   popup.style.display = 'none';
-  input.style.display = 'block';
+  list.classList.remove('listHide');
 })
+
+/******** add new transfer ********/
 okButton.addEventListener('click', e =>{
   let bankObject ={};
   let bankArray = JSON.parse(localStorage.getItem('bankArray'));
@@ -125,8 +129,16 @@ okButton.addEventListener('click', e =>{
     image.setAttribute('src','assets/img/mbank 30x30.png');
     categoryOutput.innerText = bankObject.category;
     titleOutput.innerText = bankObject.title;
-    daysLeft.innerText = `${timeLeft} d.`;
     amountOutput.innerText = `${bankObject.amount} zł`;
+    if(timeLeft>0){
+      daysLeft.innerText = `${timeLeft} d.`;
+    }
+    else if(timeLeft===0){
+      daysLeft.innerText = 'today'
+    }
+    else if(timeLeft<0){
+      daysLeft.innerText = `passed`
+    }
     
     
     
@@ -137,17 +149,26 @@ okButton.addEventListener('click', e =>{
     image.setAttribute('src','assets/img/pkobp 467x485.png');
     categoryOutput.innerText = bankObject.category;
     titleOutput.innerText = bankObject.title;
-    daysLeft.innerText = `${timeLeft} d.`;
     amountOutput.innerText = `${bankObject.amount} zł`;
+    if(timeLeft>0){
+      daysLeft.innerText = `${timeLeft} d.`;
+    }
+    else if(timeLeft===0){
+      daysLeft.innerText = 'today'
+    }
+    else if(timeLeft<0){
+      daysLeft.innerText = `passed`
+    }
   }
 
   popup.style.display = 'none';
+  list.classList.remove('listHide');
   
 })
 
 const bankArray = JSON.parse(localStorage.getItem('bankArray'));//pobieranie array z kluczami 
 if(bankArray != null){bankArray.sort((a,b)=> b.key - a.key);/* sortuje od największej do najmniejszej */
- 
+
 // bankArray.reverse();//odwraca na od najmniejszej do największej 
 
 /******* REFRESSH ***********/
@@ -180,6 +201,7 @@ for(let i=0; i<bankArray.length;i++){  //pętla iterujące przez localStorage
   const dateOutput = document.querySelector('.strip');
   const titleOutput = document.querySelector('.title');
   const daysLeft = document.querySelector('.timeLeft');
+  const amountOutput = document.querySelector('.amount');
   const statusCircle = document.querySelector('.statusCircle');
   const today = new Date();
   const trasferDay = new Date(bankArray[i].date);
@@ -194,13 +216,13 @@ for(let i=0; i<bankArray.length;i++){  //pętla iterujące przez localStorage
   if(bankArray[i].status === 'done'){
       close.remove();
   }
-  if(timeLeft<=1){
+  if(timeLeft<=1 && bankArray[i].status!='done'){
     statusCircle.style.backgroundColor = 'crimson';
   }
-  else if(timeLeft < 3){
+  else if(timeLeft < 3 && bankArray[i].status!='done'){
     statusCircle.style.backgroundColor = 'orange';
   }
-  
+  /* mBank template */
   if(bankArray[i].bank === 'mBank'){
 
     dateOutput.innerText = bankArray[i].date;
@@ -208,6 +230,7 @@ for(let i=0; i<bankArray.length;i++){  //pętla iterujące przez localStorage
     image.setAttribute('src','assets/img/mbank 30x30.png');
     categoryOutput.innerText = bankArray[i].category;
     titleOutput.innerText = bankArray[i].title;
+    amountOutput.innerText = `${bankArray[i].amount} zł`;
     if(timeLeft>0){
       daysLeft.innerText = `${timeLeft} d.`;
     }
@@ -219,13 +242,23 @@ for(let i=0; i<bankArray.length;i++){  //pętla iterujące przez localStorage
     }
 
   }
+  /* PKO tamplate */
   else if(bankArray[i].bank === 'PKO'){
     dateOutput.innerText = bankArray[i].date;
     strip.setAttribute('class', 'strip__pko');
     image.setAttribute('src','assets/img/pkobp 467x485.png');
     categoryOutput.innerText = bankArray[i].category;
     titleOutput.innerText = bankArray[i].title;
-    daysLeft.innerText = `${timeLeft} d.`;
+    amountOutput.innerText = `${bankArray[i].amount} zł`;
+    if(timeLeft>0){
+      daysLeft.innerText = `${timeLeft} d.`;
+    }
+    else if(timeLeft===0){
+      daysLeft.innerText = 'today'
+    }
+    else if(timeLeft<0){
+      daysLeft.innerText = `passed`
+    }
   }
   }
 }
@@ -276,7 +309,8 @@ ul.addEventListener('click', e =>{
     
     e.target.parentNode.remove();
   }
-  if(e.target.classList.contains('buttonClose')){
+  if(e.target.classList.contains('buttonClose')){//tu trzeba poprawić !!
     e.target.parentElement.style.display = 'none';
+    console.log(e.target.parentElement);
   }
   })

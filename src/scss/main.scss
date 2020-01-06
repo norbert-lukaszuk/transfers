@@ -148,6 +148,7 @@ body {
   // display: none;
   background: transparent;
 }
+
 .container{
   display: flex;
   flex-direction: column;
@@ -243,8 +244,10 @@ li{
 .list{
   display: flex;
   flex-direction: column;
-  // background-color: black;
   
+}
+.listHide{
+  display: none;
 }
 .logoWraper{
   display: flex;
@@ -331,7 +334,7 @@ li{
 }
 .title{
   text-align: center;
-  margin: 10px 0;
+  margin: 10px 0 5px 0;
   
 }
 #toList{
