@@ -10,7 +10,7 @@ html {
   box-sizing: inherit;
 }
 #amount{
-  text-align: center;
+  width: 136px;
 }
 .amount{
   font-size: 16;
@@ -25,6 +25,9 @@ html {
 }
 .bankClicked{
   border: solid green 2px;
+}
+.bankLable{
+  margin: 0 auto;
 }
 body {
   color: black;
@@ -91,22 +94,24 @@ body {
 .buttonsWraper{
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-top: 20px;
+}
+#calendar{
+  padding-right: 0;
+  text-align: start;
+  width: 136px;
 }
 .calendar{
   font-family: 'Lucida Console';
-  display: block;
+  display: inline;
   border-style: none;
-  
-  // border: 2px solid;
-  // border-radius: 10px;
   padding: 5px 5px;
-  margin: 8px auto;
   background-color: inherit;
+  
 }
 .calendarLabel{
   font-family: 'Lucida Console';
-  text-align: center;
+  // text-align: center;
   display: block;
   align-self: flex-end;;
   // margin: 5px auto;
@@ -116,6 +121,9 @@ body {
   display: block;
   background-color: rgba(220, 20, 60, 0.377);
   // margin: 10px auto;
+}
+#category{
+  padding-right: 0;
 }
 .category{
   font-size: 20px;
@@ -217,6 +225,9 @@ body {
 .inputWraper{
   display: flex;
   justify-content: space-between;
+  border-bottom: 1px gray solid;
+  font-size: 12px;
+  padding: 8px;
 }
 
 .item{
@@ -343,6 +354,10 @@ li{
 }
 .timeLeftDone{
   color: transparent;
+}
+#title{
+  text-align: left;
+  width: 136px;
 }
 .title{
   text-align: center;
