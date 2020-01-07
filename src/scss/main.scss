@@ -20,10 +20,11 @@ html {
 .bankSelectWraper{
   display: flex;
   justify-content: center;
+  align-items: center;
 
 }
 .bankClicked{
-  border: solid green 3px;
+  border: solid green 2px;
 }
 body {
   color: black;
@@ -265,6 +266,7 @@ li{
 }
 #mbankIcon{
   margin-right: 10px;
+  box-sizing: content-box;
 }
 .notDone{
   text-decoration: none;
