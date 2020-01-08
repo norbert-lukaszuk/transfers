@@ -44,6 +44,7 @@ input[type="text"]::-webkit-input-placeholder{
   font-weight: 900;
   align-self: flex-start;
   margin-left: 10px;
+  cursor: default;
 }
 .bankSelectBlock{
   display: flex;

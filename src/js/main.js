@@ -72,7 +72,7 @@ okButton.addEventListener('click', e =>{
     bankArray = [];
   }
   console.log(bank);
-  if(bank != null){
+  if(bank != null){//warunek wykonania pętli 
     
   
   bankObject.bank = bank;
@@ -177,7 +177,7 @@ okButton.addEventListener('click', e =>{
   
 }
     else{
-    alert('Select the bank')
+    alert('Select the bank')//jeśli nie wybiorę banku
     }
 }
 )
