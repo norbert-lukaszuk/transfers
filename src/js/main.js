@@ -19,6 +19,7 @@ const addButon = document.querySelector('button.button');
 const popup = document.querySelector('.popup');
 const cancel = document.getElementById('cancel');
 const date = document.getElementById('calendar');
+const today = document.getElementById('calendar');
 let bank = null;
 const category = document.getElementById('category');
 const title = document.getElementById('title');
@@ -32,6 +33,7 @@ const bankSelectWraper = document.querySelector('.bankSelectWraper');
 const mbankIcon = document.getElementById('mbankIcon');
 const pkoIcon = document.getElementById('pkoIcon');
 const list = document.querySelector('.list');
+
 bankSelectWraper.addEventListener('click', e =>{
   if(e.target.tagName === 'IMG' && e.target.id === 'mbankIcon'){
     e.target.classList.toggle('bankClicked');
@@ -48,6 +50,7 @@ bankSelectWraper.addEventListener('click', e =>{
 addButon.addEventListener('click', e =>{
   popup.style.display = 'block';
   list.classList.add('listHide');
+  today.valueAsDate = new Date; //aktualna data w input date
   console.log(list);
 })
 cancel.addEventListener('click', e =>{

@@ -24,16 +24,17 @@
   <div class="popup">
 
     <form class="transfer">
-      <!-- form żeby resetować pola formularza ale nie działą-->
-      <label for="bank" class="bankLabel">Select the bank</label>
-      <div class="bankSelectWraper">
-        <img id="mbankIcon" src="assets/img/mbank 30x30.png" alt="mbank logo">
-        <img id="pkoIcon" src="assets/img/pkobp 467x485.png" alt="pko logo">
+      <div class="bankSelectBlock">
+        <span class="backArrow">←</span>
+        <label for="bank" class="bankLabel">Select the bank</label>
+        <div class="bankSelectWraper">
+          <img id="mbankIcon" src="assets/img/mbank 30x30.png" alt="mbank logo">
+          <img id="pkoIcon" src="assets/img/pkobp 467x485.png" alt="pko logo">
+        </div>
       </div>
-      <!-- <select class="calendar" name="bank" id="bank">
-        <option value="mBank">mBank</option>
-        <option value="PKO">PKO</option>
-      </select> --> 
+      <!-- form żeby resetować pola formularza ale nie działą-->
+      
+      
       <div class="inputWraper">
           <label class="calendarLabel" for="calendar">Enter the date</label>
           <input class="calendar" type="date" name="date" id="calendar" autocomplete="email">
@@ -49,11 +50,11 @@
       </div>
       <div class="inputWraper">
         <label for="title" class="calendarLabel">Enter the tile</label>
-        <input type="text" class="calendar" id="title" placeholder="Title">
+        <input type="text" class="calendar" id="title" placeholder=">">
       </div>
       <div class="inputWraper">
         <label for="title" class="calendarLabel">Enter amount</label>
-        <input type="text" class="calendar" id="amount" placeholder="PLN">
+        <input type="text" class="calendar" id="amount" placeholder=">">
       </div>
       
       

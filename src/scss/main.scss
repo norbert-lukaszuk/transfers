@@ -9,29 +9,67 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
+input[type="text"]::-webkit-input-placeholder{
+  color: black;
+  font-weight: bolder;
+  text-align: right;
+  
+}
+::-webkit-datetime-edit{
+  font: 400 12px;
+}
+::-webkit-datetime-edit-text{
+  opacity: 0;
+}
+::-webkit-calendar-picker-indicator{
+    opacity: 100%;
+    width: 7px;
+    height: 7px;
+    
+}
+::-webkit-inner-spin-button { display: none; }//chowa strzałki na :hover w kalendarzu 
+
 #amount{
   width: 136px;
 }
 .amount{
+
   font-size: 16;
   font-weight: bold;
   text-align: center;
+  
+}
+.backArrow{
+  font-size: 28px;
+  font-weight: 900;
+  align-self: flex-start;
+  margin-left: 10px;
+}
+.bankSelectBlock{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
 }
 .bankSelectWraper{
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 15px 0;
 
 }
 .bankClicked{
   border: solid green 2px;
 }
-.bankLable{
-  margin: 0 auto;
+.bankLabel{
+  display: block;
+  // margin: 0 auto;
+  // align-self: center;
+
 }
 body {
   color: black;
-  background: rgb(226, 223, 223);
+  background: white;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
@@ -107,6 +145,7 @@ body {
   border-style: none;
   padding: 5px 5px;
   background-color: inherit;
+  cursor: pointer;
   
 }
 .calendarLabel{
@@ -221,6 +260,10 @@ body {
   font-family: 'Lucida Console';
   font-size: 25px;
   background-color:transparent;
+}
+.input[type="date"]{
+  align-items: left;
+  color: red;
 }
 .inputWraper{
   display: flex;
@@ -379,6 +422,10 @@ li{
   text-align: center;
   width: 250px;
   margin: 0 auto;
+}
+.transfers{
+  display: flex;
+  flex-direction: column;
 }
 ul{
   display: flex;
