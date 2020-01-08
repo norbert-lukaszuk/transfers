@@ -18,6 +18,7 @@ if ('serviceWorker' in navigator) {
 const addButon = document.querySelector('button.button');
 const popup = document.querySelector('.popup');
 const cancel = document.getElementById('cancel');
+const backArrow = document.querySelector('.backArrow');
 const date = document.getElementById('calendar');
 const today = document.getElementById('calendar');
 let bank = null;
@@ -56,6 +57,11 @@ addButon.addEventListener('click', e =>{
 cancel.addEventListener('click', e =>{
   popup.style.display = 'none';
   list.classList.remove('listHide');
+})
+backArrow.addEventListener('click', e=>{
+  popup.style.display = 'none';
+  list.classList.remove('listHide');
+
 })
 
 /******** add new transfer ********/
