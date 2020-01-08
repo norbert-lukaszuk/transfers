@@ -71,8 +71,10 @@ okButton.addEventListener('click', e =>{
   if(bankArray===null){
     bankArray = [];
   }
-  console.log(bankArray.value);
-  // bankObject.bank = bank.value;
+  console.log(bank);
+  if(bank != null){
+    
+  
   bankObject.bank = bank;
   bankObject.category = category.value;
   bankObject.date = date.value;
@@ -173,7 +175,12 @@ okButton.addEventListener('click', e =>{
   popup.style.display = 'none';
   list.classList.remove('listHide');
   
-})
+}
+    else{
+    alert('Select the bank')
+    }
+}
+)
 
 const bankArray = JSON.parse(localStorage.getItem('bankArray'));//pobieranie array z kluczami 
 if(bankArray != null){bankArray.sort((a,b)=> b.key - a.key);/* sortuje od największej do najmniejszej */
