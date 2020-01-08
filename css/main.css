@@ -315,13 +315,52 @@ html {
   -webkit-box-sizing: inherit;
           box-sizing: inherit; }
 
+input[type="text"]::-webkit-input-placeholder {
+  color: black;
+  font-weight: bolder;
+  text-align: right; }
+
+::-webkit-datetime-edit {
+  font: 400 12px; }
+
+::-webkit-datetime-edit-text {
+  opacity: 0; }
+
+::-webkit-calendar-picker-indicator {
+  opacity: 100%;
+  width: 7px;
+  height: 7px; }
+
+::-webkit-inner-spin-button {
+  display: none; }
+
 #amount {
-  text-align: center; }
+  width: 136px; }
 
 .amount {
   font-size: 16;
   font-weight: bold;
   text-align: center; }
+
+.backArrow {
+  font-size: 38px;
+  font-weight: 900;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  margin-left: 10px; }
+
+.bankSelectBlock {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 20px 0; }
 
 .bankSelectWraper {
   display: -webkit-box;
@@ -329,14 +368,21 @@ html {
   display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
-          justify-content: center; }
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 15px 0; }
 
 .bankClicked {
-  border: solid green 3px; }
+  border: solid green 2px; }
+
+.bankLabel {
+  display: block; }
 
 body {
   color: black;
-  background: #e2dfdf;
+  background: white;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; }
 
 .button {
@@ -401,27 +447,33 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  margin-bottom: 20px; }
+  margin-top: 20px; }
+
+#calendar {
+  padding-right: 0;
+  text-align: start;
+  width: 136px; }
 
 .calendar {
   font-family: 'Lucida Console';
-  display: block;
-  border-style: ridge;
-  border-radius: 10px;
-  border-bottom: 3px solid black;
+  display: inline;
+  border-style: none;
   padding: 5px 5px;
-  margin: 8px auto;
-  background-color: inherit; }
+  background-color: inherit;
+  cursor: pointer; }
 
 .calendarLabel {
   font-family: 'Lucida Console';
-  text-align: center;
   display: block;
-  margin: 5px auto; }
+  -ms-flex-item-align: end;
+      align-self: flex-end; }
 
 #cancel {
   display: block;
   background-color: rgba(220, 20, 60, 0.377); }
+
+#category {
+  padding-right: 0; }
 
 .category {
   font-size: 20px;
@@ -477,7 +529,9 @@ body {
   margin-bottom: 10px;
   min-width: 300px;
   min-height: 100px;
-  border-radius: 10px; }
+  border-radius: 10px;
+  -webkit-box-shadow: 7px 7px 2px gray;
+          box-shadow: 7px 7px 2px gray; }
 
 .containerDone {
   background-color: rgba(128, 128, 128, 0.39); }
@@ -530,6 +584,23 @@ body {
   font-family: 'Lucida Console';
   font-size: 25px;
   background-color: transparent; }
+
+.input[type="date"] {
+  -webkit-box-align: left;
+      -ms-flex-align: left;
+          align-items: left;
+  color: red; }
+
+.inputWraper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  border-bottom: 1px gray solid;
+  font-size: 12px;
+  padding: 8px; }
 
 .item {
   font-family: 'Lucida Console';
@@ -594,7 +665,9 @@ li {
   margin-top: 5px; }
 
 #mbankIcon {
-  margin-right: 10px; }
+  margin-right: 10px;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box; }
 
 .notDone {
   text-decoration: none;
@@ -680,6 +753,10 @@ li {
 .timeLeftDone {
   color: transparent; }
 
+#title {
+  text-align: left;
+  width: 136px; }
+
 .title {
   text-align: center;
   margin: 10px 0 5px 0; }
@@ -698,6 +775,15 @@ li {
   text-align: center;
   width: 250px;
   margin: 0 auto; }
+
+.transfers {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column; }
 
 ul {
   display: -webkit-box;
