@@ -338,4 +338,8 @@ ul.addEventListener('click', e =>{
     e.target.parentElement.children.item(1).classList.remove('buttonDone--show');
     console.log(e.target.parentElement);
   }
+  if(e.target.classList.contains('trashBin')){
+    console.log(e.target.parentElement.parentElement);
+    e.target.parentElement.parentElement.remove();
+  }
   })
