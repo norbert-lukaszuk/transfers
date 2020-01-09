@@ -525,6 +525,8 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -ms-flex-line-pack: center;
+      align-content: center;
   background-color: rgba(243, 242, 242, 0.75);
   padding: 0;
   margin-bottom: 10px;
@@ -785,6 +787,11 @@ li {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column; }
+
+.trashBin {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  padding-right: 10px; }
 
 ul {
   display: -webkit-box;
