@@ -347,7 +347,8 @@ input[type="text"]::-webkit-input-placeholder {
   font-weight: 900;
   -ms-flex-item-align: start;
       align-self: flex-start;
-  margin-left: 10px; }
+  margin-left: 10px;
+  cursor: default; }
 
 .bankSelectBlock {
   display: -webkit-box;
@@ -524,7 +525,7 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  background-color: white;
+  background-color: rgba(243, 242, 242, 0.75);
   padding: 0;
   margin-bottom: 10px;
   min-width: 300px;
