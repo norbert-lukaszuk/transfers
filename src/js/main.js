@@ -71,7 +71,6 @@ okButton.addEventListener('click', e =>{
   if(bankArray===null){
     bankArray = [];
   }
-  console.log(bank);
   if(bank != null){//warunek wykonania pętli 
     
   
@@ -132,8 +131,6 @@ okButton.addEventListener('click', e =>{
   else if(timeLeft < 3){
     statusCircle.style.backgroundColor = 'orange';
   }
-  console.log(timeLeft);
-  console.log(category);
   if(bankObject.bank === 'mBank'){
     dateOutput.innerText = bankObject.date;
     strip.setAttribute('class', 'strip__mbank');
@@ -229,10 +226,15 @@ for(let i=0; i<bankArray.length;i++){  //pętla iterujące przez localStorage
   statusCircle.classList.add(...statusCircleClass);
   const timeLeftClass = bankArray[i].timeLeftClass.split(' ');
   daysLeft.classList.add(...timeLeftClass);
+  const trashBin = '<img class="trashBin" src="assets/img/delete 30x30.png" alt="trashBin icon">';
+  const status =  bankArray[i].status;
   if(bankArray[i].status === 'done'){
       close.remove();
+      
+     
+      daysLeft.classList.remove('timeLeftDone');
   }
-  if(timeLeft<=1 && bankArray[i].status!='done'){
+   if(timeLeft<=1 && bankArray[i].status!='done'){
     statusCircle.style.backgroundColor = 'crimson';
   }
   else if(timeLeft < 3 && bankArray[i].status!='done'){
@@ -247,7 +249,10 @@ for(let i=0; i<bankArray.length;i++){  //pętla iterujące przez localStorage
     categoryOutput.innerText = bankArray[i].category;
     titleOutput.innerText = bankArray[i].title;
     amountOutput.innerText = `${bankArray[i].amount} zł`;
-    if(timeLeft>0){
+    if(status === 'done'){
+      daysLeft.innerHTML = trashBin;
+    }
+    else if(timeLeft>0){
       daysLeft.innerText = `${timeLeft} d.`;
     }
     else if(timeLeft===0){
@@ -266,7 +271,10 @@ for(let i=0; i<bankArray.length;i++){  //pętla iterujące przez localStorage
     categoryOutput.innerText = bankArray[i].category;
     titleOutput.innerText = bankArray[i].title;
     amountOutput.innerText = `${bankArray[i].amount} zł`;
-    if(timeLeft>0){
+    if(status === 'done'){
+      daysLeft.innerHTML = trashBin;
+    }
+    else if(timeLeft>0){
       daysLeft.innerText = `${timeLeft} d.`;
     }
     else if(timeLeft===0){
@@ -281,31 +289,20 @@ for(let i=0; i<bankArray.length;i++){  //pętla iterujące przez localStorage
 ul.addEventListener('click', e =>{
    
   if(e.target.tagName === 'DIV' && e.target.classList.contains('close')){
-    console.log(e.target.children.item(1));
     e.target.children.item(0).classList.add('buttonClose--show');
     e.target.children.item(1).classList.add('buttonDone--show');
-    // e.target.children.item(4).style.display = 'flex';//pozwala dostać się do konkretnego dziecka
   }
   if(e.target.tagName ==='BUTTON' && e.target.classList.contains('buttonDone')){
-    console.log(e.target.parentNode.parentNode);
     let bankArray = JSON.parse(localStorage.getItem('bankArray'));
     e.target.parentNode.parentNode.classList.add('containerDone');
-    console.log(e.target.parentNode.parentNode.children.item(1));
-    console.log(e.target.parentNode.parentNode.getAttribute('id'));
     const containerId = e.target.parentNode.parentNode.getAttribute('id');
-    console.log(containerId);
     const timeLeft = e.target.parentNode.parentNode.querySelector('.timeLeft');
-    const amount = e.target.parentNode.parentNode.querySelector('.amount');
+    
     const trashBin = '<img class="trashBin" src="assets/img/delete 30x30.png" alt="trashBin icon">';
     timeLeft.innerHTML += trashBin;
-    console.log(timeLeft);
     timeLeft.classList.add('timeLeftDone');
     
-    // e.target.parentElement.style.display = 'none';//close div 
     
-    // e.target.style.display = 'none';//done button
-    // e.target.parentElement.children.item(0).remove();//cancel button
-    // e.target.parentElement.children.item(0).style.display = 'none';//cancel button
    
       e.target.parentNode.parentNode.children.item(2).classList.add('timeLeftDone');//time left div
       e.target.parentNode.parentNode.children.item(1).lastElementChild.classList.add('statusCircleDone');//status circle
@@ -313,7 +310,6 @@ ul.addEventListener('click', e =>{
      
     for(let i=0; i<bankArray.length; i++){
       const objectValues = Object.values(bankArray[i]);
-      console.log(objectValues, typeof objectValues);
       const includes = objectValues.includes(containerId);
       
       if(includes===true){
@@ -327,19 +323,27 @@ ul.addEventListener('click', e =>{
       }
       
     }
-    // let classList = localStorage.getItem('containerClass').split(' ');
-    
-    // localStorage.setItem('containerClass',e.target.parentNode.parentNode.classList.value);
-    
     e.target.parentNode.remove();
   }
   if(e.target.classList.contains('buttonClose')){//tu trzeba poprawić !!
     e.target.classList.remove('buttonClose--show');
     e.target.parentElement.children.item(1).classList.remove('buttonDone--show');
-    console.log(e.target.parentElement);
   }
-  if(e.target.classList.contains('trashBin')){
-    console.log(e.target.parentElement.parentElement);
+  if(e.target.classList.contains('trashBin')){//usuwanie elementu z listy 
+    const containerId = e.target.parentElement.parentElement.getAttribute('id');
     e.target.parentElement.parentElement.remove();
+
+    for(let i=0; i<bankArray.length; i++){//usuwanie elementu z localStorage
+      const objectValues = Object.values(bankArray[i]);
+      const includes = objectValues.includes(containerId);
+      
+      if(includes===true){
+        bankArray.splice(i,1);
+        const local = JSON.stringify(bankArray);
+        localStorage.setItem('bankArray',local);
+      }
+      
+    }
+    
   }
   })
