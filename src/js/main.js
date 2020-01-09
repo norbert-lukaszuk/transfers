@@ -185,7 +185,7 @@ okButton.addEventListener('click', e =>{
 const bankArray = JSON.parse(localStorage.getItem('bankArray'));//pobieranie array z kluczami 
 if(bankArray != null){bankArray.sort((a,b)=> b.key - a.key);/* sortuje od największej do najmniejszej */
 
-// bankArray.reverse();//odwraca na od najmniejszej do największej 
+bankArray.reverse();//odwraca na od najmniejszej do największej 
 
 /******* REFRESSH ***********/
 for(let i=0; i<bankArray.length;i++){  //pętla iterujące przez localStorage
@@ -279,7 +279,7 @@ for(let i=0; i<bankArray.length;i++){  //pętla iterujące przez localStorage
   }
 }
 ul.addEventListener('click', e =>{
-  
+   
   if(e.target.tagName === 'DIV' && e.target.classList.contains('close')){
     console.log(e.target.children.item(1));
     e.target.children.item(0).classList.add('buttonClose--show');
@@ -287,12 +287,19 @@ ul.addEventListener('click', e =>{
     // e.target.children.item(4).style.display = 'flex';//pozwala dostać się do konkretnego dziecka
   }
   if(e.target.tagName ==='BUTTON' && e.target.classList.contains('buttonDone')){
+    console.log(e.target.parentNode.parentNode);
     let bankArray = JSON.parse(localStorage.getItem('bankArray'));
     e.target.parentNode.parentNode.classList.add('containerDone');
-    console.log(e.target.parentNode);
+    console.log(e.target.parentNode.parentNode.children.item(1));
     console.log(e.target.parentNode.parentNode.getAttribute('id'));
     const containerId = e.target.parentNode.parentNode.getAttribute('id');
     console.log(containerId);
+    const timeLeft = e.target.parentNode.parentNode.querySelector('.timeLeft');
+    const amount = e.target.parentNode.parentNode.querySelector('.amount');
+    const trashBin = '<img class="trashBin" src="assets/img/delete 30x30.png" alt="trashBin icon">';
+    timeLeft.innerHTML += trashBin;
+    console.log(timeLeft);
+    timeLeft.classList.add('timeLeftDone');
     
     // e.target.parentElement.style.display = 'none';//close div 
     
@@ -302,6 +309,7 @@ ul.addEventListener('click', e =>{
    
       e.target.parentNode.parentNode.children.item(2).classList.add('timeLeftDone');//time left div
       e.target.parentNode.parentNode.children.item(1).lastElementChild.classList.add('statusCircleDone');//status circle
+
      
     for(let i=0; i<bankArray.length; i++){
       const objectValues = Object.values(bankArray[i]);
