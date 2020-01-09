@@ -207,7 +207,7 @@ body {
 .container{
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: rgba(243, 242, 242,0.75);
   // background-color: rgb(177, 176, 176);
   padding: 0;
   margin-bottom: 10px;
@@ -427,6 +427,9 @@ li{
 .transfers{
   display: flex;
   flex-direction: column;
+}
+.trashBin{
+  width: 30px;
 }
 ul{
   display: flex;
