@@ -40,9 +40,10 @@ input[type="text"]::-webkit-input-placeholder{
   
 }
 .backArrow{
+  display: block;
   font-size: 38px;
   font-weight: 900;
-  align-self: flex-start;
+  
   margin-left: 10px;
   cursor: default;
 }
@@ -64,8 +65,7 @@ input[type="text"]::-webkit-input-placeholder{
 }
 .bankLabel{
   display: block;
-  // margin: 0 auto;
-  // align-self: center;
+  text-align: center;
 
 }
 body {
