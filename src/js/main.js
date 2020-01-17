@@ -75,6 +75,7 @@ okButton.addEventListener('click', e =>{
     
   
   bankObject.bank = bank;
+  console.log(category);
   bankObject.category = category.value;
   bankObject.date = date.value;
   bankObject.title = title.value;
