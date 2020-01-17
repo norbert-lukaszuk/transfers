@@ -335,7 +335,7 @@ input[type="text"]::-webkit-input-placeholder {
   display: none; }
 
 #amount {
-  width: 136px; }
+  width: 154px; }
 
 .amount {
   font-size: 16;
@@ -343,10 +343,9 @@ input[type="text"]::-webkit-input-placeholder {
   text-align: center; }
 
 .backArrow {
+  display: block;
   font-size: 38px;
   font-weight: 900;
-  -ms-flex-item-align: start;
-      align-self: flex-start;
   margin-left: 10px;
   cursor: default; }
 
@@ -376,10 +375,13 @@ input[type="text"]::-webkit-input-placeholder {
   padding: 15px 0; }
 
 .bankClicked {
-  border: solid green 2px; }
+  border-radius: 5px;
+  border: solid green 4px;
+  background-color: green; }
 
 .bankLabel {
-  display: block; }
+  display: block;
+  text-align: center; }
 
 body {
   color: black;
@@ -438,6 +440,7 @@ body {
   padding: 1px 6px 1px 5px; }
 
 #buttonPopup {
+  display: block;
   margin-top: 20px;
   font-weight: 900; }
 
@@ -453,15 +456,37 @@ body {
 #calendar {
   padding-right: 0;
   text-align: start;
-  width: 136px; }
+  width: 154px; }
 
 .calendar {
   font-family: 'Lucida Console';
+  font-size: 0.875rem;
   display: inline;
   border-style: none;
   padding: 5px 5px;
   background-color: inherit;
+  outline: none;
   cursor: pointer; }
+  .calendar::-webkit-input-placeholder {
+    text-align: end; }
+  .calendar::-moz-placeholder {
+    text-align: end; }
+  .calendar:-ms-input-placeholder {
+    text-align: end; }
+  .calendar::-ms-input-placeholder {
+    text-align: end; }
+  .calendar::placeholder {
+    text-align: end; }
+  .calendar:focus::-webkit-input-placeholder {
+    color: transparent; }
+  .calendar:focus::-moz-placeholder {
+    color: transparent; }
+  .calendar:focus:-ms-input-placeholder {
+    color: transparent; }
+  .calendar:focus::-ms-input-placeholder {
+    color: transparent; }
+  .calendar:focus::placeholder {
+    color: transparent; }
 
 .calendarLabel {
   font-family: 'Lucida Console';
@@ -474,7 +499,8 @@ body {
   background-color: rgba(220, 20, 60, 0.377); }
 
 #category {
-  padding-right: 0; }
+  padding-right: 0;
+  width: 154px; }
 
 .category {
   font-size: 20px;
@@ -758,7 +784,7 @@ li {
 
 #title {
   text-align: left;
-  width: 136px; }
+  width: 154px; }
 
 .title {
   text-align: center;
