@@ -21,44 +21,44 @@
 
 <body>
   <button class="button" id="buttonPopup"> + </button>
-  <a href="calendar.html">Calendar</a>
+  <button class="button" id="button__calendar"> Calendar </button>
   <div class="popup">
-
+  
     <form class="transfer">
-      
-        <span class="backArrow">←</span>
-        <label for="bank" class="bankLabel">Select the bank</label>
-        <div class="bankSelectWraper">
-          <img id="mbankIcon" src="assets/img/mbank 30x30.png" alt="mbank logo">
-          <img id="pkoIcon" src="assets/img/pkobp 467x485.png" alt="pko logo">
-        </div>
-      
+  
+      <span class="backArrow">←</span>
+      <label for="bank" class="bankLabel">Select the bank</label>
+      <div class="bankSelectWraper">
+        <img id="mbankIcon" src="assets/img/mbank 30x30.png" alt="mbank logo">
+        <img id="pkoIcon" src="assets/img/pkobp 467x485.png" alt="pko logo">
+      </div>
+  
       <!-- form żeby resetować pola formularza ale nie działą-->
-      
-      
+  
+  
       <div class="inputWraper">
-          <label class="calendarLabel" for="calendar">Enter the date</label>
-          <input class="calendar" type="date" name="date" id="calendar" autocomplete="email">
+        <label class="calendarLabel" for="calendar">Enter the date</label>
+        <input class="calendar" type="date" name="date" id="calendar" autocomplete="email">
       </div>
       <div class="inputWraper">
         <label for="title" class="calendarLabel">Enter the category</label>
-      <select class="calendar" name="bank" id="category">
-        <option value="Category">Category</option>
-        <option value="Czynsz">Czynsz</option>
-        <option value="Internet">Internet</option>
-        <option value="Kredyt">Kredyt</option>
-        <option value="Podatki-nieruchomość">Podatki-nieruchomość</option>
-        <option value="Podatki-PPE">Podatki-PPE</option>
-        <option value="Rachunki-prąd">Rachunki-prąd</option>
-        <option value="Rachunki-gaz">Rachunki-gaz</option>
-        <option value="Rachunki-woda">Rachunki-woda</option>
-        <option value="Rachunki-śmieci">Rachunki-śmieci</option>
-        <option value="Rachunki-telefon">Rachunki-telefon</option>
-        <option value="Rachunki-telewizja">Rachunki-telewizj</option>
-        <option value="Ubezpieczenie">Ubezpieczenie</option>
-        <option value="VAT">VAT</option>
-        <option value="ZUS">ZUS</option>
-      </select>
+        <select class="calendar" name="bank" id="category">
+          <option value="Category">Category</option>
+          <option value="Czynsz">Czynsz</option>
+          <option value="Internet">Internet</option>
+          <option value="Kredyt">Kredyt</option>
+          <option value="Podatki-nieruchomość">Podatki-nieruchomość</option>
+          <option value="Podatki-PPE">Podatki-PPE</option>
+          <option value="Rachunki-prąd">Rachunki-prąd</option>
+          <option value="Rachunki-gaz">Rachunki-gaz</option>
+          <option value="Rachunki-woda">Rachunki-woda</option>
+          <option value="Rachunki-śmieci">Rachunki-śmieci</option>
+          <option value="Rachunki-telefon">Rachunki-telefon</option>
+          <option value="Rachunki-telewizja">Rachunki-telewizj</option>
+          <option value="Ubezpieczenie">Ubezpieczenie</option>
+          <option value="VAT">VAT</option>
+          <option value="ZUS">ZUS</option>
+        </select>
       </div>
       <div class="inputWraper">
         <label for="title" class="calendarLabel">Enter the tile</label>
@@ -68,46 +68,50 @@
         <label for="title" class="calendarLabel">Enter amount</label>
         <input type="text" class="calendar" id="amount" placeholder=">">
       </div>
-      
-      
+  
+  
     </form>
     <div class="buttonsWraper">
       <button class="button button__submit" id="ok">OK</button>
       <button class="button button__cancel" id="cancel">Cancel</button>
     </div>
   </div>
+  <div class="calendar__popup">
+    <button class="calendar__backArow backArrow">←</button>
+    <div class="calendar__wraper"></div>
+  </div>
   <div class="list">
     <ul>
-<!--       <div class="container">
-        <div class="strip__mbank">28.12.2019</div>
-        <div class="logoWraper">
-          <img src="assets/img/mbank 30x30.jpg">
-          <div class="category">Czynsz</div>
-          <div class="statusCircle"></div>
+      <!--       <div class="container">
+          <div class="strip__mbank">28.12.2019</div>
+          <div class="logoWraper">
+            <img src="assets/img/mbank 30x30.jpg">
+            <div class="category">Czynsz</div>
+            <div class="statusCircle"></div>
+          </div>
+          <div class="timeLeft">2 d.</div>
+          <p class="title">Faktura 1234/12/2019</p>
         </div>
-        <div class="timeLeft">2 d.</div>
-        <p class="title">Faktura 1234/12/2019</p>
-      </div>
-      
-      <div class="container">
-          
-        <div class="strip__pko">28.12.2019</div>
-        <div class="logoWraper">
-          <img src="assets/img/pkobp 467x485.jpg">
-          <div class="category">Czynsz</div>
-          <div class="statusCircle"></div>
-        </div>
-        <img class="trashBin" src="assets/img/delete 30x30.png" alt="trashBin icon">
-        <div class="timeLeft">2 d.</div>
-        <p class="title">Faktura 1234/12/2019</p>
-        <div class="close"></div>
-      </div> -->
-      
+        
+        <div class="container">
+            
+          <div class="strip__pko">28.12.2019</div>
+          <div class="logoWraper">
+            <img src="assets/img/pkobp 467x485.jpg">
+            <div class="category">Czynsz</div>
+            <div class="statusCircle"></div>
+          </div>
+          <img class="trashBin" src="assets/img/delete 30x30.png" alt="trashBin icon">
+          <div class="timeLeft">2 d.</div>
+          <p class="title">Faktura 1234/12/2019</p>
+          <div class="close"></div>
+        </div> -->
+  
     </ul>
     <form class="input">
       <!-- <input class="form" type="text" name="form" id="toList" placeholder=" add task"> -->
       <!-- <input class="button" type="submit" value="+"> -->
-
+  
     </form>
   </div>
 

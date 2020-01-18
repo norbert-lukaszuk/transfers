@@ -22,10 +22,14 @@ const backArrow = document.querySelector('.backArrow');
 const date = document.getElementById('calendar');
 const today = document.getElementById('calendar');
 let bank = null;
+const calendarPopup = document.querySelector('.calendar__popup');
 const category = document.getElementById('category');
 const title = document.getElementById('title');
 const amount = document.getElementById('amount');
 const okButton = document.getElementById('ok');
+const calendarButton = document.getElementById('button__calendar');
+const calendarBackArow = document.querySelector('.calendar__backArow');
+const calendarWraper = document.querySelector('.calendar__wraper');
 const newDate = new Date(date);
 const transfer = document.querySelector('.transfer');
 const ul = document.querySelector('ul');
@@ -53,6 +57,26 @@ addButon.addEventListener('click', e =>{
   list.classList.add('listHide');
   today.valueAsDate = new Date; //aktualna data w input date
   console.log(list);
+})
+calendarButton.addEventListener('click', e=>{
+  calendarPopup.classList.toggle('calendar__popup--show');
+  const today = new Date();
+  for(let i=1; i<=31; i++){
+    calendarWraper.innerHTML += `<div class="day">${i}</div>`;
+  }
+  let actual = today.getUTCDate().toString();
+  const daysOfMonth = calendarWraper.querySelectorAll('.day');
+  console.log(actual);
+  daysOfMonth.forEach(e =>{
+    if(e.textContent === actual){
+      e.style.borderColor = 'green';
+      e.style.borderWidth = '2px';
+    }
+  })
+})
+calendarBackArow.addEventListener('click', e=>{
+  calendarPopup.classList.remove('calendar__popup--show');
+  calendarWraper.innerHTML = null;
 })
 cancel.addEventListener('click', e =>{
   popup.style.display = 'none';

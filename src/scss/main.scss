@@ -171,7 +171,30 @@ body {
     }
   
 }
-
+.calendar__popup{
+  background-color: inherit;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+    &--show{
+      display: block;
+    }
+   
+}
+.calendar__wraper{
+    display: grid;
+    grid-template-columns: repeat(7,auto);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+  
+}
 .calendarLabel{
   font-family: 'Lucida Console';
   // text-align: center;
@@ -246,8 +269,10 @@ body {
  
 }
 .day{
-  background-color: coral;
-  grid-area: day;
+  display: inline-block;
+  padding: 5px;
+  border: 1px solid black;
+
 }
 .form{
   min-width: 250px;
