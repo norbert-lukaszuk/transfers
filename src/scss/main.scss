@@ -269,10 +269,24 @@ body {
  
 }
 .day{
-  display: inline-block;
+  display: block;
   padding: 5px;
   border: 1px solid black;
-
+    &__number{
+      display: block;
+    }
+    &__category{
+      display: block;
+      font-size: 0.8125rem;
+      &::before{
+        display: inline-block;
+        content: "";
+        background-color: red;
+        width: 0.8125rem;
+        height: 0.8125rem;
+        border-radius: 50%;
+      }
+    }
 }
 .form{
   min-width: 250px;

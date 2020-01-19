@@ -62,18 +62,29 @@ calendarButton.addEventListener('click', e=>{
   calendarPopup.classList.toggle('calendar__popup--show');
   const today = new Date();
   for(let i=1; i<=31; i++){
-    calendarWraper.innerHTML += `<div class="day">${i}</div>`;
+    calendarWraper.innerHTML += `<div class="day"><span class="day__number">${i}</span></div>`;
   }
   let actual = today.getUTCDate().toString();
   const daysOfMonth = calendarWraper.querySelectorAll('.day');
-  console.log(actual);
-  daysOfMonth.forEach(e =>{
+  const bankArray = JSON.parse(localStorage.getItem('bankArray'));
+  console.log(daysOfMonth[8], typeof(daysOfMonth));
+  bankArray.forEach(e =>{
+      let bankArrayDate = parseInt(e.date.slice(8,10), 10);//parsuje stringa do liczby dziesiętnej '10' oznacza system liczb dzisiętnych
+      console.log(bankArrayDate);
+      
+        daysOfMonth.item(bankArrayDate-1).innerHTML += `<span class="day__category">${e.category}</span>`;
+        
+      })
+      
+      
+    
     if(e.textContent === actual){
       e.style.borderColor = 'green';
-      e.style.borderWidth = '2px';
+      e.style.borderWidth = '3px';
     }
+    
   })
-})
+
 calendarBackArow.addEventListener('click', e=>{
   calendarPopup.classList.remove('calendar__popup--show');
   calendarWraper.innerHTML = null;
