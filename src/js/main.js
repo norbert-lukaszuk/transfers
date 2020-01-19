@@ -67,7 +67,7 @@ calendarButton.addEventListener('click', e=>{
   let actual = today.getUTCDate().toString();
   const daysOfMonth = calendarWraper.querySelectorAll('.day');
   const bankArray = JSON.parse(localStorage.getItem('bankArray'));
-  console.log(daysOfMonth[8], typeof(daysOfMonth));
+  console.log(today.getUTCDay());
   bankArray.forEach(e =>{
       let bankArrayDate = parseInt(e.date.slice(8,10), 10);//parsuje stringa do liczby dziesiętnej '10' oznacza system liczb dzisiętnych
       console.log(bankArrayDate);

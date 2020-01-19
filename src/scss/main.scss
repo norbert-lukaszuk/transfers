@@ -91,6 +91,11 @@ body {
   border-width: 0;
 
 }
+#button__calendar{
+  display: inline-block;
+  background-color: rgb(215, 248, 25);
+  
+}
 .buttonClose{
   display: none;
   background-color: rgb(87, 87, 87);
@@ -129,7 +134,7 @@ body {
   
 }
 #buttonPopup{
-  display: block;
+  display: inline-block;
   margin-top: 20px;
   font-weight: 900;
 }
@@ -143,15 +148,7 @@ body {
   text-align: start;
   width: 154px;
 }
-// .calendar{
-//   font-family: 'Lucida Console';
-//   display: inline;
-//   border-style: none;
-//   padding: 5px 5px;
-//   background-color: inherit;
-//   cursor: pointer;
-  
-// }
+
 .calendar{
   font-family: 'Lucida Console';
   font-size: 0.875rem;
@@ -171,6 +168,12 @@ body {
     }
   
 }
+.calendar__backArow{
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin-left: 0;
+}
 .calendar__popup{
   background-color: inherit;
   width: 100%;
@@ -186,7 +189,7 @@ body {
 }
 .calendar__wraper{
     display: grid;
-    grid-template-columns: repeat(7,auto);
+    grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(5, 1fr);
     grid-column-gap: 5px;
     grid-row-gap: 5px;
@@ -281,7 +284,7 @@ body {
       &::before{
         display: inline-block;
         content: "";
-        background-color: red;
+        background-color: rgba(0, 255, 255, 0.425);
         width: 0.8125rem;
         height: 0.8125rem;
         border-radius: 50%;
