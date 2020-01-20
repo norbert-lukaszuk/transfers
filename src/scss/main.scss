@@ -278,6 +278,9 @@ body {
     &__number{
       display: block;
     }
+    &--today{
+      border: green solid 2px;
+    }
     &__category{
       display: block;
       font-size: 0.8125rem;
