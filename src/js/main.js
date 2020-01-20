@@ -63,9 +63,9 @@ calendarButton.addEventListener('click', e=>{
   const today = new Date();
   for(let i=1; i<=31; i++){
     if(today.getUTCDate()===i){
-    calendarWraper.innerHTML += `<div class="day--today"><span class="day__number">${i}</span></div>`;
+    calendarWraper.innerHTML += `<div class="day"><span class="day__number day__number--today">${i}</span></div>`;
     }
-    calendarWraper.innerHTML += `<div class="day"><span class="day__number">${i}</span></div>`;
+    else{calendarWraper.innerHTML += `<div class="day"><span class="day__number">${i}</span></div>`};
   }
   let actual = today.getUTCDate();
   const daysOfMonth = calendarWraper.querySelectorAll('.day');

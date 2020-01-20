@@ -274,9 +274,19 @@ body {
 .day{
   display: block;
   padding: 5px;
-  border: 1px solid black;
+  border: 1px solid rgb(185, 182, 182);
     &__number{
+      color: rgb(110, 110, 110);
       display: block;
+      padding: 5px;
+      margin-top: 3px;
+      font-size: 0.8125rem;
+      width: fit-content;
+      &--today{
+        background-color: chartreuse;
+        border-radius: 10px;
+       
+      }
     }
     &--today{
       border: green solid 2px;
