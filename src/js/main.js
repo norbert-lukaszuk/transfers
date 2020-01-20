@@ -61,20 +61,23 @@ addButon.addEventListener('click', e =>{
 calendarButton.addEventListener('click', e=>{
   calendarPopup.classList.toggle('calendar__popup--show');
   const today = new Date();
-  for(let i=1; i<=31; i++){
-    if(today.getUTCDate()===i){
-    calendarWraper.innerHTML += `<div class="day"><span class="day__number day__number--today">${i}</span></div>`;
+  for(let i=1; i<=12; i++){
+    const calendarWraper = document.getElementById(i);
+    let daysInMonth = new Date(2020,i,0).getDate()//number of days in month
+    for(let i=1; i<=daysInMonth; i++){
+      if(today.getUTCDate()===i){
+      calendarWraper.innerHTML += `<div class="day"><span class="day__number day__number--today">${i}</span></div>`;
+      }
+      else{calendarWraper.innerHTML += `<div class="day"><span class="day__number">${i}</span></div>`};
     }
-    else{calendarWraper.innerHTML += `<div class="day"><span class="day__number">${i}</span></div>`};
   }
+  
   let actual = today.getUTCDate();
   const daysOfMonth = calendarWraper.querySelectorAll('.day');
   const bankArray = JSON.parse(localStorage.getItem('bankArray'));
   console.log(today.getUTCDay());
   bankArray.forEach(e =>{
       let bankArrayDate = parseInt(e.date.slice(8,10), 10);//parsuje stringa do liczby dziesiętnej '10' oznacza system liczb dzisiętnych
-      console.log(bankArrayDate);
-      console.log(actual, typeof(actual));
         daysOfMonth.item(bankArrayDate-1).innerHTML += `<span class="day__category">${e.category}</span>`;
         
       })
