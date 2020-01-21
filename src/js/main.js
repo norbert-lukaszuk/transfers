@@ -58,18 +58,20 @@ addButon.addEventListener('click', e =>{
   today.valueAsDate = new Date; //aktualna data w input date
   console.log(list);
 })
+
+/****** włączanie widoku kalendarza******/
 calendarButton.addEventListener('click', e=>{
   calendarPopup.classList.toggle('calendar__popup--show');
   const today = new Date();
   for(let i=0; i<12; i++){ 
-    let iSting = i.toString();
-    const calendarWraper = document.getElementById(iSting);
+    const calendarWraper = document.getElementById(i.toString());
     let daysInMonth = new Date(2020,i+1,0).getDate()//number of days in month
-    for(let i=1; i<=daysInMonth; i++){
-      if(today.getUTCDate()===i){
-      calendarWraper.innerHTML += `<div class="day"><span class="day__number day__number--today">${i}</span></div>`;
+    const month = today.getMonth();
+    for(let j=1; j<=daysInMonth; j++){
+      if(today.getDate()===j && i === month){
+      calendarWraper.innerHTML += `<div class="day"><span class="day__number day__number--today">${j}</span></div>`;
       }
-      else{calendarWraper.innerHTML += `<div class="day"><span class="day__number">${i}</span></div>`};
+      else{calendarWraper.innerHTML += `<div class="day"><span class="day__number">${j}</span></div>`};
     }
   }
   
@@ -83,21 +85,20 @@ calendarButton.addEventListener('click', e=>{
         let calendar__wraper = document.getElementById(month);
         let day = bankArrayDate.getDate();
         const daysInMonth = calendar__wraper.querySelectorAll('.day');
-        daysInMonth[day].innerHTML += '<p>X</p>'
-        console.log(daysInMonth, typeof(daysInMonth));
+        daysInMonth[day].innerHTML += `<span class="day__category">${e.category}</span>`;
         
-        console.log(day, calendar__wraper);
       })
-      
-      
-    
     
     
   })
 
 calendarBackArow.addEventListener('click', e=>{
   calendarPopup.classList.remove('calendar__popup--show');
-  calendarWraper.innerHTML = null;
+  const allDays = document.querySelectorAll('.day');
+  allDays.forEach(e=>{
+    e.remove();
+  })
+
 })
 cancel.addEventListener('click', e =>{
   popup.style.display = 'none';
@@ -125,14 +126,9 @@ okButton.addEventListener('click', e =>{
   bankObject.date = date.value;
   bankObject.title = title.value;
   bankObject.amount = amount.value;
-  // bankObject.key = new Date(bankObject.date).getTime();//tworzy klucz na podstwie 
   bankObject.status = '';
   const local = localStorage.getItem('keys')
   let keys = JSON.parse(local);
-  // keys.push(new Date(bankObject.date).getTime());
-  
-  // localStorage.setItem('keys',JSON.stringify(keys));
-  // localStorage.setItem(bankObject.key,JSON.stringify(bankObject));
   transfer.reset();// reset() resetuje tylko form
   const container = `<div class="container">
     <div class="strip"></div>
