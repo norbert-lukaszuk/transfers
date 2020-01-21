@@ -55,7 +55,7 @@ bankSelectWraper.addEventListener('click', e =>{
 addButon.addEventListener('click', e =>{
   popup.style.display = 'block';
   list.classList.add('listHide');
-  today.valueAsDate = new Date; //aktualna data w input date
+  today.valueAsDate = new Date(); //aktualna data w input date
   console.log(list);
 })
 
@@ -64,14 +64,17 @@ calendarButton.addEventListener('click', e=>{
   calendarPopup.classList.toggle('calendar__popup--show');
   const today = new Date();
   for(let i=0; i<12; i++){ 
+    console.log(i);
     const calendarWraper = document.getElementById(i.toString());
     let daysInMonth = new Date(2020,i+1,0).getDate()//number of days in month
     const month = today.getMonth();
     for(let j=1; j<=daysInMonth; j++){
+      let whatDay = dayOfWeek(j,i,today.getFullYear());
       if(today.getDate()===j && i === month){
-      calendarWraper.innerHTML += `<div class="day"><span class="day__number day__number--today">${j}</span></div>`;
+      calendarWraper.innerHTML += `<div class="day"><span class="day__number day__number--today">${j}</span>${whatDay}</div>`;
       }
-      else{calendarWraper.innerHTML += `<div class="day"><span class="day__number">${j}</span></div>`};
+      else{calendarWraper.innerHTML += `<div class="day"><span class="day__number">${j}</span>${whatDay}</div>`};
+      
     }
   }
   
@@ -378,14 +381,38 @@ ul.addEventListener('click', e =>{
     for(let i=0; i<bankArray.length; i++){//usuwanie elementu z localStorage
       const objectValues = Object.values(bankArray[i]);
       const includes = objectValues.includes(containerId);
-      
       if(includes===true){
         bankArray.splice(i,1);
         const local = JSON.stringify(bankArray);
         localStorage.setItem('bankArray',local);
       }
-      
     }
-    
   }
   })
+  const dayOfWeek = (day, month, year)=>{
+    const dayNumber = new Date(year, month, day).getDay();
+
+    switch(dayNumber){
+      case 0:
+        return 'Sun';
+        break;
+      case 1:
+        return 'Mon';
+        break;
+      case 2:
+        return 'Tue';
+        break;
+      case 3:
+        return 'Wen';
+        break;
+      case 4:
+        return 'Thu';
+        break;
+      case 5:
+        return 'Fri';
+        break;
+      case 6:
+        return 'Sat';
+        break;
+    }
+  }
