@@ -64,16 +64,21 @@ calendarButton.addEventListener('click', e=>{
   calendarPopup.classList.toggle('calendar__popup--show');
   const today = new Date();
   for(let i=0; i<12; i++){ 
-    console.log(i);
     const calendarWraper = document.getElementById(i.toString());
     let daysInMonth = new Date(2020,i+1,0).getDate()//number of days in month
     const month = today.getMonth();
     for(let j=1; j<=daysInMonth; j++){
       let whatDay = dayOfWeek(j,i,today.getFullYear());
+     
       if(today.getDate()===j && i === month){
-      calendarWraper.innerHTML += `<div class="day"><span class="day__number day__number--today">${j}</span>${whatDay}</div>`;
+        if(whatDay==='Sun'){
+          calendarWraper.innerHTML += `<div class="day"><span class="day__number day__number--today">${j}</span><span class="day__name day__name--sunday">${whatDay}</span></div>`
+        }
+      else if{calendarWraper.innerHTML += `<div class="day"><span class="day__number day__number--today">${j}</span><span class="day__name">${whatDay}</span></div>`}
       }
-      else{calendarWraper.innerHTML += `<div class="day"><span class="day__number">${j}</span>${whatDay}</div>`};
+      else{calendarWraper.innerHTML += `<div class="day"><span class="day__number">${j}</span><span class="day__name">${whatDay}</span></div>`};
+      
+      console.log(calendarWraper);
       
     }
   }

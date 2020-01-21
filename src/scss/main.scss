@@ -275,10 +275,17 @@ body {
 }
 .day{
   display: block;
-  height: 70px;
+  height: 100px;
   min-width: 42px;
   padding: 2px 5px;
   border: 1px solid rgb(185, 182, 182);
+    &__name{
+      font-size: 0.8125rem;
+        
+    }
+    &__name--sunday{
+      color: red;
+    }
     &__number{
       color: rgb(110, 110, 110);
       display: block;
@@ -548,8 +555,13 @@ ul{
     border-bottom: 2px gray solid;
     height: 50px;
       &__category{
+        display: inline;
+        margin-left: 10px;
         font-size: 0.8125rem;
-        text-align: center;
+        // text-align: center;
+      }
+      &__name{
+        font-size: 0.75rem;
       }
   }
 }
