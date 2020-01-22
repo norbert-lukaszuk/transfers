@@ -71,10 +71,8 @@ calendarButton.addEventListener('click', e=>{
       let whatDay = dayOfWeek(j,i,today.getFullYear());
      
       if(today.getDate()===j && i === month){
-        if(whatDay==='Sun'){
-          calendarWraper.innerHTML += `<div class="day"><span class="day__number day__number--today">${j}</span><span class="day__name day__name--sunday">${whatDay}</span></div>`
-        }
-      else if{calendarWraper.innerHTML += `<div class="day"><span class="day__number day__number--today">${j}</span><span class="day__name">${whatDay}</span></div>`}
+       
+      calendarWraper.innerHTML += `<div class="day"><span class="day__number day__number--today">${j}</span><span class="day__name">${whatDay}</span></div>`
       }
       else{calendarWraper.innerHTML += `<div class="day"><span class="day__number">${j}</span><span class="day__name">${whatDay}</span></div>`};
       
