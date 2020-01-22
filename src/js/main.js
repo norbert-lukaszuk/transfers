@@ -66,18 +66,20 @@ calendarButton.addEventListener('click', e=>{
     const calendarWraper = document.getElementById(i.toString());
     let daysInMonth = new Date(2020,i+1,0).getDate()//number of days in month
     const month = today.getMonth();
-    for(let j=1; j<=daysInMonth; j++){
+    for(let j=1; j<=35; j++){
       let whatDay = dayOfWeek(j,i,today.getFullYear());
-      if(j===1){
-        
-      }
-      else if(today.getDate()===j && i === month){
+      
+      // else if(today.getDate()===j && i === month){// zaznacza dzisiaj
        
-      calendarWraper.innerHTML += `<div class="day"><span class="day__number day__number--today">${j}</span><span class="day__name">${whatDay}</span></div>`
-      }
-      else{calendarWraper.innerHTML += `<div class="day"><span class="day__number">${j}</span><span class="day__name">${whatDay}</span></div>`};
-      
-      
+      // calendarWraper.innerHTML += `<div class="day"><span class="day__number day__number--today">${j}</span><span class="day__name">${whatDay}</span></div>`
+      // }
+      calendarWraper.innerHTML += `<div class="day"></div>`;
+    }
+    const days = calendarWraper.querySelectorAll('.day');
+    const firstDay = monthFirstDay(1,i,2020);
+    for(let k= firstDay; k<=daysInMonth; k++){
+      days[k].innerHTML +=`<span>${k}</span>`
+
     }
   }
   
@@ -425,4 +427,7 @@ ul.addEventListener('click', e =>{
         return 'Sat';
         break;
     }
+  }
+  const monthFirstDay = (day, month, year)=>{
+    return new Date(year, month, day).getDay()
   }
