@@ -51,12 +51,11 @@ bankSelectWraper.addEventListener('click', e =>{
     bank = 'PKO';
   }
 })
-
+/****Otwieranie popupa  */
 addButon.addEventListener('click', e =>{
   popup.style.display = 'block';
   list.classList.add('listHide');
   today.valueAsDate = new Date(); //aktualna data w input date
-  console.log(list);
 })
 
 /****** włączanie widoku kalendarza******/
@@ -69,18 +68,26 @@ calendarButton.addEventListener('click', e=>{
     const month = today.getMonth();
     for(let j=1; j<=daysInMonth; j++){
       let whatDay = dayOfWeek(j,i,today.getFullYear());
-     
-      if(today.getDate()===j && i === month){
+      if(j===1){
+        
+      }
+      else if(today.getDate()===j && i === month){
        
       calendarWraper.innerHTML += `<div class="day"><span class="day__number day__number--today">${j}</span><span class="day__name">${whatDay}</span></div>`
       }
       else{calendarWraper.innerHTML += `<div class="day"><span class="day__number">${j}</span><span class="day__name">${whatDay}</span></div>`};
       
-      console.log(calendarWraper);
       
     }
   }
   
+    const daysInYear = document.querySelectorAll('.day__name');
+    daysInYear.forEach(e=>{
+      if(e.innerText ==='Sun'){
+        e.classList.add('day__name--sunday')
+      }
+    })
+    console.log(daysInYear.parentNode);
   
   const bankArray = JSON.parse(localStorage.getItem('bankArray'));
   bankArray.forEach(e =>{
