@@ -280,6 +280,9 @@ body {
   min-width: 42px;
   padding: 2px 5px;
   border: 1px solid rgb(185, 182, 182);
+    &--sunday{
+      color: red;
+    }
     &__name{
       font-size: 0.8125rem;
         

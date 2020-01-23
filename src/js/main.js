@@ -75,17 +75,20 @@ calendarButton.addEventListener('click', e=>{
 
     for(let k= firstDay; k<(firstDay+daysInMonth(i)); k++){
       // days[k].innerHTML +=`<span>${(k-firstDay)+1}</span>`;
-      days[k].innerHTML +=`<span class="day__number day__number">${(k-firstDay)+1}</span><span class="day__name">${dayOfWeek((k-firstDay)+1,i,2020)}</span>`
-      // days[k].firstElementChild.classList.add('day__name--sunday');
+      days[k].innerHTML +=`<span class="day__number">${(k-firstDay)+1}</span><span class="day__name">${dayOfWeek((k-firstDay)+1,i,2020)}</span>`
+      if(days[k].lastElementChild.innerText==='Sun'){
+      days[k].classList.add('day--sunday');
+          }
     }
     const allDays = calendarWraper.querySelectorAll('.day');
+    // allDays.forEach(e=>{if(e.lastElementChild.innerText==='Sun'){e.lastElementChild.style.color='red'}});
+    
   allDays.forEach(e=>{
-    if(e.innerHTML===""){
+    
+    if(e.innerHTML===''){
       e.classList.remove('day')
     }
-    if(e.lastElementChild.innerText==='Sun'){
-      e.classList.add('day__sunday');
-    }
+    
   })
 
   }
