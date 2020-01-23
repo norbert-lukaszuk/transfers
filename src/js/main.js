@@ -85,24 +85,18 @@ calendarButton.addEventListener('click', e=>{
     
   allDays.forEach(e=>{
     
-    if(e.innerHTML===''){
-      e.classList.remove('day')
+    if(e.innerHTML==='' && window.innerWidth <=360){
+      e.classList.add('day__mobile--hide');
     }
+    else if(e.innerHTML===''){e.classList.remove('day')}
     
   })
 
   }
   
-    // const daysInYear = document.querySelectorAll('.day__name');
-    // daysInYear.forEach(e=>{
-    //   if(e.innerText ==='Sun'){
-    //     e.classList.add('day__name--sunday')
-    //   }
-    // })
-    // console.log(daysInYear.parentNode);
   
   const bankArray = JSON.parse(localStorage.getItem('bankArray'));
-  /* bankArray.forEach(e =>{
+  bankArray.forEach(e =>{
       // let bankArrayDate = parseInt(e.date.slice(8,10), 10);//parsuje stringa do liczby dziesiętnej '10' oznacza system liczb dzisiętnych
       //   daysOfMonth.item(bankArrayDate-1).innerHTML += `<span class="day__category">${e.category}</span>`;
         let bankArrayDate = new Date(e.date);
@@ -112,7 +106,7 @@ calendarButton.addEventListener('click', e=>{
         const daysInMonth = calendar__wraper.querySelectorAll('.day');
         daysInMonth[day].innerHTML += `<span class="day__category">${e.category}</span>`;
         
-      }) */
+      })
     
     
   })

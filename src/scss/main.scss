@@ -290,6 +290,9 @@ body {
     &__name--sunday{
       color: red;
     }
+    &__mobile--hide{
+      display: none;
+    }
     &__number{
       color: rgb(110, 110, 110);
       display: block;
