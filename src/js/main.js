@@ -78,6 +78,16 @@ calendarButton.addEventListener('click', e=>{
       days[k].innerHTML +=`<span class="day__number day__number">${(k-firstDay)+1}</span><span class="day__name">${dayOfWeek((k-firstDay)+1,i,2020)}</span>`
       // days[k].firstElementChild.classList.add('day__name--sunday');
     }
+    const allDays = calendarWraper.querySelectorAll('.day');
+  allDays.forEach(e=>{
+    if(e.innerHTML===""){
+      e.classList.remove('day')
+    }
+    if(e.lastElementChild.innerText==='Sun'){
+      e.classList.add('day__sunday');
+    }
+  })
+
   }
   
     // const daysInYear = document.querySelectorAll('.day__name');
