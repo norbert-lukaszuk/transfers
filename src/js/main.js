@@ -76,9 +76,10 @@ calendarButton.addEventListener('click', e=>{
       calendarWraper.innerHTML += `<div class="day"></div>`;
     }
     const days = calendarWraper.querySelectorAll('.day');
-    const firstDay = monthFirstDay(1,i,2020);
-    for(let k= firstDay; k<=daysInMonth; k++){
-      days[k].innerHTML +=`<span>${k}</span>`
+    const firstDay = monthFirstDay(1,i,2020)-1;
+
+    for(let k= firstDay; k<(daysInMonth+firstDay); k++){
+      days[k].innerHTML +=`<span>${(k-firstDay)+1}</span>`
 
     }
   }
