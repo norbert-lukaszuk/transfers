@@ -64,36 +64,32 @@ calendarButton.addEventListener('click', e=>{
   const today = new Date();
   for(let i=0; i<12; i++){ 
     const calendarWraper = document.getElementById(i.toString());
-    let daysInMonth = new Date(2020,i+1,0).getDate()//number of days in month
-    const month = today.getMonth();
-    for(let j=1; j<=35; j++){
-      let whatDay = dayOfWeek(j,i,today.getFullYear());
-      
-      // else if(today.getDate()===j && i === month){// zaznacza dzisiaj
-       
-      // calendarWraper.innerHTML += `<div class="day"><span class="day__number day__number--today">${j}</span><span class="day__name">${whatDay}</span></div>`
-      // }
+    // let daysInMonth = new Date(2020,i+1,0).getDate()//number of days in month
+    // const month = today.getMonth();
+    for(let j=1; j<=42; j++){
       calendarWraper.innerHTML += `<div class="day"></div>`;
     }
+    // ułożenie prawidłowe dni w miesiącu
     const days = calendarWraper.querySelectorAll('.day');
     const firstDay = monthFirstDay(1,i,2020)-1;
 
-    for(let k= firstDay; k<(daysInMonth+firstDay); k++){
-      days[k].innerHTML +=`<span>${(k-firstDay)+1}</span>`
-
+    for(let k= firstDay; k<(firstDay+daysInMonth(i)); k++){
+      // days[k].innerHTML +=`<span>${(k-firstDay)+1}</span>`;
+      days[k].innerHTML +=`<span class="day__number day__number">${(k-firstDay)+1}</span><span class="day__name">${dayOfWeek((k-firstDay)+1,i,2020)}</span>`
+      // days[k].firstElementChild.classList.add('day__name--sunday');
     }
   }
   
-    const daysInYear = document.querySelectorAll('.day__name');
-    daysInYear.forEach(e=>{
-      if(e.innerText ==='Sun'){
-        e.classList.add('day__name--sunday')
-      }
-    })
-    console.log(daysInYear.parentNode);
+    // const daysInYear = document.querySelectorAll('.day__name');
+    // daysInYear.forEach(e=>{
+    //   if(e.innerText ==='Sun'){
+    //     e.classList.add('day__name--sunday')
+    //   }
+    // })
+    // console.log(daysInYear.parentNode);
   
   const bankArray = JSON.parse(localStorage.getItem('bankArray'));
-  bankArray.forEach(e =>{
+  /* bankArray.forEach(e =>{
       // let bankArrayDate = parseInt(e.date.slice(8,10), 10);//parsuje stringa do liczby dziesiętnej '10' oznacza system liczb dzisiętnych
       //   daysOfMonth.item(bankArrayDate-1).innerHTML += `<span class="day__category">${e.category}</span>`;
         let bankArrayDate = new Date(e.date);
@@ -103,7 +99,7 @@ calendarButton.addEventListener('click', e=>{
         const daysInMonth = calendar__wraper.querySelectorAll('.day');
         daysInMonth[day].innerHTML += `<span class="day__category">${e.category}</span>`;
         
-      })
+      }) */
     
     
   })
@@ -402,6 +398,9 @@ ul.addEventListener('click', e =>{
     }
   }
   })
+  const daysInMonth = (month) =>{
+    return new Date(2020,month+1,0).getDate()
+  }
   const dayOfWeek = (day, month, year)=>{
     const dayNumber = new Date(year, month, day).getDay();
 
@@ -430,5 +429,9 @@ ul.addEventListener('click', e =>{
     }
   }
   const monthFirstDay = (day, month, year)=>{
-    return new Date(year, month, day).getDay()
+    const startDay = new Date(year, month, day).getDay();
+    if (startDay===0){
+      return 7
+    }
+    else{return startDay}
   }
