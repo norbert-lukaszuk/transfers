@@ -309,7 +309,8 @@ template {
 
 html {
   -webkit-box-sizing: border-box;
-          box-sizing: border-box; }
+          box-sizing: border-box;
+  height: auto; }
 
 *, *:before, *:after {
   -webkit-box-sizing: inherit;
@@ -406,6 +407,10 @@ body {
   padding: 6px;
   border-width: 0; }
 
+#button__calendar {
+  display: inline-block;
+  background-color: #d7f819; }
+
 .buttonClose {
   display: none;
   background-color: #575757;
@@ -440,7 +445,7 @@ body {
   padding: 1px 6px 1px 5px; }
 
 #buttonPopup {
-  display: block;
+  display: inline-block;
   margin-top: 20px;
   font-weight: 900; }
 
@@ -487,6 +492,39 @@ body {
     color: transparent; }
   .calendar:focus::placeholder {
     color: transparent; }
+
+.calendar__backArow {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin-left: 0; }
+
+.calendar__popup {
+  z-index: 1;
+  background-color: inherit;
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none; }
+  .calendar__popup--show {
+    display: block; }
+
+.calendar__wraper {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[7];
+  grid-template-columns: repeat(7, 1fr);
+  -ms-grid-rows: (1fr)[5];
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+  width: 100%;
+  height: 100%;
+  padding: 15px; }
 
 .calendarLabel {
   font-family: 'Lucida Console';
@@ -564,6 +602,45 @@ body {
 
 .containerDone {
   background-color: rgba(128, 128, 128, 0.39); }
+
+.day {
+  display: block;
+  height: 100px;
+  min-width: 42px;
+  padding: 2px 5px;
+  border: 1px solid #b9b6b6; }
+  .day--sunday {
+    color: red; }
+  .day__name {
+    font-size: 0.8125rem; }
+  .day__name--sunday {
+    color: red; }
+  .day__mobile--hide {
+    display: none; }
+  .day__number {
+    color: #6e6e6e;
+    display: block;
+    padding: 1px 2px;
+    font-size: 0.8125rem;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content; }
+    .day__number--today {
+      background-color: chartreuse;
+      border-radius: 5px; }
+  .day--today {
+    border: green solid 2px; }
+  .day__category {
+    display: block;
+    font-size: 0.6875rem; }
+    .day__category::before {
+      margin-right: 2px;
+      display: inline-block;
+      content: "";
+      background-color: rgba(0, 255, 255, 0.425);
+      width: 0.6875rem;
+      height: 0.6875rem;
+      border-radius: 50%; }
 
 .form {
   min-width: 250px;
@@ -697,6 +774,18 @@ li {
   margin-right: 10px;
   -webkit-box-sizing: content-box;
           box-sizing: content-box; }
+
+.month {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (auto)[7];
+  grid-template-columns: repeat(7, auto);
+  -ms-grid-rows: (1fr)[5];
+  grid-template-rows: repeat(5, 1fr);
+  border: 2px solid black; }
+
+.monthName__header {
+  text-align: center; }
 
 .notDone {
   text-decoration: none;
@@ -834,5 +923,20 @@ ul {
   padding: 0;
   margin-top: 26px;
   margin-bottom: 30px; }
+
+@media (max-width: 360px) {
+  .calendar__wraper {
+    -ms-grid-columns: auto;
+    grid-template-columns: auto; }
+  .day {
+    border-style: none;
+    border-bottom: 2px gray solid;
+    height: 50px; }
+    .day__category {
+      display: inline;
+      margin-left: 10px;
+      font-size: 0.8125rem; }
+    .day__name {
+      font-size: 0.75rem; } }
 
 /*# sourceMappingURL=main.css.map */
