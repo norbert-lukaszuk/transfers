@@ -94,11 +94,11 @@ body {
 }
 .button__add{
   border-style: none;
+  background: none;
 }
 #button__calendar{
-  display: inline-block;
-  background-color: rgb(215, 248, 25);
-  
+  border-style: none;
+  background: none;
 }
 .buttonClose{
   display: none;
@@ -339,7 +339,17 @@ body {
   font-family: 'Lucida Console';
   
 }
+.hamburger{
+  &__box{
+    width: 35px;
+    height: 24px;
+    display: inline-block;
+    position: relative;
+  }
+  &__inner{
 
+  }
+}
 .delete{
   align-self: center;
   width: 30px;
@@ -439,10 +449,13 @@ body {
   text-align: center;
 }
 .navigation{
+  padding: 15px;
   position: absolute;
   height: 100vh;
   width: 250px;
   &__list{
+    padding-bottom: 10px;
+    padding-left: 10px;
     list-style: none;
   }
 }

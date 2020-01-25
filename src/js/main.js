@@ -15,7 +15,7 @@ if ('serviceWorker' in navigator) {
     });
   });
 }
-const addButon = document.querySelector('button.button');
+const addButon = document.querySelector('.button__add');
 const popup = document.querySelector('.popup');
 const cancel = document.getElementById('cancel');
 const backArrow = document.querySelector('.backArrow');
@@ -27,7 +27,7 @@ const category = document.getElementById('category');
 const title = document.getElementById('title');
 const amount = document.getElementById('amount');
 const okButton = document.getElementById('ok');
-const calendarButton = document.getElementById('button__calendar');
+const calendarButton = document.querySelector('.button__calendar');
 const calendarBackArow = document.querySelector('.calendar__backArow');
 const calendarWraper = document.querySelector('.calendar__wraper');
 const newDate = new Date(date);
