@@ -339,17 +339,55 @@ body {
   font-family: 'Lucida Console';
   
 }
+@mixin hamburger__line {
+  width: 100%;
+  height: 3px;
+  background-color: black;
+  position: absolute;
+}
 .hamburger{
+  border-style: none;
+  background-color: transparent;
   &__box{
     width: 35px;
     height: 24px;
     display: inline-block;
     position: relative;
+    
   }
   &__inner{
-
+    @include hamburger__line();
+    left: 0;
+    top: 50%;
+      &::before{
+        @include hamburger__line();
+        content: '';
+        top: 10px;
+        left: 0;
+        transition: transform .2s .2s ease-in-out;
+      }
+      &::after{
+        @include hamburger__line(); 
+        content: '';
+        top: -10px;
+        left: 0;
+        transition: transform .2s .2s ease-in-out;
+      }
   }
 }
+.hamburger__active .hamburger__inner{
+  background-color: transparent;
+
+}
+.hamburger__active .hamburger__inner::after{
+  transform: translateY(10px) rotate(45deg);
+
+}
+.hamburger__active .hamburger__inner::before{
+  transform: translateY(-10px) rotate(-45deg);
+
+}
+
 .delete{
   align-self: center;
   width: 30px;
@@ -453,11 +491,16 @@ body {
   position: absolute;
   height: 100vh;
   width: 250px;
+  transform: translateX(-250px);
+  transition: transform .2s .2s ease-in-out;
   &__list{
     padding-bottom: 10px;
     padding-left: 10px;
     list-style: none;
   }
+}
+.navigation--active{
+  transform: translateX(0px);
 }
 .notDone{
   text-decoration: none;

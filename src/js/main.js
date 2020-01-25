@@ -15,6 +15,8 @@ if ('serviceWorker' in navigator) {
     });
   });
 }
+const hamburger = document.querySelector('.hamburger');
+const navigation = document.querySelector('.navigation');
 const addButon = document.querySelector('.button__add');
 const popup = document.querySelector('.popup');
 const cancel = document.getElementById('cancel');
@@ -39,6 +41,11 @@ const mbankIcon = document.getElementById('mbankIcon');
 const pkoIcon = document.getElementById('pkoIcon');
 const list = document.querySelector('.list');
 
+hamburger.addEventListener('click', e=>{
+  hamburger.classList.toggle('hamburger__active');
+  navigation.classList.toggle('navigation--active');
+  
+})
 bankSelectWraper.addEventListener('click', e => {
   if (e.target.tagName === 'IMG' && e.target.id === 'mbankIcon') {
     e.target.classList.toggle('bankClicked');
