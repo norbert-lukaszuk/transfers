@@ -98,7 +98,7 @@ calendarButton.addEventListener('click', e => {
   }
   const allDaysOrder = document.querySelectorAll('.day');
   allDaysOrder.forEach(e => {
-    if (e.firstElementChild.innerText === today.getDate().toString()) {
+    if (parseInt(e.firstElementChild.innerText) === today.getDate() && parseInt(e.parentElement.getAttribute('id'))===today.getMonth()){
       e.firstElementChild.classList.add('day__number--today')
     }
   })
@@ -214,9 +214,6 @@ okButton.addEventListener('click', e => {
       else if (timeLeft < 0) {
         daysLeft.innerText = `passed`
       }
-
-
-
     }
     else if (bankObject.bank === 'PKO') {
       dateOutput.innerText = bankObject.date;

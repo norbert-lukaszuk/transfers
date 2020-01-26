@@ -90,15 +90,18 @@ body {
   align-items: center;
   padding: 6px;
   border-width: 0;
+  cursor: pointer;
 
 }
 .button__add{
   border-style: none;
   background: none;
+  cursor: pointer;
 }
 #button__calendar{
   border-style: none;
   background: none;
+  cursor: pointer;
 }
 .buttonClose{
   display: none;
@@ -348,6 +351,8 @@ body {
 .hamburger{
   border-style: none;
   background-color: transparent;
+  margin-top: 15px;
+  cursor: pointer;
   &__box{
     width: 35px;
     height: 24px;
@@ -359,6 +364,8 @@ body {
     @include hamburger__line();
     left: 0;
     top: 50%;
+    transform: translateY(-50%);
+    transition: background-color .1s .2s ease-in-out;
       &::before{
         @include hamburger__line();
         content: '';
@@ -375,8 +382,13 @@ body {
       }
   }
 }
+.hamburger__active{
+  transition: transform .2s .2s ease-in-out;
+  transform: translateX(220px);
+}
 .hamburger__active .hamburger__inner{
   background-color: transparent;
+ 
 
 }
 .hamburger__active .hamburger__inner::after{
@@ -489,18 +501,26 @@ body {
 .navigation{
   padding: 15px;
   position: absolute;
-  height: 100vh;
-  width: 250px;
+  background-color: rgba(187, 179, 179, 0.664);
+  border-radius: 20px;
+  height: 80vh;
+  width: 200px;
+  box-shadow: 7px 7px 2px gray;
+  
   transform: translateX(-250px);
   transition: transform .2s .2s ease-in-out;
   &__list{
     padding-bottom: 10px;
     padding-left: 10px;
     list-style: none;
+    
+  }
+  &__item{
+    margin-top: 8px;
   }
 }
 .navigation--active{
-  transform: translateX(0px);
+  transform: translateX(10px);
 }
 .notDone{
   text-decoration: none;
