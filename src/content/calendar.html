@@ -26,23 +26,36 @@
     </div>
 </body>
 <script>
+  daysLeft = (date)=>{
+  return Math.ceil((new Date(date) - new Date())/1000/60/60/24)
+}
+
+const statusCircle = (timeLeft) =>{
+  if(timeLeft>=3){
+    return 'statusCircle--green'
+  }
+  else if(timeLeft==2){
+    return 'statusCircle--yellow'
+  }
+  else if(timeLeft<=1){
+    return 'statusCircle--crimson'
+  }
+}
+
 const ul = document.querySelector('ul');
 const bankArray = JSON.parse(localStorage.getItem('bankArray'));
-
 bankArray.forEach(e => {
     const keys = Object.keys(e);
     const{bank, category, date, title, amount, status, id, containerClass, statusCircleClass, timeLeftClass}=e;
-    const daysLeft = Math.ceil((new Date(date) - new Date())/1000/60/60/24);
-
-    console.log(`time left ${daysLeft}`);
+    console.log(daysLeft(date));
     const mbank_container = `<div class="container">
     <div class="strip__mbank">${date}</div>
     <div class="logoWraper">
       <img class="image" src="assets/img/mbank 30x30.png">
       <div class="category">${category}</div>
-      <div class="statusCircle"></div>
+      <div class="statusCircle ${statusCircle(daysLeft(date))}"></div>
     </div>
-    <div class="timeLeft">${daysLeft} .d</div> 
+    <div class="timeLeft">${daysLeft(date)} .d</div> 
     <div class="amount">${amount} zł</div> 
     <p class="title">${title}</p>
     <div class="close">
@@ -55,9 +68,9 @@ bankArray.forEach(e => {
     <div class="logoWraper">
       <img class="image" src="assets/img/pkobp 467x485.png">
       <div class="category">${category}</div>
-      <div class="statusCircle"></div>
+      <div class="statusCircle ${statusCircle(daysLeft(date))}"></div>
     </div>
-    <div class="timeLeft">${daysLeft} d.</div> 
+    <div class="timeLeft">${daysLeft(date)} d.</div> 
     <div class="amount">${amount}</div> 
     <p class="title">${title}</p>
     <div class="close">
@@ -72,5 +85,6 @@ bankArray.forEach(e => {
       ul.innerHTML += pko_container;
   }
 })
+  
 </script>
 </html>
