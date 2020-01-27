@@ -47,6 +47,7 @@ const statusCircle = (timeLeft) =>{
 }
 
 const ul = document.querySelector('ul');
+
 const bankArray = JSON.parse(localStorage.getItem('bankArray'));
 bankArray.forEach(e => {
     const keys = Object.keys(e);
@@ -87,6 +88,17 @@ bankArray.forEach(e => {
   }
   if(bank === 'PKO'){
       ul.innerHTML += pko_container;
+  }
+  
+})
+
+ul.addEventListener('click',e=>{
+  if (e.target.tagName === 'DIV' && e.target.classList.contains('close')) {
+    e.target.firstElementChild.classList.add('buttonClose--show');
+    e.target.lastElementChild.classList.add('buttonDone--show');
+  }
+  if(e.target.tagName === 'BUTTON' && e.target.classList.contains('buttonDone')){
+    console.log(e.target.parentElement.parentElement.getAttribute('id'));
   }
 })
   

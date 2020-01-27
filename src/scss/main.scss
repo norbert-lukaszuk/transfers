@@ -249,7 +249,6 @@ body {
 }
 .close{
   display: flex;
-  // flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 300px;
@@ -258,9 +257,11 @@ body {
   margin-bottom: 10px;
   border-radius: 10px;
   position: absolute;
-  // display: block;
-  // display: none;
   background: transparent;
+    &--done{
+      opacity: 30%;
+    }
+  
 }
 
 .container{
@@ -560,6 +561,19 @@ body {
 }
 .statusCircleDone{
   background-color: transparent;
+}
+
+.strip__done{
+  background-color: rgb(87, 87, 114);
+  max-width: inherit;
+  height: 18px;
+  border-top-right-radius: inherit;
+  border-top-left-radius: inherit;
+  color: white;
+  font-size: 11px;
+  text-align: center;
+  padding: 4px 0;
+  cursor: pointer;
 }
 .strip__pko{
   background-color: blue;

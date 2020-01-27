@@ -269,7 +269,7 @@ okButton.addEventListener('click', e => {
       const keys = Object.keys(e);
       const{bank, category, date, title, amount, status, id, containerClass, statusCircleClass, timeLeftClass}=e;
       console.log(daysLeft(date));
-      const mbank_container = `<div class="container">
+      const mbank_container = `<div class="container" id="${id}">
       <div class="strip__mbank">${date}</div>
       <div class="logoWraper">
         <img class="image" src="assets/img/mbank 30x30.png">
@@ -284,7 +284,7 @@ okButton.addEventListener('click', e => {
       <button class ="buttonDone">Done</button>
       </div>          
     </div`;
-      const pko_container = `<div class="container">
+      const pko_container = `<div class="container id="${id}">
       <div class="strip__pko">${date}</div>
       <div class="logoWraper">
         <img class="image" src="assets/img/pkobp 467x485.png">
@@ -300,18 +300,17 @@ okButton.addEventListener('click', e => {
       </div>          
     </div`;
       const done_container = `<div class="container">
-      <div class="strip__pko">${date}</div>
+      <div class="strip__done">${date}</div>
       <div class="logoWraper">
         <img class="image" src="assets/img/delete 30x30.png">
         <div class="category">${category}</div>
-        <div class="statusCircle ${statusCircle(daysLeft(date))}"></div>
+        <div class="statusCircle statusCircleDone"></div>
       </div>
-      <div class="timeLeft">${daysLeft(date)}</div> 
+      <div class="timeLeft timeLeftDone"></div> 
       <div class="amount">${amount}</div> 
       <p class="title">${title}</p>
-      <div class="close">
-      <button class="buttonClose">Cancel</button>
-      <button class ="buttonDone">Done</button>
+      <div class="close close--done">
+      <img src="assets/img/checked 64x64.png">
       </div>          
     </div`;
     if(status ==='done'){
@@ -331,14 +330,12 @@ ul.addEventListener('click', e => {
     e.target.firstElementChild.classList.add('buttonClose--show');
     e.target.lastElementChild.classList.add('buttonDone--show');
   }
-  if (e.target.tagName === 'BUTTON' && e.target.classList.contains('buttonDone')) {
+  if(e.target.tagName === 'BUTTON' && e.target.classList.contains('buttonDone')) {
     // let bankArray = JSON.parse(localStorage.getItem('bankArray'));
     const containerId = e.target.parentNode.parentNode.getAttribute('id');
-    bankArray.forEach(e=>{
-        if(containerId===e.id){
-          e.status = 'done';
-          console.log(e);
-        }
+   
+    bankArray.forEach(f=>{
+       console.log(containerId, f.id)
     })
     e.target.parentNode.parentNode.classList.add('containerDone');
     
