@@ -23,7 +23,7 @@ const cancel = document.getElementById('cancel');
 const backArrow = document.querySelector('.backArrow');
 const date = document.getElementById('calendar');
 const today = document.getElementById('calendar');
-let bank = null;
+let bank__clicked = null;
 const calendarPopup = document.querySelector('.calendar__popup');
 const category = document.getElementById('category');
 const title = document.getElementById('title');
@@ -50,12 +50,12 @@ bankSelectWraper.addEventListener('click', e => {
   if (e.target.tagName === 'IMG' && e.target.id === 'mbankIcon') {
     e.target.classList.toggle('bankClicked');
     pkoIcon.classList.remove('bankClicked');
-    bank = 'mBank';
+    bank__clicked = 'mBank';
   }
   else if (e.target.tagName === 'IMG' && e.target.id === 'pkoIcon') {
     e.target.classList.toggle('bankClicked');
     mbankIcon.classList.remove('bankClicked');
-    bank = 'PKO';
+    bank__clicked = 'PKO';
   }
 })
 /****Otwieranie popupa  */
@@ -142,99 +142,98 @@ okButton.addEventListener('click', e => {
   if (bankArray === null) {
     bankArray = [];
   }
-  if (bank != null) {//warunek wykonania pętli 
+  if (bank__clicked != null) {//warunek wykonania pętli 
 
-
-    bankObject.bank = bank;
-    console.log(category);
+    bankObject.bank = bank__clicked;
     bankObject.category = category.value;
     bankObject.date = date.value;
     bankObject.title = title.value;
     bankObject.amount = amount.value;
     bankObject.status = '';
-    const local = localStorage.getItem('keys')
-    let keys = JSON.parse(local);
-    transfer.reset();// reset() resetuje tylko form
-    const container = `<div class="container">
-    <div class="strip"></div>
-    <div class="logoWraper">
-      <img class="image" src="">
-      <div class="category"></div>
-      <div class="statusCircle"></div>
-    </div>
-    <div class="timeLeft"></div> 
-    <div class="amount"></div> 
-    <p class="title"></p>
-    <div class="close">
-    <button class="buttonClose">Cancel</button>
-    <button class ="buttonDone">Done</button>
-    </div>          
-  </div`;
-    ul.insertAdjacentHTML('afterbegin', container);
-    const containerId = document.querySelector('.container');
-    const image = document.querySelector('.image');
-    const strip = document.querySelector('.strip');
-    const categoryOutput = document.querySelector('.category');
-    const dateOutput = document.querySelector('.strip');
-    const titleOutput = document.querySelector('.title');
-    const daysLeft = document.querySelector('.timeLeft');
-    const amountOutput = document.querySelector('.amount');
-    const statusCircle = document.querySelector('.statusCircle');
-    const today = new Date();
-    const trasferDay = new Date(bankObject.date);
-    const timeLeft = Math.ceil((trasferDay - today) / 1000 / 60 / 60 / 24);
-    containerId.setAttribute('id', today.getTime());
-    bankObject.id = containerId.getAttribute('id');
-    /* Tu skończyłem dodawanie id dla container i zapisanie go w bankObject */
-    /* trzeba ogarnąć array.find() */
-    bankObject.containerClass = containerId.classList.value;
-    bankObject.statusCircleClass = statusCircle.classList.value;
-    bankObject.timeLeftClass = daysLeft.classList.value;
+    bankObject.id = new Date().getTime();
     bankArray.push(bankObject);
     localStorage.setItem('bankArray', JSON.stringify(bankArray));
-    if (timeLeft <= 1) {
-      statusCircle.style.backgroundColor = 'crimson';
-    }
-    else if (timeLeft < 3) {
-      statusCircle.style.backgroundColor = 'orange';
-    }
-    if (bankObject.bank === 'mBank') {
-      dateOutput.innerText = bankObject.date;
-      strip.setAttribute('class', 'strip__mbank');
-      image.setAttribute('src', 'assets/img/mbank 30x30.png');
-      categoryOutput.innerText = bankObject.category;
-      titleOutput.innerText = bankObject.title;
-      amountOutput.innerText = `${bankObject.amount} zł`;
-      if (timeLeft > 0) {
-        daysLeft.innerText = `${timeLeft} d.`;
-      }
-      else if (timeLeft === 0) {
-        daysLeft.innerText = 'today'
-      }
-      else if (timeLeft < 0) {
-        daysLeft.innerText = `passed`
-      }
-    }
-    else if (bankObject.bank === 'PKO') {
-      dateOutput.innerText = bankObject.date;
-      strip.setAttribute('class', 'strip__pko');
-      image.setAttribute('src', 'assets/img/pkobp 467x485.png');
-      categoryOutput.innerText = bankObject.category;
-      titleOutput.innerText = bankObject.title;
-      amountOutput.innerText = `${bankObject.amount} zł`;
-      if (timeLeft > 0) {
-        daysLeft.innerText = `${timeLeft} d.`;
-      }
-      else if (timeLeft === 0) {
-        daysLeft.innerText = 'today'
-      }
-      else if (timeLeft < 0) {
-        daysLeft.innerText = `passed`
-      }
-    }
+    transfer.reset();// reset() resetuje tylko form
+  //   const container = `<div class="container">
+  //   <div class="strip"></div>
+  //   <div class="logoWraper">
+  //     <img class="image" src="">
+  //     <div class="category"></div>
+  //     <div class="statusCircle"></div>
+  //   </div>
+  //   <div class="timeLeft"></div> 
+  //   <div class="amount"></div> 
+  //   <p class="title"></p>
+  //   <div class="close">
+  //   <button class="buttonClose">Cancel</button>
+  //   <button class ="buttonDone">Done</button>
+  //   </div>          
+  // </div`;
+  //   ul.insertAdjacentHTML('afterbegin', container);
+  //   const containerId = document.querySelector('.container');
+  //   const image = document.querySelector('.image');
+  //   const strip = document.querySelector('.strip');
+  //   const categoryOutput = document.querySelector('.category');
+  //   const dateOutput = document.querySelector('.strip');
+  //   const titleOutput = document.querySelector('.title');
+  //   const daysLeft = document.querySelector('.timeLeft');
+  //   const amountOutput = document.querySelector('.amount');
+  //   const statusCircle = document.querySelector('.statusCircle');
+  //   const today = new Date();
+  //   const trasferDay = new Date(bankObject.date);
+  //   const timeLeft = Math.ceil((trasferDay - today) / 1000 / 60 / 60 / 24);
+  //   containerId.setAttribute('id', today.getTime());
+  //   bankObject.id = containerId.getAttribute('id');
+  //   /* Tu skończyłem dodawanie id dla container i zapisanie go w bankObject */
+  //   /* trzeba ogarnąć array.find() */
+  //   bankObject.containerClass = containerId.classList.value;
+  //   bankObject.statusCircleClass = statusCircle.classList.value;
+  //   bankObject.timeLeftClass = daysLeft.classList.value;
+    
+  //   localStorage.setItem('bankArray', JSON.stringify(bankArray));
+  //   if (timeLeft <= 1) {
+  //     statusCircle.style.backgroundColor = 'crimson';
+  //   }
+  //   else if (timeLeft < 3) {
+  //     statusCircle.style.backgroundColor = 'orange';
+  //   }
+  //   if (bankObject.bank === 'mBank') {
+  //     dateOutput.innerText = bankObject.date;
+  //     strip.setAttribute('class', 'strip__mbank');
+  //     image.setAttribute('src', 'assets/img/mbank 30x30.png');
+  //     categoryOutput.innerText = bankObject.category;
+  //     titleOutput.innerText = bankObject.title;
+  //     amountOutput.innerText = `${bankObject.amount} zł`;
+  //     if (timeLeft > 0) {
+  //       daysLeft.innerText = `${timeLeft} d.`;
+  //     }
+  //     else if (timeLeft === 0) {
+  //       daysLeft.innerText = 'today'
+  //     }
+  //     else if (timeLeft < 0) {
+  //       daysLeft.innerText = `passed`
+  //     }
+  //   }
+  //   else if (bankObject.bank === 'PKO') {
+  //     dateOutput.innerText = bankObject.date;
+  //     strip.setAttribute('class', 'strip__pko');
+  //     image.setAttribute('src', 'assets/img/pkobp 467x485.png');
+  //     categoryOutput.innerText = bankObject.category;
+  //     titleOutput.innerText = bankObject.title;
+  //     amountOutput.innerText = `${bankObject.amount} zł`;
+  //     if (timeLeft > 0) {
+  //       daysLeft.innerText = `${timeLeft} d.`;
+  //     }
+  //     else if (timeLeft === 0) {
+  //       daysLeft.innerText = 'today'
+  //     }
+  //     else if (timeLeft < 0) {
+  //       daysLeft.innerText = `passed`
+  //     }
+  //   }
 
-    popup.style.display = 'none';
-    list.classList.remove('listHide');
+  //   popup.style.display = 'none';
+  //   list.classList.remove('listHide');
 
   }
   else {
@@ -335,23 +334,27 @@ ul.addEventListener('click', e => {
     const containerId = e.target.parentNode.parentNode.getAttribute('id');
    
     bankArray.forEach(f=>{
-       console.log(containerId, f.id)
+       if(containerId ===f.id){
+         f.status = 'done'
+       }
     })
-    e.target.parentNode.parentNode.classList.add('containerDone');
+    const local = JSON.stringify(bankArray);
+    localStorage.setItem('bankArray',local);
+    // e.target.parentNode.parentNode.classList.add('containerDone');
     
-    const timeLeft = e.target.parentNode.parentNode.querySelector('.timeLeft');
+    // const timeLeft = e.target.parentNode.parentNode.querySelector('.timeLeft');
 
-    const trashBin = '<img class="trashBin" src="assets/img/delete 30x30.png" alt="trashBin icon">';
-    timeLeft.innerHTML += trashBin;
-    timeLeft.classList.add('timeLeftDone');
-
-
-
-    e.target.parentNode.parentNode.children.item(2).classList.add('timeLeftDone');//time left div
-    e.target.parentNode.parentNode.children.item(1).lastElementChild.classList.add('statusCircleDone');//status circle
+    // const trashBin = '<img class="trashBin" src="assets/img/delete 30x30.png" alt="trashBin icon">';
+    // timeLeft.innerHTML += trashBin;
+    // timeLeft.classList.add('timeLeftDone');
 
 
-    for (let i = 0; i < bankArray.length; i++) {
+
+    // e.target.parentNode.parentNode.children.item(2).classList.add('timeLeftDone');//time left div
+    // e.target.parentNode.parentNode.children.item(1).lastElementChild.classList.add('statusCircleDone');//status circle
+
+
+    /* for (let i = 0; i < bankArray.length; i++) {
       const objectValues = Object.values(bankArray[i]);
       const includes = objectValues.includes(containerId);
 
@@ -365,7 +368,7 @@ ul.addEventListener('click', e => {
         localStorage.setItem('bankArray', local);
       }
 
-    }
+    } */
     e.target.parentNode.remove();
   }
   if (e.target.classList.contains('buttonClose')) {//tu trzeba poprawić !!
