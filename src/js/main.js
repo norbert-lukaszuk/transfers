@@ -243,124 +243,105 @@ okButton.addEventListener('click', e => {
 }
 )
 
-const bankArray = JSON.parse(localStorage.getItem('bankArray'));//pobieranie array z kluczami 
-if (bankArray != null) {
-  bankArray.sort((a, b) => b.key - a.key);/* sortuje od największej do najmniejszej */
-
-  bankArray.reverse();//odwraca na od najmniejszej do największej 
 
   /******* REFRESSH ***********/
-  for (let i = 0; i < bankArray.length; i++) {  //pętla iterujące przez localStorage
-    //   /* get data from localStorage */
-
-    const local = localStorage.getItem(bankArray[i]);//pobranie z localStorage elementu o danym w pętli kluczu
-    const bankObject = JSON.parse(local);//parsowanie do obiektu
-    const container = `<div class="container">
-    <div class="strip"></div>
-    <div class="logoWraper">
-      <img class="image" src="">
-      <div class="category"></div>
-      <div class="statusCircle"></div>
-    </div>
-    <div class="timeLeft"></div> 
-    <div class="amount"></div> 
-    <p class="title"></p>
-    <div class="close">
-        <button class="buttonClose">Cancel</button>
-        <button class ="buttonDone">Done</button>
-    </div>          
-  </div`;
-    ul.insertAdjacentHTML('afterbegin', container);
-    const close = document.querySelector('.close');
-    const containerId = document.querySelector('.container');
-    const image = document.querySelector('.image');
-    const strip = document.querySelector('.strip');
-    const categoryOutput = document.querySelector('.category');
-    const dateOutput = document.querySelector('.strip');
-    const titleOutput = document.querySelector('.title');
-    const daysLeft = document.querySelector('.timeLeft');
-    const amountOutput = document.querySelector('.amount');
-    const statusCircle = document.querySelector('.statusCircle');
-    const today = new Date();
-    const trasferDay = new Date(bankArray[i].date);
-    const timeLeft = Math.ceil((trasferDay - today) / 1000 / 60 / 60 / 24);
-    containerId.setAttribute('id', bankArray[i].id);
-    const containerClass = bankArray[i].containerClass.split(' ');
-    containerId.classList.add(...containerClass);
-    const statusCircleClass = bankArray[i].statusCircleClass.split(' ');
-    statusCircle.classList.add(...statusCircleClass);
-    const timeLeftClass = bankArray[i].timeLeftClass.split(' ');
-    daysLeft.classList.add(...timeLeftClass);
-    const trashBin = '<img class="trashBin" src="assets/img/delete 30x30.png" alt="trashBin icon">';
-    const status = bankArray[i].status;
-    if (bankArray[i].status === 'done') {
-      close.remove();
-
-
-      daysLeft.classList.remove('timeLeftDone');
-    }
-    if (timeLeft <= 1 && bankArray[i].status != 'done') {
-      statusCircle.style.backgroundColor = 'crimson';
-    }
-    else if (timeLeft < 3 && bankArray[i].status != 'done') {
-      statusCircle.style.backgroundColor = 'orange';
-    }
-    /* mBank template */
-    if (bankArray[i].bank === 'mBank') {
-
-      dateOutput.innerText = bankArray[i].date;
-      strip.setAttribute('class', 'strip__mbank');
-      image.setAttribute('src', 'assets/img/mbank 30x30.png');
-      categoryOutput.innerText = bankArray[i].category;
-      titleOutput.innerText = bankArray[i].title;
-      amountOutput.innerText = `${bankArray[i].amount} zł`;
-      if (status === 'done') {
-        daysLeft.innerHTML = trashBin;
-      }
-      else if (timeLeft > 0) {
-        daysLeft.innerText = `${timeLeft} d.`;
-      }
-      else if (timeLeft === 0) {
-        daysLeft.innerText = 'today'
-      }
-      else if (timeLeft < 0) {
-        daysLeft.innerText = `passed`
-      }
-
-    }
-    /* PKO tamplate */
-    else if (bankArray[i].bank === 'PKO') {
-      dateOutput.innerText = bankArray[i].date;
-      strip.setAttribute('class', 'strip__pko');
-      image.setAttribute('src', 'assets/img/pkobp 467x485.png');
-      categoryOutput.innerText = bankArray[i].category;
-      titleOutput.innerText = bankArray[i].title;
-      amountOutput.innerText = `${bankArray[i].amount} zł`;
-      if (status === 'done') {
-        daysLeft.innerHTML = trashBin;
-      }
-      else if (timeLeft > 0) {
-        daysLeft.innerText = `${timeLeft} d.`;
-      }
-      else if (timeLeft === 0) {
-        daysLeft.innerText = 'today'
-      }
-      else if (timeLeft < 0) {
-        daysLeft.innerText = `passed`
-      }
-    }
+  const daysLeft = (date)=>{
+    const days =  Math.ceil((new Date(date) - new Date())/1000/60/60/24);
+  if(days>30){
+    return `${Math.ceil(days/30)}`
   }
-}
+  else{return `${days}`}
+  }
+  
+  const statusCircle = (timeLeft) =>{
+  if(timeLeft>=3){
+    return 'statusCircle--green'
+  }
+  else if(timeLeft==2){
+    return 'statusCircle--yellow'
+  }
+  else if(timeLeft<=1){
+    return 'statusCircle--crimson'
+  }
+  }
+  const bankArray = JSON.parse(localStorage.getItem('bankArray'));
+  bankArray.forEach(e => {
+      const keys = Object.keys(e);
+      const{bank, category, date, title, amount, status, id, containerClass, statusCircleClass, timeLeftClass}=e;
+      console.log(daysLeft(date));
+      const mbank_container = `<div class="container">
+      <div class="strip__mbank">${date}</div>
+      <div class="logoWraper">
+        <img class="image" src="assets/img/mbank 30x30.png">
+        <div class="category">${category}</div>
+        <div class="statusCircle ${statusCircle(daysLeft(date))}"></div>
+      </div>
+      <div class="timeLeft">${daysLeft(date)}</div> 
+      <div class="amount">${amount} zł</div> 
+      <p class="title">${title}</p>
+      <div class="close">
+      <button class="buttonClose">Cancel</button>
+      <button class ="buttonDone">Done</button>
+      </div>          
+    </div`;
+      const pko_container = `<div class="container">
+      <div class="strip__pko">${date}</div>
+      <div class="logoWraper">
+        <img class="image" src="assets/img/pkobp 467x485.png">
+        <div class="category">${category}</div>
+        <div class="statusCircle ${statusCircle(daysLeft(date))}"></div>
+      </div>
+      <div class="timeLeft">${daysLeft(date)}</div> 
+      <div class="amount">${amount}</div> 
+      <p class="title">${title}</p>
+      <div class="close">
+      <button class="buttonClose">Cancel</button>
+      <button class ="buttonDone">Done</button>
+      </div>          
+    </div`;
+      const done_container = `<div class="container">
+      <div class="strip__pko">${date}</div>
+      <div class="logoWraper">
+        <img class="image" src="assets/img/delete 30x30.png">
+        <div class="category">${category}</div>
+        <div class="statusCircle ${statusCircle(daysLeft(date))}"></div>
+      </div>
+      <div class="timeLeft">${daysLeft(date)}</div> 
+      <div class="amount">${amount}</div> 
+      <p class="title">${title}</p>
+      <div class="close">
+      <button class="buttonClose">Cancel</button>
+      <button class ="buttonDone">Done</button>
+      </div>          
+    </div`;
+    if(status ==='done'){
+      ul.innerHTML += done_container;
+    }
+    if(bank==='mBank'){
+        ul.innerHTML += mbank_container;
+    }
+    if(bank === 'PKO'){
+        ul.innerHTML += pko_container;
+    }
+  })
+
 ul.addEventListener('click', e => {
 
   if (e.target.tagName === 'DIV' && e.target.classList.contains('close')) {
-    e.target.children.item(0).classList.add('buttonClose--show');
-    e.target.children.item(1).classList.add('buttonDone--show');
+    e.target.firstElementChild.classList.add('buttonClose--show');
+    e.target.lastElementChild.classList.add('buttonDone--show');
   }
   if (e.target.tagName === 'BUTTON' && e.target.classList.contains('buttonDone')) {
-    let bankArray = JSON.parse(localStorage.getItem('bankArray'));
-    e.target.parentNode.parentNode.classList.add('containerDone');
+    // let bankArray = JSON.parse(localStorage.getItem('bankArray'));
     const containerId = e.target.parentNode.parentNode.getAttribute('id');
+    bankArray.forEach(e=>{
+        if(containerId===e.id){
+          e.status = 'done';
+          console.log(e);
+        }
+    })
+    e.target.parentNode.parentNode.classList.add('containerDone');
+    
     const timeLeft = e.target.parentNode.parentNode.querySelector('.timeLeft');
 
     const trashBin = '<img class="trashBin" src="assets/img/delete 30x30.png" alt="trashBin icon">';

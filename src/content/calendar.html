@@ -27,7 +27,11 @@
 </body>
 <script>
   daysLeft = (date)=>{
-  return Math.ceil((new Date(date) - new Date())/1000/60/60/24)
+    const days =  Math.ceil((new Date(date) - new Date())/1000/60/60/24);
+  if(days>30){
+    return `${Math.ceil(days/30)}`
+  }
+  else{return `${days}`}
 }
 
 const statusCircle = (timeLeft) =>{
@@ -55,7 +59,7 @@ bankArray.forEach(e => {
       <div class="category">${category}</div>
       <div class="statusCircle ${statusCircle(daysLeft(date))}"></div>
     </div>
-    <div class="timeLeft">${daysLeft(date)} .d</div> 
+    <div class="timeLeft">${daysLeft(date)}</div> 
     <div class="amount">${amount} zł</div> 
     <p class="title">${title}</p>
     <div class="close">
@@ -70,7 +74,7 @@ bankArray.forEach(e => {
       <div class="category">${category}</div>
       <div class="statusCircle ${statusCircle(daysLeft(date))}"></div>
     </div>
-    <div class="timeLeft">${daysLeft(date)} d.</div> 
+    <div class="timeLeft">${daysLeft(date)}</div> 
     <div class="amount">${amount}</div> 
     <p class="title">${title}</p>
     <div class="close">
