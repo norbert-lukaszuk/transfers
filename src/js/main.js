@@ -142,6 +142,7 @@ okButton.addEventListener('click', e => {
   if (bankArray === null) {
     bankArray = [];
   }
+  const category = document.getElementById('category');
   if (bank__clicked != null) {//warunek wykonania pętli 
 
     bankObject.bank = bank__clicked;
@@ -153,6 +154,45 @@ okButton.addEventListener('click', e => {
     bankObject.id = new Date().getTime();
     bankArray.push(bankObject);
     localStorage.setItem('bankArray', JSON.stringify(bankArray));
+    
+    const{bank, category:cat, date:dat, title:tit, amount:amun, status:stat, id:idNum} = bankObject;
+    console.log(tit);
+    if(bank==='mBank'){
+      const mbank_container = `<div class="container" id="${idNum}">
+        <div class="strip__mbank">${dat}</div>
+        <div class="logoWraper">
+          <img class="image" src="assets/img/mbank 30x30.png">
+          <div class="category">${cat}</div>
+          <div class="statusCircle ${statusCircle(daysLeft(dat))}"></div>
+        </div>
+        <div class="timeLeft">${daysLeft(dat)} d.</div> 
+        <div class="amount">${amun} zł</div> 
+        <p class="title">${tit}</p>
+        <div class="close">
+        <button class="buttonClose">Cancel</button>
+        <button class ="buttonDone">Done</button>
+        </div>          
+        </div`;
+        ul.innerHTML += mbank_container;
+    }
+    if(bank==='PKO'){
+      const pko_container = `<div class="container id="${idNum}">
+      <div class="strip__pko">${dat}</div>
+      <div class="logoWraper">
+        <img class="image" src="assets/img/pkobp 467x485.png">
+        <div class="category">${cat}</div>
+        <div class="statusCircle ${statusCircle(daysLeft(dat))}"></div>
+      </div>
+      <div class="timeLeft">${daysLeft(dat)} d.</div> 
+      <div class="amount">${amun}</div> 
+      <p class="title">${tit}</p>
+      <div class="close">
+      <button class="buttonClose">Cancel</button>
+      <button class ="buttonDone">Done</button>
+      </div>          
+    </div`;
+        ul.innerHTML += pko_container;
+    }  
     transfer.reset();// reset() resetuje tylko form
   //   const container = `<div class="container">
   //   <div class="strip"></div>
@@ -232,8 +272,8 @@ okButton.addEventListener('click', e => {
   //     }
   //   }
 
-  //   popup.style.display = 'none';
-  //   list.classList.remove('listHide');
+    popup.style.display = 'none';
+    list.classList.remove('listHide');
 
   }
   else {
@@ -267,7 +307,6 @@ okButton.addEventListener('click', e => {
   bankArray.forEach(e => {
       const keys = Object.keys(e);
       const{bank, category, date, title, amount, status, id, containerClass, statusCircleClass, timeLeftClass}=e;
-      console.log(daysLeft(date));
       const mbank_container = `<div class="container" id="${id}">
       <div class="strip__mbank">${date}</div>
       <div class="logoWraper">
@@ -275,7 +314,7 @@ okButton.addEventListener('click', e => {
         <div class="category">${category}</div>
         <div class="statusCircle ${statusCircle(daysLeft(date))}"></div>
       </div>
-      <div class="timeLeft">${daysLeft(date)}</div> 
+      <div class="timeLeft">${daysLeft(date)} d.</div> 
       <div class="amount">${amount} zł</div> 
       <p class="title">${title}</p>
       <div class="close">
@@ -283,14 +322,14 @@ okButton.addEventListener('click', e => {
       <button class ="buttonDone">Done</button>
       </div>          
     </div`;
-      const pko_container = `<div class="container id="${id}">
+      const pko_container = `<div class="container" id="${id}">
       <div class="strip__pko">${date}</div>
       <div class="logoWraper">
         <img class="image" src="assets/img/pkobp 467x485.png">
         <div class="category">${category}</div>
         <div class="statusCircle ${statusCircle(daysLeft(date))}"></div>
       </div>
-      <div class="timeLeft">${daysLeft(date)}</div> 
+      <div class="timeLeft">${daysLeft(date)} d.</div> 
       <div class="amount">${amount}</div> 
       <p class="title">${title}</p>
       <div class="close">
@@ -301,7 +340,7 @@ okButton.addEventListener('click', e => {
       const done_container = `<div class="container">
       <div class="strip__done">${date}</div>
       <div class="logoWraper">
-        <img class="image" src="assets/img/delete 30x30.png">
+        
         <div class="category">${category}</div>
         <div class="statusCircle statusCircleDone"></div>
       </div>
@@ -309,6 +348,7 @@ okButton.addEventListener('click', e => {
       <div class="amount">${amount}</div> 
       <p class="title">${title}</p>
       <div class="close close--done">
+      <img class="image__trashBin" src="assets/img/delete 30x30.png">
       <img src="assets/img/checked 64x64.png">
       </div>          
     </div`;
@@ -330,12 +370,27 @@ ul.addEventListener('click', e => {
     e.target.lastElementChild.classList.add('buttonDone--show');
   }
   if(e.target.tagName === 'BUTTON' && e.target.classList.contains('buttonDone')) {
-    // let bankArray = JSON.parse(localStorage.getItem('bankArray'));
-    const containerId = e.target.parentNode.parentNode.getAttribute('id');
+    let bankArray = JSON.parse(localStorage.getItem('bankArray'));
+    const containerId = parseInt(e.target.parentNode.parentNode.getAttribute('id'));
    
     bankArray.forEach(f=>{
+      console.log(containerId, f.id);
        if(containerId ===f.id){
          f.status = 'done'
+          const {date, category, amount, title} = f;
+         const swap__container = document.getElementById(JSON.stringify(containerId));
+         swap__container.innerHTML = `<div class="strip__done">${date}</div>
+         <div class="logoWraper">
+           <img class="image__trashBin" src="assets/img/delete 30x30.png">
+           <div class="category">${category}</div>
+           <div class="statusCircle statusCircleDone"></div>
+         </div>
+         <div class="timeLeft timeLeftDone"></div> 
+         <div class="amount">${amount}</div> 
+         <p class="title">${title}</p>
+        //  <div class="close close--done">
+         <img src="assets/img/checked 64x64.png">
+         </div>`        
        }
     })
     const local = JSON.stringify(bankArray);
@@ -375,9 +430,11 @@ ul.addEventListener('click', e => {
     e.target.classList.remove('buttonClose--show');
     e.target.parentElement.children.item(1).classList.remove('buttonDone--show');
   }
-  if (e.target.classList.contains('trashBin')) {//usuwanie elementu z listy 
-    const containerId = e.target.parentElement.parentElement.getAttribute('id');
-    e.target.parentElement.parentElement.remove();
+  if (e.target.tagName ==='IMG' && e.target.classList.contains('image__trashBin')) {//usuwanie elementu z listy 
+    console.log(e.target);
+    // const containerId = e.target.parentElement.parentElement.getAttribute('id');
+    
+    // e.target.parentElement.parentElement.remove();
 
     for (let i = 0; i < bankArray.length; i++) {//usuwanie elementu z localStorage
       const objectValues = Object.values(bankArray[i]);

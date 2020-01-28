@@ -259,6 +259,9 @@ body {
   position: absolute;
   background: transparent;
     &--done{
+      display: flex;
+      flex-direction: row;
+      
       opacity: 30%;
     }
   
@@ -413,7 +416,11 @@ body {
   border-radius: 50%;
   cursor: pointer;
 }
-
+.image{
+  &__trashBin{
+    align-self: flex-end;
+  }
+}
 .input{
   position: fixed;
   top: 0;
