@@ -259,8 +259,9 @@ body {
   position: absolute;
   background: transparent;
     &--done{
-      display: flex;
-      flex-direction: row;
+      // display: flex;
+      // // flex-direction: column;
+      // align-items: center;
       
       opacity: 30%;
     }
@@ -419,6 +420,7 @@ body {
 .image{
   &__trashBin{
     align-self: flex-end;
+    padding-top: 15px;
   }
 }
 .input{

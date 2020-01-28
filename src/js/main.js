@@ -337,20 +337,16 @@ okButton.addEventListener('click', e => {
       <button class ="buttonDone">Done</button>
       </div>          
     </div`;
-      const done_container = `<div class="container">
+      const done_container = `<div class="container" id=${id}>
       <div class="strip__done">${date}</div>
       <div class="logoWraper">
-        
+      <img class="image__trashBin" src="assets/img/delete 30x30.png">
         <div class="category">${category}</div>
-        <div class="statusCircle statusCircleDone"></div>
+        <img src="assets/img/checked 64x64.png">
       </div>
       <div class="timeLeft timeLeftDone"></div> 
       <div class="amount">${amount}</div> 
       <p class="title">${title}</p>
-      <div class="close close--done">
-      <img class="image__trashBin" src="assets/img/delete 30x30.png">
-      <img src="assets/img/checked 64x64.png">
-      </div>          
     </div`;
     if(status ==='done'){
       ul.innerHTML += done_container;
@@ -381,16 +377,13 @@ ul.addEventListener('click', e => {
          const swap__container = document.getElementById(JSON.stringify(containerId));
          swap__container.innerHTML = `<div class="strip__done">${date}</div>
          <div class="logoWraper">
-           <img class="image__trashBin" src="assets/img/delete 30x30.png">
+         <img class="image__trashBin" src="assets/img/delete 30x30.png">
            <div class="category">${category}</div>
-           <div class="statusCircle statusCircleDone"></div>
+           <img src="assets/img/checked 64x64.png">
          </div>
          <div class="timeLeft timeLeftDone"></div> 
          <div class="amount">${amount}</div> 
-         <p class="title">${title}</p>
-        //  <div class="close close--done">
-         <img src="assets/img/checked 64x64.png">
-         </div>`        
+         <p class="title">${title}</p>`;
        }
     })
     const local = JSON.stringify(bankArray);
@@ -431,9 +424,14 @@ ul.addEventListener('click', e => {
     e.target.parentElement.children.item(1).classList.remove('buttonDone--show');
   }
   if (e.target.tagName ==='IMG' && e.target.classList.contains('image__trashBin')) {//usuwanie elementu z listy 
-    console.log(e.target);
-    // const containerId = e.target.parentElement.parentElement.getAttribute('id');
-    
+    console.log(e.target.parentElement.parentElement.getAttribute('id'));
+    const containerId = e.target.parentElement.parentElement.getAttribute('id');
+    const bankArray = JSON.parse(localStorage.getItem('bankArray'));
+    bankArray.forEach(f=>{
+      if(f.id === containerId){
+       console.log(f.title)
+      }
+    })
     // e.target.parentElement.parentElement.remove();
 
     for (let i = 0; i < bankArray.length; i++) {//usuwanie elementu z localStorage
