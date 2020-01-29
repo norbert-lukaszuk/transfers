@@ -424,25 +424,32 @@ ul.addEventListener('click', e => {
     e.target.parentElement.children.item(1).classList.remove('buttonDone--show');
   }
   if (e.target.tagName ==='IMG' && e.target.classList.contains('image__trashBin')) {//usuwanie elementu z listy 
-    console.log(e.target.parentElement.parentElement.getAttribute('id'));
-    const containerId = e.target.parentElement.parentElement.getAttribute('id');
+    // console.log(e.target.parentElement.parentElement.getAttribute('id'));
+    const containerId = parseInt(e.target.parentElement.parentElement.getAttribute('id'));
     const bankArray = JSON.parse(localStorage.getItem('bankArray'));
-    bankArray.forEach(f=>{
-      if(f.id === containerId){
-       console.log(f.title)
+    let indexDel = null;
+    const indexFun = (elemenent, index) =>{
+      if(elemenent.id === containerId ){
+        indexDel = index
       }
-    })
-    // e.target.parentElement.parentElement.remove();
-
-    for (let i = 0; i < bankArray.length; i++) {//usuwanie elementu z localStorage
-      const objectValues = Object.values(bankArray[i]);
-      const includes = objectValues.includes(containerId);
-      if (includes === true) {
-        bankArray.splice(i, 1);
-        const local = JSON.stringify(bankArray);
-        localStorage.setItem('bankArray', local);
-      }
+      
     }
+    bankArray.forEach(indexFun);
+    console.log(indexDel);
+    bankArray.splice(indexDel,1);
+    const local = JSON.stringify(bankArray);
+    localStorage.setItem('bankArray',local);
+    e.target.parentElement.parentElement.remove();
+
+    // for (let i = 0; i < bankArray.length; i++) {//usuwanie elementu z localStorage
+    //   const objectValues = Object.values(bankArray[i]);
+    //   const includes = objectValues.includes(containerId);
+    //   if (includes === true) {
+    //     bankArray.splice(i, 1);
+    //     const local = JSON.stringify(bankArray);
+    //     localStorage.setItem('bankArray', local);
+    //   }
+    // }
   }
 })
 /*********Funkcje*********/
