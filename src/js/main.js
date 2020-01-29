@@ -152,12 +152,14 @@ okButton.addEventListener('click', e => {
     bankObject.bank = bank__clicked;
     bankObject.category = category.value;
     bankObject.date = date.value;
+    bankObject.dateNumber = new Date(date.value).getTime();
     bankObject.title = title.value;
     bankObject.amount = amount.value;
     bankObject.status = '';
     bankObject.id = new Date().getTime();
     bankArray.push(bankObject);
-    localStorage.setItem('bankArray', JSON.stringify(bankArray));
+    const local = JSON.stringify(bankArray.sort((a,b)=>{b.dateNumber - a.dateNumber}));
+    localStorage.setItem('bankArray', local);
     
     const{bank, category:cat, date:dat, title:tit, amount:amun, status:stat, id:idNum} = bankObject;
     console.log(tit);
