@@ -15,6 +15,7 @@ if ('serviceWorker' in navigator) {
     });
   });
 }
+const show__done = document.getElementById('show__done');
 const hamburger = document.querySelector('.hamburger');
 const navigation = document.querySelector('.navigation');
 const addButon = document.querySelector('.button__add');
@@ -41,11 +42,28 @@ const mbankIcon = document.getElementById('mbankIcon');
 const pkoIcon = document.getElementById('pkoIcon');
 const list = document.querySelector('.list');
 
+const daysLeft = (date)=>{//funkcja zwraca liczbe dni miedzy datą a dziś
+  return  Math.ceil((new Date(date) - new Date())/1000/60/60/24);
+}
+
+const statusCircle = (timeLeft) =>{//kolor kółka zależnie od ilości pozostałych dni
+if(timeLeft>=3){
+  return 'statusCircle--green'
+}
+else if(timeLeft==2){
+  return 'statusCircle--yellow'
+}
+else if(timeLeft<=1){
+  return 'statusCircle--crimson'
+}
+}
+
 hamburger.addEventListener('click', e=>{
   hamburger.classList.toggle('hamburger__active');
   navigation.classList.toggle('navigation--active');
   
 })
+
 bankSelectWraper.addEventListener('click', e => {
   if (e.target.tagName === 'IMG' && e.target.id === 'mbankIcon') {
     e.target.classList.toggle('bankClicked');
@@ -159,47 +177,51 @@ okButton.addEventListener('click', e => {
     bankObject.id = new Date().getTime();
     bankArray.push(bankObject);
     const local = bankArray.sort((a,b)=>new Date(b.date)-new Date(a.date));
-    console.log(local);
+    local.reverse();
     localStorage.setItem('bankArray', JSON.stringify(local));
-    
-    const{bank, category:cat, date:dat, title:tit, amount:amun, status:stat, id:idNum} = bankObject;
-    console.log(tit);
-    if(bank==='mBank'){
-      const mbank_container = `<div class="container" id="${idNum}">
-        <div class="strip__mbank">${dat}</div>
+    ul.innerHTML = null;
+    bankArray.forEach(e=>{
+      const{bank, category:cat, date:dat, title:tit, amount:amun, status:stat, id:idNum} = e;
+
+      if(bank==='mBank'){
+        const mbank_container = `<div class="container" id="${idNum}">
+          <div class="strip__mbank">${dat}</div>
+          <div class="logoWraper">
+            <img class="image" src="assets/img/mbank 30x30.png">
+            <div class="category">${cat}</div>
+            <div class="statusCircle ${statusCircle(daysLeft(dat))}"></div>
+          </div>
+          <div class="timeLeft">${daysLeft(dat)} d.</div> 
+          <div class="amount">${amun} zł</div> 
+          <p class="title">${tit}</p>
+          <div class="close">
+          <button class="buttonClose">Cancel</button>
+          <button class ="buttonDone">Done</button>
+          </div>          
+          </div`;
+          ul.innerHTML += mbank_container;
+      }
+      if(bank==='PKO'){
+        const pko_container = `<div class="container id="${idNum}">
+        <div class="strip__pko">${dat}</div>
         <div class="logoWraper">
-          <img class="image" src="assets/img/mbank 30x30.png">
+          <img class="image" src="assets/img/pkobp 467x485.png">
           <div class="category">${cat}</div>
           <div class="statusCircle ${statusCircle(daysLeft(dat))}"></div>
         </div>
         <div class="timeLeft">${daysLeft(dat)} d.</div> 
-        <div class="amount">${amun} zł</div> 
+        <div class="amount">${amun}</div> 
         <p class="title">${tit}</p>
         <div class="close">
         <button class="buttonClose">Cancel</button>
         <button class ="buttonDone">Done</button>
         </div>          
-        </div`;
-        ul.innerHTML += mbank_container;
-    }
-    if(bank==='PKO'){
-      const pko_container = `<div class="container id="${idNum}">
-      <div class="strip__pko">${dat}</div>
-      <div class="logoWraper">
-        <img class="image" src="assets/img/pkobp 467x485.png">
-        <div class="category">${cat}</div>
-        <div class="statusCircle ${statusCircle(daysLeft(dat))}"></div>
-      </div>
-      <div class="timeLeft">${daysLeft(dat)} d.</div> 
-      <div class="amount">${amun}</div> 
-      <p class="title">${tit}</p>
-      <div class="close">
-      <button class="buttonClose">Cancel</button>
-      <button class ="buttonDone">Done</button>
-      </div>          
-    </div`;
-        ul.innerHTML += pko_container;
-    }  
+      </div`;
+          ul.innerHTML += pko_container;
+      }  
+    })
+    
+    
     transfer.reset();// reset() resetuje tylko form
   //
 
@@ -215,25 +237,7 @@ okButton.addEventListener('click', e => {
 
 
   /******* REFRESSH ***********/
-  const daysLeft = (date)=>{
-    const days =  Math.ceil((new Date(date) - new Date())/1000/60/60/24);
-  if(days>30){
-    return `${Math.ceil(days/30)}`
-  }
-  else{return `${days}`}
-  }
-  
-  const statusCircle = (timeLeft) =>{
-  if(timeLeft>=3){
-    return 'statusCircle--green'
-  }
-  else if(timeLeft==2){
-    return 'statusCircle--yellow'
-  }
-  else if(timeLeft<=1){
-    return 'statusCircle--crimson'
-  }
-  }
+
   const bankArray = JSON.parse(localStorage.getItem('bankArray'));
   bankArray.forEach(e => {
       const keys = Object.keys(e);
@@ -268,7 +272,7 @@ okButton.addEventListener('click', e => {
       <button class ="buttonDone">Done</button>
       </div>          
     </div`;
-      const done_container = `<div class="container" id=${id}>
+      const done_container = `<div class="container container__done" id=${id}>
       <div class="strip__done">${date}</div>
       <div class="logoWraper">
       <img class="image__trashBin" src="assets/img/delete 30x30.png">
@@ -344,6 +348,13 @@ ul.addEventListener('click', e => {
 
   }
 })
+const container__done = document.querySelectorAll('.container__done');
+show__done.onchange = ()=>{
+  if(show__done.checked){
+    container__done.classList.add('container__done--hide');
+  }
+  else{container__done.classList.remove('container__done--hide')}
+}
 /*********Funkcje*********/
 const daysInMonth = (month) => {
   return new Date(2020, month + 1, 0).getDate()

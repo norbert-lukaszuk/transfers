@@ -281,10 +281,12 @@ body {
   box-shadow: 7px 7px 2px gray;
   
 }
-.containerDone{
-  background-color: rgba(128, 128, 128, 0.39);
+.container__done--hide{
+  
+    display: none;
+  }
  
-}
+
 .day{
   display: block;
   height: 100px;
