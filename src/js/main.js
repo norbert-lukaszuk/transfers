@@ -15,7 +15,8 @@ if ('serviceWorker' in navigator) {
     });
   });
 }
-const show__done = document.getElementById('show__done');
+const checkbox = document.getElementById('show__done');
+
 const hamburger = document.querySelector('.hamburger');
 const navigation = document.querySelector('.navigation');
 const addButon = document.querySelector('.button__add');
@@ -56,6 +57,44 @@ else if(timeLeft==2){
 else if(timeLeft<=1){
   return 'statusCircle--crimson'
 }
+}
+
+const daysInMonth = (month) => {
+  return new Date(2020, month + 1, 0).getDate()
+}
+const dayOfWeek = (day, month, year) => {
+  const dayNumber = new Date(year, month, day).getDay();
+
+  switch (dayNumber) {
+    case 0:
+      return 'Sun';
+      break;
+    case 1:
+      return 'Mon';
+      break;
+    case 2:
+      return 'Tue';
+      break;
+    case 3:
+      return 'Wen';
+      break;
+    case 4:
+      return 'Thu';
+      break;
+    case 5:
+      return 'Fri';
+      break;
+    case 6:
+      return 'Sat';
+      break;
+  }
+}
+const monthFirstDay = (day, month, year) => {
+  const startDay = new Date(year, month, day).getDay();
+  if (startDay === 0) {
+    return 7
+  }
+  else { return startDay }
 }
 
 hamburger.addEventListener('click', e=>{
@@ -235,6 +274,16 @@ okButton.addEventListener('click', e => {
 }
 )
 
+checkbox.onchange = ()=>{
+  const container__done = document.querySelectorAll('.container__done');
+  if(checkbox.checked){
+    
+    container__done.forEach(e=>{ 
+      e.classList.add('container__done--hide');
+    }) 
+  }
+  else{container__done.forEach(e=> e.classList.remove('container__done--hide'))}
+}
 
   /******* REFRESSH ***********/
 
@@ -305,7 +354,6 @@ ul.addEventListener('click', e => {
     const containerId = parseInt(e.target.parentNode.parentNode.getAttribute('id'));
    
     bankArray.forEach(f=>{
-      console.log(containerId, f.id);
        if(containerId ===f.id){
          f.status = 'done'
           const {date, category, amount, title} = f;
@@ -348,48 +396,7 @@ ul.addEventListener('click', e => {
 
   }
 })
-const container__done = document.querySelectorAll('.container__done');
-show__done.onchange = ()=>{
-  if(show__done.checked){
-    container__done.classList.add('container__done--hide');
-  }
-  else{container__done.classList.remove('container__done--hide')}
-}
-/*********Funkcje*********/
-const daysInMonth = (month) => {
-  return new Date(2020, month + 1, 0).getDate()
-}
-const dayOfWeek = (day, month, year) => {
-  const dayNumber = new Date(year, month, day).getDay();
 
-  switch (dayNumber) {
-    case 0:
-      return 'Sun';
-      break;
-    case 1:
-      return 'Mon';
-      break;
-    case 2:
-      return 'Tue';
-      break;
-    case 3:
-      return 'Wen';
-      break;
-    case 4:
-      return 'Thu';
-      break;
-    case 5:
-      return 'Fri';
-      break;
-    case 6:
-      return 'Sat';
-      break;
-  }
-}
-const monthFirstDay = (day, month, year) => {
-  const startDay = new Date(year, month, day).getDay();
-  if (startDay === 0) {
-    return 7
-  }
-  else { return startDay }
-}
+
+/*********Funkcje*********/
+
