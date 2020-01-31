@@ -222,7 +222,7 @@ okButton.addEventListener('click', e => {
     bankArray.forEach(e=>{
       const{bank, category:cat, date:dat, title:tit, amount:amun, status:stat, id:idNum} = e;
 
-      if(bank==='mBank'){
+      if(bank==='mBank' && stat !='done'){
         const mbank_container = `<div class="container" id="${idNum}">
           <div class="strip__mbank">${dat}</div>
           <div class="logoWraper">
@@ -240,7 +240,7 @@ okButton.addEventListener('click', e => {
           </div`;
           ul.innerHTML += mbank_container;
       }
-      if(bank==='PKO'){
+      if(bank==='PKO' && stat!='done'){
         const pko_container = `<div class="container id="${idNum}">
         <div class="strip__pko">${dat}</div>
         <div class="logoWraper">
@@ -279,10 +279,10 @@ checkbox.onchange = ()=>{
   if(checkbox.checked){
     
     container__done.forEach(e=>{ 
-      e.classList.add('container__done--hide');
+      e.classList.remove('container__done--hide');
     }) 
   }
-  else{container__done.forEach(e=> e.classList.remove('container__done--hide'))}
+  else{container__done.forEach(e=> e.classList.add('container__done--hide'))}
 }
 
   /******* REFRESSH ***********/
@@ -321,7 +321,7 @@ checkbox.onchange = ()=>{
       <button class ="buttonDone">Done</button>
       </div>          
     </div`;
-      const done_container = `<div class="container container__done" id=${id}>
+      const done_container = `<div class="container container__done container__done--hide" id=${id}>
       <div class="strip__done">${date}</div>
       <div class="logoWraper">
       <img class="image__trashBin" src="assets/img/delete 30x30.png">
@@ -335,10 +335,10 @@ checkbox.onchange = ()=>{
     if(status ==='done'){
       ul.innerHTML += done_container;
     }
-    if(bank==='mBank'){
+    if(bank==='mBank'&& status !='done'){
         ul.innerHTML += mbank_container;
     }
-    if(bank === 'PKO'){
+    if(bank === 'PKO' && status !='done'){
         ul.innerHTML += pko_container;
     }
   })
@@ -352,7 +352,7 @@ ul.addEventListener('click', e => {
   if(e.target.tagName === 'BUTTON' && e.target.classList.contains('buttonDone')) {
     let bankArray = JSON.parse(localStorage.getItem('bankArray'));
     const containerId = parseInt(e.target.parentNode.parentNode.getAttribute('id'));
-   
+    e.target.parentNode.parentNode.classList.add('container__done', 'container__done--hide');
     bankArray.forEach(f=>{
        if(containerId ===f.id){
          f.status = 'done'
