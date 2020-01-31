@@ -396,7 +396,3 @@ ul.addEventListener('click', e => {
 
   }
 })
-
-
-/*********Funkcje*********/
-
