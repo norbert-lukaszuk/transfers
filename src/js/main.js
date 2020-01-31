@@ -43,20 +43,20 @@ const mbankIcon = document.getElementById('mbankIcon');
 const pkoIcon = document.getElementById('pkoIcon');
 const list = document.querySelector('.list');
 
-const daysLeft = (date)=>{//funkcja zwraca liczbe dni miedzy datą a dziś
-  return  Math.ceil((new Date(date) - new Date())/1000/60/60/24);
+const daysLeft = (date) => {//funkcja zwraca liczbe dni miedzy datą a dziś
+  return Math.ceil((new Date(date) - new Date()) / 1000 / 60 / 60 / 24);
 }
 
-const statusCircle = (timeLeft) =>{//kolor kółka zależnie od ilości pozostałych dni
-if(timeLeft>=3){
-  return 'statusCircle--green'
-}
-else if(timeLeft==2){
-  return 'statusCircle--yellow'
-}
-else if(timeLeft<=1){
-  return 'statusCircle--crimson'
-}
+const statusCircle = (timeLeft) => {//kolor kółka zależnie od ilości pozostałych dni
+  if (timeLeft >= 3) {
+    return 'statusCircle--green'
+  }
+  else if (timeLeft == 2) {
+    return 'statusCircle--yellow'
+  }
+  else if (timeLeft <= 1) {
+    return 'statusCircle--crimson'
+  }
 }
 
 const daysInMonth = (month) => {
@@ -97,10 +97,10 @@ const monthFirstDay = (day, month, year) => {
   else { return startDay }
 }
 
-hamburger.addEventListener('click', e=>{
+hamburger.addEventListener('click', e => {
   hamburger.classList.toggle('hamburger__active');
   navigation.classList.toggle('navigation--active');
-  
+
 })
 
 bankSelectWraper.addEventListener('click', e => {
@@ -147,8 +147,8 @@ calendarButton.addEventListener('click', e => {
         days[k].classList.add('day--sunday');
       }
     }
-    const allDays = calendarWraper.querySelectorAll('.day');
-
+    const allDays = calendarWraper.querySelectorAll('div');
+    console.log(allDays);
     allDays.forEach(e => {
       if (e.innerHTML === '' && window.innerWidth <= 360) {
         e.classList.add('day__mobile--hide');
@@ -159,7 +159,7 @@ calendarButton.addEventListener('click', e => {
   }
   const allDaysOrder = document.querySelectorAll('.day');
   allDaysOrder.forEach(e => {
-    if (parseInt(e.firstElementChild.innerText) === today.getDate() && parseInt(e.parentElement.getAttribute('id'))===today.getMonth()){
+    if (parseInt(e.firstElementChild.innerText) === today.getDate() && parseInt(e.parentElement.getAttribute('id')) === today.getMonth()) {
       e.firstElementChild.classList.add('day__number--today')
     }
   })
@@ -215,14 +215,14 @@ okButton.addEventListener('click', e => {
     bankObject.status = '';
     bankObject.id = new Date().getTime();
     bankArray.push(bankObject);
-    const local = bankArray.sort((a,b)=>new Date(b.date)-new Date(a.date));
+    const local = bankArray.sort((a, b) => new Date(b.date) - new Date(a.date));
     local.reverse();
     localStorage.setItem('bankArray', JSON.stringify(local));
     ul.innerHTML = null;
-    bankArray.forEach(e=>{
-      const{bank, category:cat, date:dat, title:tit, amount:amun, status:stat, id:idNum} = e;
+    bankArray.forEach(e => {
 
-      if(bank==='mBank' && stat !='done'){
+      const { bank, category: cat, date: dat, title: tit, amount: amun, status: stat, id: idNum } = e;
+      if (bank === 'mBank' && stat != 'done') {
         const mbank_container = `<div class="container" id="${idNum}">
           <div class="strip__mbank">${dat}</div>
           <div class="logoWraper">
@@ -238,9 +238,9 @@ okButton.addEventListener('click', e => {
           <button class ="buttonDone">Done</button>
           </div>          
           </div`;
-          ul.innerHTML += mbank_container;
+        ul.innerHTML += mbank_container;
       }
-      if(bank==='PKO' && stat!='done'){
+      if (bank === 'PKO' && stat != 'done') {
         const pko_container = `<div class="container id="${idNum}">
         <div class="strip__pko">${dat}</div>
         <div class="logoWraper">
@@ -256,13 +256,32 @@ okButton.addEventListener('click', e => {
         <button class ="buttonDone">Done</button>
         </div>          
       </div`;
-          ul.innerHTML += pko_container;
-      }  
+        ul.innerHTML += pko_container;
+      }
+      else if (stat == 'done') {
+        const done_container = `<div class="container container__done container__done--hide" id=${idNum}>
+      <div class="strip__done">${dat}</div>
+      <div class="logoWraper">
+      <img class="image__trashBin" src="assets/img/delete 30x30.png">
+        <div class="category">${cat}</div>
+        <img src="assets/img/checked 64x64.png">
+      </div>
+      <div class="timeLeft timeLeftDone"></div> 
+      <div class="amount">${amun}</div> 
+      <p class="title">${tit}</p>
+    </div>`;
+
+        ul.innerHTML += done_container;
+        if (checkbox.checked) {
+          const done_containers = ul.querySelectorAll('.container__done--hide');
+          done_containers.forEach(e => e.classList.remove('container__done--hide'));
+        }
+      }
     })
-    
-    
+
+
     transfer.reset();// reset() resetuje tylko form
-  //
+    //
 
     popup.style.display = 'none';
     list.classList.remove('listHide');
@@ -274,24 +293,24 @@ okButton.addEventListener('click', e => {
 }
 )
 
-checkbox.onchange = ()=>{
+checkbox.onchange = () => {
   const container__done = document.querySelectorAll('.container__done');
-  if(checkbox.checked){
-    
-    container__done.forEach(e=>{ 
+  if (checkbox.checked) {
+
+    container__done.forEach(e => {
       e.classList.remove('container__done--hide');
-    }) 
+    })
   }
-  else{container__done.forEach(e=> e.classList.add('container__done--hide'))}
+  else { container__done.forEach(e => e.classList.add('container__done--hide')) }
 }
 
-  /******* REFRESSH ***********/
+/******* REFRESSH ***********/
 
-  const bankArray = JSON.parse(localStorage.getItem('bankArray'));
-  bankArray.forEach(e => {
-      const keys = Object.keys(e);
-      const{bank, category, date, title, amount, status, id, containerClass, statusCircleClass, timeLeftClass}=e;
-      const mbank_container = `<div class="container" id="${id}">
+const bankArray = JSON.parse(localStorage.getItem('bankArray'));
+bankArray.forEach(e => {
+  const keys = Object.keys(e);
+  const { bank, category, date, title, amount, status, id, containerClass, statusCircleClass, timeLeftClass } = e;
+  const mbank_container = `<div class="container" id="${id}">
       <div class="strip__mbank">${date}</div>
       <div class="logoWraper">
         <img class="image" src="assets/img/mbank 30x30.png">
@@ -305,8 +324,8 @@ checkbox.onchange = ()=>{
       <button class="buttonClose">Cancel</button>
       <button class ="buttonDone">Done</button>
       </div>          
-    </div`;
-      const pko_container = `<div class="container" id="${id}">
+    </div>`;
+  const pko_container = `<div class="container" id="${id}">
       <div class="strip__pko">${date}</div>
       <div class="logoWraper">
         <img class="image" src="assets/img/pkobp 467x485.png">
@@ -320,8 +339,8 @@ checkbox.onchange = ()=>{
       <button class="buttonClose">Cancel</button>
       <button class ="buttonDone">Done</button>
       </div>          
-    </div`;
-      const done_container = `<div class="container container__done container__done--hide" id=${id}>
+    </div>`;
+  const done_container = `<div class="container container__done container__done--hide" id=${id}>
       <div class="strip__done">${date}</div>
       <div class="logoWraper">
       <img class="image__trashBin" src="assets/img/delete 30x30.png">
@@ -331,17 +350,17 @@ checkbox.onchange = ()=>{
       <div class="timeLeft timeLeftDone"></div> 
       <div class="amount">${amount}</div> 
       <p class="title">${title}</p>
-    </div`;
-    if(status ==='done'){
-      ul.innerHTML += done_container;
-    }
-    if(bank==='mBank'&& status !='done'){
-        ul.innerHTML += mbank_container;
-    }
-    if(bank === 'PKO' && status !='done'){
-        ul.innerHTML += pko_container;
-    }
-  })
+    </div>`;
+  if (status === 'done') {
+    ul.innerHTML += done_container;
+  }
+  if (bank === 'mBank' && status != 'done') {
+    ul.innerHTML += mbank_container;
+  }
+  if (bank === 'PKO' && status != 'done') {
+    ul.innerHTML += pko_container;
+  }
+})
 
 ul.addEventListener('click', e => {
 
@@ -349,16 +368,16 @@ ul.addEventListener('click', e => {
     e.target.firstElementChild.classList.add('buttonClose--show');
     e.target.lastElementChild.classList.add('buttonDone--show');
   }
-  if(e.target.tagName === 'BUTTON' && e.target.classList.contains('buttonDone')) {
+  if (e.target.tagName === 'BUTTON' && e.target.classList.contains('buttonDone')) {
     let bankArray = JSON.parse(localStorage.getItem('bankArray'));
     const containerId = parseInt(e.target.parentNode.parentNode.getAttribute('id'));
     e.target.parentNode.parentNode.classList.add('container__done', 'container__done--hide');
-    bankArray.forEach(f=>{
-       if(containerId ===f.id){
-         f.status = 'done'
-          const {date, category, amount, title} = f;
-         const swap__container = document.getElementById(JSON.stringify(containerId));
-         swap__container.innerHTML = `<div class="strip__done">${date}</div>
+    bankArray.forEach(f => {
+      if (containerId === f.id) {
+        f.status = 'done'
+        const { date, category, amount, title } = f;
+        const swap__container = document.getElementById(JSON.stringify(containerId));
+        swap__container.innerHTML = `<div class="strip__done">${date}</div>
          <div class="logoWraper">
          <img class="image__trashBin" src="assets/img/delete 30x30.png">
            <div class="category">${category}</div>
@@ -367,31 +386,31 @@ ul.addEventListener('click', e => {
          <div class="timeLeft timeLeftDone"></div> 
          <div class="amount">${amount}</div> 
          <p class="title">${title}</p>`;
-       }
+      }
     })
     const local = JSON.stringify(bankArray);
-    localStorage.setItem('bankArray',local);
-        e.target.parentNode.remove();
+    localStorage.setItem('bankArray', local);
+    e.target.parentNode.remove();
   }
   if (e.target.classList.contains('buttonClose')) {//tu trzeba poprawić !!
     e.target.classList.remove('buttonClose--show');
     e.target.parentElement.children.item(1).classList.remove('buttonDone--show');
   }
-  if (e.target.tagName ==='IMG' && e.target.classList.contains('image__trashBin')) {//usuwanie elementu z listy 
+  if (e.target.tagName === 'IMG' && e.target.classList.contains('image__trashBin')) {//usuwanie elementu z listy 
     const containerId = parseInt(e.target.parentElement.parentElement.getAttribute('id'));
     const bankArray = JSON.parse(localStorage.getItem('bankArray'));
     let indexDel = null;
-    const indexFun = (elemenent, index) =>{
-      if(elemenent.id === containerId ){
+    const indexFun = (elemenent, index) => {
+      if (elemenent.id === containerId) {
         indexDel = index
       }
-      
+
     }
     bankArray.forEach(indexFun);
     console.log(indexDel);
-    bankArray.splice(indexDel,1);
+    bankArray.splice(indexDel, 1);
     const local = JSON.stringify(bankArray);
-    localStorage.setItem('bankArray',local);
+    localStorage.setItem('bankArray', local);
     e.target.parentElement.parentElement.remove();
 
   }

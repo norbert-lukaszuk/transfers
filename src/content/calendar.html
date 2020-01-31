@@ -50,7 +50,6 @@ const ul = document.querySelector('ul');
 
 const bankArray = JSON.parse(localStorage.getItem('bankArray'));
 bankArray.forEach(e => {
-    const keys = Object.keys(e);
     const{bank, category, date, title, amount, status, id, containerClass, statusCircleClass, timeLeftClass}=e;
     console.log(daysLeft(date));
     const mbank_container = `<div class="container">
