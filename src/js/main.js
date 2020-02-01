@@ -148,7 +148,6 @@ calendarButton.addEventListener('click', e => {
       }
     }
     const allDays = calendarWraper.querySelectorAll('div');
-    console.log(allDays);
     allDays.forEach(e => {
       if (e.innerHTML === '' && window.innerWidth <= 360) {
         e.classList.add('day__mobile--hide');
