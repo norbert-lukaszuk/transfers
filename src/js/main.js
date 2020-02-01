@@ -158,7 +158,7 @@ calendarButton.addEventListener('click', e => {
   }
   const allDaysOrder = document.querySelectorAll('.day');
   allDaysOrder.forEach(e => {
-    if (parseInt(e.firstElementChild.innerText) === today.getDate() && parseInt(e.parentElement.getAttribute('id')) === today.getMonth()) {
+    if (e.firstElementChild != null && parseInt(e.firstElementChild.innerText) === today.getDate() && parseInt(e.parentElement.getAttribute('id')) === today.getMonth()) {
       e.firstElementChild.classList.add('day__number--today')
     }
   })
