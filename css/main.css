@@ -405,11 +405,18 @@ body {
       -ms-flex-align: center;
           align-items: center;
   padding: 6px;
-  border-width: 0; }
+  border-width: 0;
+  cursor: pointer; }
+
+.button__add {
+  border-style: none;
+  background: none;
+  cursor: pointer; }
 
 #button__calendar {
-  display: inline-block;
-  background-color: #d7f819; }
+  border-style: none;
+  background: none;
+  cursor: pointer; }
 
 .buttonClose {
   display: none;
@@ -580,6 +587,8 @@ body {
   border-radius: 10px;
   position: absolute;
   background: transparent; }
+  .close--done {
+    opacity: 30%; }
 
 .container {
   display: -webkit-box;
@@ -597,11 +606,11 @@ body {
   min-width: 300px;
   min-height: 100px;
   border-radius: 10px;
-  -webkit-box-shadow: 7px 7px 2px gray;
-          box-shadow: 7px 7px 2px gray; }
+  -webkit-box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2);
+          box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2); }
 
-.containerDone {
-  background-color: rgba(128, 128, 128, 0.39); }
+.container__done--hide {
+  display: none; }
 
 .day {
   display: block;
@@ -658,6 +667,79 @@ body {
   font-size: large;
   font-family: 'Lucida Console'; }
 
+.hamburger {
+  border-style: none;
+  background-color: transparent;
+  margin-top: 15px;
+  cursor: pointer; }
+  .hamburger__box {
+    width: 35px;
+    height: 24px;
+    display: inline-block;
+    position: relative; }
+  .hamburger__inner {
+    width: 100%;
+    height: 3px;
+    background-color: black;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+    -webkit-transition: background-color .1s .2s ease-in-out;
+    -o-transition: background-color .1s .2s ease-in-out;
+    transition: background-color .1s .2s ease-in-out; }
+    .hamburger__inner::before {
+      width: 100%;
+      height: 3px;
+      background-color: black;
+      position: absolute;
+      content: '';
+      top: 10px;
+      left: 0;
+      -webkit-transition: -webkit-transform .2s .2s ease-in-out;
+      transition: -webkit-transform .2s .2s ease-in-out;
+      -o-transition: transform .2s .2s ease-in-out;
+      transition: transform .2s .2s ease-in-out;
+      transition: transform .2s .2s ease-in-out, -webkit-transform .2s .2s ease-in-out; }
+    .hamburger__inner::after {
+      width: 100%;
+      height: 3px;
+      background-color: black;
+      position: absolute;
+      content: '';
+      top: -10px;
+      left: 0;
+      -webkit-transition: -webkit-transform .2s .2s ease-in-out;
+      transition: -webkit-transform .2s .2s ease-in-out;
+      -o-transition: transform .2s .2s ease-in-out;
+      transition: transform .2s .2s ease-in-out;
+      transition: transform .2s .2s ease-in-out, -webkit-transform .2s .2s ease-in-out; }
+
+.hamburger__active {
+  -webkit-transition: -webkit-transform .2s .2s ease-in-out;
+  transition: -webkit-transform .2s .2s ease-in-out;
+  -o-transition: transform .2s .2s ease-in-out;
+  transition: transform .2s .2s ease-in-out;
+  transition: transform .2s .2s ease-in-out, -webkit-transform .2s .2s ease-in-out;
+  -webkit-transform: translateX(220px);
+      -ms-transform: translateX(220px);
+          transform: translateX(220px); }
+
+.hamburger__active .hamburger__inner {
+  background-color: transparent; }
+
+.hamburger__active .hamburger__inner::after {
+  -webkit-transform: translateY(10px) rotate(45deg);
+      -ms-transform: translateY(10px) rotate(45deg);
+          transform: translateY(10px) rotate(45deg); }
+
+.hamburger__active .hamburger__inner::before {
+  -webkit-transform: translateY(-10px) rotate(-45deg);
+      -ms-transform: translateY(-10px) rotate(-45deg);
+          transform: translateY(-10px) rotate(-45deg); }
+
 .delete {
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
@@ -671,6 +753,11 @@ body {
   padding-top: 4px;
   border-radius: 50%;
   cursor: pointer; }
+
+.image__trashBin {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  padding-top: 15px; }
 
 .input {
   position: fixed;
@@ -723,24 +810,6 @@ body {
   text-decoration: line-through;
   color: rgba(128, 128, 128, 0.69); }
 
-li {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  border-radius: 10px;
-  background-color: lightsteelblue;
-  color: black;
-  padding: 15px;
-  text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 25px;
-  font-weight: 800;
-  margin-bottom: 10px;
-  min-width: 300px; }
-
 .lineTrough {
   text-decoration: line-through;
   color: rgba(0, 0, 0, 0.596); }
@@ -787,6 +856,36 @@ li {
 .monthName__header {
   text-align: center; }
 
+.navigation {
+  z-index: 2;
+  padding: 15px;
+  position: absolute;
+  background-color: rgba(187, 179, 179, 0.664);
+  border-radius: 20px;
+  height: 80vh;
+  width: 200px;
+  -webkit-box-shadow: 7px 7px 2px gray;
+          box-shadow: 7px 7px 2px gray;
+  -webkit-transform: translateX(-250px);
+      -ms-transform: translateX(-250px);
+          transform: translateX(-250px);
+  -webkit-transition: -webkit-transform .2s .2s ease-in-out;
+  transition: -webkit-transform .2s .2s ease-in-out;
+  -o-transition: transform .2s .2s ease-in-out;
+  transition: transform .2s .2s ease-in-out;
+  transition: transform .2s .2s ease-in-out, -webkit-transform .2s .2s ease-in-out; }
+  .navigation__list {
+    padding-bottom: 10px;
+    padding-left: 10px;
+    list-style: none; }
+  .navigation__item {
+    margin-top: 8px; }
+
+.navigation--active {
+  -webkit-transform: translateX(10px);
+      -ms-transform: translateX(10px);
+          transform: translateX(10px); }
+
 .notDone {
   text-decoration: none;
   display: -webkit-box;
@@ -818,11 +917,28 @@ li {
 .statusCircle {
   width: 15px;
   height: 15px;
-  border-radius: 50%;
-  background-color: green; }
+  border-radius: 50%; }
+  .statusCircle--green {
+    background-color: green; }
+  .statusCircle--yellow {
+    background-color: yellow; }
+  .statusCircle--crimson {
+    background-color: crimson; }
 
 .statusCircleDone {
   background-color: transparent; }
+
+.strip__done {
+  background-color: #575772;
+  max-width: inherit;
+  height: 18px;
+  border-top-right-radius: inherit;
+  border-top-left-radius: inherit;
+  color: white;
+  font-size: 11px;
+  text-align: center;
+  padding: 4px 0;
+  cursor: pointer; }
 
 .strip__pko {
   background-color: blue;
@@ -908,7 +1024,7 @@ li {
       align-self: flex-end;
   padding-right: 10px; }
 
-ul {
+.list__transfers {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

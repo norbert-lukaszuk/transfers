@@ -20,8 +20,24 @@
 </head>
 
 <body>
-  <button class="button" id="buttonPopup"> + </button>
-  <button class="button" id="button__calendar"> Calendar </button>
+  <button class="hamburger">
+    <span class="hamburger__box">
+        <span class="hamburger__inner">
+
+        </span>
+    </span>
+</button>
+  <div class="navigation">Menu
+    <ul class="navigation__list">
+      <li class="navigation__item"><button class="button__add">Add new transfer</button></li>
+      <li class="navigation__item"><button class="button__calendar" id="button__calendar">Calendar view</button></li>
+      <li class="navigation__item"><input type="checkbox" name="show__done" id="show__done"><label for="show__done">Show done transfers</label></li>
+      <li class="navigation__item"></li>
+    </ul>
+  </div>
+  
+  <!-- <button class="button" id="buttonPopup"> + </button> -->
+  <!-- <button class="button" id="button__calendar"> Calendar </button> -->
   <div class="popup">
   
     <form class="transfer">
@@ -132,31 +148,8 @@
     
   </div>
   <div class="list">
-    <ul>
-      <!--       <div class="container">
-          <div class="strip__mbank">28.12.2019</div>
-          <div class="logoWraper">
-            <img src="assets/img/mbank 30x30.jpg">
-            <div class="category">Czynsz</div>
-            <div class="statusCircle"></div>
-          </div>
-          <div class="timeLeft">2 d.</div>
-          <p class="title">Faktura 1234/12/2019</p>
-        </div>
-        
-        <div class="container">
-            
-          <div class="strip__pko">28.12.2019</div>
-          <div class="logoWraper">
-            <img src="assets/img/pkobp 467x485.jpg">
-            <div class="category">Czynsz</div>
-            <div class="statusCircle"></div>
-          </div>
-          <img class="trashBin" src="assets/img/delete 30x30.png" alt="trashBin icon">
-          <div class="timeLeft">2 d.</div>
-          <p class="title">Faktura 1234/12/2019</p>
-          <div class="close"></div>
-        </div> -->
+    <ul class="list__transfers">
+
   
     </ul>
     <form class="input">
