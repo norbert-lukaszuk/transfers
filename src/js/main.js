@@ -114,16 +114,17 @@ db.collection('bankTransfers').get()
       <div class="statusCircle ${statusCircle(dayDifference)}"></div>
     </div>
     <div class="timeLeft">${dateFns.differenceInDays(new Date(data.date), new Date())} d.</div> 
-    <div class="container__bar">
+    <div class="container__bar container__bar--hide">
         <div class="amount">${data.amount} zł</div> 
         <p class="title">${data.title}</p>
             <div class="containerBar__icons">
-            <i class="far fa-check-square"></i>
-            <i class="far fa-edit"></i>
+            <i class="icon__checked far fa-check-square"></i>
+            <i class="icon__edit far fa-edit"></i>
+            <i class="icon__delete far fa-trash-alt"></i>
             </div>
         </div>
     
-    <i class="arrow fas fa-chevron-up"></i>
+    <i class="arrow fas fa-chevron-up fa-rotate-180"></i>
     </div>`;
     ul.append(li);
   }
@@ -131,9 +132,16 @@ db.collection('bankTransfers').get()
   )
 })
 ul.addEventListener('click', e=>{
-  console.log(e.target.parentElement.children);
+  console.log(e.target.parentElement.parentElement.parentElement.getAttribute('data-id'));
+  if(e.target.tagName === 'I' && e.target.classList.contains('arrow')){
   e.target.parentElement.children.item(3).classList.toggle('container__bar--hide');
   e.target.parentElement.children.item(4).classList.toggle('fa-rotate-180');
+  }
+  if(e.target.tagName === 'I' && e.target.classList.contains('icon__delete')){
+    let id = e.target.parentElement.parentElement.parentElement.getAttribute('data-id');
+    const list = document.querySelectorAll('li');
+    console.log('my console log: list', list)
+    }
 })
 hamburger.addEventListener('click', e => {
   hamburger.classList.toggle('hamburger__active');
