@@ -97,6 +97,45 @@ const monthFirstDay = (day, month, year) => {
   else { return startDay }
 }
 
+const addTransfer = (amount, bank, category, date, status, title)=>{
+  if(status === 'done'){
+    const html = `<div class="container container__done" id=${idNum}>
+    <div class="strip__done">${dat}</div>
+    <div class="logoWraper">
+    <img class="image__trashBin" src="assets/img/delete 30x30.png">
+      <div class="category">${cat}</div>
+      <img src="assets/img/checked 64x64.png">
+    </div>
+    <div class="timeLeft timeLeftDone"></div> 
+    <div class="amount">${amun}</div> 
+    <p class="title">${tit}</p>
+  </div>`;
+
+  }
+  else{
+    const html = `
+    <div class="strip__${bank}">${date}</div>
+    <div class="logoWraper">
+      <img class="image" src="assets/img/${bank} 30x30.png">
+      <div class="category">${category}</div>
+      <div class="statusCircle ${statusCircle(dayDifference)}"></div>
+    </div>
+    <div class="timeLeft">${dateFns.differenceInDays(new Date(date), new Date())} d.</div> 
+    <div class="container__bar container__bar--hide">
+        <div class="amount">${amount} zł</div> 
+        <p class="title">${title}</p>
+            <div class="containerBar__icons">
+            <i class="icon__checked far fa-check-square"></i>
+            <i class="icon__edit far fa-edit"></i>
+            <i class="icon__delete far fa-trash-alt"></i>
+            </div>
+        </div>
+    
+    <i class="arrow fas fa-chevron-down"></i>
+    </div>`;
+  }
+}
+
 db.collection('bankTransfers').get()
 .then(snapshot=>{
   snapshot.docs.forEach(doc=>{
@@ -107,9 +146,9 @@ db.collection('bankTransfers').get()
     const dayDifference = dateFns.differenceInDays(new Date(data.date), new Date());
     console.log(data.date);
     li.innerHTML= `
-    <div class="strip__mbank">${data.date}</div>
+    <div class="strip__${data.bank}">${data.date}</div>
     <div class="logoWraper">
-      <img class="image" src="assets/img/mbank 30x30.png">
+      <img class="image" src="assets/img/${data.bank} 30x30.png">
       <div class="category">${data.category}</div>
       <div class="statusCircle ${statusCircle(dayDifference)}"></div>
     </div>
@@ -124,7 +163,7 @@ db.collection('bankTransfers').get()
             </div>
         </div>
     
-    <i class="arrow fas fa-chevron-up fa-rotate-180"></i>
+    <i class="arrow fas fa-chevron-down"></i>
     </div>`;
     ul.append(li);
   }
