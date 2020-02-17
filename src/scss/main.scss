@@ -38,7 +38,14 @@ input[type="text"]::-webkit-input-placeholder{
   font-size: 16;
   font-weight: bold;
   text-align: center;
+    &--hide{
+      display: none;
+    }
   
+}
+.arrow{
+  font-size: 1.5rem;
+  text-align: center;
 }
 .backArrow{
   display: block;
@@ -283,12 +290,21 @@ body {
         6px 6px 10px rgba(0, 0, 0, 0.2);
   
 }
+.container__bar{
+  &--hide{
+    display: none;
+  }
+}
 .container__done--hide{
   
     display: none;
   }
  
-
+.containerBar__icons{
+  display: flex;
+  justify-content: center;
+  align-items: space-between;
+}
 .day{
   display: block;
   height: 100px;
@@ -638,7 +654,9 @@ body {
 .title{
   text-align: center;
   margin: 10px 0 5px 0;
-  
+    &--hide{
+      display: none;
+    }
 }
 #toList{
   font-size: 25px;

@@ -159,7 +159,33 @@
     </form>
   </div>
 
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-firestore.js"></script>
 
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+   https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-analytics.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyBtqXcKXeh1MPAlJIxopKHe0juh9lki0jY",
+      authDomain: "transfers-6bc44.firebaseapp.com",
+      databaseURL: "https://transfers-6bc44.firebaseio.com",
+      projectId: "transfers-6bc44",
+      storageBucket: "transfers-6bc44.appspot.com",
+      messagingSenderId: "176631941413",
+      appId: "1:176631941413:web:192f2c586188cfbbabf2cc",
+      measurementId: "G-S5LS2W2PQS"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    // firebase.analytics();
+    const db = firebase.firestore();
+  </script>
+  <script src="https://kit.fontawesome.com/420f196fe5.js" crossorigin="anonymous"></script>
+  <script src="http://cdn.date-fns.org/v1.9.0/date_fns.min.js"></script>
   <script src="js/main.js"></script>
 </body>
 

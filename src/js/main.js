@@ -97,6 +97,44 @@ const monthFirstDay = (day, month, year) => {
   else { return startDay }
 }
 
+db.collection('bankTransfers').get()
+.then(snapshot=>{
+  snapshot.docs.forEach(doc=>{
+    const li = document.createElement('li');
+    li.setAttribute('data-id', doc.id);
+    li.setAttribute('class', 'container');
+    const data = doc.data();
+    const dayDifference = dateFns.differenceInDays(new Date(data.date), new Date());
+    console.log(data.date);
+    li.innerHTML= `
+    <div class="strip__mbank">${data.date}</div>
+    <div class="logoWraper">
+      <img class="image" src="assets/img/mbank 30x30.png">
+      <div class="category">${data.category}</div>
+      <div class="statusCircle ${statusCircle(dayDifference)}"></div>
+    </div>
+    <div class="timeLeft">${dateFns.differenceInDays(new Date(data.date), new Date())} d.</div> 
+    <div class="container__bar">
+        <div class="amount">${data.amount} zł</div> 
+        <p class="title">${data.title}</p>
+            <div class="containerBar__icons">
+            <i class="far fa-check-square"></i>
+            <i class="far fa-edit"></i>
+            </div>
+        </div>
+    
+    <i class="arrow fas fa-chevron-up"></i>
+    </div>`;
+    ul.append(li);
+  }
+    
+  )
+})
+ul.addEventListener('click', e=>{
+  console.log(e.target.parentElement.children);
+  e.target.parentElement.children.item(3).classList.toggle('container__bar--hide');
+  e.target.parentElement.children.item(4).classList.toggle('fa-rotate-180');
+})
 hamburger.addEventListener('click', e => {
   hamburger.classList.toggle('hamburger__active');
   navigation.classList.toggle('navigation--active');
@@ -362,6 +400,10 @@ bankArray.forEach(e => {
 })
 
 ul.addEventListener('click', e => {
+  console.log(e.target);
+  if(e.target.tagName === 'I' /* && e.target.classList.contains('arrow') */){
+    console.log(e.target.tagName);
+  }
 
   if (e.target.tagName === 'DIV' && e.target.classList.contains('close')) {
     e.target.firstElementChild.classList.add('buttonClose--show');
