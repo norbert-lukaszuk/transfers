@@ -304,8 +304,11 @@ body {
 .containerBar__icons{
   display: flex;
   justify-content: space-evenly;
-  align-items: center;
+  align-items: baseline;
   padding: 10px;
+    &--done{
+      justify-content: flex-start;
+    }
 }
 .day{
   display: block;
