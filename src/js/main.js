@@ -288,91 +288,19 @@ backArrow.addEventListener('click', e => {
 okButton.addEventListener('click', e => {
   // let bankObject = {};
   // let bankArray = JSON.parse(localStorage.getItem('bankArray'));
-  if (bankArray === null) {
-    // bankArray = [];
-  }
+  // if (bankArray === null) {
+  //   bankArray = [];
+  // }
   const category = document.getElementById('category');
   if (bank__clicked != null) {//warunek wykonania pętli
-   const bankObject = Transfer(transfers.amount.value, transfers.bank.value, transfers.category.value, transfers.date.value, '',transfers.title.value);
+   const bankObject = Transfer(transfers.amount.value, bank__clicked, transfers.category.value, transfers.date.value, '',transfers.title.value);
     
     db.collection('bankTransfers').add(bankObject).then(()=>{
-      console.log('transfer added')
+      console.log('transfer added to firebase')
     })
-    // bankObject.bank = bank__clicked;
-    // bankObject.category = category.value;
-    // bankObject.date = date.value;
-    // bankObject.dateNumber = new Date(date.value);
-    // bankObject.title = title.value;
-    // bankObject.amount = amount.value;
-    // bankObject.status = '';
-    // bankObject.id = new Date().getTime();
-    // bankArray.push(bankObject);
-    const local = bankArray.sort((a, b) => new Date(b.date) - new Date(a.date));
-    local.reverse();
-    localStorage.setItem('bankArray', JSON.stringify(local));
-    ul.innerHTML = null;
-    bankArray.forEach(e => {
+    
 
-      const { bank, category: cat, date: dat, title: tit, amount: amun, status: stat, id: idNum } = e;
-      if (bank === 'mBank' && stat != 'done') {
-        const mbank_container = `<div class="container" id="${idNum}">
-          <div class="strip__mbank">${dat}</div>
-          <div class="logoWraper">
-            <img class="image" src="assets/img/mbank 30x30.png">
-            <div class="category">${cat}</div>
-            <div class="statusCircle ${statusCircle(daysLeft(dat))}"></div>
-          </div>
-          <div class="timeLeft">${daysLeft(dat)} d.</div> 
-          <div class="amount">${amun} zł</div> 
-          <p class="title">${tit}</p>
-          <div class="close">
-          <button class="buttonClose">Cancel</button>
-          <button class ="buttonDone">Done</button>
-          </div>          
-          </div`;
-        ul.innerHTML += mbank_container;
-      }
-      if (bank === 'PKO' && stat != 'done') {
-        const pko_container = `<div class="container id="${idNum}">
-        <div class="strip__pko">${dat}</div>
-        <div class="logoWraper">
-          <img class="image" src="assets/img/pkobp 467x485.png">
-          <div class="category">${cat}</div>
-          <div class="statusCircle ${statusCircle(daysLeft(dat))}"></div>
-        </div>
-        <div class="timeLeft">${daysLeft(dat)} d.</div> 
-        <div class="amount">${amun}</div> 
-        <p class="title">${tit}</p>
-        <div class="close">
-        <button class="buttonClose">Cancel</button>
-        <button class ="buttonDone">Done</button>
-        </div>          
-      </div`;
-        ul.innerHTML += pko_container;
-      }
-      else if (stat == 'done') {
-        const done_container = `<div class="container container__done container__done--hide" id=${idNum}>
-      <div class="strip__done">${dat}</div>
-      <div class="logoWraper">
-      <img class="image__trashBin" src="assets/img/delete 30x30.png">
-        <div class="category">${cat}</div>
-        <img src="assets/img/checked 64x64.png">
-      </div>
-      <div class="timeLeft timeLeftDone"></div> 
-      <div class="amount">${amun}</div> 
-      <p class="title">${tit}</p>
-    </div>`;
-
-        ul.innerHTML += done_container;
-        if (checkbox.checked) {
-          const done_containers = ul.querySelectorAll('.container__done--hide');
-          done_containers.forEach(e => e.classList.remove('container__done--hide'));
-        }
-      }
-    })
-
-
-    transfer.reset();// reset() resetuje tylko form
+    transfers.reset();// reset() resetuje tylko form
     //
 
     popup.style.display = 'none';
@@ -398,61 +326,61 @@ checkbox.onchange = () => {
 
 /******* REFRESSH ***********/
 
-const bankArray = JSON.parse(localStorage.getItem('bankArray'));
-bankArray.forEach(e => {
-  const keys = Object.keys(e);
-  const { bank, category, date, title, amount, status, id, containerClass, statusCircleClass, timeLeftClass } = e;
-  const mbank_container = `<div class="container" id="${id}">
-      <div class="strip__mbank">${date}</div>
-      <div class="logoWraper">
-        <img class="image" src="assets/img/mbank 30x30.png">
-        <div class="category">${category}</div>
-        <div class="statusCircle ${statusCircle(daysLeft(date))}"></div>
-      </div>
-      <div class="timeLeft">${daysLeft(date)} d.</div> 
-      <div class="amount">${amount} zł</div> 
-      <p class="title">${title}</p>
-      <div class="close">
-      <button class="buttonClose">Cancel</button>
-      <button class ="buttonDone">Done</button>
-      </div>          
-    </div>`;
-  const pko_container = `<div class="container" id="${id}">
-      <div class="strip__pko">${date}</div>
-      <div class="logoWraper">
-        <img class="image" src="assets/img/pkobp 467x485.png">
-        <div class="category">${category}</div>
-        <div class="statusCircle ${statusCircle(daysLeft(date))}"></div>
-      </div>
-      <div class="timeLeft">${daysLeft(date)} d.</div> 
-      <div class="amount">${amount}</div> 
-      <p class="title">${title}</p>
-      <div class="close">
-      <button class="buttonClose">Cancel</button>
-      <button class ="buttonDone">Done</button>
-      </div>          
-    </div>`;
-  const done_container = `<div class="container container__done container__done--hide" id=${id}>
-      <div class="strip__done">${date}</div>
-      <div class="logoWraper">
-      <img class="image__trashBin" src="assets/img/delete 30x30.png">
-        <div class="category">${category}</div>
-        <img src="assets/img/checked 64x64.png">
-      </div>
-      <div class="timeLeft timeLeftDone"></div> 
-      <div class="amount">${amount}</div> 
-      <p class="title">${title}</p>
-    </div>`;
-  if (status === 'done') {
-    ul.innerHTML += done_container;
-  }
-  if (bank === 'mBank' && status != 'done') {
-    ul.innerHTML += mbank_container;
-  }
-  if (bank === 'PKO' && status != 'done') {
-    ul.innerHTML += pko_container;
-  }
-})
+// const bankArray = JSON.parse(localStorage.getItem('bankArray'));
+// bankArray.forEach(e => {
+//   const keys = Object.keys(e);
+//   const { bank, category, date, title, amount, status, id, containerClass, statusCircleClass, timeLeftClass } = e;
+//   const mbank_container = `<div class="container" id="${id}">
+//       <div class="strip__mbank">${date}</div>
+//       <div class="logoWraper">
+//         <img class="image" src="assets/img/mbank 30x30.png">
+//         <div class="category">${category}</div>
+//         <div class="statusCircle ${statusCircle(daysLeft(date))}"></div>
+//       </div>
+//       <div class="timeLeft">${daysLeft(date)} d.</div> 
+//       <div class="amount">${amount} zł</div> 
+//       <p class="title">${title}</p>
+//       <div class="close">
+//       <button class="buttonClose">Cancel</button>
+//       <button class ="buttonDone">Done</button>
+//       </div>          
+//     </div>`;
+//   const pko_container = `<div class="container" id="${id}">
+//       <div class="strip__pko">${date}</div>
+//       <div class="logoWraper">
+//         <img class="image" src="assets/img/pkobp 467x485.png">
+//         <div class="category">${category}</div>
+//         <div class="statusCircle ${statusCircle(daysLeft(date))}"></div>
+//       </div>
+//       <div class="timeLeft">${daysLeft(date)} d.</div> 
+//       <div class="amount">${amount}</div> 
+//       <p class="title">${title}</p>
+//       <div class="close">
+//       <button class="buttonClose">Cancel</button>
+//       <button class ="buttonDone">Done</button>
+//       </div>          
+//     </div>`;
+//   const done_container = `<div class="container container__done container__done--hide" id=${id}>
+//       <div class="strip__done">${date}</div>
+//       <div class="logoWraper">
+//       <img class="image__trashBin" src="assets/img/delete 30x30.png">
+//         <div class="category">${category}</div>
+//         <img src="assets/img/checked 64x64.png">
+//       </div>
+//       <div class="timeLeft timeLeftDone"></div> 
+//       <div class="amount">${amount}</div> 
+//       <p class="title">${title}</p>
+//     </div>`;
+//   if (status === 'done') {
+//     ul.innerHTML += done_container;
+//   }
+//   if (bank === 'mBank' && status != 'done') {
+//     ul.innerHTML += mbank_container;
+//   }
+//   if (bank === 'PKO' && status != 'done') {
+//     ul.innerHTML += pko_container;
+//   }
+// })
 
 ul.addEventListener('click', e => {
   console.log(e.target);
