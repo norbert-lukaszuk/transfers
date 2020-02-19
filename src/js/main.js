@@ -35,13 +35,26 @@ const calendarButton = document.querySelector('.button__calendar');
 const calendarBackArow = document.querySelector('.calendar__backArow');
 const calendarWraper = document.querySelector('.calendar__wraper');
 const newDate = new Date(date);
-const transfer = document.querySelector('.transfer');
+const transfers = document.querySelector('.transfer');
 const ul = document.querySelector('.list__transfers');
 let input = document.querySelector('.input')
 const bankSelectWraper = document.querySelector('.bankSelectWraper');
 const mbankIcon = document.getElementById('mbankIcon');
 const pkoIcon = document.getElementById('pkoIcon');
 const list = document.querySelector('.list');
+const Transfer = (amount, bank, category, date, status, title) =>{
+    const transfer ={
+      amount: amount,
+      bank: bank,
+      category: category,
+      date: date,
+      status: status,
+      title: title,
+      
+    }
+    return transfer
+  }
+
 
 const daysLeft = (date) => {//funkcja zwraca liczbe dni miedzy datą a dziś
   return Math.ceil((new Date(date) - new Date()) / 1000 / 60 / 60 / 24);
@@ -273,23 +286,27 @@ backArrow.addEventListener('click', e => {
 
 /******** add new transfer ********/
 okButton.addEventListener('click', e => {
-  let bankObject = {};
-  let bankArray = JSON.parse(localStorage.getItem('bankArray'));
+  // let bankObject = {};
+  // let bankArray = JSON.parse(localStorage.getItem('bankArray'));
   if (bankArray === null) {
-    bankArray = [];
+    // bankArray = [];
   }
   const category = document.getElementById('category');
-  if (bank__clicked != null) {//warunek wykonania pętli 
-
-    bankObject.bank = bank__clicked;
-    bankObject.category = category.value;
-    bankObject.date = date.value;
-    bankObject.dateNumber = new Date(date.value);
-    bankObject.title = title.value;
-    bankObject.amount = amount.value;
-    bankObject.status = '';
-    bankObject.id = new Date().getTime();
-    bankArray.push(bankObject);
+  if (bank__clicked != null) {//warunek wykonania pętli
+   const bankObject = Transfer(transfers.amount.value, transfers.bank.value, transfers.category.value, transfers.date.value, '',transfers.title.value);
+    
+    db.collection('bankTransfers').add(bankObject).then(()=>{
+      console.log('transfer added')
+    })
+    // bankObject.bank = bank__clicked;
+    // bankObject.category = category.value;
+    // bankObject.date = date.value;
+    // bankObject.dateNumber = new Date(date.value);
+    // bankObject.title = title.value;
+    // bankObject.amount = amount.value;
+    // bankObject.status = '';
+    // bankObject.id = new Date().getTime();
+    // bankArray.push(bankObject);
     const local = bankArray.sort((a, b) => new Date(b.date) - new Date(a.date));
     local.reverse();
     localStorage.setItem('bankArray', JSON.stringify(local));
