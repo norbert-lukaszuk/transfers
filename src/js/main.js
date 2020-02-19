@@ -157,33 +157,48 @@ const addTransfer = (amount, bank, category, date, status, title)=>{
   }
   
 }
-
-db.collection('bankTransfers').get()
-.then(snapshot=>{
-  snapshot.docs.forEach(doc=>{
-    const li = document.createElement('li');
-    li.setAttribute('data-id', doc.id);
-    li.setAttribute('class', 'container');
-    const data = doc.data();
-    const dayDifference = dateFns.differenceInDays(new Date(data.date), new Date());
-    const {amount, bank, category, date, status, title} = data;
-    
-    li.innerHTML = addTransfer(amount, bank, category, date, status, title); 
-    ul.append(li);
-  }
-    
-  )
+db.collection('bankTransfers').onSnapshot(snapshot=>{
+  snapshot.docChanges().forEach(e=>{
+    const doc = e.doc;
+    console.log(e.type);
+  } )
 })
+
+// db.collection('bankTransfers').get()
+// .then(snapshot=>{
+//   snapshot.docs.forEach(doc=>{
+//     const li = document.createElement('li');
+//     li.setAttribute('data-id', doc.id);
+//     li.setAttribute('class', 'container');
+//     const data = doc.data();
+//     const dayDifference = dateFns.differenceInDays(new Date(data.date), new Date());
+//     const {amount, bank, category, date, status, title} = data;
+    
+//     li.innerHTML = addTransfer(amount, bank, category, date, status, title); 
+//     ul.append(li);
+//   }
+    
+//   )
+// })
 ul.addEventListener('click', e=>{
-  console.log(e.target.parentElement.parentElement.parentElement.getAttribute('data-id'));
+  // console.log(e.target.parentElement.parentElement.parentElement.getAttribute('data-id'));
   if(e.target.tagName === 'I' && e.target.classList.contains('arrow')){
   e.target.parentElement.children.item(3).classList.toggle('container__bar--hide');
   e.target.parentElement.children.item(4).classList.toggle('fa-rotate-180');
   }
   if(e.target.tagName === 'I' && e.target.classList.contains('icon__delete')){
     let id = e.target.parentElement.parentElement.parentElement.getAttribute('data-id');
-    const list = document.querySelectorAll('li');
-    console.log('my console log: list', list)
+    const containers =  document.querySelectorAll('.container');
+
+    containers.forEach(e=>{ 
+      if(e.getAttribute('data-id') === id){
+        db.collection('bankTransfers').doc(id).delete()
+        .then(console.log('transfer deleted from firebase'))
+        .catch(err => console.log(err))
+      }
+  
+  })
+    
     }
 })
 hamburger.addEventListener('click', e => {
@@ -382,60 +397,59 @@ checkbox.onchange = () => {
 //   }
 // })
 
-ul.addEventListener('click', e => {
-  console.log(e.target);
-  if(e.target.tagName === 'I' /* && e.target.classList.contains('arrow') */){
-    console.log(e.target.tagName);
-  }
+// ul.addEventListener('click', e => {
+//   if(e.target.tagName === 'I' /* && e.target.classList.contains('arrow') */){
+//   }
 
-  if (e.target.tagName === 'DIV' && e.target.classList.contains('close')) {
-    e.target.firstElementChild.classList.add('buttonClose--show');
-    e.target.lastElementChild.classList.add('buttonDone--show');
-  }
-  if (e.target.tagName === 'BUTTON' && e.target.classList.contains('buttonDone')) {
-    let bankArray = JSON.parse(localStorage.getItem('bankArray'));
-    const containerId = parseInt(e.target.parentNode.parentNode.getAttribute('id'));
-    e.target.parentNode.parentNode.classList.add('container__done', 'container__done--hide');
-    bankArray.forEach(f => {
-      if (containerId === f.id) {
-        f.status = 'done'
-        const { date, category, amount, title } = f;
-        const swap__container = document.getElementById(JSON.stringify(containerId));
-        swap__container.innerHTML = `<div class="strip__done">${date}</div>
-         <div class="logoWraper">
-         <img class="image__trashBin" src="assets/img/delete 30x30.png">
-           <div class="category">${category}</div>
-           <img src="assets/img/checked 64x64.png">
-         </div>
-         <div class="timeLeft timeLeftDone"></div> 
-         <div class="amount">${amount}</div> 
-         <p class="title">${title}</p>`;
-      }
-    })
-    const local = JSON.stringify(bankArray);
-    localStorage.setItem('bankArray', local);
-    e.target.parentNode.remove();
-  }
-  if (e.target.classList.contains('buttonClose')) {//tu trzeba poprawić !!
-    e.target.classList.remove('buttonClose--show');
-    e.target.parentElement.children.item(1).classList.remove('buttonDone--show');
-  }
-  if (e.target.tagName === 'IMG' && e.target.classList.contains('image__trashBin')) {//usuwanie elementu z listy 
-    const containerId = parseInt(e.target.parentElement.parentElement.getAttribute('id'));
-    const bankArray = JSON.parse(localStorage.getItem('bankArray'));
-    let indexDel = null;
-    const indexFun = (elemenent, index) => {
-      if (elemenent.id === containerId) {
-        indexDel = index
-      }
+//   if (e.target.tagName === 'DIV' && e.target.classList.contains('close')) {
+//     e.target.firstElementChild.classList.add('buttonClose--show');
+//     e.target.lastElementChild.classList.add('buttonDone--show');
+//   }
+//   if (e.target.tagName === 'BUTTON' && e.target.classList.contains('buttonDone')) {
+//     let bankArray = JSON.parse(localStorage.getItem('bankArray'));
+//     const containerId = parseInt(e.target.parentNode.parentNode.getAttribute('id'));
+//     e.target.parentNode.parentNode.classList.add('container__done', 'container__done--hide');
+//     bankArray.forEach(f => {
+//       if (containerId === f.id) {
+//         f.status = 'done'
+//         const { date, category, amount, title } = f;
+//         const swap__container = document.getElementById(JSON.stringify(containerId));
+//         swap__container.innerHTML = `<div class="strip__done">${date}</div>
+//          <div class="logoWraper">
+//          <img class="image__trashBin" src="assets/img/delete 30x30.png">
+//            <div class="category">${category}</div>
+//            <img src="assets/img/checked 64x64.png">
+//          </div>
+//          <div class="timeLeft timeLeftDone"></div> 
+//          <div class="amount">${amount}</div> 
+//          <p class="title">${title}</p>`;
+//       }
+//     })
+//     const local = JSON.stringify(bankArray);
+//     localStorage.setItem('bankArray', local);
+//     e.target.parentNode.remove();
+//   }
+//   if (e.target.classList.contains('buttonClose')) {//tu trzeba poprawić !!
+//     e.target.classList.remove('buttonClose--show');
+//     e.target.parentElement.children.item(1).classList.remove('buttonDone--show');
+//   }
+//   if (e.target.tagName === 'IMG' && e.target.classList.contains('image__trashBin')) {//usuwanie elementu z listy 
+//     const containerId = parseInt(e.target.parentElement.parentElement.getAttribute('id'));
+//     const bankArray = JSON.parse(localStorage.getItem('bankArray'));
+//     let indexDel = null;
+//     const indexFun = (elemenent, index) => {
+//       if (elemenent.id === containerId) {
+console.log("TCL: //indexFun -> id ", id )
+//         indexDel = index
+//       }
 
-    }
-    bankArray.forEach(indexFun);
-    console.log(indexDel);
-    bankArray.splice(indexDel, 1);
-    const local = JSON.stringify(bankArray);
-    localStorage.setItem('bankArray', local);
-    e.target.parentElement.parentElement.remove();
+//     }
+//     bankArray.forEach(indexFun);
+//     console.log(indexDel);
+//     bankArray.splice(indexDel, 1);
+//     const local = JSON.stringify(bankArray);
+//     localStorage.setItem('bankArray', local);
+//     e.target.parentElement.parentElement.remove();
 
-  }
-})
+//   }
+// })
