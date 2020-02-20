@@ -20,29 +20,27 @@
 </head>
 
 <body>
-  <button class="hamburger">
-    <span class="hamburger__box">
-        <span class="hamburger__inner">
-
-        </span>
-    </span>
-</button>
-  <div class="navigation">Menu
+  
+  <div class="navigation">
     <ul class="navigation__list">
-      <li class="navigation__item"><button class="button__add">Add new transfer</button></li>
-      <li class="navigation__item"><button class="button__calendar" id="button__calendar">Calendar view</button></li>
-      <li class="navigation__item"><input type="checkbox" name="show__done" id="show__done"><label for="show__done">Show done transfers</label></li>
-      <li class="navigation__item"></li>
+      <li><div class="navigation__item"><i class="button__add far fa-plus-square" id="addButton"></i>
+      <label for="addButton">Add new trnsfer</label>
+      </div></li>
+      <li><div class="navigation__item"><i class="button__calendar far fa-calendar-alt" id="calendarButton"></i>
+      <label for="calendarButton">Calendar view</label>
+      </div></li>
+      <li><div class="navigation__item"><i class="button__show far fa-eye" id="show__done"></i>
+      <label for="show__done">Calendar view</label>
+      </div></li>
     </ul>
   </div>
   
   <!-- <button class="button" id="buttonPopup"> + </button> -->
   <!-- <button class="button" id="button__calendar"> Calendar </button> -->
-  <div class="popup">
+  <div class="add__transfer" id="add__transfer">
   
     <form class="transfer">
-  
-      <span class="backArrow">←</span>
+      <i class="backArrow fas fa-angle-double-left" id="backArrow"></i>
       <label for="bank" class="bankLabel">Select the bank</label>
       <div class="bankSelectWraper">
         <img id="mbankIcon" src="assets/img/mbank 30x30.png" alt="mbank logo">

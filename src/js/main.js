@@ -15,14 +15,17 @@ if ('serviceWorker' in navigator) {
     });
   });
 }
+const add__transfer = document.getElementById('add__transfer');
+const addButon = document.getElementById('addButton');
+const backArrow = document.getElementById('backArrow');
 const checkbox = document.getElementById('show__done');
 
 const hamburger = document.querySelector('.hamburger');
 const navigation = document.querySelector('.navigation');
-const addButon = document.querySelector('.button__add');
+// const addButon = document.querySelector('.button__add');
 const popup = document.querySelector('.popup');
 const cancel = document.getElementById('cancel');
-const backArrow = document.querySelector('.backArrow');
+// const backArrow = document.querySelector('.backArrow');
 const date = document.getElementById('calendar');
 const today = document.getElementById('calendar');
 let bank__clicked = null;
@@ -213,11 +216,7 @@ ul.addEventListener("click", e => {
     });
   }
 });
-hamburger.addEventListener('click', e => {
-  hamburger.classList.toggle('hamburger__active');
-  navigation.classList.toggle('navigation--active');
 
-})
 
 bankSelectWraper.addEventListener('click', e => {
   if (e.target.tagName === 'IMG' && e.target.id === 'mbankIcon') {
@@ -232,13 +231,18 @@ bankSelectWraper.addEventListener('click', e => {
   }
 })
 /****Otwieranie popupa  */
-addButon.addEventListener('click', e => {
-  popup.style.display = 'block';
-  list.classList.add('listHide');
-  navigation.classList.remove('navigation--active');
-  hamburger.classList.remove('hamburger__active');
-  today.valueAsDate = new Date(); //aktualna data w input date
+// addButon.addEventListener('click', e => {
+//   popup.style.display = 'block';
+//   list.classList.add('listHide');
+//   navigation.classList.remove('navigation--active');
+//   hamburger.classList.remove('hamburger__active');
+//   today.valueAsDate = new Date(); //aktualna data w input date
+// })
+
+addButon.addEventListener('click', e=>{
+  add__transfer.classList.toggle('add__transfer--show')
 })
+
 
 /****** włączanie widoku kalendarza******/
 calendarButton.addEventListener('click', e => {
@@ -306,7 +310,7 @@ cancel.addEventListener('click', e => {
   list.classList.remove('listHide');
 })
 backArrow.addEventListener('click', e => {
-  popup.style.display = 'none';
+  add__transfer.classList.remove('add__transfer--show')
   list.classList.remove('listHide');
 
 })

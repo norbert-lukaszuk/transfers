@@ -48,12 +48,8 @@ input[type="text"]::-webkit-input-placeholder{
   text-align: center;
 }
 .backArrow{
-  display: block;
-  font-size: 38px;
-  font-weight: 900;
-  
-  margin-left: 10px;
-  cursor: default;
+  font-size: 2rem;
+  padding: 10px 20px;
 }
 .bankSelectBlock{
   display: flex;
@@ -101,10 +97,21 @@ body {
 
 }
 .button__add{
-  border-style: none;
-  background: none;
+  font-size: 1.5rem;
+  padding: 10px;
   cursor: pointer;
 }
+.button__calendar{
+  font-size: 1.5rem;
+  padding: 10px;
+  cursor: pointer;
+}
+.button__show{
+  font-size: 1.5rem;
+  padding: 10px;
+  cursor: pointer;
+}
+
 #button__calendar{
   border-style: none;
   background: none;
@@ -529,31 +536,49 @@ body {
 .monthName__header{
   text-align: center;
 }
-.navigation{
-  z-index: 2;
-  padding: 15px;
-  position: absolute;
-  background-color: rgba(187, 179, 179, 0.664);
-  border-radius: 20px;
-  height: 80vh;
-  width: 200px;
-  box-shadow: 7px 7px 2px gray;
+.navigation__list{
+  padding: 0;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  list-style: none;
+}
+.navigation__item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.navigation__item label{
+  display: block;
+  font-size: 1rem;
   
-  transform: translateX(-250px);
-  transition: transform .2s .2s ease-in-out;
-  &__list{
-    padding-bottom: 10px;
-    padding-left: 10px;
-    list-style: none;
+}
+// .navigation{
+//   z-index: 2;
+//   padding: 15px;
+//   position: absolute;
+//   background-color: rgba(187, 179, 179, 0.664);
+//   border-radius: 20px;
+//   height: 80vh;
+//   width: 200px;
+//   box-shadow: 7px 7px 2px gray;
+  
+//   transform: translateX(-250px);
+//   transition: transform .2s .2s ease-in-out;
+//   &__list{
+//     padding-bottom: 10px;
+//     padding-left: 10px;
+//     list-style: none;
     
-  }
-  &__item{
-    margin-top: 8px;
-  }
-}
-.navigation--active{
-  transform: translateX(10px);
-}
+//   }
+//   &__item{
+//     margin-top: 8px;
+//   }
+// }
+// .navigation--active{
+//   transform: translateX(10px);
+// }
 .notDone{
   text-decoration: none;
   display: flex;
@@ -566,8 +591,7 @@ body {
 #pkoIcon{
   margin-left: 10px;
 }
-.popup{
-
+.add__transfer{
   background-color: inherit;
   width: 100%;
   height: 1000px;
@@ -575,6 +599,9 @@ body {
   top: 0;
   left: 0;
   display: none;
+}
+.add__transfer--show{
+  display: block;
 }
 .statusCircle{
   width: 15px;
@@ -694,7 +721,12 @@ body {
   margin-bottom: 30px;
 }
 @media(max-width:360px){
-  
+  .button__add{
+    font-size: 2rem;
+  }
+  .button__calendar{
+    font-size: 2rem;
+  }
   .calendar__wraper{
     grid-template-columns: auto;
 
@@ -712,5 +744,9 @@ body {
       &__name{
         font-size: 0.75rem;
       }
+  }
+ 
+  .navigation__item label{
+    visibility: hidden;
   }
 }
