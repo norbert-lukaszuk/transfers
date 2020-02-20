@@ -188,22 +188,6 @@ db.collection('bankTransfers').onSnapshot(snapshot=>{
   } )
 })
 
-// db.collection('bankTransfers').get()
-// .then(snapshot=>{
-//   snapshot.docs.forEach(doc=>{
-//     const li = document.createElement('li');
-//     li.setAttribute('data-id', doc.id);
-//     li.setAttribute('class', 'container');
-//     const data = doc.data();
-//     const dayDifference = dateFns.differenceInDays(new Date(data.date), new Date());
-//     const {amount, bank, category, date, status, title} = data;
-    
-//     li.innerHTML = addTransfer(amount, bank, category, date, status, title); 
-//     ul.append(li);
-//   }
-    
-//   )
-// })
 ul.addEventListener("click", e => {
   // console.log(e.target.parentElement.parentElement.parentElement.getAttribute('data-id'));
   if (e.target.tagName === "I" && e.target.classList.contains("arrow")) {
@@ -239,12 +223,12 @@ bankSelectWraper.addEventListener('click', e => {
   if (e.target.tagName === 'IMG' && e.target.id === 'mbankIcon') {
     e.target.classList.toggle('bankClicked');
     pkoIcon.classList.remove('bankClicked');
-    bank__clicked = 'mBank';
+    bank__clicked = 'mbank';
   }
   else if (e.target.tagName === 'IMG' && e.target.id === 'pkoIcon') {
     e.target.classList.toggle('bankClicked');
     mbankIcon.classList.remove('bankClicked');
-    bank__clicked = 'PKO';
+    bank__clicked = 'pkobp';
   }
 })
 /****Otwieranie popupa  */
@@ -467,7 +451,6 @@ checkbox.onchange = () => {
 //     let indexDel = null;
 //     const indexFun = (elemenent, index) => {
 //       if (elemenent.id === containerId) {
-console.log("TCL: //indexFun -> id ", id )
 //         indexDel = index
 //       }
 
