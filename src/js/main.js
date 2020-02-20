@@ -157,10 +157,34 @@ const addTransfer = (amount, bank, category, date, status, title)=>{
   }
   
 }
+const deleteTransfer = (id)=>{
+
+  const containers =  document.querySelectorAll('.container');
+  containers.forEach(e=>{ 
+    if(e.getAttribute('data-id') === id){
+      db.collection('bankTransfers').doc(id).delete()
+      .then(console.log('transfer deleted from firebase'))
+      .catch(err => console.log(err))
+    }
+
+})
+
+}
 db.collection('bankTransfers').onSnapshot(snapshot=>{
   snapshot.docChanges().forEach(e=>{
     const doc = e.doc;
     console.log(e.type);
+    if(e.type === 'added'){
+      const li = document.createElement('li');
+    li.setAttribute('data-id', doc.id);
+    li.setAttribute('class', 'container');
+    const data = doc.data();
+    const dayDifference = dateFns.differenceInDays(new Date(data.date), new Date());
+    const {amount, bank, category, date, status, title} = data;
+    
+    li.innerHTML = addTransfer(amount, bank, category, date, status, title); 
+    ul.append(li);
+    }
   } )
 })
 
@@ -180,27 +204,31 @@ db.collection('bankTransfers').onSnapshot(snapshot=>{
     
 //   )
 // })
-ul.addEventListener('click', e=>{
+ul.addEventListener("click", e => {
   // console.log(e.target.parentElement.parentElement.parentElement.getAttribute('data-id'));
-  if(e.target.tagName === 'I' && e.target.classList.contains('arrow')){
-  e.target.parentElement.children.item(3).classList.toggle('container__bar--hide');
-  e.target.parentElement.children.item(4).classList.toggle('fa-rotate-180');
+  if (e.target.tagName === "I" && e.target.classList.contains("arrow")) {
+    e.target.parentElement.children
+      .item(3)
+      .classList.toggle("container__bar--hide");
+    e.target.parentElement.children.item(4).classList.toggle("fa-rotate-180");
   }
-  if(e.target.tagName === 'I' && e.target.classList.contains('icon__delete')){
-    let id = e.target.parentElement.parentElement.parentElement.getAttribute('data-id');
-    const containers =  document.querySelectorAll('.container');
-
-    containers.forEach(e=>{ 
-      if(e.getAttribute('data-id') === id){
-        db.collection('bankTransfers').doc(id).delete()
-        .then(console.log('transfer deleted from firebase'))
-        .catch(err => console.log(err))
+  if (e.target.tagName === "I" && e.target.classList.contains("icon__delete")) {
+    let id = e.target.parentElement.parentElement.parentElement.getAttribute(
+      "data-id"
+    );
+    const containers = document.querySelectorAll(".container");
+    containers.forEach(e => {
+      if (e.getAttribute("data-id") === id) {
+        db.collection("bankTransfers")
+          .doc(id)
+          .delete()
+          .then(console.log("transfer deleted from firebase"))
+          .catch(err => console.log(err));
+        e.remove();
       }
-  
-  })
-    
-    }
-})
+    });
+  }
+});
 hamburger.addEventListener('click', e => {
   hamburger.classList.toggle('hamburger__active');
   navigation.classList.toggle('navigation--active');
