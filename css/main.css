@@ -342,6 +342,12 @@ input[type="text"]::-webkit-input-placeholder {
   font-size: 16;
   font-weight: bold;
   text-align: center; }
+  .amount--hide {
+    display: none; }
+
+.arrow {
+  font-size: 2rem;
+  text-align: center; }
 
 .backArrow {
   display: block;
@@ -609,8 +615,27 @@ body {
   -webkit-box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2);
           box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2); }
 
+.container__bar--hide {
+  display: none; }
+
 .container__done--hide {
   display: none; }
+
+.containerBar__icons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+  padding: 10px; }
+  .containerBar__icons--done {
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start; }
 
 .day {
   display: block;
@@ -753,6 +778,15 @@ body {
   padding-top: 4px;
   border-radius: 50%;
   cursor: pointer; }
+
+.icon__checked {
+  font-size: 2rem; }
+
+.icon__delete {
+  font-size: 2rem; }
+
+.icon__edit {
+  font-size: 2rem; }
 
 .image__trashBin {
   -ms-flex-item-align: end;
@@ -940,7 +974,7 @@ body {
   padding: 4px 0;
   cursor: pointer; }
 
-.strip__pko {
+.strip__pkobp {
   background-color: blue;
   max-width: inherit;
   height: 18px;
@@ -994,6 +1028,8 @@ body {
 .title {
   text-align: center;
   margin: 10px 0 5px 0; }
+  .title--hide {
+    display: none; }
 
 #toList {
   font-size: 25px;
