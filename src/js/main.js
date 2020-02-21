@@ -18,6 +18,7 @@ if ('serviceWorker' in navigator) {
 const add__transfer = document.getElementById('add__transfer');
 const addButon = document.getElementById('addButton');
 const backArrow = document.getElementById('backArrow');
+const calendarBackArrow = document.getElementById('calendarBackArrow');
 const checkbox = document.getElementById('show__done');
 
 const hamburger = document.querySelector('.hamburger');
@@ -243,6 +244,9 @@ addButon.addEventListener('click', e=>{
   add__transfer.classList.toggle('add__transfer--show')
 })
 
+calendarBackArrow.addEventListener('click', e=>{
+  calendarPopup.classList.toggle('calendar__popup--show');
+})
 
 /****** włączanie widoku kalendarza******/
 calendarButton.addEventListener('click', e => {
