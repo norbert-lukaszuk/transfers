@@ -19,7 +19,9 @@ const add__transfer = document.getElementById('add__transfer');
 const addButon = document.getElementById('addButton');
 const backArrow = document.getElementById('backArrow');
 const calendarBackArrow = document.getElementById('calendarBackArrow');
-const checkbox = document.getElementById('show__done');
+// const list__transfers = document.getElementById('list__transfers');
+const show__done = document.getElementById('show__done');
+const ul = document.getElementById('list__transfers');
 
 const hamburger = document.querySelector('.hamburger');
 const navigation = document.querySelector('.navigation');
@@ -40,7 +42,7 @@ const calendarBackArow = document.querySelector('.calendar__backArow');
 const calendarWraper = document.querySelector('.calendar__wraper');
 const newDate = new Date(date);
 const transfers = document.querySelector('.transfer');
-const ul = document.querySelector('.list__transfers');
+
 let input = document.querySelector('.input')
 const bankSelectWraper = document.querySelector('.bankSelectWraper');
 const mbankIcon = document.getElementById('mbankIcon');
@@ -185,6 +187,20 @@ db.collection('bankTransfers').onSnapshot(snapshot=>{
     const data = doc.data();
     const dayDifference = dateFns.differenceInDays(new Date(data.date), new Date());
     const {amount, bank, category, date, status, title} = data;
+    if(status === 'done'){
+      li.classList.add('container__done--hide')
+    }
+    li.innerHTML = addTransfer(amount, bank, category, date, status, title); 
+    ul.append(li);
+    }
+    if(e.type === 'modified'){
+      const li = document.createElement('li');
+    li.setAttribute('data-id', doc.id);
+    li.setAttribute('class', 'container');
+    li.classList.add('container__done--hide');
+    const data = doc.data();
+    const dayDifference = dateFns.differenceInDays(new Date(data.date), new Date());
+    const {amount, bank, category, date, status, title} = data;
     
     li.innerHTML = addTransfer(amount, bank, category, date, status, title); 
     ul.append(li);
@@ -193,7 +209,6 @@ db.collection('bankTransfers').onSnapshot(snapshot=>{
 })
 
 ul.addEventListener("click", e => {
-  // console.log(e.target.parentElement.parentElement.parentElement.getAttribute('data-id'));
   if (e.target.tagName === "I" && e.target.classList.contains("arrow")) {
     e.target.parentElement.children
       .item(3)
@@ -216,6 +231,15 @@ ul.addEventListener("click", e => {
       }
     });
   }
+  if(e.target.tagName === "I" && e.target.classList.contains('icon__checked')){
+    console.log(e.target.parentElement.parentElement.parentElement);
+    const id = e.target.parentElement.parentElement.parentElement.getAttribute('data-id')
+    console.log(id);
+    db.collection('bankTransfers').doc(id).update({status: 'done'})
+    .then(console.log("transfer edited in firebase"))
+    .catch(err => console.log(err));
+    e.target.parentElement.parentElement.parentElement.remove();
+  }
 });
 
 
@@ -231,14 +255,6 @@ bankSelectWraper.addEventListener('click', e => {
     bank__clicked = 'pkobp';
   }
 })
-/****Otwieranie popupa  */
-// addButon.addEventListener('click', e => {
-//   popup.style.display = 'block';
-//   list.classList.add('listHide');
-//   navigation.classList.remove('navigation--active');
-//   hamburger.classList.remove('hamburger__active');
-//   today.valueAsDate = new Date(); //aktualna data w input date
-// })
 
 addButon.addEventListener('click', e=>{
   add__transfer.classList.toggle('add__transfer--show')
@@ -247,7 +263,14 @@ addButon.addEventListener('click', e=>{
 calendarBackArrow.addEventListener('click', e=>{
   calendarPopup.classList.toggle('calendar__popup--show');
 })
-
+show__done.addEventListener('click', e=>{
+   const containers = ul.querySelectorAll('.container');
+   containers.forEach(e=>{
+     console.log(e);
+     e.classList.toggle('container__done--hide')
+   })
+    console.log(containers);
+})
 /****** włączanie widoku kalendarza******/
 calendarButton.addEventListener('click', e => {
   calendarPopup.classList.toggle('calendar__popup--show');

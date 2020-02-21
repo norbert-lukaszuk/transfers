@@ -20,25 +20,30 @@
 </head>
 
 <body>
-  
+  <!-- Navigation Section -->
   <div class="navigation">
     <ul class="navigation__list">
-      <li><div class="navigation__item"><i class="button__add far fa-plus-square" id="addButton"></i>
-      <label for="addButton">Add new trnsfer</label>
-      </div></li>
-      <li><div class="navigation__item"><i class="button__calendar far fa-calendar-alt" id="calendarButton"></i>
-      <label for="calendarButton">Calendar view</label>
-      </div></li>
-      <li><div class="navigation__item"><i class="button__show far fa-eye" id="show__done"></i>
-      <label for="show__done">Calendar view</label>
-      </div></li>
+      <li>
+        <div class="navigation__item"><i class="button__add far fa-plus-square" id="addButton"></i>
+          <label for="addButton">Add new trnsfer</label>
+        </div>
+      </li>
+      <li>
+        <div class="navigation__item"><i class="button__calendar far fa-calendar-alt" id="calendarButton"></i>
+          <label for="calendarButton">Calendar view</label>
+        </div>
+      </li>
+      <li>
+        <div class="navigation__item"><i class="button__show far fa-eye" id="show__done"></i>
+          <label for="show__done">Show done transfers</label>
+        </div>
+      </li>
     </ul>
   </div>
-  
-  <!-- <button class="button" id="buttonPopup"> + </button> -->
-  <!-- <button class="button" id="button__calendar"> Calendar </button> -->
+
+  <!-- Transfer add section -->
   <div class="add__transfer" id="add__transfer">
-  
+
     <form class="transfer">
       <i class="backArrow fas fa-angle-double-left" id="backArrow"></i>
       <label for="bank" class="bankLabel">Select the bank</label>
@@ -46,10 +51,10 @@
         <img id="mbankIcon" src="assets/img/mbank 30x30.png" alt="mbank logo">
         <img id="pkoIcon" src="assets/img/pkobp 30x30.png" alt="pko logo">
       </div>
-  
+
       <!-- form żeby resetować pola formularza ale nie działą-->
-  
-  
+
+
       <div class="inputWraper">
         <label class="calendarLabel" for="calendar">Enter the date</label>
         <input class="calendar" type="date" name="date" id="calendar" autocomplete="email">
@@ -84,8 +89,8 @@
         <label for="title" class="calendarLabel">Enter amount</label>
         <input type="text" class="calendar" id="amount" placeholder=">">
       </div>
-  
-  
+
+
     </form>
     <div class="buttonsWraper">
       <button class="button button__submit" id="ok">OK</button>
@@ -143,18 +148,18 @@
       <h3 class="monthName__header">December</h3>
       <div class="calendar__wraper" id="11"></div>
     </section>
-    
-    
+
+
   </div>
   <div class="list">
-    <ul class="list__transfers">
+    <ul class="list__transfers" id="list__transfers">
 
-  
+
     </ul>
     <form class="input">
       <!-- <input class="form" type="text" name="form" id="toList" placeholder=" add task"> -->
       <!-- <input class="button" type="submit" value="+"> -->
-  
+
     </form>
   </div>
 
