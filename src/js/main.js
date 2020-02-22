@@ -208,6 +208,10 @@ db.collection('bankTransfers').onSnapshot(snapshot=>{
   } )
 })
 
+backArrow.addEventListener('click', e=>{
+  add__transfer.classList.remove('add__transfer--show')
+})
+
 ul.addEventListener("click", e => {
   if (e.target.tagName === "I" && e.target.classList.contains("arrow")) {
     e.target.parentElement.children
