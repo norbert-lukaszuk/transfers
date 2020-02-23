@@ -51,24 +51,25 @@
         <div class="radio">
           <label for="mbank">mBank</label>
           <input type="radio" name="bank" id="mbank" value="mbank">
-          <label for="mbank">mBank</label>
+          <label for="mbank">PKO</label>
           <input type="radio" name="bank" id="pkobp" value="pkobp">
         </div>
-        
-        <img id="mbankIcon" src="assets/img/mbank 30x30.png" alt="mbank logo">
-        <img id="pkoIcon" src="assets/img/pkobp 30x30.png" alt="pko logo">
+
+        <!-- <img id="mbankIcon" src="assets/img/mbank 30x30.png" alt="mbank logo"> -->
+        <!-- <img id="pkoIcon" src="assets/img/pkobp 30x30.png" alt="pko logo"> -->
       </div>
 
       <!-- form żeby resetować pola formularza ale nie działą-->
 
 
       <div class="inputWraper">
+
         <label class="calendarLabel" for="calendar">Enter the date</label>
         <input class="calendar" type="date" name="date" id="calendar" autocomplete="email">
       </div>
       <div class="inputWraper">
         <label for="title" class="calendarLabel">Enter the category</label>
-        <select class="calendar" name="bank" id="category">
+        <select class="calendar" id="category">
           <option value="Category">Category</option>
           <option value="Czynsz">Czynsz</option>
           <option value="Internet">Internet</option>
@@ -96,11 +97,11 @@
         <label for="title" class="calendarLabel">Enter amount</label>
         <input type="text" class="calendar" id="amount" placeholder=">">
       </div>
-      
-        <input type="submit" class="transfers__submit" id="transfers__submit" value="Add transfer">
-      
+
+      <input type="submit" class="transfers__submit" id="transfers__submit" value="Add transfer">
+
     </form>
- 
+
   </div>
   <div class="calendar__popup">
     <i class="calendarBackArrow fas fa-angle-double-left" id="calendarBackArrow"></i>
@@ -160,7 +161,7 @@
 
 
     </ul>
-    
+
   </div>
 
   <!-- The core Firebase JS SDK is always required and must be listed first -->

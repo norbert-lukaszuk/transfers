@@ -175,6 +175,19 @@ const deleteTransfer = (id)=>{
 })
 
 }
+
+// Checking witch bank is selected
+
+const bankSelected = (bankSelection)=>{
+  const bank = '';
+  bankSelection.forEach(e=>{
+    if(e.checked){
+    bank = e.value;
+    }
+    
+  })
+  return bank;
+}
 db.collection('bankTransfers').onSnapshot(snapshot=>{
   snapshot.docChanges().forEach(e=>{
     const doc = e.doc;
@@ -281,7 +294,9 @@ show__done.addEventListener('click', e=>{
 transfers__submit.addEventListener('click', e=>{
   e.preventDefault();
   const category = document.getElementById('category');
-  const bankObject = Transfer(transfers.amount.value, bank__clicked, transfers.category.value, transfers.date.value, '',transfers.title.value);
+  const bankSelection =  document.getElementsByName('bank');
+  const bankSelected = bankSelected(bankSelection);
+  const bankObject = Transfer(transfers.amount.value, bank.value, transfers.category.value, transfers.date.value, '',transfers.title.value);
     
     db.collection('bankTransfers').add(bankObject).then(()=>{
       console.log('transfer added to firebase')
