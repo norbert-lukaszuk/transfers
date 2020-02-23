@@ -20,45 +20,57 @@
 </head>
 
 <body>
-  <button class="hamburger">
-    <span class="hamburger__box">
-        <span class="hamburger__inner">
-
-        </span>
-    </span>
-</button>
-  <div class="navigation">Menu
+  <!-- Navigation Section -->
+  <div class="navigation">
     <ul class="navigation__list">
-      <li class="navigation__item"><button class="button__add">Add new transfer</button></li>
-      <li class="navigation__item"><button class="button__calendar" id="button__calendar">Calendar view</button></li>
-      <li class="navigation__item"><input type="checkbox" name="show__done" id="show__done"><label for="show__done">Show done transfers</label></li>
-      <li class="navigation__item"></li>
+      <li>
+        <div class="navigation__item"><i class="button__add far fa-plus-square" id="addButton"></i>
+          <label for="addButton">Add new trnsfer</label>
+        </div>
+      </li>
+      <li>
+        <div class="navigation__item"><i class="button__calendar far fa-calendar-alt" id="calendarButton"></i>
+          <label for="calendarButton">Calendar view</label>
+        </div>
+      </li>
+      <li>
+        <div class="navigation__item"><i class="button__show far fa-eye" id="show__done"></i>
+          <label for="show__done">Show done transfers</label>
+        </div>
+      </li>
     </ul>
   </div>
-  
-  <!-- <button class="button" id="buttonPopup"> + </button> -->
-  <!-- <button class="button" id="button__calendar"> Calendar </button> -->
-  <div class="popup">
-  
+
+  <!-- Transfer add section -->
+  <div class="add__transfer" id="add__transfer">
+
     <form class="transfer">
-  
-      <span class="backArrow">←</span>
-      <label for="bank" class="bankLabel">Select the bank</label>
-      <div class="bankSelectWraper">
-        <img id="mbankIcon" src="assets/img/mbank 30x30.png" alt="mbank logo">
-        <img id="pkoIcon" src="assets/img/pkobp 30x30.png" alt="pko logo">
-      </div>
-  
+      <i class="backArrow fas fa-angle-double-left" id="backArrow"></i>
+      
+        <div class="radio__bank">
+          
+          <input type="radio" name="bank" id="mbank" value="mbank">
+          <label class="label__bank" for="mbank">mbank</label>
+          
+          <input type="radio" name="bank" id="pkobp" value="pkobp">
+          <label class="label__bank" for="pkobp">PKO</label>
+        </div>
+
+        <!-- <img id="mbankIcon" src="assets/img/mbank 30x30.png" alt="mbank logo"> -->
+        <!-- <img id="pkoIcon" src="assets/img/pkobp 30x30.png" alt="pko logo"> -->
+      
+
       <!-- form żeby resetować pola formularza ale nie działą-->
-  
-  
+
+
       <div class="inputWraper">
+
         <label class="calendarLabel" for="calendar">Enter the date</label>
         <input class="calendar" type="date" name="date" id="calendar" autocomplete="email">
       </div>
       <div class="inputWraper">
         <label for="title" class="calendarLabel">Enter the category</label>
-        <select class="calendar" name="bank" id="category">
+        <select class="calendar" id="category">
           <option value="Category">Category</option>
           <option value="Czynsz">Czynsz</option>
           <option value="Internet">Internet</option>
@@ -86,16 +98,14 @@
         <label for="title" class="calendarLabel">Enter amount</label>
         <input type="text" class="calendar" id="amount" placeholder=">">
       </div>
-  
-  
+
+      <input type="submit" class="transfers__submit" id="transfers__submit" value="Add transfer">
+
     </form>
-    <div class="buttonsWraper">
-      <button class="button button__submit" id="ok">OK</button>
-      <button class="button button__cancel" id="cancel">Cancel</button>
-    </div>
+
   </div>
   <div class="calendar__popup">
-    <button class="calendar__backArow backArrow">←</button>
+    <i class="calendarBackArrow fas fa-angle-double-left" id="calendarBackArrow"></i>
     <section class="month__name">
       <h3 class="monthName__header">January</h3>
       <div class="calendar__wraper" id="0"></div>
@@ -144,19 +154,15 @@
       <h3 class="monthName__header">December</h3>
       <div class="calendar__wraper" id="11"></div>
     </section>
-    
-    
+
+
   </div>
   <div class="list">
-    <ul class="list__transfers">
+    <ul class="list__transfers" id="list__transfers">
 
-  
+
     </ul>
-    <form class="input">
-      <!-- <input class="form" type="text" name="form" id="toList" placeholder=" add task"> -->
-      <!-- <input class="button" type="submit" value="+"> -->
-  
-    </form>
+
   </div>
 
   <!-- The core Firebase JS SDK is always required and must be listed first -->
