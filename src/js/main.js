@@ -176,18 +176,6 @@ const deleteTransfer = (id)=>{
 
 }
 
-// Checking witch bank is selected
-
-const bankSelected = (bankSelection)=>{
-  const bank = '';
-  bankSelection.forEach(e=>{
-    if(e.checked){
-    bank = e.value;
-    }
-    
-  })
-  return bank;
-}
 db.collection('bankTransfers').onSnapshot(snapshot=>{
   snapshot.docChanges().forEach(e=>{
     const doc = e.doc;
@@ -200,7 +188,7 @@ db.collection('bankTransfers').onSnapshot(snapshot=>{
     const dayDifference = dateFns.differenceInDays(new Date(data.date), new Date());
     const {amount, bank, category, date, status, title} = data;
     if(status === 'done'){
-      li.classList.add('container__done--hide')
+      li.classList.add('container__done', 'container__done--hide')
     }
     li.innerHTML = addTransfer(amount, bank, category, date, status, title); 
     ul.append(li);
@@ -259,18 +247,18 @@ ul.addEventListener("click", e => {
 });
 
 
-bankSelectWraper.addEventListener('click', e => {
-  if (e.target.tagName === 'IMG' && e.target.id === 'mbankIcon') {
-    e.target.classList.toggle('bankClicked');
-    pkoIcon.classList.remove('bankClicked');
-    bank__clicked = 'mbank';
-  }
-  else if (e.target.tagName === 'IMG' && e.target.id === 'pkoIcon') {
-    e.target.classList.toggle('bankClicked');
-    mbankIcon.classList.remove('bankClicked');
-    bank__clicked = 'pkobp';
-  }
-})
+// bankSelectWraper.addEventListener('click', e => {
+//   if (e.target.tagName === 'IMG' && e.target.id === 'mbankIcon') {
+//     e.target.classList.toggle('bankClicked');
+//     pkoIcon.classList.remove('bankClicked');
+//     bank__clicked = 'mbank';
+//   }
+//   else if (e.target.tagName === 'IMG' && e.target.id === 'pkoIcon') {
+//     e.target.classList.toggle('bankClicked');
+//     mbankIcon.classList.remove('bankClicked');
+//     bank__clicked = 'pkobp';
+//   }
+// })
 
 addButon.addEventListener('click', e=>{
   add__transfer.classList.toggle('add__transfer--show')
@@ -284,7 +272,7 @@ calendarBackArrow.addEventListener('click', e=>{
   calendarPopup.classList.toggle('calendar__popup--show');
 })
 show__done.addEventListener('click', e=>{
-   const containers = ul.querySelectorAll('.container');
+   const containers = ul.querySelectorAll('.container__done');
    containers.forEach(e=>{
      console.log(e);
      e.classList.toggle('container__done--hide')
@@ -294,9 +282,8 @@ show__done.addEventListener('click', e=>{
 transfers__submit.addEventListener('click', e=>{
   e.preventDefault();
   const category = document.getElementById('category');
-  const bankSelection =  document.getElementsByName('bank');
-  const bankSelected = bankSelected(bankSelection);
-  const bankObject = Transfer(transfers.amount.value, bank.value, transfers.category.value, transfers.date.value, '',transfers.title.value);
+  const bank =  document.querySelector('input[name=bank]:checked').value;
+  const bankObject = Transfer(transfers.amount.value, bank, transfers.category.value, transfers.date.value, '',transfers.title.value);
     
     db.collection('bankTransfers').add(bankObject).then(()=>{
       console.log('transfer added to firebase')
@@ -306,29 +293,29 @@ transfers__submit.addEventListener('click', e=>{
 })
 
 
-cancelButton.addEventListener('click', e => {
-  add__transfer.classList.toggle('add__transfer--show');
-  transfers.reset();
-})
+// cancelButton.addEventListener('click', e => {
+//   add__transfer.classList.toggle('add__transfer--show');
+//   transfers.reset();
+// })
 
 
 /******** add new transfer ********/
-okButton.addEventListener('click', e => {
-    const category = document.getElementById('category');
-    const bankObject = Transfer(transfers.amount.value, bank__clicked, transfers.category.value, transfers.date.value, '',transfers.title.value);
+// okButton.addEventListener('click', e => {
+//     const category = document.getElementById('category');
+//     const bankObject = Transfer(transfers.amount.value, bank__clicked, transfers.category.value, transfers.date.value, '',transfers.title.value);
     
-    db.collection('bankTransfers').add(bankObject).then(()=>{
-      console.log('transfer added to firebase')
-    })
+//     db.collection('bankTransfers').add(bankObject).then(()=>{
+//       console.log('transfer added to firebase')
+//     })
     
 
-    transfers.reset();// reset() resetuje tylko form
-    //
+//     transfers.reset();// reset() resetuje tylko form
+//     //
 
-    popup.style.display = 'none';
-    list.classList.remove('listHide');
-}
-)
+//     popup.style.display = 'none';
+//     list.classList.remove('listHide');
+// }
+// )
 
 
 

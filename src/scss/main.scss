@@ -10,6 +10,12 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
+input[type="radio"]{
+  appearance: none;
+}
+input[type="radio"]:checked+label{
+  background-color: coral;
+}
 input[type="text"]::-webkit-input-placeholder{
   color: black;
   font-weight: bolder;
@@ -507,7 +513,15 @@ body {
   text-decoration: line-through;
   color: rgba(128, 128, 128, 0.69);
 }
-
+.label__bank{
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 80px;
+  text-align: center;
+  margin: 0 3px;
+  cursor: pointer;
+}
 .lineTrough{
   text-decoration: line-through;
   // background-color: rgba(180, 179, 179, 0.644);
@@ -611,6 +625,11 @@ body {
 }
 .add__transfer--show{
   display: block;
+}
+.radio__bank{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .statusCircle{
   width: 15px;
