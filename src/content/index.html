@@ -48,6 +48,13 @@
       <i class="backArrow fas fa-angle-double-left" id="backArrow"></i>
       <label for="bank" class="bankLabel">Select the bank</label>
       <div class="bankSelectWraper">
+        <div class="radio">
+          <label for="mbank">mBank</label>
+          <input type="radio" name="bank" id="mbank" value="mbank">
+          <label for="mbank">mBank</label>
+          <input type="radio" name="bank" id="pkobp" value="pkobp">
+        </div>
+        
         <img id="mbankIcon" src="assets/img/mbank 30x30.png" alt="mbank logo">
         <img id="pkoIcon" src="assets/img/pkobp 30x30.png" alt="pko logo">
       </div>
@@ -89,17 +96,14 @@
         <label for="title" class="calendarLabel">Enter amount</label>
         <input type="text" class="calendar" id="amount" placeholder=">">
       </div>
-
-
+      
+        <input type="submit" class="transfers__submit" id="transfers__submit" value="Add transfer">
+      
     </form>
-    <div class="buttonsWraper">
-      <button class="button button__submit" id="ok">OK</button>
-      <button class="button button__cancel" id="cancel">Cancel</button>
-    </div>
+ 
   </div>
   <div class="calendar__popup">
     <i class="calendarBackArrow fas fa-angle-double-left" id="calendarBackArrow"></i>
-    <!-- <button class="calendar__backArow backArrow">←</button> -->
     <section class="month__name">
       <h3 class="monthName__header">January</h3>
       <div class="calendar__wraper" id="0"></div>
@@ -156,11 +160,7 @@
 
 
     </ul>
-    <form class="input">
-      <!-- <input class="form" type="text" name="form" id="toList" placeholder=" add task"> -->
-      <!-- <input class="button" type="submit" value="+"> -->
-
-    </form>
+    
   </div>
 
   <!-- The core Firebase JS SDK is always required and must be listed first -->

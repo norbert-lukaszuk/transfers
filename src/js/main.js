@@ -19,15 +19,16 @@ const add__transfer = document.getElementById('add__transfer');
 const addButon = document.getElementById('addButton');
 const backArrow = document.getElementById('backArrow');
 const calendarBackArrow = document.getElementById('calendarBackArrow');
-// const list__transfers = document.getElementById('list__transfers');
+const calendarButton = document.getElementById('calendarButton');
+const cancelButton = document.getElementById('cancelButton');
+const okButton = document.getElementById('okButton');
 const show__done = document.getElementById('show__done');
+const transfers__submit = document.getElementById('transfers__submit');
 const ul = document.getElementById('list__transfers');
 
 const hamburger = document.querySelector('.hamburger');
 const navigation = document.querySelector('.navigation');
-// const addButon = document.querySelector('.button__add');
 const popup = document.querySelector('.popup');
-const cancel = document.getElementById('cancel');
 // const backArrow = document.querySelector('.backArrow');
 const date = document.getElementById('calendar');
 const today = document.getElementById('calendar');
@@ -36,8 +37,6 @@ const calendarPopup = document.querySelector('.calendar__popup');
 const category = document.getElementById('category');
 const title = document.getElementById('title');
 const amount = document.getElementById('amount');
-const okButton = document.getElementById('ok');
-const calendarButton = document.querySelector('.button__calendar');
 const calendarBackArow = document.querySelector('.calendar__backArow');
 const calendarWraper = document.querySelector('.calendar__wraper');
 const newDate = new Date(date);
@@ -264,6 +263,10 @@ addButon.addEventListener('click', e=>{
   add__transfer.classList.toggle('add__transfer--show')
 })
 
+calendarButton.addEventListener('click', e=> {
+  calendarPopup.classList.toggle('calendar__popup--show');
+
+})
 calendarBackArrow.addEventListener('click', e=>{
   calendarPopup.classList.toggle('calendar__popup--show');
 })
@@ -273,89 +276,31 @@ show__done.addEventListener('click', e=>{
      console.log(e);
      e.classList.toggle('container__done--hide')
    })
-    console.log(containers);
 })
-/****** włączanie widoku kalendarza******/
-calendarButton.addEventListener('click', e => {
-  calendarPopup.classList.toggle('calendar__popup--show');
-  navigation.classList.remove('navigation--active');
-  hamburger.classList.remove('hamburger__active');
-  const today = new Date();
-  for (let i = 0; i < 12; i++) {
-    const calendarWraper = document.getElementById(i.toString());
-    // let daysInMonth = new Date(2020,i+1,0).getDate()//number of days in month
-    // const month = today.getMonth();
-    for (let j = 1; j <= 42; j++) {
-      calendarWraper.innerHTML += `<div class="day"></div>`;
-    }
-    // ułożenie prawidłowe dni w miesiącu
-    const days = calendarWraper.querySelectorAll('.day');
-    const firstDay = monthFirstDay(1, i, 2020) - 1;
 
-    for (let k = firstDay; k < (firstDay + daysInMonth(i)); k++) {
-      days[k].innerHTML += `<span class="day__number">${(k - firstDay) + 1}</span><span class="day__name">${dayOfWeek((k - firstDay) + 1, i, 2020)}</span>`//wypisuje dzień miesiąca i dzień tygodnia w komórce kalendarza 
-      if (days[k].lastElementChild.innerText === 'Sun') {
-        days[k].classList.add('day--sunday');
-      }
-    }
-    const allDays = calendarWraper.querySelectorAll('div');
-    allDays.forEach(e => {
-      if (e.innerHTML === '' && window.innerWidth <= 360) {
-        e.classList.add('day__mobile--hide');
-      }
-      else if (e.innerHTML === '') { e.classList.remove('day') }
-
+transfers__submit.addEventListener('click', e=>{
+  e.preventDefault();
+  const category = document.getElementById('category');
+  const bankObject = Transfer(transfers.amount.value, bank__clicked, transfers.category.value, transfers.date.value, '',transfers.title.value);
+    
+    db.collection('bankTransfers').add(bankObject).then(()=>{
+      console.log('transfer added to firebase')
     })
-  }
-  const allDaysOrder = document.querySelectorAll('.day');
-  allDaysOrder.forEach(e => {
-    if (e.firstElementChild != null && parseInt(e.firstElementChild.innerText) === today.getDate() && parseInt(e.parentElement.getAttribute('id')) === today.getMonth()) {
-      e.firstElementChild.classList.add('day__number--today')
-    }
-  })
-
-  const bankArray = JSON.parse(localStorage.getItem('bankArray'));
-  bankArray.forEach(e => {
-    let bankArrayDate = new Date(e.date);
-    let month = bankArrayDate.getMonth().toString();
-    let calendar__wraper = document.getElementById(month);
-    let day = bankArrayDate.getDate();
-    const daysInMonth = calendar__wraper.querySelectorAll('.day');
-    daysInMonth[day].innerHTML += `<span class="day__category">${e.category}</span>`;
-
-  })
-
-
+    transfers.reset();
+    add__transfer.classList.toggle('add__transfer--show');
 })
 
-calendarBackArow.addEventListener('click', e => {
-  calendarPopup.classList.remove('calendar__popup--show');
-  const allDays = document.querySelectorAll('.day');
-  allDays.forEach(e => {
-    e.remove();
-  })
 
+cancelButton.addEventListener('click', e => {
+  add__transfer.classList.toggle('add__transfer--show');
+  transfers.reset();
 })
-cancel.addEventListener('click', e => {
-  popup.style.display = 'none';
-  list.classList.remove('listHide');
-})
-backArrow.addEventListener('click', e => {
-  add__transfer.classList.remove('add__transfer--show')
-  list.classList.remove('listHide');
 
-})
 
 /******** add new transfer ********/
 okButton.addEventListener('click', e => {
-  // let bankObject = {};
-  // let bankArray = JSON.parse(localStorage.getItem('bankArray'));
-  // if (bankArray === null) {
-  //   bankArray = [];
-  // }
-  const category = document.getElementById('category');
-  if (bank__clicked != null) {//warunek wykonania pętli
-   const bankObject = Transfer(transfers.amount.value, bank__clicked, transfers.category.value, transfers.date.value, '',transfers.title.value);
+    const category = document.getElementById('category');
+    const bankObject = Transfer(transfers.amount.value, bank__clicked, transfers.category.value, transfers.date.value, '',transfers.title.value);
     
     db.collection('bankTransfers').add(bankObject).then(()=>{
       console.log('transfer added to firebase')
@@ -367,135 +312,8 @@ okButton.addEventListener('click', e => {
 
     popup.style.display = 'none';
     list.classList.remove('listHide');
-
-  }
-  else {
-    alert('Select the bank')//jeśli nie wybiorę banku
-  }
 }
 )
 
-checkbox.onchange = () => {
-  const container__done = document.querySelectorAll('.container__done');
-  if (checkbox.checked) {
 
-    container__done.forEach(e => {
-      e.classList.remove('container__done--hide');
-    })
-  }
-  else { container__done.forEach(e => e.classList.add('container__done--hide')) }
-}
 
-/******* REFRESSH ***********/
-
-// const bankArray = JSON.parse(localStorage.getItem('bankArray'));
-// bankArray.forEach(e => {
-//   const keys = Object.keys(e);
-//   const { bank, category, date, title, amount, status, id, containerClass, statusCircleClass, timeLeftClass } = e;
-//   const mbank_container = `<div class="container" id="${id}">
-//       <div class="strip__mbank">${date}</div>
-//       <div class="logoWraper">
-//         <img class="image" src="assets/img/mbank 30x30.png">
-//         <div class="category">${category}</div>
-//         <div class="statusCircle ${statusCircle(daysLeft(date))}"></div>
-//       </div>
-//       <div class="timeLeft">${daysLeft(date)} d.</div> 
-//       <div class="amount">${amount} zł</div> 
-//       <p class="title">${title}</p>
-//       <div class="close">
-//       <button class="buttonClose">Cancel</button>
-//       <button class ="buttonDone">Done</button>
-//       </div>          
-//     </div>`;
-//   const pko_container = `<div class="container" id="${id}">
-//       <div class="strip__pko">${date}</div>
-//       <div class="logoWraper">
-//         <img class="image" src="assets/img/pkobp 467x485.png">
-//         <div class="category">${category}</div>
-//         <div class="statusCircle ${statusCircle(daysLeft(date))}"></div>
-//       </div>
-//       <div class="timeLeft">${daysLeft(date)} d.</div> 
-//       <div class="amount">${amount}</div> 
-//       <p class="title">${title}</p>
-//       <div class="close">
-//       <button class="buttonClose">Cancel</button>
-//       <button class ="buttonDone">Done</button>
-//       </div>          
-//     </div>`;
-//   const done_container = `<div class="container container__done container__done--hide" id=${id}>
-//       <div class="strip__done">${date}</div>
-//       <div class="logoWraper">
-//       <img class="image__trashBin" src="assets/img/delete 30x30.png">
-//         <div class="category">${category}</div>
-//         <img src="assets/img/checked 64x64.png">
-//       </div>
-//       <div class="timeLeft timeLeftDone"></div> 
-//       <div class="amount">${amount}</div> 
-//       <p class="title">${title}</p>
-//     </div>`;
-//   if (status === 'done') {
-//     ul.innerHTML += done_container;
-//   }
-//   if (bank === 'mBank' && status != 'done') {
-//     ul.innerHTML += mbank_container;
-//   }
-//   if (bank === 'PKO' && status != 'done') {
-//     ul.innerHTML += pko_container;
-//   }
-// })
-
-// ul.addEventListener('click', e => {
-//   if(e.target.tagName === 'I' /* && e.target.classList.contains('arrow') */){
-//   }
-
-//   if (e.target.tagName === 'DIV' && e.target.classList.contains('close')) {
-//     e.target.firstElementChild.classList.add('buttonClose--show');
-//     e.target.lastElementChild.classList.add('buttonDone--show');
-//   }
-//   if (e.target.tagName === 'BUTTON' && e.target.classList.contains('buttonDone')) {
-//     let bankArray = JSON.parse(localStorage.getItem('bankArray'));
-//     const containerId = parseInt(e.target.parentNode.parentNode.getAttribute('id'));
-//     e.target.parentNode.parentNode.classList.add('container__done', 'container__done--hide');
-//     bankArray.forEach(f => {
-//       if (containerId === f.id) {
-//         f.status = 'done'
-//         const { date, category, amount, title } = f;
-//         const swap__container = document.getElementById(JSON.stringify(containerId));
-//         swap__container.innerHTML = `<div class="strip__done">${date}</div>
-//          <div class="logoWraper">
-//          <img class="image__trashBin" src="assets/img/delete 30x30.png">
-//            <div class="category">${category}</div>
-//            <img src="assets/img/checked 64x64.png">
-//          </div>
-//          <div class="timeLeft timeLeftDone"></div> 
-//          <div class="amount">${amount}</div> 
-//          <p class="title">${title}</p>`;
-//       }
-//     })
-//     const local = JSON.stringify(bankArray);
-//     localStorage.setItem('bankArray', local);
-//     e.target.parentNode.remove();
-//   }
-//   if (e.target.classList.contains('buttonClose')) {//tu trzeba poprawić !!
-//     e.target.classList.remove('buttonClose--show');
-//     e.target.parentElement.children.item(1).classList.remove('buttonDone--show');
-//   }
-//   if (e.target.tagName === 'IMG' && e.target.classList.contains('image__trashBin')) {//usuwanie elementu z listy 
-//     const containerId = parseInt(e.target.parentElement.parentElement.getAttribute('id'));
-//     const bankArray = JSON.parse(localStorage.getItem('bankArray'));
-//     let indexDel = null;
-//     const indexFun = (elemenent, index) => {
-//       if (elemenent.id === containerId) {
-//         indexDel = index
-//       }
-
-//     }
-//     bankArray.forEach(indexFun);
-//     console.log(indexDel);
-//     bankArray.splice(indexDel, 1);
-//     const local = JSON.stringify(bankArray);
-//     localStorage.setItem('bankArray', local);
-//     e.target.parentElement.parentElement.remove();
-
-//   }
-// })

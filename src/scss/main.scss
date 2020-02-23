@@ -235,7 +235,7 @@ body {
   // margin: 5px auto;
   // color: lime;
 }
-#cancel{
+#cancelButton{
   display: block;
   background-color: rgba(220, 20, 60, 0.377);
   // margin: 10px auto;
@@ -700,6 +700,10 @@ body {
   max-width: 250px;
   padding: 10px;
 }
+.transfer{
+  width: 90%;
+  margin: 0 auto;
+}
 .transferItem{
   border: solid lime 2px;
   border-radius: 10px;
@@ -714,6 +718,15 @@ body {
 .transfers{
   display: flex;
   flex-direction: column;
+}
+.transfers__submit{
+  display: block;
+  padding: 15px;
+  margin: 20px auto;
+  width: 90%;
+  background-color: rgb(119, 182, 119);
+  border-style: none;
+  border-radius: 5px;
 }
 .trashBin{
   align-self: flex-end;
