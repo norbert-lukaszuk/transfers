@@ -77,6 +77,48 @@ const statusCircle = (timeLeft) => {//kolor kółka zależnie od ilości pozosta
 const daysInMonth = (month) => {
   return new Date(2020, month + 1, 0).getDate()
 }
+const monthName = (month) =>{
+  switch (month) {
+    case 0:
+      return 'January';
+      break;
+    
+    case 1:
+      return 'February';
+      break;
+    case 2:
+      return 'March';
+      break;
+    case 3:
+      return 'April';
+      break;
+    case 4:
+      return 'May';
+      break;
+    case 5:
+      return 'June';
+      break;
+    case 6:
+      return 'July';
+      break;
+    case 7:
+      return 'August';
+      break;
+    case 8:
+      return 'September';
+      break;
+    case 9:
+      return 'October';
+      break;
+    case 10:
+      return 'November';
+      break;
+    case 11:
+      return 'December';
+      break;
+    
+  }
+}
 const dayOfWeek = (day, month, year) => {
   const dayNumber = new Date(year, month, day).getDay();
 
@@ -251,9 +293,10 @@ calendarButton.addEventListener('click', e=> {
   calendarPopup.classList.toggle('calendar__popup--show');
   const list = document.querySelectorAll('.container:not(.container__done)');
   const today = new Date();
-  const firstDayOfMonth = dateFns.startOfMonth(today);
-  console.log('my console log: firstDayOfMonth', firstDayOfMonth);
-  console.log('my console log: firstDayOfMonth', firstDayOfMonth.getDay());
+  const firstDayOfMonth = dateFns.startOfMonth(today).getDay();
+  const month = monthName(today.getMonth());
+  console.log('my console log: month', month)
+  
   list.forEach(e=>{
 
     console.log(dateFns.startOfMonth(new Date(e.children.item(0).innerText)));

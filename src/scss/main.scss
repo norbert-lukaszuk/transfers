@@ -377,6 +377,9 @@ body {
       }
     }
 }
+.day--empty{
+  visibility: hidden;
+}
 .form{
   min-width: 250px;
   align-self: center;
