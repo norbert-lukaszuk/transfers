@@ -20,16 +20,12 @@ const addButon = document.getElementById('addButton');
 const backArrow = document.getElementById('backArrow');
 const calendarBackArrow = document.getElementById('calendarBackArrow');
 const calendarButton = document.getElementById('calendarButton');
-const cancelButton = document.getElementById('cancelButton');
-const okButton = document.getElementById('okButton');
 const show__done = document.getElementById('show__done');
 const transfers__submit = document.getElementById('transfers__submit');
 const ul = document.getElementById('list__transfers');
 
-const hamburger = document.querySelector('.hamburger');
 const navigation = document.querySelector('.navigation');
 const popup = document.querySelector('.popup');
-// const backArrow = document.querySelector('.backArrow');
 const date = document.getElementById('calendar');
 const today = document.getElementById('calendar');
 let bank__clicked = null;
@@ -47,6 +43,7 @@ const bankSelectWraper = document.querySelector('.bankSelectWraper');
 const mbankIcon = document.getElementById('mbankIcon');
 const pkoIcon = document.getElementById('pkoIcon');
 const list = document.querySelector('.list');
+// Get transfer info from form
 const Transfer = (amount, bank, category, date, status, title) =>{
     const transfer ={
       amount: amount,
@@ -197,7 +194,7 @@ db.collection('bankTransfers').onSnapshot(snapshot=>{
       const li = document.createElement('li');
     li.setAttribute('data-id', doc.id);
     li.setAttribute('class', 'container');
-    li.classList.add('container__done--hide');
+    li.classList.add('container__done');
     const data = doc.data();
     const dayDifference = dateFns.differenceInDays(new Date(data.date), new Date());
     const {amount, bank, category, date, status, title} = data;
@@ -246,26 +243,21 @@ ul.addEventListener("click", e => {
   }
 });
 
-
-// bankSelectWraper.addEventListener('click', e => {
-//   if (e.target.tagName === 'IMG' && e.target.id === 'mbankIcon') {
-//     e.target.classList.toggle('bankClicked');
-//     pkoIcon.classList.remove('bankClicked');
-//     bank__clicked = 'mbank';
-//   }
-//   else if (e.target.tagName === 'IMG' && e.target.id === 'pkoIcon') {
-//     e.target.classList.toggle('bankClicked');
-//     mbankIcon.classList.remove('bankClicked');
-//     bank__clicked = 'pkobp';
-//   }
-// })
-
 addButon.addEventListener('click', e=>{
   add__transfer.classList.toggle('add__transfer--show')
 })
 
 calendarButton.addEventListener('click', e=> {
   calendarPopup.classList.toggle('calendar__popup--show');
+  const list = document.querySelectorAll('.container:not(.container__done)');
+  const today = new Date();
+  const firstDayOfMonth = dateFns.startOfMonth(today);
+  console.log('my console log: firstDayOfMonth', firstDayOfMonth);
+  console.log('my console log: firstDayOfMonth', firstDayOfMonth.getDay());
+  list.forEach(e=>{
+
+    console.log(dateFns.startOfMonth(new Date(e.children.item(0).innerText)));
+  })
 
 })
 calendarBackArrow.addEventListener('click', e=>{
@@ -291,31 +283,3 @@ transfers__submit.addEventListener('click', e=>{
     transfers.reset();
     add__transfer.classList.toggle('add__transfer--show');
 })
-
-
-// cancelButton.addEventListener('click', e => {
-//   add__transfer.classList.toggle('add__transfer--show');
-//   transfers.reset();
-// })
-
-
-/******** add new transfer ********/
-// okButton.addEventListener('click', e => {
-//     const category = document.getElementById('category');
-//     const bankObject = Transfer(transfers.amount.value, bank__clicked, transfers.category.value, transfers.date.value, '',transfers.title.value);
-    
-//     db.collection('bankTransfers').add(bankObject).then(()=>{
-//       console.log('transfer added to firebase')
-//     })
-    
-
-//     transfers.reset();// reset() resetuje tylko form
-//     //
-
-//     popup.style.display = 'none';
-//     list.classList.remove('listHide');
-// }
-// )
-
-
-
