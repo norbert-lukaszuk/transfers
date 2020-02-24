@@ -20,6 +20,7 @@ const addButon = document.getElementById('addButton');
 const backArrow = document.getElementById('backArrow');
 const calendarBackArrow = document.getElementById('calendarBackArrow');
 const calendarButton = document.getElementById('calendarButton');
+const calendarWraper = document.querySelector('.calendar__wraper');
 const show__done = document.getElementById('show__done');
 const transfers__submit = document.getElementById('transfers__submit');
 const ul = document.getElementById('list__transfers');
@@ -34,7 +35,6 @@ const category = document.getElementById('category');
 const title = document.getElementById('title');
 const amount = document.getElementById('amount');
 const calendarBackArow = document.querySelector('.calendar__backArow');
-const calendarWraper = document.querySelector('.calendar__wraper');
 const newDate = new Date(date);
 const transfers = document.querySelector('.transfer');
 
@@ -293,13 +293,23 @@ calendarButton.addEventListener('click', e=> {
   calendarPopup.classList.toggle('calendar__popup--show');
   const list = document.querySelectorAll('.container:not(.container__done)');
   const today = new Date();
-  const firstDayOfMonth = dateFns.startOfMonth(today).getDay();
+  const firstDayOfMonth = dateFns.startOfMonth(today).getDay() -1;
   const month = monthName(today.getMonth());
   const monthHeader = document.querySelector('.monthName__header');
   console.log('my console log: monthHeader', monthHeader)
   monthHeader.innerText = month;
   const listToFilter = []; 
-  console.log(list);
+  const daysInMonth = dateFns.getDaysInMonth(today);
+  const lastDayInArray = daysInMonth + firstDayOfMonth -1;
+  const daysInCalendar = calendarWraper.querySelectorAll('.day');
+  let dayInArray = today;
+  for(let i = firstDayOfMonth; i<=lastDayInArray; i++){
+    
+    daysInCalendar[i].classList.remove('day--empty');
+    daysInCalendar[i].innerHTML = `<p>${dayInArray.getDate()}</p>`
+    dayInArray = dateFns.addDays(dayInArray,1);
+  }
+
   list.forEach(e=>{
     console.log(e.children.item(3).childNodes.item(1).innerText);
     const transferMonth = dateFns.getMonth(new Date(e.children.item(0).innerText));
