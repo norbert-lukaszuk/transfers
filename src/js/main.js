@@ -288,15 +288,16 @@ ul.addEventListener("click", e => {
 addButon.addEventListener('click', e=>{
   add__transfer.classList.toggle('add__transfer--show')
 })
-
+// Calendar view open
 calendarButton.addEventListener('click', e=> {
   calendarPopup.classList.toggle('calendar__popup--show');
   const list = document.querySelectorAll('.container:not(.container__done)');
   const today = new Date();
   const firstDayOfMonth = dateFns.startOfMonth(today).getDay();
   const month = monthName(today.getMonth());
-  console.log('my console log: month', month)
-  
+  const monthHeader = document.querySelector('.monthName__header');
+  console.log('my console log: monthHeader', monthHeader)
+  monthHeader.innerText = month;
   list.forEach(e=>{
 
     console.log(dateFns.startOfMonth(new Date(e.children.item(0).innerText)));
