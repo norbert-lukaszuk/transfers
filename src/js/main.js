@@ -298,9 +298,15 @@ calendarButton.addEventListener('click', e=> {
   const monthHeader = document.querySelector('.monthName__header');
   console.log('my console log: monthHeader', monthHeader)
   monthHeader.innerText = month;
+  const listToFilter = []; 
+  console.log(list);
   list.forEach(e=>{
-
+    console.log(e.children.item(3).childNodes.item(1).innerText);
+    const transferMonth = dateFns.getMonth(new Date(e.children.item(0).innerText));
     console.log(dateFns.startOfMonth(new Date(e.children.item(0).innerText)));
+    if(transferMonth === today.getMonth()){
+      console.log(monthName(transferMonth));
+    }
   })
 
 })
