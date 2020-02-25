@@ -295,28 +295,31 @@ calendarButton.addEventListener('click', e=> {
   const today = new Date();
   const firstDayOfMonth = dateFns.startOfMonth(today).getDay() -1;
   const month = monthName(today.getMonth());
-  let monthNumber = today.getMonth();
-  console.log('my console log: monthNumber', monthNumber)
+  let monthNumber = (today.getMonth()+1).toString();
+  let year = today.getFullYear().toString();
   const monthHeader = document.querySelector('.monthName__header');
   monthHeader.innerText = month;
   const daysInMonth = dateFns.getDaysInMonth(today);
   const lastDayInArray = daysInMonth + firstDayOfMonth -1;
   const daysInCalendar = calendarWraper.querySelectorAll('.day');
-  let dayInArray = new Date('2020-02-01');
-  console.log(dayInArray.toString().slice(0,3));
+  let dayInArray = new Date(`${year}-${monthNumber}-1`);
+
   for(let i = firstDayOfMonth; i<=lastDayInArray; i++){
-    
     daysInCalendar[i].classList.remove('day--empty');
     daysInCalendar[i].innerHTML = `<p class="dayInMonth">${dayInArray.getDate()} ${dayInArray.toString().slice(0,3)}</p>`
     dayInArray = dateFns.addDays(dayInArray,1);
   }
 
   list.forEach(e=>{
-    console.log(e.children.item(3).childNodes.item(1).innerText);
-    const transferMonth = dateFns.getMonth(new Date(e.children.item(0).innerText));
-    console.log(dateFns.startOfMonth(new Date(e.children.item(0).innerText)));
-    if(transferMonth === today.getMonth()){
-      console.log(monthName(transferMonth));
+    
+    const category = e.children.item(1).children.item(1).innerText;
+    const transferDay = dateFns.getDate(new Date(e.children.item(0).innerText));
+    const transferMonth = dateFns.getMonth(new Date(e.children.item(0).innerText))+1;
+    
+    if(transferMonth === +monthNumber){
+      const calendarInPosition = (transferDay+firstDayOfMonth)-1;
+      daysInCalendar[calendarInPosition].innerHTML += `<p class="day__category">${category}</p>`
+      
     }
   })
 
