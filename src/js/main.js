@@ -295,18 +295,19 @@ calendarButton.addEventListener('click', e=> {
   const today = new Date();
   const firstDayOfMonth = dateFns.startOfMonth(today).getDay() -1;
   const month = monthName(today.getMonth());
+  let monthNumber = today.getMonth();
+  console.log('my console log: monthNumber', monthNumber)
   const monthHeader = document.querySelector('.monthName__header');
-  console.log('my console log: monthHeader', monthHeader)
   monthHeader.innerText = month;
-  const listToFilter = []; 
   const daysInMonth = dateFns.getDaysInMonth(today);
   const lastDayInArray = daysInMonth + firstDayOfMonth -1;
   const daysInCalendar = calendarWraper.querySelectorAll('.day');
-  let dayInArray = today;
+  let dayInArray = new Date('2020-02-01');
+  console.log(dayInArray.toString().slice(0,3));
   for(let i = firstDayOfMonth; i<=lastDayInArray; i++){
     
     daysInCalendar[i].classList.remove('day--empty');
-    daysInCalendar[i].innerHTML = `<p>${dayInArray.getDate()}</p>`
+    daysInCalendar[i].innerHTML = `<p class="dayInMonth">${dayInArray.getDate()} ${dayInArray.toString().slice(0,3)}</p>`
     dayInArray = dateFns.addDays(dayInArray,1);
   }
 

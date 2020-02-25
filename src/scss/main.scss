@@ -333,18 +333,10 @@ body {
   display: block;
   height: 100px;
   min-width: 42px;
-  padding: 2px 5px;
+  padding: 0 5px;
   border: 1px solid rgb(185, 182, 182);
-    &--sunday{
-      color: red;
-    }
-    &__name{
-      font-size: 0.8125rem;
-        
-    }
-    &__name--sunday{
-      color: red;
-    }
+  font-size: .8125rem;
+    
     &__mobile--hide{
       display: none;
     }
@@ -360,9 +352,7 @@ body {
        
       }
     }
-    &--today{
-      border: green solid 2px;
-    }
+    
     &__category{
       display: block;
       font-size:  0.6875rem;
@@ -377,8 +367,14 @@ body {
       }
     }
 }
+.dayInMonth{
+  margin: 8px 0;
+}
 .day--empty{
   visibility: hidden;
+}
+.day--sunday{
+  color:red;
 }
 .form{
   min-width: 250px;
