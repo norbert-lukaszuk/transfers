@@ -22,8 +22,6 @@ const calendarBackArrow = document.getElementById('calendarBackArrow');
 const calendarButton = document.getElementById('calendarButton');
 const calendarWraper = document.querySelector('.calendar__wraper');
 const monthName__navigation = document.getElementById('monthNav')
-const nextMonth = document.getElementById('nextMonth');
-const prevMonth = document.getElementById('prevMonth');
 const show__done = document.getElementById('show__done');
 const transfers__submit = document.getElementById('transfers__submit');
 const ul = document.getElementById('list__transfers');
@@ -220,7 +218,6 @@ const calendarReset = ()=>{
     e.innerHTML = null;
     e.classList.add('day--empty');
   })
-  console.log('my console log: calendarReset -> calendar', calendar);
 }
 const deleteTransfer = (id)=>{
 
@@ -239,20 +236,17 @@ const deleteTransfer = (id)=>{
 const printCalendar = (today) =>{
 
   const list = document.querySelectorAll('.container:not(.container__done)');
-  // let today = new Date();
-  // today = dateFns.addMonths(today,1);
   const firstDayOfMonth = dayOfWeekConvert(dateFns.startOfMonth(today).getDay());
-  console.log('my console log: firstDayOfMonth', firstDayOfMonth)
   const month = monthName(today.getMonth());
   let monthNumber = (today.getMonth()+1).toString();
   let year = today.getFullYear().toString();
   const monthHeader = document.querySelector('.monthName__header');
+  const yearHeader = document.getElementById('year__header');
   monthHeader.innerText = month;
+  yearHeader.innerText = year;
   const daysInMonth = dateFns.getDaysInMonth(today);
   const lastDayInArray = daysInMonth + firstDayOfMonth-1;
-  console.log('my console log: lastDayInArray', lastDayInArray)
   const daysInCalendar = calendarWraper.querySelectorAll('.day');
-  console.log('my console log: daysInCalendar', daysInCalendar)
   let dayInArray = new Date(`${year}-${monthNumber}-1`);
 
   for(let i = firstDayOfMonth; i<=lastDayInArray; i++){
@@ -355,45 +349,21 @@ calendarButton.addEventListener('click', e=> {
   calendarPopup.classList.toggle('calendar__popup--show');
   let today = new Date();
   printCalendar(today);
- 
+//  month arrow listener
   monthName__navigation.addEventListener('click', e=>{
-    console.log(e.target.getAttribute('id'));
     if(e.target.getAttribute('id') === 'nextMonth'){
       today = dateFns.addMonths(today, 1);
-      console.log('my console log: today', today)
       calendarReset();
       printCalendar(today);
     }
     if(e.target.getAttribute('id') === 'prevMonth'){
       today = dateFns.subMonths(today, 1);
-      console.log('my console log: today', today)
       calendarReset();
       printCalendar(today);
     }
 })
   
 })
-
-
-
-// nextMonth.addEventListener('click', e=>{
-//   let today = new Date();
-//   today = dateFns.addMonths(today, i);
-//   calendarReset();
-//   printCalendar(today);
-//   i++;
-//   console.log('my console log: i', i)
-// })
-// prevMonth.addEventListener('click', e=>{
-//   let today = new Date();
-//   today = dateFns.subMonths(today, j);
-//   calendarReset();
-//   printCalendar(today);
-//   j++;
-//   console.log('my console log: i', i)
-// })
-
-
 
 calendarBackArrow.addEventListener('click', e=>{
   calendarPopup.classList.toggle('calendar__popup--show');

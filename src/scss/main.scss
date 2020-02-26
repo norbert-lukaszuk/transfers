@@ -556,6 +556,11 @@ body {
   grid-template-rows: repeat(5, 1fr);
   border: 2px solid black;
 }
+.month__name h2{
+  text-align: center;
+  color: gray;
+  margin-bottom: 0;
+}
 .monthName__header{
   text-align: center;
 }
