@@ -563,16 +563,19 @@ body {
 }
 .monthName__header{
   text-align: center;
+  margin: 0;
 }
 .monthName__navigation{
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 10px 0;
     
 }
 .monthName__navigation .fas{
   margin: 0 10px;
   cursor: pointer;
+  font-size: 1.5rem;
 }
 .navigation__list{
   padding: 0;
