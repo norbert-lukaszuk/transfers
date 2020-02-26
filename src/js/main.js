@@ -146,6 +146,15 @@ const dayOfWeek = (day, month, year) => {
       break;
   }
 }
+
+const dayOfWeekConvert = (day)=>{
+  if(day=== 0){
+    day=6;
+    return day;
+  }
+  else{return day-1}
+}
+
 const monthFirstDay = (day, month, year) => {
   const startDay = new Date(year, month, day).getDay();
   if (startDay === 0) {
@@ -200,6 +209,15 @@ const addTransfer = (amount, bank, category, date, status, title)=>{
     return html;
   }
   
+}
+const calendarReset = ()=>{
+  const calendar = calendarWraper.querySelectorAll('.day:not(.day--empty)');
+  
+  calendar.forEach(e=>{
+    e.innerHTML = null;
+    e.classList.add('day--empty');
+  })
+  console.log('my console log: calendarReset -> calendar', calendar);
 }
 const deleteTransfer = (id)=>{
 
@@ -293,18 +311,23 @@ calendarButton.addEventListener('click', e=> {
   calendarPopup.classList.toggle('calendar__popup--show');
   const list = document.querySelectorAll('.container:not(.container__done)');
   const today = new Date();
-  const firstDayOfMonth = dateFns.startOfMonth(today).getDay() -1;
+  
+  const firstDayOfMonth = dayOfWeekConvert(dateFns.startOfMonth(today).getDay());
+  console.log('my console log: firstDayOfMonth', firstDayOfMonth)
   const month = monthName(today.getMonth());
   let monthNumber = (today.getMonth()+1).toString();
   let year = today.getFullYear().toString();
   const monthHeader = document.querySelector('.monthName__header');
   monthHeader.innerText = month;
   const daysInMonth = dateFns.getDaysInMonth(today);
-  const lastDayInArray = daysInMonth + firstDayOfMonth -1;
+  const lastDayInArray = daysInMonth + firstDayOfMonth-1;
+  console.log('my console log: lastDayInArray', lastDayInArray)
   const daysInCalendar = calendarWraper.querySelectorAll('.day');
+  console.log('my console log: daysInCalendar', daysInCalendar)
   let dayInArray = new Date(`${year}-${monthNumber}-1`);
 
   for(let i = firstDayOfMonth; i<=lastDayInArray; i++){
+    
     daysInCalendar[i].classList.remove('day--empty');
     daysInCalendar[i].innerHTML = `<p class="dayInMonth">${dayInArray.getDate()} ${dayInArray.toString().slice(0,3)}</p>`
     dayInArray = dateFns.addDays(dayInArray,1);
@@ -326,6 +349,7 @@ calendarButton.addEventListener('click', e=> {
 })
 calendarBackArrow.addEventListener('click', e=>{
   calendarPopup.classList.toggle('calendar__popup--show');
+  calendarReset();
 })
 show__done.addEventListener('click', e=>{
    const containers = ul.querySelectorAll('.container__done');
