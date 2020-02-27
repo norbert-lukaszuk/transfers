@@ -662,14 +662,9 @@ body {
   display: block;
   height: 100px;
   min-width: 42px;
-  padding: 2px 5px;
-  border: 1px solid #b9b6b6; }
-  .day--sunday {
-    color: red; }
-  .day__name {
-    font-size: 0.8125rem; }
-  .day__name--sunday {
-    color: red; }
+  padding: 0 5px;
+  border: 1px solid #b9b6b6;
+  font-size: .8125rem; }
   .day__mobile--hide {
     display: none; }
   .day__number {
@@ -683,19 +678,33 @@ body {
     .day__number--today {
       background-color: chartreuse;
       border-radius: 5px; }
-  .day--today {
-    border: green solid 2px; }
   .day__category {
     display: block;
-    font-size: 0.6875rem; }
+    font-size: 0.6875rem;
+    margin: 3px 0; }
     .day__category::before {
       margin-right: 2px;
       display: inline-block;
       content: "";
       background-color: rgba(0, 255, 255, 0.425);
-      width: 0.6875rem;
-      height: 0.6875rem;
+      width: .5rem;
+      height: .5rem;
       border-radius: 50%; }
+
+.dayInMonth {
+  margin: 8px 0; }
+
+.day--empty {
+  visibility: hidden; }
+
+.day--saturday {
+  color: #969696; }
+
+.day--sunday {
+  color: red; }
+
+.dummy {
+  height: 1500px; }
 
 .form {
   min-width: 250px;
@@ -917,8 +926,31 @@ body {
   grid-template-rows: repeat(5, 1fr);
   border: 2px solid black; }
 
+.month__name h2 {
+  text-align: center;
+  color: gray;
+  margin-bottom: 0; }
+
 .monthName__header {
-  text-align: center; }
+  text-align: center;
+  margin: 0; }
+
+.monthName__navigation {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 10px 0; }
+
+.monthName__navigation .fas {
+  margin: 0 10px;
+  cursor: pointer;
+  font-size: 1.5rem; }
 
 .navigation__list {
   padding: 0;
@@ -1002,6 +1034,27 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center; }
+
+.radio__category {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 20px; }
+
+.radio__category label {
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 80px;
+  text-align: center;
+  margin: 0 3px;
+  cursor: pointer; }
 
 .statusCircle {
   width: 15px;
@@ -1162,6 +1215,8 @@ body {
       font-size: 0.8125rem; }
     .day__name {
       font-size: 0.75rem; }
+  .day--empty {
+    display: none; }
   .navigation__item label {
     visibility: hidden; } }
 

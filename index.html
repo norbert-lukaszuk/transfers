@@ -43,7 +43,6 @@
 
   <!-- Transfer add section -->
   <div class="add__transfer" id="add__transfer">
-
     <form class="transfer">
       <i class="backArrow fas fa-angle-double-left" id="backArrow"></i>
       
@@ -56,12 +55,18 @@
           <label class="label__bank" for="pkobp">PKO</label>
         </div>
 
-        <!-- <img id="mbankIcon" src="assets/img/mbank 30x30.png" alt="mbank logo"> -->
-        <!-- <img id="pkoIcon" src="assets/img/pkobp 30x30.png" alt="pko logo"> -->
-      
-
       <!-- form żeby resetować pola formularza ale nie działą-->
+      <div class="radio__category">
+        <input type="radio" name="category" id="czynsz" value="czynsz">
+        <label for="czynsz">Czynsz</label>
 
+        <input type="radio" name="category" id="internet" value="internet">
+        <label for="internet">Internet</label>
+
+        <input type="radio" name="category" id="kredyt" value="kredyt">
+        <label for="kredyt">kredyt</label>
+
+      </div>
 
       <div class="inputWraper">
 
@@ -102,59 +107,67 @@
       <input type="submit" class="transfers__submit" id="transfers__submit" value="Add transfer">
 
     </form>
-
+    <div class="dummy"></div>
+  
   </div>
   <div class="calendar__popup">
     <i class="calendarBackArrow fas fa-angle-double-left" id="calendarBackArrow"></i>
     <section class="month__name">
-      <h3 class="monthName__header">January</h3>
-      <div class="calendar__wraper" id="0"></div>
-    </section>
-    <section class="month__name">
-      <h3 class="monthName__header">February</h3>
-      <div class="calendar__wraper" id="1"></div>
-    </section>
-    <section class="month__name">
-      <h3 class="monthName__header">March</h3>
-      <div class="calendar__wraper" id="2"></div>
-    </section>
-    <section class="month__name">
-      <h3 class="monthName__header">April</h3>
-      <div class="calendar__wraper" id="3"></div>
-    </section>
-    <section class="month__name">
-      <h3 class="monthName__header">May</h3>
-      <div class="calendar__wraper" id="4"></div>
-    </section>
-    <section class="month__name">
-      <h3 class="monthName__header">June</h3>
-      <div class="calendar__wraper" id="5"></div>
-    </section>
-    <section class="month__name">
-      <h3 class="monthName__header">July</h3>
-      <div class="calendar__wraper" id="6"></div>
-    </section>
-    <section class="month__name">
-      <h3 class="monthName__header">August</h3>
-      <div class="calendar__wraper" id="7"></div>
-    </section>
-    <section class="month__name">
-      <h3 class="monthName__header">September</h3>
-      <div class="calendar__wraper" id="8"></div>
-    </section>
-    <section class="month__name">
-      <h3 class="monthName__header">October</h3>
-      <div class="calendar__wraper" id="9"></div>
-    </section>
-    <section class="month__name">
-      <h3 class="monthName__header">November</h3>
-      <div class="calendar__wraper" id="10"></div>
-    </section>
-    <section class="month__name">
-      <h3 class="monthName__header">December</h3>
-      <div class="calendar__wraper" id="11"></div>
-    </section>
+      <h2 class="year__header" id="year__header"></h2>
+      <div class="monthName__navigation" id="monthNav">
+      <i class="prevMonth fas fa-chevron-left" id="prevMonth"></i>
+      <h2 class="monthName__header"></h2>
+      <i class="nextMont fas fa-chevron-right" id="nextMonth"></i>
+    </div>
+      <div class="calendar__wraper" id="0">
+        <div class="day day--empty"></div>
+        <div class="day day--empty"></div>
+        <div class="day day--empty"></div>
+        <div class="day day--empty"></div>
+        <div class="day day--empty"></div>
+        <div class="day day--saturday day--empty"></div>
+        <div class="day day--sunday day--empty"></div>
+        <div class="day day--empty"></div>
+        <div class="day day--empty"></div>
+        <div class="day day--empty"></div>
+        <div class="day day--empty"></div>
+        <div class="day day--empty"></div>
+        <div class="day day--saturday day--empty"></div>
+        <div class="day day--sunday day--empty"></div>
+        <div class="day day--empty"></div>
+        <div class="day day--empty"></div>
+        <div class="day day--empty"></div>
+        <div class="day day--empty"></div>
+        <div class="day day--empty"></div>
+        <div class="day day--saturday day--empty"></div>
+        <div class="day day--sunday day--empty"></div>
+        <div class="day day--empty"></div>
+        <div class="day day--empty"></div>
+        <div class="day day--empty"></div>
+        <div class="day day--empty"></div>
+        <div class="day day--empty"></div>
+        <div class="day day--saturday day--empty"></div>
+        <div class="day day--sunday day--empty"></div>
+        <div class="day day--empty"></div>
+        <div class="day day--empty"></div>
+        <div class="day day--empty"></div>
+        <div class="day day--empty"></div>
+        <div class="day day--empty"></div>
+        <div class="day day--saturday day--empty"></div>
+        <div class="day day--sunday day--empty"></div>
+        <div class="day day--empty"></div>
+        <div class="day day--empty"></div>
+        <div class="day day--empty"></div>
+        <div class="day day--empty"></div>
+        <div class="day day--empty"></div>
+        <div class="day day--saturday day--empty"></div>
+        <div class="day day--sunday day--empty"></div>
+        
 
+      </div>
+    </section>
+    
+    
 
   </div>
   <div class="list">
