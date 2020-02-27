@@ -274,6 +274,7 @@ const printCalendar = (today) =>{
 db.collection('bankTransfers').onSnapshot(snapshot=>{
   snapshot.docChanges().forEach(e=>{
     const doc = e.doc;
+    console.log("TCL: doc", doc)
     console.log(e.type);
     if(e.type === 'added'){
       const li = document.createElement('li');
