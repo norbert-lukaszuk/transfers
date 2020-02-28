@@ -120,33 +120,33 @@ const monthName = (month) =>{
     
   }
 }
-const dayOfWeek = (day, month, year) => {
-  const dayNumber = new Date(year, month, day).getDay();
+// const dayOfWeek = (day, month, year) => {
+//   const dayNumber = new Date(year, month, day).getDay();
 
-  switch (dayNumber) {
-    case 0:
-      return 'Sun';
-      break;
-    case 1:
-      return 'Mon';
-      break;
-    case 2:
-      return 'Tue';
-      break;
-    case 3:
-      return 'Wen';
-      break;
-    case 4:
-      return 'Thu';
-      break;
-    case 5:
-      return 'Fri';
-      break;
-    case 6:
-      return 'Sat';
-      break;
-  }
-}
+//   switch (dayNumber) {
+//     case 0:
+//       return 'Sun';
+//       break;
+//     case 1:
+//       return 'Mon';
+//       break;
+//     case 2:
+//       return 'Tue';
+//       break;
+//     case 3:
+//       return 'Wen';
+//       break;
+//     case 4:
+//       return 'Thu';
+//       break;
+//     case 5:
+//       return 'Fri';
+//       break;
+//     case 6:
+//       return 'Sat';
+//       break;
+//   }
+// }
 
 const dayOfWeekConvert = (day)=>{
   if(day=== 0){
@@ -156,13 +156,13 @@ const dayOfWeekConvert = (day)=>{
   else{return day-1}
 }
 
-const monthFirstDay = (day, month, year) => {
-  const startDay = new Date(year, month, day).getDay();
-  if (startDay === 0) {
-    return 7
-  }
-  else { return startDay }
-}
+// const monthFirstDay = (day, month, year) => {
+//   const startDay = new Date(year, month, day).getDay();
+//   if (startDay === 0) {
+//     return 7
+//   }
+//   else { return startDay }
+// }
 
 const addTransfer = (amount, bank, category, date, status, title)=>{
   const dayDifference = dateFns.differenceInDays(new Date(date), new Date());
@@ -272,21 +272,24 @@ const printCalendar = (today) =>{
 }
 
 db.collection('bankTransfers').onSnapshot(snapshot=>{
+  let arr = [];
   snapshot.docChanges().forEach(e=>{
     const doc = e.doc;
-    console.log("TCL: doc", doc)
-    console.log(e.type);
+    
     if(e.type === 'added'){
+      const data = doc.data();
+      arr.push(data);
+      console.log('my console log: data', data)
       const li = document.createElement('li');
     li.setAttribute('data-id', doc.id);
+    li.setAttribute('transDate-id', new Date(data.date));
     li.setAttribute('class', 'container');
-    const data = doc.data();
     const dayDifference = dateFns.differenceInDays(new Date(data.date), new Date());
     const {amount, bank, category, date, status, title} = data;
     if(status === 'done'){
       li.classList.add('container__done', 'container__done--hide')
     }
-    li.innerHTML = addTransfer(amount, bank, category, date, status, title); 
+    li.innerHTML = addTransfer(amount, bank, category, date, status, title);
     ul.append(li);
     }
     if(e.type === 'modified'){
@@ -301,7 +304,12 @@ db.collection('bankTransfers').onSnapshot(snapshot=>{
     li.innerHTML = addTransfer(amount, bank, category, date, status, title); 
     ul.append(li);
     }
-  } )
+  })
+  arr.sort(function (a,b){
+    
+    return a.amount - b.amount;
+  });
+  console.log(arr);
 })
 
 backArrow.addEventListener('click', e=>{
