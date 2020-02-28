@@ -169,7 +169,7 @@ const addTransfer = (amount, bank, category, date, status, title)=>{
 
   if (status === "done") {
     const html = `
-    <div class="strip__done">${date}</div>
+    <div class="strip__done">${date.toISOString().slice(0,10)}</div>
     <div class="logoWraper">
       <div class="category">${category}</div>
     </div>
@@ -186,7 +186,7 @@ const addTransfer = (amount, bank, category, date, status, title)=>{
     return html;
   } else {
     const html = `
-    <div class="strip__${bank}">${date}</div>
+    <div class="strip__${bank}">${date.toISOString().slice(0,10)}</div>
     <div class="logoWraper">
       <img class="image" src="assets/img/${bank} 30x30.png">
       <div class="category">${category}</div>
@@ -277,7 +277,10 @@ db.collection('bankTransfers').onSnapshot(snapshot=>{
     const doc = e.doc;
     
     if(e.type === 'added'){
-      const data = doc.data();
+      let data = doc.data();
+      let fbDate = data.date;
+      data.date = fbDate.toDate();
+      console.log(data.date);
       arr.push(data);
       console.log('my console log: data', data)
       const li = document.createElement('li');
@@ -293,7 +296,7 @@ db.collection('bankTransfers').onSnapshot(snapshot=>{
     ul.append(li);
     }
     if(e.type === 'modified'){
-      const li = document.createElement('li');
+    const li = document.createElement('li');
     li.setAttribute('data-id', doc.id);
     li.setAttribute('class', 'container');
     li.classList.add('container__done');
@@ -305,9 +308,9 @@ db.collection('bankTransfers').onSnapshot(snapshot=>{
     ul.append(li);
     }
   })
-  arr.sort(function (a,b){
+  arr.sort((a,b) =>{
     
-    return a.amount - b.amount;
+    return a.date - b.date;
   });
   console.log(arr);
 })
@@ -382,16 +385,15 @@ calendarBackArrow.addEventListener('click', e=>{
 show__done.addEventListener('click', e=>{
    const containers = ul.querySelectorAll('.container__done');
    containers.forEach(e=>{
-     console.log(e);
      e.classList.toggle('container__done--hide')
    })
 })
-
+// add new transfer to firebase
 transfers__submit.addEventListener('click', e=>{
   e.preventDefault();
   const category = document.getElementById('category');
   const bank =  document.querySelector('input[name=bank]:checked').value;
-  const bankObject = Transfer(transfers.amount.value, bank, transfers.category.value, transfers.date.value, '',transfers.title.value);
+  const bankObject = Transfer(parseFloat(transfers.amount.value), bank, transfers.category.value, transfers.date.valueAsDate, '',transfers.title.value);
     
     db.collection('bankTransfers').add(bankObject).then(()=>{
       console.log('transfer added to firebase')
