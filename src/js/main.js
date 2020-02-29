@@ -280,38 +280,46 @@ db.collection('bankTransfers').onSnapshot(snapshot=>{
       let data = doc.data();
       let fbDate = data.date;
       data.date = fbDate.toDate();
-      console.log(data.date);
+      data.dataId = doc.id;
       arr.push(data);
-      console.log('my console log: data', data)
-      const li = document.createElement('li');
-    li.setAttribute('data-id', doc.id);
-    li.setAttribute('transDate-id', new Date(data.date));
+        // const li = document.createElement('li');
+        // li.setAttribute('data-id', doc.id);
+        // li.setAttribute('transDate-id', new Date(data.date));
+        // li.setAttribute('class', 'container');
+        // const dayDifference = dateFns.differenceInDays(new Date(data.date), new Date());
+        // const {amount, bank, category, date, status, title} = data;
+    // if(status === 'done'){
+    //   li.classList.add('container__done', 'container__done--hide')
+    // }
+    // li.innerHTML = addTransfer(amount, bank, category, date, status, title);
+    // ul.append(li);
+    }
+    if(e.type === 'modified'){
+    // const li = document.createElement('li');
+    // li.setAttribute('data-id', doc.id);
+    // li.setAttribute('class', 'container');
+    // li.classList.add('container__done');
+    // const data = doc.data();
+    // const dayDifference = dateFns.differenceInDays(new Date(data.date), new Date());
+    // const {amount, bank, category, date, status, title} = data;
+    
+    // li.innerHTML = addTransfer(amount, bank, category, date, status, title); 
+    // ul.append(li);
+    }
+  })
+  arr.sort((a,b) => a.date - b.date);
+  arr.forEach(e=>{
+    const {amount, bank, category, date,docId, status, title} =e;
+    const li = document.createElement('li');
+    li.setAttribute('data-id', docId);
+    li.setAttribute('transDate-id', new Date(date));
     li.setAttribute('class', 'container');
-    const dayDifference = dateFns.differenceInDays(new Date(data.date), new Date());
-    const {amount, bank, category, date, status, title} = data;
     if(status === 'done'){
       li.classList.add('container__done', 'container__done--hide')
     }
     li.innerHTML = addTransfer(amount, bank, category, date, status, title);
     ul.append(li);
-    }
-    if(e.type === 'modified'){
-    const li = document.createElement('li');
-    li.setAttribute('data-id', doc.id);
-    li.setAttribute('class', 'container');
-    li.classList.add('container__done');
-    const data = doc.data();
-    const dayDifference = dateFns.differenceInDays(new Date(data.date), new Date());
-    const {amount, bank, category, date, status, title} = data;
-    
-    li.innerHTML = addTransfer(amount, bank, category, date, status, title); 
-    ul.append(li);
-    }
   })
-  arr.sort((a,b) =>{
-    
-    return a.date - b.date;
-  });
   console.log(arr);
 })
 
