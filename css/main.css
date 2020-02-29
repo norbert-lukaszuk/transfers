@@ -703,9 +703,6 @@ body {
 .day--sunday {
   color: red; }
 
-.dummy {
-  height: 1500px; }
-
 .form {
   min-width: 250px;
   -ms-flex-item-align: center;
@@ -1034,27 +1031,6 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center; }
-
-.radio__category {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  padding: 20px; }
-
-.radio__category label {
-  padding: 10px;
-  border: 1px solid black;
-  border-radius: 5px;
-  width: 80px;
-  text-align: center;
-  margin: 0 3px;
-  cursor: pointer; }
 
 .statusCircle {
   width: 15px;
