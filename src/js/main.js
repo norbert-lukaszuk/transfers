@@ -120,33 +120,6 @@ const monthName = (month) =>{
     
   }
 }
-// const dayOfWeek = (day, month, year) => {
-//   const dayNumber = new Date(year, month, day).getDay();
-
-//   switch (dayNumber) {
-//     case 0:
-//       return 'Sun';
-//       break;
-//     case 1:
-//       return 'Mon';
-//       break;
-//     case 2:
-//       return 'Tue';
-//       break;
-//     case 3:
-//       return 'Wen';
-//       break;
-//     case 4:
-//       return 'Thu';
-//       break;
-//     case 5:
-//       return 'Fri';
-//       break;
-//     case 6:
-//       return 'Sat';
-//       break;
-//   }
-// }
 
 const dayOfWeekConvert = (day)=>{
   if(day=== 0){
@@ -155,14 +128,6 @@ const dayOfWeekConvert = (day)=>{
   }
   else{return day-1}
 }
-
-// const monthFirstDay = (day, month, year) => {
-//   const startDay = new Date(year, month, day).getDay();
-//   if (startDay === 0) {
-//     return 7
-//   }
-//   else { return startDay }
-// }
 
 const addTransfer = (amount, bank, category, date, status, title)=>{
   const dayDifference = dateFns.differenceInDays(new Date(date), new Date());
@@ -275,7 +240,7 @@ db.collection('bankTransfers').onSnapshot(snapshot=>{
   let arr = [];
   snapshot.docChanges().forEach(e=>{
     const doc = e.doc;
-    
+  console.log('doc.id', doc.id);    
     if(e.type === 'added'){
       let data = doc.data();
       let fbDate = data.date;
@@ -308,10 +273,10 @@ db.collection('bankTransfers').onSnapshot(snapshot=>{
     }
   })
   arr.sort((a,b) => a.date - b.date);
-  arr.forEach(e=>{
-    const {amount, bank, category, date,docId, status, title} =e;
+  arr.forEach( e=>{
+    const {amount, bank, category, date,  dataId, status, title} =e;
     const li = document.createElement('li');
-    li.setAttribute('data-id', docId);
+    li.setAttribute('data-id', dataId);
     li.setAttribute('transDate-id', new Date(date));
     li.setAttribute('class', 'container');
     if(status === 'done'){
@@ -353,6 +318,7 @@ ul.addEventListener("click", e => {
   if(e.target.tagName === "I" && e.target.classList.contains('icon__checked')){
     console.log(e.target.parentElement.parentElement.parentElement);
     const id = e.target.parentElement.parentElement.parentElement.getAttribute('data-id')
+    console.log("TCL: e.target.parentElement.parentElement.parentElement", e.target.parentElement.parentElement.parentElement)
     console.log(id);
     db.collection('bankTransfers').doc(id).update({status: 'done'})
     .then(console.log("transfer edited in firebase"))
@@ -401,6 +367,7 @@ transfers__submit.addEventListener('click', e=>{
   e.preventDefault();
   const category = document.getElementById('category');
   const bank =  document.querySelector('input[name=bank]:checked').value;
+  console.log("date from form",transfers.date.valueAsDate);
   const bankObject = Transfer(parseFloat(transfers.amount.value), bank, transfers.category.value, transfers.date.valueAsDate, '',transfers.title.value);
     
     db.collection('bankTransfers').add(bankObject).then(()=>{
