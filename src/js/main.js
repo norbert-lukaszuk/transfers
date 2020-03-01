@@ -235,6 +235,13 @@ const printCalendar = (today) =>{
   })
 
 }
+db.collection('bankTransfers').orderBy("date").get()
+.then(snapshot=>{
+  snapshot.docs.forEach(e=>{
+    console.log(e.data())
+  })
+  console.log(e.docs);
+})
 
 db.collection('bankTransfers').onSnapshot(snapshot=>{
   let arr = [];
