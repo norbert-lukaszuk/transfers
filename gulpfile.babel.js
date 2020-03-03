@@ -54,7 +54,7 @@ gulp.task("js", function() {
 
 gulp.task("sass", () => {
   return gulp
-    .src("./src/scss/main.scss")
+    .src("./src/scss/main1.scss")
     .pipe(
       plumber({
         errorHandler: function(err) {

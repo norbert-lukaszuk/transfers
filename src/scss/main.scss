@@ -495,9 +495,17 @@ body {
   align-items: left;
   color: red;
 }
+.inputWraper label{
+align-self: flex-start;
+}
+.inputWraper small{
+  visibility: hidden;
+}
 .inputWraper{
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   border-bottom: 1px gray solid;
   font-size: 12px;
   padding: 8px;
