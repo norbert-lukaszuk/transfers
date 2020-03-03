@@ -366,7 +366,6 @@ calendarButton.addEventListener('click', e=> {
 calendarBackArrow.addEventListener('click', e=>{
   calendarPopup.classList.toggle('calendar__popup--show');
   calendarReset();
-  i=i;
 })
 show__done.addEventListener('click', e=>{
    const containers = ul.querySelectorAll('.container__done');

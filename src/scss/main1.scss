@@ -1,11 +1,24 @@
 @import "_normalize.scss";
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
-
+*{
+  margin: 0;
+  padding: 0;
+}
 html{
     font-family: 'Roboto';
+    background-color: #ffffff;
 }
 .add__transfer {
-    display: none;
+  background-color: #ffffff;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  display: none;
 }
 .add__transfer--show{
     display: block;
@@ -24,11 +37,34 @@ html{
     text-align: center;
 }
 .calendar__popup{
-    display: none;
+  z-index: 1;
+  width: 100%;
+  height: 100vh;
+  background-color: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
 }
 .calendar__popup--show{
     display: block;
 }
+.calendar__popup i{
+  font-size: 2rem;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+.calendar__wraper{
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+}
+
 .category{
     font-size: 20px;
     font-weight: 500;
@@ -69,6 +105,38 @@ html{
 .container__done--hide{
   display: none;
 }
+.day{
+  display: block;
+  height: 100px;
+  min-width: 42px;
+  padding: 3px 5px;
+  border: 1px solid rgb(185, 182, 182);
+  border-radius: 5px;
+  font-size: .8125rem;
+}
+.day__category{
+  display: block;
+  font-size:  0.6875rem;
+  margin: 3px 0;
+  &::before{
+    margin-right: 2px;
+    display: inline-block;
+    content: "";
+    background-color: rgba(0, 255, 255, 0.425);
+    width: .5rem;
+    height: .5rem;
+    border-radius: 50%;
+  }
+}
+.day--empty{
+  visibility: hidden;
+}
+.day--saturday{
+  color: rgb(150, 150, 150)
+}
+.day--sunday{
+  color:red;
+}
 .list{
     display: flex;
     flex-direction: column;
@@ -90,6 +158,27 @@ html{
     justify-content: space-between;
     padding: 0 15px;
     margin-top: 5px;
+  }
+  .month__name h2{
+    text-align: center;
+    color: gray;
+    margin-bottom: 0;
+  }
+  
+  
+  .monthName__navigation{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0; 
+  }
+  .monthName__navigation h2{
+  
+  }
+  .monthName__navigation .fas{
+    margin: 0 10px;
+    cursor: pointer;
+    font-size: 1.5rem;
   }
   .navigation__item{
     display: flex;
@@ -114,7 +203,15 @@ html{
     align-items: center;
     list-style: none;
   }
-
+.inputWraper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px gray solid;
+    font-size: 12px;
+    padding: 8px;
+  }
 .statusCircle{
     width: 15px;
     height: 15px;
@@ -178,4 +275,8 @@ html{
     text-align: center;
     font-size: 1.125rem;
     margin: 10px 0 5px 0;
+  }
+  .transfer{
+    width: 90%;
+    margin: 0 auto;
   }
