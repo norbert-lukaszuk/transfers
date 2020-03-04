@@ -23,6 +23,9 @@ html{
 .add__transfer--show{
     display: block;
 }
+.add__transfer i {
+  font-size: 2rem;;
+}
 .amount{
     font-size: 1.125rem;
     font-weight: bold;
@@ -149,21 +152,35 @@ input[type="radio"]:checked+label{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px gray solid;
   font-size: 12px;
   padding: 8px;
 }
-.inputWraper input[type="calendar"]{
-width: 100%;
-}
+
 .inputWraper input[type="text"]{
+font-size: .875rem;
 width: 100%;
+padding: 3px;
+}
+.inputWraper label{
+  padding: 5px;
+  font-size: .875rem;
 }
 .inputWraper select{
+  padding: 3px;
+  font-size: .875rem;
   width: 100%;
 }
 .inputWraper small{
   visibility: hidden;
+}
+.label__bank{
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 80px;
+  text-align: center;
+  margin: 0 3px;
+  cursor: pointer;
 }
 .list{
     display: flex;
@@ -234,6 +251,9 @@ width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.resizer{
+  height: 1500px;
 }
 .statusCircle{
     width: 15px;
