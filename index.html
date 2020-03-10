@@ -16,7 +16,7 @@
 
   <link rel="icon" type="image/png" href="assets/pwa/icons/icon-192x192.png" />
 
-  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/main1.css" />
 </head>
 
 <body>
@@ -91,18 +91,20 @@
         </select>
       </div>
       <div class="inputWraper">
-        <label for="title" class="calendarLabel">Enter the tile</label>
-        <input type="text" class="calendar" id="title" placeholder=">">
+        <label for="title">Enter the tile</label>
+        <input type="text" class="calendar" id="title" >
+        <small class="error__massage" id="title__error">Error massage</small>
       </div>
       <div class="inputWraper">
-        <label for="title" class="calendarLabel">Enter amount</label>
-        <input type="text" class="calendar" id="amount" placeholder=">">
+        <label for="amount">Enter amount</label>
+        <input type="text" class="calendar" id="amount">
+        <small class="error__massage" id="amount__error">Error massage</small>
       </div>
 
       <input type="submit" class="transfers__submit" id="transfers__submit" value="Add transfer">
 
     </form>
-
+    <div class="resizer"></div>
   </div>
   <div class="calendar__popup">
     <i class="calendarBackArrow fas fa-angle-double-left" id="calendarBackArrow"></i>
