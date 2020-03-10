@@ -332,3 +332,36 @@ padding: 3px;
     border-style: none;
     border-radius: 5px;
   }
+@media(max-width:360px){
+  .calendar__wraper{
+    grid-template-columns: auto;
+
+  }
+  .day{
+    border-style: none;
+    border-bottom: 2px gray solid;
+    height: 50px;
+    width: 100%;
+    border-radius: 0;
+      &__category{
+        display: inline;
+        margin-left: 10px;
+        font-size: 0.8125rem;
+        // text-align: center;
+      }
+      &__name{
+        font-size: 0.75rem;
+      }
+  }
+  .day--empty{
+    display: none;
+  }
+
+  .navigation__item {
+    i{font-size: 2rem}
+    label{display: none}
+    
+  }
+
+
+}
