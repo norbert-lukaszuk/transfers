@@ -340,13 +340,26 @@ ul.addEventListener("click", e => {
 });
 
 addButon.addEventListener('click', e=>{
-  add__transfer.classList.toggle('add__transfer--show')
+  add__transfer.classList.toggle('add__transfer--show');
+  // putting curent date in date input
+  const datePicker = document.getElementById('calendar');
+  datePicker.valueAsDate = new Date();
 })
 // Calendar view open
 calendarButton.addEventListener('click', e=> {
   calendarPopup.classList.toggle('calendar__popup--show');
   let today = new Date();
   printCalendar(today);
+// marking today day
+const days = calendarWraper.querySelectorAll('.day');
+  days.forEach(e=>{
+    const day = e.innerText.slice(0,2);
+    if(+day === today.getDate()){
+      console.log(+day);
+      e.style.border = 'green solid 2px';
+    }
+    // console.log(+day)
+    })
 //  month arrow listener
   monthName__navigation.addEventListener('click', e=>{
     if(e.target.getAttribute('id') === 'nextMonth'){
@@ -360,7 +373,7 @@ calendarButton.addEventListener('click', e=> {
       printCalendar(today);
     }
 })
-  
+ 
 })
 
 calendarBackArrow.addEventListener('click', e=>{
