@@ -364,6 +364,48 @@ padding: 8px;
     border-style: none;
     border-radius: 5px;
   }
+  .user__panel{
+    background-color: rgb(164, 196, 177);
+    button{
+      background: none;
+      border: 1px solid black;
+      padding: 5px;
+      margin: 10px;
+      border-radius: 5px;
+    }
+    form{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      
+    }
+    input[type='submit']{
+      background: none;
+      border: 1px solid black;
+      padding: 5px;
+      margin: 10px;
+      border-radius: 5px;
+    }
+    input[type='text']{
+      display: block;
+      background: none;
+      border: 1px solid black;
+      padding: 5px;
+      margin: 10px;
+      border-radius: 5px;
+    }
+    input[type='password']{
+      display: block;
+      background: none;
+      border: 1px solid black;
+      padding: 5px;
+      margin: 10px;
+      border-radius: 5px;
+    }
+    
+    
+  }
 @media(max-width:360px){
   .calendar__wraper{
     grid-template-columns: auto;

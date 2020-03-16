@@ -24,6 +24,11 @@
   <div class="navigation">
     <ul class="navigation__list">
       <li>
+        <div class="navigation__item"><i class="button__user fas fa-user" id="userButton"></i>
+          <label for="userButton">User</label>
+        </div>
+      </li>
+      <li>
         <div class="navigation__item"><i class="button__add far fa-plus-square" id="addButton"></i>
           <label for="addButton">Add new trnsfer</label>
         </div>
@@ -40,7 +45,18 @@
       </li>
     </ul>
   </div>
-
+  <div class="user__panel">
+    <form class="form__user">
+      <input type="text" name="user__email" id="user__email" placeholder="e-mail">
+      <input type="password" name="user__password" id="user__password" placeholder="password">
+      <div class="login__buttons">
+        <input type="submit" value="Login" id="user__login">
+        <button class="button__logout">Logout</button>
+      </div>
+      
+    </form>
+    
+  </div>
   <!-- Transfer add section -->
   <div class="add__transfer" id="add__transfer">
 
