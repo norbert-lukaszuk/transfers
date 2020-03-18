@@ -403,8 +403,11 @@ padding: 8px;
       margin: 10px;
       border-radius: 5px;
     }
+    display: none;
     
-    
+  }
+  .user__panel--show {
+    display: block;
   }
 @media(max-width:360px){
   .calendar__wraper{

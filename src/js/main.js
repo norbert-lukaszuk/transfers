@@ -1,6 +1,7 @@
 "use strict";
 
 import { type } from "os";
+// import { doc } from "prettier";
 
 // service worker registration - remove if you're not going to use it
 
@@ -15,35 +16,38 @@ if ('serviceWorker' in navigator) {
     });
   });
 }
-const add__transfer = document.getElementById('add__transfer');
-const addButon = document.getElementById('addButton');
-const backArrow = document.getElementById('backArrow');
-const calendarBackArrow = document.getElementById('calendarBackArrow');
-const calendarButton = document.getElementById('calendarButton');
-const calendarPopup = document.querySelector('.calendar__popup');
-const calendarWraper = document.querySelector('.calendar__wraper');
-const monthName__navigation = document.getElementById('monthNav')
-const show__done = document.getElementById('show__done');
-const transfers__submit = document.getElementById('transfers__submit');
-const ul = document.getElementById('list__transfers');
-
-const navigation = document.querySelector('.navigation');
-const popup = document.querySelector('.popup');
-const date = document.getElementById('calendar');
-const today = document.getElementById('calendar');
+const add__transfer = document.getElementById("add__transfer");
+const addButon = document.getElementById("addButton");
+const backArrow = document.getElementById("backArrow");
+const calendarBackArrow = document.getElementById("calendarBackArrow");
+const calendarButton = document.getElementById("calendarButton");
+const calendarPopup = document.querySelector(".calendar__popup");
+const calendarWraper = document.querySelector(".calendar__wraper");
+const form__user = document.getElementById("form__user");
+const monthName__navigation = document.getElementById("monthNav");
+const show__done = document.getElementById("show__done");
+const transfers__submit = document.getElementById("transfers__submit");
+const ul = document.getElementById("list__transfers");
+const user__panel = document.querySelector(".user__panel");
+const user__logout = document.getElementById("user__logout");
+const user__button = document.getElementById("userButton");
+const navigation = document.querySelector(".navigation");
+const popup = document.querySelector(".popup");
+const date = document.getElementById("calendar");
+const today = document.getElementById("calendar");
 let bank__clicked = null;
-const category = document.getElementById('category');
-const title = document.getElementById('title');
-const amount = document.getElementById('amount');
-const calendarBackArow = document.querySelector('.calendar__backArow');
+const category = document.getElementById("category");
+const title = document.getElementById("title");
+const amount = document.getElementById("amount");
+const calendarBackArow = document.querySelector(".calendar__backArow");
 const newDate = new Date(date);
-const transfers = document.querySelector('.transfer');
+const transfers = document.querySelector(".transfer");
 
-let input = document.querySelector('.input')
-const bankSelectWraper = document.querySelector('.bankSelectWraper');
-const mbankIcon = document.getElementById('mbankIcon');
-const pkoIcon = document.getElementById('pkoIcon');
-const list = document.querySelector('.list');
+let input = document.querySelector(".input");
+const bankSelectWraper = document.querySelector(".bankSelectWraper");
+const mbankIcon = document.getElementById("mbankIcon");
+const pkoIcon = document.getElementById("pkoIcon");
+const list = document.querySelector(".list");
 // Get transfer info from form
 const Transfer = (amount, bank, category, date, status, title) =>{
     const transfer ={
@@ -235,6 +239,44 @@ const printCalendar = (today) =>{
   })
 
 }
+//watch for login or logout 
+auth.onAuthStateChanged(user=>{
+  if (user){
+    console.log('user logged in');
+    user__button.style.color = 'green';
+    
+  }
+  else{
+    console.log('user logged out');
+    user__button.style.color = 'none';
+
+  }
+})
+
+//login form 
+
+form__user.addEventListener('submit',e=>{
+  e.preventDefault();
+  const email = form__user.user__email.value;
+  const password = form__user.user__password.value;
+  
+  auth.signInWithEmailAndPassword(email, password)
+  .then(form__user.reset())
+  user__panel.classList.toggle('user__panel--show');
+  
+})
+//log out user
+user__logout.addEventListener('click', e=>{
+  e.preventDefault();
+  user__panel.classList.toggle('user__panel--show')
+  auth.signOut();
+  
+})
+ // show hide user panel
+user__button.addEventListener('click', e=>{
+    user__panel.classList.toggle('user__panel--show');
+})
+//get data from firebase
 db.collection('bankTransfers').orderBy("date").get()
 .then(snapshot=>{
   snapshot.docs.forEach(e=>{
