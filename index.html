@@ -24,6 +24,11 @@
   <div class="navigation">
     <ul class="navigation__list">
       <li>
+        <div class="navigation__item"><i class="button__user fas fa-user" id="userButton"></i>
+          <label for="userButton">User</label>
+        </div>
+      </li>
+      <li>
         <div class="navigation__item"><i class="button__add far fa-plus-square" id="addButton"></i>
           <label for="addButton">Add new trnsfer</label>
         </div>
@@ -40,7 +45,18 @@
       </li>
     </ul>
   </div>
-
+  <div class="user__panel">
+    <form class="form__user" id="form__user" >
+      <input type="text" name="user__email" id="user__email" placeholder="e-mail">
+      <input type="password" name="user__password" id="user__password" placeholder="password">
+      <div class="login__buttons">
+        <input type="submit" value="Login" id="user__login">
+        <button class="button__logout" id ='user__logout'>Logout</button>
+      </div>
+      
+    </form>
+    
+  </div>
   <!-- Transfer add section -->
   <div class="add__transfer" id="add__transfer">
 
@@ -66,7 +82,7 @@
       <div class="inputWraper">
 
         <label class="calendarLabel" for="calendar">Enter the date</label>
-        <input class="calendar" type="date" name="date" id="calendar" autocomplete="email">
+        <input class="calendar" type="date" name="date" id="calendar">
       </div>
       <div class="inputWraper">
         <label for="title" class="calendarLabel">Enter the category</label>
@@ -175,6 +191,7 @@
 
   <!-- The core Firebase JS SDK is always required and must be listed first -->
   <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-firestore.js"></script>
 
   <!-- TODO: Add SDKs for Firebase products that you want to use
@@ -196,6 +213,7 @@
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     // firebase.analytics();
+    const auth = firebase.auth();
     const db = firebase.firestore();
   </script>
   <script src="https://kit.fontawesome.com/420f196fe5.js" crossorigin="anonymous"></script>

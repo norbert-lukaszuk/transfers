@@ -463,6 +463,20 @@ html {
 .day--sunday {
   color: red; }
 
+input[type="date"] {
+  padding: 5px;
+  border: 1px gray solid;
+  border-radius: 5px;
+  font-size: .875rem;
+  font-weight: 900;
+  width: 100%; }
+
+input[type="date"]::-webkit-inner-spin-button {
+  visibility: hidden; }
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  font-size: 1.125rem; }
+
 input[type="radio"] {
   -webkit-appearance: none;
      -moz-appearance: none;
@@ -470,6 +484,17 @@ input[type="radio"] {
 
 input[type="radio"]:checked + label {
   background-color: coral; }
+
+select {
+  border-radius: 5px;
+  border: 1px solid gray;
+  background: url("../assets/img/chevron-down-solid.svg") no-repeat;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-position: right;
+  background-size: 5%;
+  background-origin: content-box; }
 
 .inputWraper {
   display: -webkit-box;
@@ -490,16 +515,20 @@ input[type="radio"]:checked + label {
 
 .inputWraper input[type="text"] {
   font-size: .875rem;
-  width: 100%;
-  padding: 3px; }
+  font-weight: 800;
+  width: 95%;
+  border-radius: 5px;
+  border: 1px solid gray;
+  padding: 8px; }
 
 .inputWraper label {
   padding: 5px;
   font-size: .875rem; }
 
 .inputWraper select {
-  padding: 3px;
+  padding: 8px;
   font-size: .875rem;
+  font-weight: 900;
   width: 100%; }
 
 .inputWraper small {
@@ -688,8 +717,10 @@ input[type="radio"]:checked + label {
   margin: 10px 0 5px 0; }
 
 .transfer {
-  width: 90%;
+  width: 60%;
   margin: 0 auto; }
+  .transfer i {
+    margin-bottom: 15px; }
 
 .transfers__submit {
   display: block;
@@ -700,22 +731,67 @@ input[type="radio"]:checked + label {
   border-style: none;
   border-radius: 5px; }
 
+.user__panel {
+  background-color: #a4c4b1;
+  display: none; }
+  .user__panel button {
+    background: none;
+    border: 1px solid black;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 5px; }
+  .user__panel form {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center; }
+  .user__panel input[type='submit'] {
+    background: none;
+    border: 1px solid black;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 5px; }
+  .user__panel input[type='text'] {
+    display: block;
+    background: none;
+    border: 1px solid black;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 5px; }
+  .user__panel input[type='password'] {
+    display: block;
+    background: none;
+    border: 1px solid black;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 5px; }
+
+.user__panel--show {
+  display: block; }
+
 @media (max-width: 360px) {
   .calendar__wraper {
     -ms-grid-columns: auto;
-    grid-template-columns: auto; }
+    grid-template-columns: auto;
+    padding: 0;
+    width: 90%;
+    margin: 0 auto; }
   .day {
     border-style: none;
     border-bottom: 2px gray solid;
     height: 50px;
-    width: 100%;
-    border-radius: 0; }
-    .day__category {
-      display: inline;
-      margin-left: 10px;
-      font-size: 0.8125rem; }
-    .day__name {
-      font-size: 0.75rem; }
+    width: inherit;
+    border-radius: 0;
+    margin: 0 auto; }
   .day--empty {
     display: none; }
   .navigation__item i {
