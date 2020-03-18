@@ -248,7 +248,7 @@ auth.onAuthStateChanged(user=>{
   }
   else{
     console.log('user logged out');
-    user__button.style.color = 'none';
+    user__button.style.color = 'black';
 
   }
 })
