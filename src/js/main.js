@@ -241,12 +241,24 @@ const printCalendar = (today) =>{
 }
 //watch for login or logout 
 auth.onAuthStateChanged(user=>{
+  
   if (user){
-    console.log('user logged in');
+    const info = document.createElement('p');
+    info.setAttribute('class','login__info')
+    info.innerText = `Your login as: ${user.email}`
+    user__panel.prepend(info);
+    form__user.user__email.style.display='none';
+    form__user.user__password.style.display='none';
+    form__user.user__login.style.display='none';
     user__button.style.color = 'green';
     
   }
   else{
+    const info = user__panel.querySelector('.login__info');
+    info.remove();
+    form__user.user__email.style.display='block';
+    form__user.user__password.style.display='block';
+    form__user.user__login.style.display='inline';
     console.log('user logged out');
     user__button.style.color = 'black';
 
@@ -262,6 +274,7 @@ form__user.addEventListener('submit',e=>{
   
   auth.signInWithEmailAndPassword(email, password)
   .then(form__user.reset())
+  
   user__panel.classList.toggle('user__panel--show');
   
 })
@@ -277,14 +290,14 @@ user__button.addEventListener('click', e=>{
     user__panel.classList.toggle('user__panel--show');
 })
 //get data from firebase
-db.collection('bankTransfers').orderBy("date").get()
-.then(snapshot=>{
-  snapshot.docs.forEach(e=>{
-    const data = e.data();
-    console.log(data.date.toDate());
-    console.log(e.data());
-  })
-})
+// db.collection('bankTransfers').orderBy("date").get()
+// .then(snapshot=>{
+//   snapshot.docs.forEach(e=>{
+//     const data = e.data();
+//     console.log(data.date.toDate());
+//     console.log(e.data());
+//   })
+// })
 
 db.collection('bankTransfers').orderBy("date").onSnapshot(snapshot=>{
   
