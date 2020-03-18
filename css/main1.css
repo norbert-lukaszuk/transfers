@@ -568,6 +568,11 @@ select {
   margin-top: 26px;
   margin-bottom: 30px; }
 
+.login__info {
+  text-align: center;
+  padding: 10px;
+  font-weight: 700; }
+
 .logoWraper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -629,6 +634,7 @@ select {
 
 .navigation__list {
   padding: 0;
+  margin: 10px 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -777,6 +783,9 @@ select {
 
 .user__panel--show {
   display: block; }
+
+.form__user--hide {
+  display: none; }
 
 @media (max-width: 360px) {
   .calendar__wraper {
