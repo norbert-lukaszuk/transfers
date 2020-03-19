@@ -338,7 +338,9 @@ html {
   display: block; }
 
 .add__transfer i {
-  font-size: 2rem; }
+  font-size: 2rem;
+  padding: 10px;
+  cursor: pointer; }
 
 .amount {
   font-size: 1.125rem;
@@ -350,7 +352,8 @@ html {
 
 .arrow {
   font-size: 2rem;
-  text-align: center; }
+  text-align: center;
+  cursor: pointer; }
 
 .calendar__popup {
   z-index: 1;
@@ -424,7 +427,8 @@ html {
             justify-content: flex-start; }
 
 .containerBar__icons i {
-  font-size: 1.75rem; }
+  font-size: 1.75rem;
+  cursor: pointer; }
 
 .container__bar--hide {
   display: none; }
@@ -510,8 +514,7 @@ select {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  font-size: 12px;
-  padding: 8px; }
+  font-size: 12px; }
 
 .inputWraper input[type="text"] {
   font-size: .875rem;
