@@ -24,7 +24,9 @@ html{
     display: block;
 }
 .add__transfer i {
-  font-size: 2rem;;
+  font-size: 2rem;
+  padding: 10px;
+  cursor: pointer;
 }
 .amount{
     font-size: 1.125rem;
@@ -179,7 +181,7 @@ background-origin: content-box;
   justify-content: center;
   align-items: center;
   font-size: 12px;
-  padding: 8px;
+  // padding: 8px;
 }
 
 .inputWraper input[type="text"]{

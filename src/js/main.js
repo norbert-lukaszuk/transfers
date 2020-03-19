@@ -251,6 +251,7 @@ auth.onAuthStateChanged(user=>{
     form__user.user__email.style.display='none';
     form__user.user__password.style.display='none';
     form__user.user__login.style.display='none';
+    form__user.user__logout.style.display='block';
     user__button.style.color = 'green';
 //real-time adding items to list
     db.collection('bankTransfers').orderBy("date").onSnapshot(snapshot=>{
@@ -317,6 +318,7 @@ auth.onAuthStateChanged(user=>{
     form__user.user__email.style.display='block';
     form__user.user__password.style.display='block';
     form__user.user__login.style.display='inline';
+    form__user.user__logout.style.display='none';
     console.log('user logged out');
     user__button.style.color = 'black';
     logged__out.style.display='block';
