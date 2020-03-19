@@ -12,24 +12,25 @@ if ('serviceWorker' in navigator) {
       console.log('ServiceWorker registration successful with scope: ', registration.scope);
     }, function (err) {
       // registration failed :(
-      console.log('ServiceWorker registration failed: ', err);
+        console.log('ServiceWorker registration failed: ', err);
+      });
     });
-  });
-}
-const add__transfer = document.getElementById("add__transfer");
-const addButon = document.getElementById("addButton");
-const backArrow = document.getElementById("backArrow");
-const calendarBackArrow = document.getElementById("calendarBackArrow");
-const calendarButton = document.getElementById("calendarButton");
-const calendarPopup = document.querySelector(".calendar__popup");
-const calendarWraper = document.querySelector(".calendar__wraper");
-const form__user = document.getElementById("form__user");
-const monthName__navigation = document.getElementById("monthNav");
-const show__done = document.getElementById("show__done");
-const transfers__submit = document.getElementById("transfers__submit");
-const ul = document.getElementById("list__transfers");
-const user__panel = document.querySelector(".user__panel");
-const user__logout = document.getElementById("user__logout");
+  }
+  const add__transfer = document.getElementById("add__transfer");
+  const addButon = document.getElementById("addButton");
+  const backArrow = document.getElementById("backArrow");
+  const calendarBackArrow = document.getElementById("calendarBackArrow");
+  const calendarButton = document.getElementById("calendarButton");
+  const calendarPopup = document.querySelector(".calendar__popup");
+  const calendarWraper = document.querySelector(".calendar__wraper");
+  const form__user = document.getElementById("form__user");
+  const list__wraper = document.querySelector(".list");
+  const monthName__navigation = document.getElementById("monthNav");
+  const show__done = document.getElementById("show__done");
+  const transfers__submit = document.getElementById("transfers__submit");
+  const ul = document.getElementById("list__transfers");
+  const user__panel = document.querySelector(".user__panel");
+  const user__logout = document.getElementById("user__logout");
 const user__button = document.getElementById("userButton");
 const navigation = document.querySelector(".navigation");
 const popup = document.querySelector(".popup");
@@ -47,7 +48,6 @@ let input = document.querySelector(".input");
 const bankSelectWraper = document.querySelector(".bankSelectWraper");
 const mbankIcon = document.getElementById("mbankIcon");
 const pkoIcon = document.getElementById("pkoIcon");
-const list = document.querySelector(".list");
 // Get transfer info from form
 const Transfer = (amount, bank, category, date, status, title) =>{
     const transfer ={
@@ -241,8 +241,10 @@ const printCalendar = (today) =>{
 }
 //watch for login or logout 
 auth.onAuthStateChanged(user=>{
-  
+//when user is logged in
   if (user){
+    const loggedOut = list__wraper.querySelector('p');
+    if(loggedOut) {loggedOut.remove()};
     const info = document.createElement('p');
     info.setAttribute('class','login__info')
     info.innerText = `Your login as: ${user.email}`
@@ -251,22 +253,78 @@ auth.onAuthStateChanged(user=>{
     form__user.user__password.style.display='none';
     form__user.user__login.style.display='none';
     user__button.style.color = 'green';
+//real-time adding items to list
+    db.collection('bankTransfers').orderBy("date").onSnapshot(snapshot=>{
+      snapshot.docChanges().forEach(e=>{
+        const doc = e.doc;
+        console.log('doc.id', doc.id);    
+          if(e.type === 'added'){
+            let data = doc.data();
+            let fbDate = data.date;
+            data.date = fbDate.toDate();
+            data.dataId = doc.id;
+            
+              const li = document.createElement('li');
+              li.setAttribute('data-id', doc.id);
+              li.setAttribute('transDate-id', new Date(data.date));
+              li.setAttribute('class', 'container');
+              const dayDifference = dateFns.differenceInDays(new Date(data.date), new Date());
+              const {amount, bank, category, date, status, title} = data;
+          if(status === 'done'){
+            li.classList.add('container__done', 'container__done--hide')
+          }
+        li.innerHTML = addTransfer(amount, bank, category, date, status, title);
+        ul.append(li);
+        
+        
+        
+        }
+        if(e.type === 'modified'){
+        const li = document.createElement('li');
+        li.setAttribute('data-id', doc.id);
+        li.setAttribute('class', 'container');
+        li.classList.add('container__done');
+        const data = doc.data();
+        const dayDifference = dateFns.differenceInDays(new Date(data.date), new Date());
+        const {amount, bank, category, date, status, title} = data;
+        
+        li.innerHTML = addTransfer(amount, bank, category, date, status, title); 
+        ul.append(li);
+        
+        }
+        
+        
+      })
+      // getting transfers list sort and display again
+      let list = ul.querySelectorAll('.container');
+        let arr = [...list];
+        ul.innerHTML = null;
+        arr.sort((a,b)=>{
+          a = new Date(a.getAttribute('transdate-id'));
+          b = new Date(b.getAttribute('transdate-id'));  
+          return a-b;
+          })
+        arr.forEach(e=>ul.append(e))
+        console.log("arr", arr);
+      console.log('onsnapshot');
+    })
+    
     
   }
+  // when user is not logged in
   else{
     const info = user__panel.querySelector('.login__info');
-    info.remove();
+    if(info){info.remove()};
     form__user.user__email.style.display='block';
     form__user.user__password.style.display='block';
     form__user.user__login.style.display='inline';
     console.log('user logged out');
     user__button.style.color = 'black';
-
+    list__wraper.innerHTML += "<p style='text-align:center'>logged out</p>"
   }
 })
 
-//login form 
-
+//log user in 
 form__user.addEventListener('submit',e=>{
   e.preventDefault();
   const email = form__user.user__email.value;
@@ -283,6 +341,10 @@ user__logout.addEventListener('click', e=>{
   e.preventDefault();
   user__panel.classList.toggle('user__panel--show')
   auth.signOut();
+  const containers = ul.querySelectorAll('.container');
+  containers.forEach(e=>{
+    e.remove();
+  })
   
 })
  // show hide user panel
@@ -299,61 +361,7 @@ user__button.addEventListener('click', e=>{
 //   })
 // })
 
-db.collection('bankTransfers').orderBy("date").onSnapshot(snapshot=>{
-  
-  snapshot.docChanges().forEach(e=>{
-    const doc = e.doc;
-  console.log('doc.id', doc.id);    
-    if(e.type === 'added'){
-      let data = doc.data();
-      let fbDate = data.date;
-      data.date = fbDate.toDate();
-      data.dataId = doc.id;
-      
-        const li = document.createElement('li');
-        li.setAttribute('data-id', doc.id);
-        li.setAttribute('transDate-id', new Date(data.date));
-        li.setAttribute('class', 'container');
-        const dayDifference = dateFns.differenceInDays(new Date(data.date), new Date());
-        const {amount, bank, category, date, status, title} = data;
-    if(status === 'done'){
-      li.classList.add('container__done', 'container__done--hide')
-    }
-    li.innerHTML = addTransfer(amount, bank, category, date, status, title);
-    ul.append(li);
-    
-    
-    
-    }
-    if(e.type === 'modified'){
-    const li = document.createElement('li');
-    li.setAttribute('data-id', doc.id);
-    li.setAttribute('class', 'container');
-    li.classList.add('container__done');
-    const data = doc.data();
-    const dayDifference = dateFns.differenceInDays(new Date(data.date), new Date());
-    const {amount, bank, category, date, status, title} = data;
-    
-    li.innerHTML = addTransfer(amount, bank, category, date, status, title); 
-    ul.append(li);
-    
-    }
-    
-    
-  })
-  // getting transfers list sort and display again
-  let list = ul.querySelectorAll('.container');
-    let arr = [...list];
-    ul.innerHTML = null;
-    arr.sort((a,b)=>{
-      a = new Date(a.getAttribute('transdate-id'));
-      b = new Date(b.getAttribute('transdate-id'));  
-      return a-b;
-      })
-    arr.forEach(e=>ul.append(e))
-    console.log("arr", arr);
-  console.log('onsnapshot');
-})
+
 
 backArrow.addEventListener('click', e=>{
   add__transfer.classList.remove('add__transfer--show')
