@@ -24,7 +24,7 @@ if ('serviceWorker' in navigator) {
   const calendarPopup = document.querySelector(".calendar__popup");
   const calendarWraper = document.querySelector(".calendar__wraper");
   const form__user = document.getElementById("form__user");
-  const list__wraper = document.querySelector(".list");
+  const logged__out = document.querySelector('.logged__out');
   const monthName__navigation = document.getElementById("monthNav");
   const show__done = document.getElementById("show__done");
   const transfers__submit = document.getElementById("transfers__submit");
@@ -243,8 +243,7 @@ const printCalendar = (today) =>{
 auth.onAuthStateChanged(user=>{
 //when user is logged in
   if (user){
-    const loggedOut = list__wraper.querySelector('p');
-    if(loggedOut) {loggedOut.remove()};
+    logged__out.style.display='none';
     const info = document.createElement('p');
     info.setAttribute('class','login__info')
     info.innerText = `Your login as: ${user.email}`
@@ -320,7 +319,7 @@ auth.onAuthStateChanged(user=>{
     form__user.user__login.style.display='inline';
     console.log('user logged out');
     user__button.style.color = 'black';
-    list__wraper.innerHTML += "<p style='text-align:center'>logged out</p>"
+    logged__out.style.display='block';
   }
 })
 
